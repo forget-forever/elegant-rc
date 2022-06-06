@@ -16,12 +16,14 @@ npm run start
 
 ## components 目录结构
 
+```bash
 |--src
-|--component
-|--index.tsx 组件入口
-|--index.md 组件说明文档
-|--demos 使用范例
-｜--index.ts 组件统一加入的入口，每加一个组件记得到这里面去加入口
+  |--component
+    |--index.tsx 组件入口
+    |--index.md 组件说明文档
+    |--demos 使用范例
+  ｜--index.ts 组件统一加入的入口，每加一个组件记得到这里面去加入口
+```
 
 ## 发布
 
