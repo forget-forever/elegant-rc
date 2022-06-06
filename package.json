@@ -1,13 +1,13 @@
 {
   "name": "tc-rc",
-  "version": "1.0.1",
+  "version": "1.1.1",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "build": "father-build",
     "deploy": "npm run docs:build && npm run docs:deploy",
-    "release": "npm run build && npm publish",
+    "release": "npm run build && npm publish --registry http://npm.sfjswl.com",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
@@ -32,10 +32,10 @@
     "lib"
   ],
   "peerDependencies": {
-    "@types/lodash": "^4.14.182",
-    "ahooks": "^3.4.1",
+    "@types/lodash": ">=4.14.0",
+    "ahooks": ">=2.10.11",
     "antd": ">=4.0.0",
-    "lodash": "^4.17.21",
+    "lodash": ">=4.0.0",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
@@ -51,9 +51,9 @@
     "lint-staged": "^10.0.7",
     "prettier": "^2.2.1",
     "typescript": "^4.7.3",
-    "yorkie": "^2.0.0"
-  },
-  "dependencies": {
-    "history": "^5.3.0"
+    "yorkie": "^2.0.0",
+    "ahooks": ">=2.10.11",
+    "lodash": ">=4.0.0",
+    "@types/lodash": ">=4.14.0"
   }
 }

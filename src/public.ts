@@ -1,9 +1,8 @@
 /*
  * @Author: zml
  * @Date: 2022-01-10 16:05:07
- * @LastEditTime: 2022-05-07 14:02:16
+ * @LastEditTime: 2022-06-06 14:04:06
  */
-import type { IRouteComponentProps, IRouteProps } from 'umi';
 import type React from 'react';
 
 export type GetIProps<T> = T extends React.FC<infer P> ? P : never;

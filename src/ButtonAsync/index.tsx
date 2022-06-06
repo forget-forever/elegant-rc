@@ -1,9 +1,9 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 13:01:30
- * @LastEditTime: 2022-06-06 13:06:22
+ * @LastEditTime: 2022-06-06 14:06:09
  */
-import { GetIProps } from '@/public';
+import { GetIProps } from '../public';
 import { useMemoizedFn, useSafeState } from 'ahooks';
 import { Button } from 'antd';
 
