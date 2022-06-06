@@ -1,56 +1,4 @@
-import 'antd/es/button/style';
-import _Button from 'antd/es/button';
-var _excluded = ['maxSecondNum', 'txt', 'loadingTxt', 'disabledTxt', 'onClick'];
-
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    if (enumerableOnly) {
-      symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      });
-    }
-    keys.push.apply(keys, symbols);
-  }
-  return keys;
-}
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-    if (i % 2) {
-      ownKeys(Object(source), true).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      });
-    } else if (Object.getOwnPropertyDescriptors) {
-      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
-    } else {
-      ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(
-          target,
-          key,
-          Object.getOwnPropertyDescriptor(source, key),
-        );
-      });
-    }
-  }
-  return target;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true,
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
+'use strict';
 
 function _slicedToArray(arr, i) {
   return (
@@ -118,71 +66,78 @@ function _arrayWithHoles(arr) {
   if (Array.isArray(arr)) return arr;
 }
 
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = _objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
+var __rest =
+  (this && this.__rest) ||
+  function (s, e) {
+    var t = {};
+
+    for (var p in s) {
+      if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
     }
-  }
-  return target;
-}
 
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-  return target;
-}
+    if (s != null && typeof Object.getOwnPropertySymbols === 'function')
+      for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+        if (
+          e.indexOf(p[i]) < 0 &&
+          Object.prototype.propertyIsEnumerable.call(s, p[i])
+        )
+          t[p[i]] = s[p[i]];
+      }
+    return t;
+  };
 
-import React, { useState, useEffect } from 'react';
+Object.defineProperty(exports, '__esModule', {
+  value: true,
+});
+
+var jsx_runtime_1 = require('react/jsx-runtime');
+
+var react_1 = require('react');
+
+var antd_1 = require('antd');
+
 var MAX_SECOND_NUM = 60;
 
-function CountdownButton(_ref) {
-  var _ref$maxSecondNum = _ref.maxSecondNum,
+function CountdownButton(_a) {
+  var _a$maxSecondNum = _a.maxSecondNum,
     maxSecondNum =
-      _ref$maxSecondNum === void 0 ? MAX_SECOND_NUM : _ref$maxSecondNum,
-    _ref$txt = _ref.txt,
-    txt = _ref$txt === void 0 ? '获取验证码' : _ref$txt,
-    _ref$loadingTxt = _ref.loadingTxt,
-    loadingTxt = _ref$loadingTxt === void 0 ? '发送中' : _ref$loadingTxt,
-    _ref$disabledTxt = _ref.disabledTxt,
+      _a$maxSecondNum === void 0 ? MAX_SECOND_NUM : _a$maxSecondNum,
+    _a$txt = _a.txt,
+    txt = _a$txt === void 0 ? '获取验证码' : _a$txt,
+    _a$loadingTxt = _a.loadingTxt,
+    loadingTxt = _a$loadingTxt === void 0 ? '发送中' : _a$loadingTxt,
+    _a$disabledTxt = _a.disabledTxt,
     disabledTxt =
-      _ref$disabledTxt === void 0
+      _a$disabledTxt === void 0
         ? function (s) {
             return ''.concat(s, ' \u79D2\u540E\u91CD\u8BD5');
           }
-        : _ref$disabledTxt,
-    _ref$onClick = _ref.onClick,
+        : _a$disabledTxt,
+    _a$onClick = _a.onClick,
     _onClick =
-      _ref$onClick === void 0
+      _a$onClick === void 0
         ? function (completeCallback) {
             completeCallback();
           }
-        : _ref$onClick,
-    rest = _objectWithoutProperties(_ref, _excluded);
+        : _a$onClick,
+    rest = __rest(_a, [
+      'maxSecondNum',
+      'txt',
+      'loadingTxt',
+      'disabledTxt',
+      'onClick',
+    ]);
 
-  var _useState = useState({
+  var _ref = (0, react_1.useState)({
       timing: false,
       count: maxSecondNum,
     }),
-    _useState2 = _slicedToArray(_useState, 2),
-    authCodeArgs = _useState2[0],
-    setAuthCodeArgs = _useState2[1];
+    _ref2 = _slicedToArray(_ref, 2),
+    authCodeArgs = _ref2[0],
+    setAuthCodeArgs = _ref2[1];
 
-  useEffect(
+  (0, react_1.useEffect)(
     function () {
       var timer = undefined;
 
@@ -217,13 +172,9 @@ function CountdownButton(_ref) {
 
   var completeCallback = function completeCallback() {
     setAuthCodeArgs(
-      _objectSpread(
-        _objectSpread({}, authCodeArgs),
-        {},
-        {
-          timing: true,
-        },
-      ),
+      Object.assign(Object.assign({}, authCodeArgs), {
+        timing: true,
+      }),
     );
   };
 
@@ -237,12 +188,12 @@ function CountdownButton(_ref) {
     buttonText = txt;
   }
 
-  return /*#__PURE__*/ React.createElement(
-    _Button,
-    _objectSpread(
+  return (0, jsx_runtime_1.jsx)(
+    antd_1.Button,
+    Object.assign(
       {
         disabled: authCodeArgs.timing,
-        style: _objectSpread(
+        style: Object.assign(
           {
             minWidth: 100,
           },
@@ -253,9 +204,11 @@ function CountdownButton(_ref) {
         },
       },
       rest,
+      {
+        children: buttonText,
+      },
     ),
-    buttonText,
   );
 }
 
-export default CountdownButton;
+exports.default = CountdownButton;

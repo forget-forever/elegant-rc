@@ -1,4 +1,8 @@
-import React from 'react';
+/*
+ * @Author: zml
+ * @Date: 2022-06-06 10:44:43
+ * @LastEditTime: 2022-06-06 12:39:37
+ */
 import './index.less';
 
 interface RankListProps {
