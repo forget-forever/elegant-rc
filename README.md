@@ -18,7 +18,7 @@ npm run start
 
 ```bash
 |--src
-  |--component
+  |--componentDemo
     |--index.tsx 组件入口
     |--index.md 组件说明文档
     |--demos 使用范例
@@ -35,3 +35,4 @@ npm run release
 
 - 加一个组件记得在 src/index.ts 中加入入口
 - 出于一个规范化的考虑，对于 ts 编译不通过的情况都会不允许发布
+- 对于依赖的添加，不要轻易的加 dependency，一般加 devDependency 和 peerDependency 就好了
