@@ -4,6 +4,7 @@
  * @LastEditTime: 2022-06-06 13:58:43
  */
 import ButtonAsync from './ButtonAsync';
+import ButtonGroup from './ButtonGroup';
 import CountdownButton from './CountdownButton';
 import FormContent from './FormContent';
 import ModalContent from './ModalContent';
@@ -17,4 +18,5 @@ export {
   ModalContent,
   FormContent,
   Prominent,
+  ButtonGroup,
 };
