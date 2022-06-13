@@ -9,6 +9,11 @@ export type GetIProps<T> = T extends React.FC<infer P> ? P : never;
 
 export type FCProps<T = unknown> = React.FC<T & React.HTMLAttributes<T>>;
 
+export interface IOptions<T = string | number, U = string> {
+  value: T;
+  label: U;
+}
+
 /**
  * 去除一个类型包含的void属性
  */

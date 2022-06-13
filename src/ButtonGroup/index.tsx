@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-02 15:34:24
- * @LastEditTime: 2022-06-07 20:16:47
+ * @LastEditTime: 2022-06-13 21:57:39
  */
 import type { FCProps, GetIProps } from '../public';
 import type { CSSProperties } from 'react';
@@ -22,7 +22,7 @@ const ButtonGroup: FCProps<{
   gap?: CSSProperties['gap'];
   /** 俩按钮统一的style */
   buttonStyle?: CSSProperties;
-  /** 确定按钮偷传的参数 */
+  /** 确定按钮透传的参数 */
   submitProps?: GetIProps<typeof ButtonAsync>;
   /** 取消按钮偷传的参数 */
   cancelProps?: GetIProps<typeof ButtonAsync>;
