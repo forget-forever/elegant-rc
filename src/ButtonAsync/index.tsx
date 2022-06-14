@@ -8,7 +8,7 @@ import { useMemoizedFn, useSafeState } from 'ahooks';
 import { Button } from 'antd';
 
 type IProps = Omit<GetIProps<typeof Button>, 'onClick'> & {
-  /** 点击事件加上promise的处理 */
+  /** 点击事件加上promise的处理, 其他配置与Button标签一样 */
   onClick?: () => void | Promise<void>;
 };
 const ButtonAsync: React.FC<IProps> = (props) => {

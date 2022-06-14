@@ -49,7 +49,7 @@
     (n.o = function (e, t) {
       return Object.prototype.hasOwnProperty.call(e, t);
     }),
-    (n.p = '/component-lib-demo/docs-dist/'),
+    (n.p = '/tc-rc/docs-dist/'),
     n((n.s = 0));
 })({
   '+2a4': function (e, t, n) {
@@ -8150,17 +8150,17 @@
             { className: 'markdown' },
             o.a.createElement(
               'h2',
-              { id: 'hello-component-lib-demo' },
+              { id: 'hello-tc-rc' },
               o.a.createElement(
                 a['AnchorLink'],
                 {
-                  to: '#hello-component-lib-demo',
+                  to: '#hello-tc-rc',
                   'aria-hidden': 'true',
                   tabIndex: -1,
                 },
                 o.a.createElement('span', { className: 'icon icon-link' }),
               ),
-              'Hello component-lib-demo!',
+              'Hello tc-rc!',
             ),
           ),
         )
@@ -8547,7 +8547,7 @@
         return a;
       });
     var r = n('YS25'),
-      o = { basename: '/component-lib-demo/docs-dist/' };
+      o = { basename: '/tc-rc/docs-dist/' };
     window.routerBase && (o.basename = window.routerBase);
     var a = Object({ NODE_ENV: 'production' }).__IS_SERVER
         ? null
@@ -24049,9 +24049,9 @@
       a = n.n(o),
       i = n('q3YX'),
       u =
-        "import React, { useState } from 'react';\r\nimport { CountdownButton } from 'component-lib-demo';\r\n\r\nfunction CountdownButtonDemo() {\r\n  const [loading, setLoading] = useState<boolean>(false);\r\n\r\n  const getCode = async () => {\r\n    setLoading(true);\r\n    try {\r\n      return await new Promise((resolve) =>\r\n        setTimeout(() => {\r\n          resolve(123);\r\n        }, 1000),\r\n      );\r\n    } catch (err) {\r\n      throw new Error('failed');\r\n    } finally {\r\n      setLoading(false);\r\n    }\r\n  };\r\n\r\n  return (\r\n    <CountdownButton\r\n      loading={loading}\r\n      onClick={async (completeCallback) => {\r\n        const code = await getCode();\r\n        console.log(`\u9a8c\u8bc1\u7801\uff1a${code}`);\r\n        completeCallback();\r\n      }}\r\n    >\r\n      \u83b7\u53d6\u9a8c\u8bc1\u7801\r\n    </CountdownButton>\r\n  );\r\n}\r\n\r\nexport default CountdownButtonDemo;",
+        "import React, { useState } from 'react';\r\nimport { CountdownButton } from 'tc-rc';\r\n\r\nfunction CountdownButtonDemo() {\r\n  const [loading, setLoading] = useState<boolean>(false);\r\n\r\n  const getCode = async () => {\r\n    setLoading(true);\r\n    try {\r\n      return await new Promise((resolve) =>\r\n        setTimeout(() => {\r\n          resolve(123);\r\n        }, 1000),\r\n      );\r\n    } catch (err) {\r\n      throw new Error('failed');\r\n    } finally {\r\n      setLoading(false);\r\n    }\r\n  };\r\n\r\n  return (\r\n    <CountdownButton\r\n      loading={loading}\r\n      onClick={async (completeCallback) => {\r\n        const code = await getCode();\r\n        console.log(`\u9a8c\u8bc1\u7801\uff1a${code}`);\r\n        completeCallback();\r\n      }}\r\n    >\r\n      \u83b7\u53d6\u9a8c\u8bc1\u7801\r\n    </CountdownButton>\r\n  );\r\n}\r\n\r\nexport default CountdownButtonDemo;",
       c =
-        "import React from 'react';\r\nimport { RankList } from 'component-lib-demo';\r\n\r\nfunction RankListDemo() {\r\n  const data = Array.from(new Array(10)).map((_, idx) => ({\r\n    label: `\u9009\u9879${idx + 1}`,\r\n    value: 10 - idx,\r\n  }));\r\n\r\n  return (\r\n    <div>\r\n      <RankList data={data}></RankList>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default RankListDemo;",
+        "import React from 'react';\r\nimport { RankList } from 'tc-rc';\r\n\r\nfunction RankListDemo() {\r\n  const data = Array.from(new Array(10)).map((_, idx) => ({\r\n    label: `\u9009\u9879${idx + 1}`,\r\n    value: 10 - idx,\r\n  }));\r\n\r\n  return (\r\n    <div>\r\n      <RankList data={data}></RankList>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default RankListDemo;",
       l = {
         'countdownbutton-demos': {
           component: n('WFta').default,
@@ -24059,7 +24059,7 @@
             sources: { _: { tsx: u } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'component-lib-demo': { version: '1.0.0' },
+              'tc-rc': { version: '1.0.0' },
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               'react-dom': { version: '>=16.9.0' },
             },
@@ -24073,7 +24073,7 @@
             sources: { _: { tsx: c } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'component-lib-demo': { version: '1.0.0' },
+              'tc-rc': { version: '1.0.0' },
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               'react-dom': { version: '>=16.9.0' },
             },
@@ -28839,7 +28839,7 @@
   },
   q3YX: function (e) {
     e.exports = JSON.parse(
-      '{"menus":{"en-US":{"/components":[{"title":"\u7ec4\u4ef6","path":"/components","meta":{},"children":[{"path":"/components/countdown-button","title":"CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae","meta":{}},{"path":"/components/rank-list","title":"RankList \u6392\u884c\u699c","meta":{}}]}],"*":[{"path":"/","title":"Hello component-lib-demo!","meta":{}}]}},"locales":[{"name":"en-US","label":"English"}],"navs":{"en-US":[{"title":"\u7ec4\u4ef6","path":"/components"}]},"title":"component-lib-demo","logo":"https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png","mode":"site","repository":{"url":"","branch":"master"},"theme":{}}',
+      '{"menus":{"en-US":{"/components":[{"title":"\u7ec4\u4ef6","path":"/components","meta":{},"children":[{"path":"/components/countdown-button","title":"CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae","meta":{}},{"path":"/components/rank-list","title":"RankList \u6392\u884c\u699c","meta":{}}]}],"*":[{"path":"/","title":"Hello tc-rc!","meta":{}}]}},"locales":[{"name":"en-US","label":"English"}],"navs":{"en-US":[{"title":"\u7ec4\u4ef6","path":"/components"}]},"title":"tc-rc","logo":"https://user-images.githubusercontent.com/9554297/83762004-a0761b00-a6a9-11ea-83b4-9c8ff721d4b8.png","mode":"site","repository":{"url":"","branch":"master"},"theme":{}}',
     );
   },
   qA1w: function (e, t, n) {
@@ -31204,8 +31204,7 @@
                   { depth: 2, value: 'API', heading: 'api' },
                 ],
               },
-              title:
-                'CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae - component-lib-demo',
+              title: 'CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae - tc-rc',
             },
             {
               path: '/components/rank-list',
@@ -31232,7 +31231,7 @@
                   { depth: 2, value: 'API', heading: 'api' },
                 ],
               },
-              title: 'RankList \u6392\u884c\u699c - component-lib-demo',
+              title: 'RankList \u6392\u884c\u699c - tc-rc',
             },
             {
               path: '/',
@@ -31242,8 +31241,8 @@
                 filePath: 'docs/index.md',
                 updatedTime: 1638433702e3,
                 hero: {
-                  title: 'component-lib-demo',
-                  desc: '<div class="markdown"><p>component-lib-demo site example</p></div>',
+                  title: 'tc-rc',
+                  desc: '<div class="markdown"><p>tc-rc site example</p></div>',
                   actions: [{ text: 'Getting Started', link: '/components' }],
                 },
                 features: [
@@ -31268,13 +31267,13 @@
                 slugs: [
                   {
                     depth: 2,
-                    value: 'Hello component-lib-demo!',
-                    heading: 'hello-component-lib-demo',
+                    value: 'Hello tc-rc!',
+                    heading: 'hello-tc-rc',
                   },
                 ],
-                title: 'Hello component-lib-demo!',
+                title: 'Hello tc-rc!',
               },
-              title: 'Hello component-lib-demo! - component-lib-demo',
+              title: 'Hello tc-rc! - tc-rc',
             },
             {
               path: '/components',
@@ -31283,7 +31282,7 @@
               redirect: '/components/countdown-button',
             },
           ],
-          title: 'component-lib-demo',
+          title: 'tc-rc',
           component: (e) => e.children,
         },
       ];
@@ -31312,7 +31311,7 @@
                 history: Object(o['a'])(e.hot),
                 isServer: Object({ NODE_ENV: 'production' }).__IS_SERVER,
                 rootElement: 'root',
-                defaultTitle: 'component-lib-demo',
+                defaultTitle: 'tc-rc',
               },
             });
             return z(t);

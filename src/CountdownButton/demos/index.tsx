@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CountdownButton } from 'component-lib-demo';
+import { CountdownButton } from 'tc-rc';
 
 function CountdownButtonDemo() {
   const [loading, setLoading] = useState<boolean>(false);
