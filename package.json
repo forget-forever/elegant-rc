@@ -36,14 +36,17 @@
     "lib"
   ],
   "peerDependencies": {
+    "@ant-design/pro-table": ">=2.16.1",
     "@types/lodash": ">=4.14.0",
     "ahooks": ">=2.10.11",
     "antd": ">=4.0.0",
     "lodash": ">=4.0.0",
+    "qnn-react-cron": "^0.8.6",
     "react": ">=16.9.0",
     "react-dom": ">=16.9.0"
   },
   "devDependencies": {
+    "@ant-design/pro-table": ">=2.16.1",
     "@types/lodash": ">=4.14.0",
     "@types/react": "^17.0.37",
     "@types/react-dom": "^17.0.11",
@@ -56,6 +59,7 @@
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
     "lodash": ">=4.0.0",
+    "qnn-react-cron": "^0.8.6",
     "prettier": "^2.2.1",
     "typescript": "^4.7.3",
     "yorkie": "^2.0.0"

@@ -22,3 +22,8 @@ export type OmitVoid<T> = T | undefined extends infer R1 | undefined
   : T | null extends infer R2 | null
   ? R2
   : T;
+
+/**
+ * 自己定义的Omit类型
+ */
+export type MyOmit<T, K extends keyof T> = Omit<T, K>;

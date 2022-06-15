@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-05-31 20:37:58
- * @LastEditTime: 2022-06-06 13:25:41
+ * @LastEditTime: 2022-06-15 21:06:02
  */
 import { FCProps, GetIProps } from '../public';
 import { useSize } from 'ahooks';
@@ -13,7 +13,10 @@ const headerHeight = 55;
 type IProps = GetIProps<typeof Modal> & {
   /** 浮层距顶部的高度，为数字的时候单位是px, 如果没有这个会根据contentHeight计算应该下降多少 */
   topHeight?: number | string;
-  /** 浮层的上下空白区比值，默认是0.618 */
+  /**
+   * 浮层的上下空白区比值，建议小于1
+   * @default 0.618
+   */
   maskRatio?: number;
 };
 const ModalContent: FCProps<IProps> = (props) => {
@@ -21,6 +24,7 @@ const ModalContent: FCProps<IProps> = (props) => {
     children,
     maskRatio = 0.618,
     topHeight: topHeightSelf,
+    title = '',
     ...resetProps
   } = props;
   const { bodyStyle } = props;
@@ -73,6 +77,7 @@ const ModalContent: FCProps<IProps> = (props) => {
     <Modal
       width={800}
       footer={null}
+      title={title}
       {...resetProps}
       style={style}
       bodyStyle={contentStyle}

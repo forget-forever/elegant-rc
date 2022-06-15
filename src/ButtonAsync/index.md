@@ -1,5 +1,5 @@
 ---
-title: ButtonAsync 自动通过onClick事件出现loading的Button
+title: ButtonAsync 按钮自动loading
 nav:
   title: 组件
   path: /components
