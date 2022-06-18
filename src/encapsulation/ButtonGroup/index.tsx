@@ -3,10 +3,11 @@
  * @Date: 2022-06-02 15:34:24
  * @LastEditTime: 2022-06-13 21:57:39
  */
+
+import ButtonAsync from '../ButtonAsync';
 import { FCProps, GetIProps } from '@/types';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
-import { ButtonAsync } from '..';
 
 const ButtonGroup: FCProps<{
   style?: CSSProperties;

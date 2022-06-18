@@ -3,7 +3,7 @@
  * @Date: 2022-05-31 20:37:58
  * @LastEditTime: 2022-06-15 21:06:02
  */
-import { FCProps, GetIProps } from '../public';
+import { FCProps, GetIProps } from '@/types';
 import { useSize } from 'ahooks';
 import { Modal } from 'antd';
 import type { CSSProperties } from 'react';

@@ -1,9 +1,9 @@
 /*
  * @Author: zml
  * @Date: 2022-06-13 21:18:06
- * @LastEditTime: 2022-06-13 21:57:12
+ * @LastEditTime: 2022-06-17 19:33:36
  */
-import { GetIProps, IOptions } from '../public';
+import { GetIProps, IOptions } from '@/types';
 import { useMemoizedFn } from 'ahooks';
 import { Select } from 'antd';
 import { useMemo, useState } from 'react';

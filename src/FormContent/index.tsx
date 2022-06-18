@@ -3,7 +3,7 @@
  * @Date: 2022-06-06 13:29:04
  * @LastEditTime: 2022-06-14 19:49:45
  */
-import { FCProps, GetIProps } from '../public';
+import { FCProps, GetIProps } from '@/types';
 import { Col, Form } from 'antd';
 import { CSSProperties, useMemo } from 'react';
 

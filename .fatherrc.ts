@@ -9,6 +9,7 @@ export default {
         libraryName: 'antd',
         libraryDirectory: 'es',
         style: true,
+        minimal: true,
       },
     ],
   ],
