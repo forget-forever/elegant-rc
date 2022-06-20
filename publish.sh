@@ -1,10 +1,10 @@
 ###
  # @Author: zml
  # @Date: 2022-06-06 15:51:19
- # @LastEditTime: 2022-06-18 22:02:47
+ # @LastEditTime: 2022-06-20 10:52:41
 ### 
 
-# npm run build
+npm run build
 
 if [ $? -eq 0 ]; then
   cp ts-path.txt ./es/tsconfig.json
@@ -12,13 +12,12 @@ if [ $? -eq 0 ]; then
   br=`git branch | grep "*"`
 
   cmd_res=`git rev-list origin/master --not ${br/* /}`
-  echo $cmd_res
-  if [ $cmd_res == '' ]; then
-    echo 'ok!!'
-    # npm publish --registry http://npm.sfjswl.com
+  if [ -z ${cmd_res} ]; then
+    
+    npm publish --registry http://npm.sfjswl.com
   else
     echo '当前分支落后master分支, 禁止发布'
   fi
 else
-  echo "tsc compile error"
+  echo "tsc compile error, publish was forbade!"
 fi
