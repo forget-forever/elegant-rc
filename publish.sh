@@ -1,7 +1,7 @@
 ###
  # @Author: zml
  # @Date: 2022-06-06 15:51:19
- # @LastEditTime: 2022-06-18 16:57:05
+ # @LastEditTime: 2022-06-18 22:02:47
 ### 
 
 # npm run build
@@ -11,7 +11,7 @@ if [ $? -eq 0 ]; then
   cp ts-path.txt ./lib/tsconfig.json
   br=`git branch | grep "*"`
 
-  cmd_res=`git rev-list ${br/* /} --not origin/master`
+  cmd_res=`git rev-list origin/master --not ${br/* /}`
   echo $cmd_res
   if [ $cmd_res == '' ]; then
     echo 'ok!!'
