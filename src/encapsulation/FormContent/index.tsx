@@ -1,14 +1,18 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 13:29:04
- * @LastEditTime: 2022-06-22 21:51:42
+ * @LastEditTime: 2022-06-23 19:35:14
  */
 import { Col, Form } from 'antd';
 import { CSSProperties, useMemo } from 'react';
-import { FCProps, GetIProps } from 'tc-rc';
+import { FCProps, GetIProps, MyOmit } from 'tc-rc';
 
 const FormContent: FCProps<
-  GetIProps<typeof Form.Item> & {
+  MyOmit<GetIProps<typeof Form.Item>, 'required'> & {
+    /**
+     * 是否必须，如果传了这个之后就会自动添加rule，如果required是字符串，会写入message
+     */
+    required?: boolean | string;
     /**
      * 栅格
      */
@@ -23,7 +27,11 @@ const FormContent: FCProps<
   const rulesConf = useMemo(() => {
     const res = rules || [];
     if (required) {
-      res.push({ message: `${props.label}不能为空`, required });
+      let message = `${props.label || '该字段'}不能为空`;
+      if (typeof required === 'string') {
+        message = required;
+      }
+      res.push({ message, required: true });
     }
     return res;
   }, [props.label, required, rules]);
