@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-16 15:38:23
- * @LastEditTime: 2022-06-20 20:28:56
+ * @LastEditTime: 2022-06-23 15:14:21
  */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -69,7 +69,12 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     disabledChangeLanguage,
     valueType = 'str' as V,
   } = props;
-  const { editHeight = 'auto', editMaxHeight, editMinHeight, readonly } = props;
+  const {
+    editHeight = '300px',
+    editMaxHeight,
+    editMinHeight,
+    readonly,
+  } = props;
   const [lang, setLang] = useState(defaultLanguage);
 
   const changeHandle = useMemoizedFn((val?: string) =>
