@@ -3,9 +3,9 @@
  * @Date: 2022-06-06 13:01:30
  * @LastEditTime: 2022-06-17 19:25:41
  */
-import { GetIProps } from '@/types';
 import { useMemoizedFn, useSafeState } from 'ahooks';
 import { Button } from 'antd';
+import { GetIProps } from '../../types';
 
 type IProps = Omit<GetIProps<typeof Button>, 'onClick'> & {
   /** 点击事件加上promise的处理, 其他配置与Button标签一样 */

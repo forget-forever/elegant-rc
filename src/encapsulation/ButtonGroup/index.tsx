@@ -5,7 +5,7 @@
  */
 
 import ButtonAsync from '../ButtonAsync';
-import { FCProps, GetIProps } from '@/types';
+import { FCProps, GetIProps } from '../../types';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
 

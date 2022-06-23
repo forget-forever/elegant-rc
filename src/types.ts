@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-01-10 16:05:07
- * @LastEditTime: 2022-06-18 10:51:31
+ * @LastEditTime: 2022-06-23 13:45:31
  */
 import type React from 'react';
 
@@ -27,3 +27,10 @@ export type OmitVoid<T> = T | undefined extends infer R1 | undefined
  * 自己定义的Omit类型
  */
 export type MyOmit<T, K extends keyof T> = Omit<T, K>;
+
+export type FormProps<T, E = Record<string, never>> = {
+  /** 数据改变的事件，由Form.Item注入 */
+  onChange?: (val?: T) => void;
+  /** 数据，由Form.Item注入 */
+  value?: T;
+} & E;

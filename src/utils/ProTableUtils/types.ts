@@ -1,11 +1,11 @@
 /*
  * @Author: zml
  * @Date: 2022-06-08 19:54:20
- * @LastEditTime: 2022-06-17 19:26:07
+ * @LastEditTime: 2022-06-23 13:06:48
  */
-import { MyOmit } from '@/types';
 import type { ProColumns, ProTableProps } from '@ant-design/pro-table';
 import type { RowClassName } from 'rc-table/lib/interface';
+import { MyOmit } from 'tc-rc';
 
 export type ProTableTypeReq<R extends ParamsType, P, V = 'text'> = Required<
   ProTableType<R, P, V>

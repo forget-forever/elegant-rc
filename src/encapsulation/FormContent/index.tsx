@@ -1,11 +1,11 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 13:29:04
- * @LastEditTime: 2022-06-14 19:49:45
+ * @LastEditTime: 2022-06-22 21:51:42
  */
-import { FCProps, GetIProps } from '@/types';
 import { Col, Form } from 'antd';
 import { CSSProperties, useMemo } from 'react';
+import { FCProps, GetIProps } from 'tc-rc';
 
 const FormContent: FCProps<
   GetIProps<typeof Form.Item> & {
