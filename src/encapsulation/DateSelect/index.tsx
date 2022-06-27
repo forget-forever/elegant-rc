@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-22 20:16:17
- * @LastEditTime: 2022-06-27 21:09:35
+ * @LastEditTime: 2022-06-27 21:28:57
  */
 import React, { useRef, useState } from 'react';
 import { DatePicker } from 'antd';
@@ -84,6 +84,9 @@ const DateSelect: React.FC<IProps> = (props) => {
     // 是否在屏蔽段内
     if (
       disabledRanges?.some((item) => {
+        if (!(item instanceof Array)) {
+          return false;
+        }
         /** 转化成数字时间戳 */
         const compare =
           item?.filter(Boolean).map((ele) => {
