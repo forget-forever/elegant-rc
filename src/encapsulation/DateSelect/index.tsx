@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-22 20:16:17
- * @LastEditTime: 2022-06-27 20:43:11
+ * @LastEditTime: 2022-06-27 20:48:44
  */
 import React, { useRef, useState } from 'react';
 import { DatePicker } from 'antd';
@@ -85,12 +85,13 @@ const DateSelect: React.FC<IProps> = (props) => {
     if (
       disabledRanges?.some((item) => {
         /** 转化成数字时间戳 */
-        const compare = item.filter(Boolean).map((ele) => {
-          if (typeof ele === 'number') {
-            return ele;
-          }
-          return +ele!.format('YYYYMMDD');
-        });
+        const compare =
+          item?.filter(Boolean).map((ele) => {
+            if (typeof ele === 'number') {
+              return ele;
+            }
+            return +ele!.format('YYYYMMDD');
+          }) || [];
         if (compare.length < 2) {
           return false;
         }
