@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-23 14:08:50
- * @LastEditTime: 2022-06-27 20:06:18
+ * @LastEditTime: 2022-06-27 20:55:15
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Form } from 'antd';
@@ -13,6 +13,7 @@ const disList = [
     moment.Moment,
     moment.Moment,
   ],
+  undefined,
 ];
 
 export default () => {
