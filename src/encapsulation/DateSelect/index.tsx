@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-22 20:16:17
- * @LastEditTime: 2022-06-27 20:12:05
+ * @LastEditTime: 2022-06-27 20:43:11
  */
 import React, { useRef, useState } from 'react';
 import { DatePicker } from 'antd';
@@ -38,7 +38,7 @@ type IProps = {
     disabledFn: (current: moment.Moment) => boolean,
   ) => boolean;
   /** 需要屏蔽的日期段, 可以直接给moment对象，也可以给YYYYMMDD数字日期, 内部做了兼容 */
-  disabledRanges?: [moment.Moment | number, moment.Moment | number][];
+  disabledRanges?: (moment.Moment | number | undefined)[][];
 } & Omit<RangePickerProps, 'value' | 'onChange'>;
 const DateSelect: React.FC<IProps> = (props) => {
   const {
@@ -85,9 +85,15 @@ const DateSelect: React.FC<IProps> = (props) => {
     if (
       disabledRanges?.some((item) => {
         /** 转化成数字时间戳 */
-        const compare = item.map((ele) =>
-          typeof ele === 'number' ? ele : +ele.format('YYYYMMDD'),
-        );
+        const compare = item.filter(Boolean).map((ele) => {
+          if (typeof ele === 'number') {
+            return ele;
+          }
+          return +ele!.format('YYYYMMDD');
+        });
+        if (compare.length < 2) {
+          return false;
+        }
 
         compare.sort((a, b) => a - b);
 
