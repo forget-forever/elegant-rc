@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-22 20:16:17
- * @LastEditTime: 2022-06-27 13:59:29
+ * @LastEditTime: 2022-06-27 20:12:05
  */
 import React, { useRef, useState } from 'react';
 import { DatePicker } from 'antd';
@@ -31,6 +31,14 @@ type IProps = {
    * @default false
    */
   includeToday?: boolean;
+  disabledDate?: (
+    /** 当前的日期 */
+    current: moment.Moment,
+    /** 组件中自定义了的disabled函数, 因为传了disabledDate之后会把组件中的替换掉，如果想要继续用二次封装的，可以调用它 */
+    disabledFn: (current: moment.Moment) => boolean,
+  ) => boolean;
+  /** 需要屏蔽的日期段, 可以直接给moment对象，也可以给YYYYMMDD数字日期, 内部做了兼容 */
+  disabledRanges?: [moment.Moment | number, moment.Moment | number][];
 } & Omit<RangePickerProps, 'value' | 'onChange'>;
 const DateSelect: React.FC<IProps> = (props) => {
   const {
@@ -39,6 +47,8 @@ const DateSelect: React.FC<IProps> = (props) => {
     dataLength,
     disableTodayAfter = true,
     includeToday,
+    disabledDate: disabledSoruce,
+    disabledRanges,
     ...resetProps
   } = props;
 
@@ -59,12 +69,36 @@ const DateSelect: React.FC<IProps> = (props) => {
     if (disableTodayAfter && isTodayAfter) return isTodayAfter;
 
     /** 屏蔽时间长度 */
-    if (!dataLength || !date || (!date[0] && !date[1])) {
-      return false;
+    // if (!dataLength || !date || (!date[0] && !date[1])) {
+    //   return false;
+    // }
+    if (dataLength && date && !(!date[0] && !date[1])) {
+      const tooLate = date[0] && current.diff(date[0], 'days') > dataLength;
+      const tooEarly = date[1] && date[1].diff(current, 'days') > dataLength;
+      if (tooEarly || !!tooLate) {
+        return true;
+      }
     }
-    const tooLate = date[0] && current.diff(date[0], 'days') > dataLength;
-    const tooEarly = date[1] && date[1].diff(current, 'days') > dataLength;
-    return tooEarly || !!tooLate;
+
+    const currentNum = +current.format('YYYYMMDD');
+    // 是否在屏蔽段内
+    if (
+      disabledRanges?.some((item) => {
+        /** 转化成数字时间戳 */
+        const compare = item.map((ele) =>
+          typeof ele === 'number' ? ele : +ele.format('YYYYMMDD'),
+        );
+
+        compare.sort((a, b) => a - b);
+
+        return currentNum > compare[0] && currentNum < compare[1];
+      }) ||
+      false
+    ) {
+      return true;
+    }
+
+    return false;
   });
 
   const onOpenChange = useMemoizedFn((open: boolean) => {
@@ -75,6 +109,10 @@ const DateSelect: React.FC<IProps> = (props) => {
     }
   });
 
+  const disabledHandle = useMemoizedFn((current: moment.Moment) => {
+    return disabledSoruce?.(current, disabledDate) ?? disabledDate(current);
+  });
+
   const calendarChange = useMemoizedFn((val: ValueType) => {
     setDates({ hackDate, date: val });
   });
@@ -83,7 +121,7 @@ const DateSelect: React.FC<IProps> = (props) => {
     /** @ts-ignore */
     <DatePicker.RangePicker
       value={hackDate || value}
-      disabledDate={disabledDate}
+      disabledDate={disabledHandle}
       onCalendarChange={calendarChange}
       onChange={onChange}
       onOpenChange={onOpenChange}
