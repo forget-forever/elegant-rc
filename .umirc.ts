@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 10:44:43
- * @LastEditTime: 2022-06-16 11:29:20
+ * @LastEditTime: 2022-06-27 13:52:28
  */
 import { defineConfig } from 'dumi';
 
@@ -32,6 +32,7 @@ export default defineConfig({
       skipNodeModules: true,
     },
   },
+  locales: [['zh-CN', '中文']],
   base: '/tc-rc/docs-dist/',
   publicPath: '/tc-rc/docs-dist/',
   history: {

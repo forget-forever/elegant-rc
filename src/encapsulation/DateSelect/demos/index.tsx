@@ -15,7 +15,7 @@ export default () => {
   return (
     <Form onFinish={onFinish}>
       <Form.Item name="date1" label="选择日期">
-        <DateSelect dataLength={9} />
+        <DateSelect dataLength={9} includeToday />
       </Form.Item>
       <Button htmlType="submit" type="primary">
         确定

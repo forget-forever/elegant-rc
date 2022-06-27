@@ -1,9 +1,9 @@
 /*
  * @Author: zml
  * @Date: 2022-06-22 20:16:17
- * @LastEditTime: 2022-06-23 14:25:11
+ * @LastEditTime: 2022-06-27 13:59:29
  */
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import { useMemoizedFn } from 'ahooks';
@@ -26,6 +26,11 @@ type IProps = {
    * @default true
    */
   disableTodayAfter?: boolean;
+  /**
+   * 今天是否可选
+   * @default false
+   */
+  includeToday?: boolean;
 } & Omit<RangePickerProps, 'value' | 'onChange'>;
 const DateSelect: React.FC<IProps> = (props) => {
   const {
@@ -33,29 +38,34 @@ const DateSelect: React.FC<IProps> = (props) => {
     onChange,
     dataLength,
     disableTodayAfter = true,
+    includeToday,
     ...resetProps
   } = props;
+
   const [dates, setDates] = useState({
     date: [null, null] as ValueType,
     hackDate: undefined as ValueType | undefined,
   });
   const { date, hackDate } = dates;
 
-  const disabledDate: RangePickerProps['disabledDate'] = useMemoizedFn(
-    (current) => {
-      /** 今天之后是否屏蔽 */
-      const isTodayAfter = moment().diff(current, 'days') < 1;
-      if (disableTodayAfter && isTodayAfter) return isTodayAfter;
+  const disabledDate = useMemoizedFn((current: moment.Moment) => {
+    const toDay = moment();
+    /** 今天之后是否屏蔽 */
+    const isTodayAfter =
+      toDay.diff(current, 'days') < 1 &&
+      /** 如果今天可选，那就要判定一下当前是否等于今天 */
+      (!includeToday ||
+        current.format('YYYYMMDD') !== toDay.format('YYYYMMDD'));
+    if (disableTodayAfter && isTodayAfter) return isTodayAfter;
 
-      /** 屏蔽时间长度 */
-      if (!dataLength || !date || (!date[0] && !date[1])) {
-        return false;
-      }
-      const tooLate = date[0] && current.diff(date[0], 'days') > dataLength;
-      const tooEarly = date[1] && date[1].diff(current, 'days') > dataLength;
-      return tooEarly || !!tooLate;
-    },
-  );
+    /** 屏蔽时间长度 */
+    if (!dataLength || !date || (!date[0] && !date[1])) {
+      return false;
+    }
+    const tooLate = date[0] && current.diff(date[0], 'days') > dataLength;
+    const tooEarly = date[1] && date[1].diff(current, 'days') > dataLength;
+    return tooEarly || !!tooLate;
+  });
 
   const onOpenChange = useMemoizedFn((open: boolean) => {
     if (open) {
