@@ -21,6 +21,8 @@ if [ -z "$(git status --porcelain)" ]; then
       `git merge ${br/* /}`
       git push
       `git checkout ${br/* /}`
+      echo '发布成功'
+      sh ./publish-docs.sh
     else
       echo '当前分支落后master分支, 禁止发布'
     fi

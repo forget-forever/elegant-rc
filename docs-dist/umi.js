@@ -49,7 +49,7 @@
     (n.o = function (e, t) {
       return Object.prototype.hasOwnProperty.call(e, t);
     }),
-    (n.p = '/tc-rc/docs-dist/'),
+    (n.p = '/'),
     n((n.s = 0));
 })({
   '++zV': function (e, t, n) {
@@ -8973,48 +8973,86 @@
           r = e.dataLength,
           o = e.disableTodayAfter,
           u = void 0 === o || o,
-          l = Object(s['a'])(e, [
+          l = e.includeToday,
+          f = e.disabledDate,
+          m = e.disabledRanges,
+          h = Object(s['a'])(e, [
             'value',
             'onChange',
             'dataLength',
             'disableTodayAfter',
+            'includeToday',
+            'disabledDate',
+            'disabledRanges',
           ]),
-          f = Object(c['useState'])({ date: [null, null], hackDate: void 0 }),
-          m = Object(i['a'])(f, 2),
-          h = m[0],
-          v = m[1],
-          g = h.date,
-          b = h.hackDate,
-          y = Object(p['a'])((e) => {
-            var t = _()().diff(e, 'days') < 1;
-            if (u && t) return t;
-            if (!r || !g || (!g[0] && !g[1])) return !1;
-            var n = g[0] && e.diff(g[0], 'days') > r,
-              a = g[1] && g[1].diff(e, 'days') > r;
-            return a || !!n;
-          }),
-          w = Object(p['a'])((e) => {
-            v(
-              e
-                ? { date: [null, null], hackDate: [null, null] }
-                : { date: g, hackDate: void 0 },
+          v = Object(c['useState'])({ date: [null, null], hackDate: void 0 }),
+          g = Object(i['a'])(v, 2),
+          b = g[0],
+          y = g[1],
+          w = b.date,
+          k = b.hackDate,
+          x = Object(p['a'])((e) => {
+            var t = _()(),
+              n =
+                t.diff(e, 'days') < 1 &&
+                (!l || e.format('YYYYMMDD') !== t.format('YYYYMMDD'));
+            if (u && n) return n;
+            if (r && w && (w[0] || w[1])) {
+              var a = w[0] && e.diff(w[0], 'days') > r,
+                o = w[1] && w[1].diff(e, 'days') > r;
+              if (o || a) return !0;
+            }
+            var i = +e.format('YYYYMMDD');
+            return !(
+              null === m ||
+              void 0 === m ||
+              !m.some((e) => {
+                if (!(e instanceof Array)) return !1;
+                var t =
+                  (null === e || void 0 === e
+                    ? void 0
+                    : e
+                        .filter(Boolean)
+                        .map((e) =>
+                          'number' === typeof e ? e : +e.format('YYYYMMDD'),
+                        )) || [];
+                return (
+                  !(t.length < 2) &&
+                  (t.sort((e, t) => e - t), i >= t[0] && i <= t[1])
+                );
+              })
             );
           }),
-          k = Object(p['a'])((e) => {
-            v({ hackDate: b, date: e });
+          M = Object(p['a'])((e) => {
+            y(
+              e
+                ? { date: [null, null], hackDate: [null, null] }
+                : { date: w, hackDate: void 0 },
+            );
+          }),
+          O = Object(p['a'])((e) => {
+            var t;
+            return null !==
+              (t = null === f || void 0 === f ? void 0 : f(e, x)) &&
+              void 0 !== t
+              ? t
+              : x(e);
+          }),
+          E = Object(p['a'])((e) => {
+            y({ hackDate: k, date: e });
           });
         return d.a.createElement(
           fr.RangePicker,
           Object(a['a'])(
             {
-              value: b || t,
-              disabledDate: y,
-              onCalendarChange: k,
+              value: k || t,
+              disabledDate: O,
+              onCalendarChange: E,
               onChange: n,
-              onOpenChange: w,
+              onOpenChange: M,
               allowClear: !1,
             },
-            l,
+            h,
           ),
         );
       },
@@ -9038,14 +9076,15 @@
           ]),
           f = Object(c['useMemo'])(() => {
             var t = u || [];
-            return (
-              i &&
-                t.push({
-                  message: ''.concat(e.label, '\u4e0d\u80fd\u4e3a\u7a7a'),
-                  required: i,
-                }),
-              t
-            );
+            if (i) {
+              var n = ''.concat(
+                e.label || '\u8be5\u5b57\u6bb5',
+                '\u4e0d\u80fd\u4e3a\u7a7a',
+              );
+              'string' === typeof i && (n = i),
+                t.push({ message: n, required: !0 });
+            }
+            return t;
           }, [e.label, i, u]);
         return d.a.createElement(
           hr['a'],
@@ -11884,29 +11923,37 @@
   '2Lmz': function (e, t, n) {
     'use strict';
     n.r(t);
-    n('+L6B');
-    var r = n('2/Rp'),
-      a = (n('y8nQ'), n('Vl3Y')),
-      o = n('q1tI'),
-      i = n.n(o),
-      s = n('L00U'),
-      u = n('/7QA');
+    n('IzEo');
+    var r = n('bx4M'),
+      a = (n('+L6B'), n('2/Rp')),
+      o = (n('y8nQ'), n('Vl3Y')),
+      i = n('q1tI'),
+      s = n.n(i),
+      u = n('L00U'),
+      l = n('/7QA');
     t['default'] = () => {
-      var e = Object(s['a'])((e) => {
+      var e = Object(u['a'])((e) => {
         alert(JSON.stringify(e));
       });
-      return i.a.createElement(
-        a['a'],
-        { onFinish: e },
-        i.a.createElement(
-          a['a'].Item,
-          { name: 'date1', label: '\u9009\u62e9\u65e5\u671f' },
-          i.a.createElement(u['DateSelect'], { dataLength: 9 }),
-        ),
-        i.a.createElement(
-          r['a'],
-          { htmlType: 'submit', type: 'primary' },
-          '\u786e\u5b9a',
+      return s.a.createElement(
+        r['a'],
+        { title: '\u9650\u5236\u9009\u62e9\u65e5\u671f\u7684\u957f\u5ea6' },
+        s.a.createElement(
+          o['a'],
+          { onFinish: e },
+          s.a.createElement(
+            o['a'].Item,
+            { name: 'date1', label: '\u9009\u62e9\u65e5\u671f' },
+            s.a.createElement(l['DateSelect'], {
+              dataLength: 9,
+              includeToday: !0,
+            }),
+          ),
+          s.a.createElement(
+            a['a'],
+            { htmlType: 'submit', type: 'primary' },
+            '\u786e\u5b9a',
+          ),
         ),
       );
     };
@@ -16094,7 +16141,8 @@
       s = n('Zxc8'),
       u = a.a.memo((e) => {
         var t = e.demos,
-          n = t['dateselect-demos'].component;
+          n = t['dateselect-demos'].component,
+          r = t['dateselect-disableranges'].component;
         return a.a.createElement(
           a.a.Fragment,
           null,
@@ -16144,6 +16192,29 @@
               s['default'],
               t['dateselect-demos'].previewerProps,
               a.a.createElement(n, null),
+            ),
+            a.a.createElement(
+              'div',
+              { className: 'markdown' },
+              a.a.createElement(
+                'h2',
+                { id: '\u5c4f\u853d\u65e5\u671f\u6bb5' },
+                a.a.createElement(
+                  o['AnchorLink'],
+                  {
+                    to: '#\u5c4f\u853d\u65e5\u671f\u6bb5',
+                    'aria-hidden': 'true',
+                    tabIndex: -1,
+                  },
+                  a.a.createElement('span', { className: 'icon icon-link' }),
+                ),
+                '\u5c4f\u853d\u65e5\u671f\u6bb5',
+              ),
+            ),
+            a.a.createElement(
+              s['default'],
+              t['dateselect-disableranges'].previewerProps,
+              a.a.createElement(r, null),
             ),
             a.a.createElement(
               'div',
@@ -28406,7 +28477,7 @@
         return o;
       });
     var r = n('YS25'),
-      a = { basename: '/tc-rc/docs-dist/' };
+      a = { basename: '/' };
     window.routerBase && (a.basename = window.routerBase);
     var o = Object({ NODE_ENV: 'production' }).__IS_SERVER
         ? null
@@ -63769,6 +63840,48 @@
       return t;
     });
   },
+  ZAtt: function (e, t, n) {
+    'use strict';
+    n.r(t);
+    n('IzEo');
+    var r = n('bx4M'),
+      a = (n('+L6B'), n('2/Rp')),
+      o = (n('y8nQ'), n('Vl3Y')),
+      i = n('q1tI'),
+      s = n.n(i),
+      u = n('L00U'),
+      l = n('wd/R'),
+      c = n.n(l),
+      d = n('/7QA'),
+      f = [[c()().subtract(7, 'days'), c()().subtract(3, 'days')], void 0];
+    t['default'] = () => {
+      var e = Object(u['a'])((e) => {
+        alert(JSON.stringify(e));
+      });
+      return s.a.createElement(
+        r['a'],
+        { title: '\u5c4f\u853d\u65e5\u671f\u6bb5' },
+        s.a.createElement(
+          o['a'],
+          { onFinish: e },
+          s.a.createElement(
+            o['a'].Item,
+            { name: 'date1', label: '\u9009\u62e9\u65e5\u671f' },
+            s.a.createElement(d['DateSelect'], {
+              dataLength: 9,
+              includeToday: !0,
+              disabledRanges: f,
+            }),
+          ),
+          s.a.createElement(
+            a['a'],
+            { htmlType: 'submit', type: 'primary' },
+            '\u786e\u5b9a',
+          ),
+        ),
+      );
+    };
+  },
   ZHNe: function (e, t, n) {
     'use strict';
     n.r(t);
@@ -71343,45 +71456,47 @@
       p =
         "import { ButtonGroup } from 'tc-rc';\n\nconst request = () => {\n  return new Promise<void>((resolve, reject) => {\n    setTimeout(() => {\n      resolve();\n    }, 2000);\n  });\n};\n\nconst Demo = () => {\n  return <ButtonGroup onSubmit={request} onCancel={request} />;\n};\nexport default Demo;",
       m =
-        '/*\n * @Author: zml\n * @Date: 2022-06-23 14:08:50\n * @LastEditTime: 2022-06-23 14:17:04\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { DateSelect } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val) => {\n    alert(JSON.stringify(val));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="date1" label="\u9009\u62e9\u65e5\u671f">\n        <DateSelect dataLength={9} />\n      </Form.Item>\n      <Button htmlType="submit" type="primary">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-23 14:08:50\n * @LastEditTime: 2022-06-28 10:55:17\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Card, Form } from \'antd\';\nimport { DateSelect } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val) => {\n    alert(JSON.stringify(val));\n  });\n\n  return (\n    <Card title="\u9650\u5236\u9009\u62e9\u65e5\u671f\u7684\u957f\u5ea6">\n      <Form onFinish={onFinish}>\n        <Form.Item name="date1" label="\u9009\u62e9\u65e5\u671f">\n          <DateSelect dataLength={9} includeToday />\n        </Form.Item>\n        <Button htmlType="submit" type="primary">\n          \u786e\u5b9a\n        </Button>\n      </Form>\n    </Card>\n  );\n};',
       h =
-        'import { Form, Input, Row, Select } from \'antd\';\nimport { FormContent } from \'tc-rc\';\n\nconst genderOptions = [\n  { value: \'male\', label: \'\u7537\' },\n  { value: \'femal\', label: \'\u5973\' },\n  { value: \'secret\', label: \'\u4fdd\u5bc6\' },\n];\n\nexport default () => {\n  return (\n    <Form>\n      <Row gutter={24}>\n        <FormContent name="name" span={8} label="\u59d3\u540d">\n          <Input />\n        </FormContent>\n        <FormContent name="age" span={8} label="\u5e74\u9f84">\n          <Input />\n        </FormContent>\n        <FormContent name="gender" span={8} label="\u6027\u522b">\n          <Select options={genderOptions} />\n        </FormContent>\n        <FormContent name="describe" label="\u63cf\u8ff0" span={18}>\n          <Input.TextArea />\n        </FormContent>\n      </Row>\n    </Form>\n  );\n};',
+        "/*\n * @Author: zml\n * @Date: 2022-06-23 14:08:50\n * @LastEditTime: 2022-06-28 10:53:58\n */\nimport { useMemoizedFn } from 'ahooks';\nimport { Button, Card, Form } from 'antd';\nimport moment from 'moment';\nimport { DateSelect } from 'tc-rc';\n\nconst disList = [\n  [moment().subtract(7, 'days'), moment().subtract(3, 'days')] as [\n    moment.Moment,\n    moment.Moment,\n  ],\n  undefined,\n];\n\nexport default () => {\n  const onFinish = useMemoizedFn((val) => {\n    alert(JSON.stringify(val));\n  });\n\n  return (\n   <Card title=\"\u5c4f\u853d\u65e5\u671f\u6bb5\">\n    <Form onFinish={onFinish}>\n      <Form.Item name=\"date1\" label=\"\u9009\u62e9\u65e5\u671f\">\n        <DateSelect dataLength={9} includeToday disabledRanges={disList} />\n      </Form.Item>\n      <Button htmlType=\"submit\" type=\"primary\">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  </Card>\n  );\n};",
       v =
-        "import { useMemoizedFn } from 'ahooks';\nimport { Form, Input, Row, Select } from 'antd';\nimport { FormContent, ButtonGroup } from 'tc-rc';\n\nconst genderOptions = [\n  { value: 'male', label: '\u7537' },\n  { value: 'femal', label: '\u5973' },\n  { value: 'secret', label: '\u4fdd\u5bc6' },\n];\n\ntype FormData = Record<'name' | 'age' | 'describe' | 'gender', string>;\nexport default () => {\n  const onFinish = useMemoizedFn((val: FormData) => {\n    alert(JSON.stringify(val, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Row gutter={24}>\n        <FormContent required name=\"name\" span={8} label=\"\u59d3\u540d\">\n          <Input />\n        </FormContent>\n        <FormContent name=\"age\" span={8} label=\"\u5e74\u9f84\">\n          <Input />\n        </FormContent>\n        <FormContent required name=\"gender\" span={8} label=\"\u6027\u522b\">\n          <Select options={genderOptions} />\n        </FormContent>\n        <FormContent name=\"describe\" label=\"\u63cf\u8ff0\" span={18}>\n          <Input.TextArea />\n        </FormContent>\n        <ButtonGroup submitProps={{ htmlType: 'submit' }} />\n      </Row>\n    </Form>\n  );\n};",
+        'import { Form, Input, Row, Select } from \'antd\';\nimport { FormContent } from \'tc-rc\';\n\nconst genderOptions = [\n  { value: \'male\', label: \'\u7537\' },\n  { value: \'femal\', label: \'\u5973\' },\n  { value: \'secret\', label: \'\u4fdd\u5bc6\' },\n];\n\nexport default () => {\n  return (\n    <Form>\n      <Row gutter={24}>\n        <FormContent name="name" span={8} label="\u59d3\u540d">\n          <Input />\n        </FormContent>\n        <FormContent name="age" span={8} label="\u5e74\u9f84">\n          <Input />\n        </FormContent>\n        <FormContent name="gender" span={8} label="\u6027\u522b">\n          <Select options={genderOptions} />\n        </FormContent>\n        <FormContent name="describe" label="\u63cf\u8ff0" span={18}>\n          <Input.TextArea />\n        </FormContent>\n      </Row>\n    </Form>\n  );\n};',
       g =
-        "/*\n * @Author: zml\n * @Date: 2022-06-15 20:37:41\n * @LastEditTime: 2022-06-15 20:49:34\n */\nimport { useBoolean, useMemoizedFn, useSafeState } from 'ahooks';\nimport { Button, Card } from 'antd';\nimport { ModalContent } from 'tc-rc';\n\nexport default () => {\n  const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);\n\n  const [height, setHeight] = useSafeState(400);\n\n  const addHeight = useMemoizedFn(() => setHeight((old) => old + 100));\n\n  const subHeight = useMemoizedFn(() =>\n    setHeight((old) => {\n      const res = old - 100;\n      if (res < 80) {\n        return 80;\n      }\n      return res;\n    }),\n  );\n\n  return (\n    <Card title=\"\u4e0emodal\u7528\u6cd5\u4e00\u81f4\">\n      <Button type=\"primary\" onClick={open}>\n        \u6253\u5f00\u5f39\u7a97\n      </Button>\n      <ModalContent onCancel={close} title=\"\u6837\u4f8b\u5f39\u7a97\" visible={visible}>\n        <div\n          style={{\n            border: '5px solid #f00',\n            width: '100%',\n            height,\n            display: 'flex',\n            justifyContent: 'center',\n            padding: '20px 0',\n          }}\n        >\n          <Button type=\"primary\" onClick={addHeight}>\n            \u9ad8\u5ea6\u52a0100\n          </Button>\n          &nbsp;&nbsp;\n          <Button onClick={subHeight}>\u9ad8\u5ea6\u51cf100</Button>\n        </div>\n      </ModalContent>\n    </Card>\n  );\n};",
+        "import { useMemoizedFn } from 'ahooks';\nimport { Form, Input, Row, Select } from 'antd';\nimport { FormContent, ButtonGroup } from 'tc-rc';\n\nconst genderOptions = [\n  { value: 'male', label: '\u7537' },\n  { value: 'femal', label: '\u5973' },\n  { value: 'secret', label: '\u4fdd\u5bc6' },\n];\n\ntype FormData = Record<'name' | 'age' | 'describe' | 'gender', string>;\nexport default () => {\n  const onFinish = useMemoizedFn((val: FormData) => {\n    alert(JSON.stringify(val, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Row gutter={24}>\n        <FormContent required name=\"name\" span={8} label=\"\u59d3\u540d\">\n          <Input />\n        </FormContent>\n        <FormContent name=\"age\" span={8} label=\"\u5e74\u9f84\">\n          <Input />\n        </FormContent>\n        <FormContent required name=\"gender\" span={8} label=\"\u6027\u522b\">\n          <Select options={genderOptions} />\n        </FormContent>\n        <FormContent name=\"describe\" label=\"\u63cf\u8ff0\" span={18}>\n          <Input.TextArea />\n        </FormContent>\n        <ButtonGroup submitProps={{ htmlType: 'submit' }} />\n      </Row>\n    </Form>\n  );\n};",
       b =
-        '/*\n * @Author: zml\n * @Date: 2022-06-15 20:53:03\n * @LastEditTime: 2022-06-15 21:04:12\n */\nimport { useBoolean, useMemoizedFn, useSafeState } from \'ahooks\';\nimport { Button, Card, Form, InputNumber } from \'antd\';\nimport ModalContent from \'..\';\n\nexport default () => {\n  const [ratio, setRatio] = useSafeState(0.618);\n  const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);\n\n  const onSubmit = useMemoizedFn((val: { val: number }) => {\n    setRatio(+val.val);\n  });\n\n  return (\n    <Card title="\u8c03\u8282\u6bd4\u4f8b">\n      <Button type="primary" onClick={open}>\n        \u6253\u5f00\u5f39\u7a97\n      </Button>\n      <ModalContent\n        visible={visible}\n        onCancel={close}\n        title="\u5f39\u7a97\u6837\u4f8b"\n        maskRatio={ratio}\n      >\n        <div\n          style={{\n            border: \'5px solid #f00\',\n            width: \'100%\',\n            height: 10000,\n            display: \'flex\',\n            justifyContent: \'center\',\n            padding: \'20px 0\',\n          }}\n        >\n          <Form onFinish={onSubmit}>\n            <Form.Item name="val" label="\u8499\u7248\u4e0a\u4e0b\u6bd4\u4f8b">\n              <InputNumber placeholder="\u8f93\u5165\u6570\u5b57\u8c03\u8282\u4e0a\u4e0b\u6bd4\u4f8b" />\n            </Form.Item>\n            <Button type="primary" htmlType="submit">\n              \u786e\u5b9a\n            </Button>\n          </Form>\n        </div>\n      </ModalContent>\n    </Card>\n  );\n};',
+        "/*\n * @Author: zml\n * @Date: 2022-06-15 20:37:41\n * @LastEditTime: 2022-06-15 20:49:34\n */\nimport { useBoolean, useMemoizedFn, useSafeState } from 'ahooks';\nimport { Button, Card } from 'antd';\nimport { ModalContent } from 'tc-rc';\n\nexport default () => {\n  const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);\n\n  const [height, setHeight] = useSafeState(400);\n\n  const addHeight = useMemoizedFn(() => setHeight((old) => old + 100));\n\n  const subHeight = useMemoizedFn(() =>\n    setHeight((old) => {\n      const res = old - 100;\n      if (res < 80) {\n        return 80;\n      }\n      return res;\n    }),\n  );\n\n  return (\n    <Card title=\"\u4e0emodal\u7528\u6cd5\u4e00\u81f4\">\n      <Button type=\"primary\" onClick={open}>\n        \u6253\u5f00\u5f39\u7a97\n      </Button>\n      <ModalContent onCancel={close} title=\"\u6837\u4f8b\u5f39\u7a97\" visible={visible}>\n        <div\n          style={{\n            border: '5px solid #f00',\n            width: '100%',\n            height,\n            display: 'flex',\n            justifyContent: 'center',\n            padding: '20px 0',\n          }}\n        >\n          <Button type=\"primary\" onClick={addHeight}>\n            \u9ad8\u5ea6\u52a0100\n          </Button>\n          &nbsp;&nbsp;\n          <Button onClick={subHeight}>\u9ad8\u5ea6\u51cf100</Button>\n        </div>\n      </ModalContent>\n    </Card>\n  );\n};",
       y =
-        "/*\n * @Author: zml\n * @Date: 2022-05-31 20:37:58\n * @LastEditTime: 2022-06-23 13:03:31\n */\nimport { useSize } from 'ahooks';\nimport { Modal } from 'antd';\nimport type { CSSProperties } from 'react';\nimport { useMemo, useRef } from 'react';\nimport { FCProps, GetIProps } from 'tc-rc';\n\nconst headerHeight = 55;\ntype IProps = GetIProps<typeof Modal> & {\n  /** \u6d6e\u5c42\u8ddd\u9876\u90e8\u7684\u9ad8\u5ea6\uff0c\u4e3a\u6570\u5b57\u7684\u65f6\u5019\u5355\u4f4d\u662fpx, \u5982\u679c\u6ca1\u6709\u8fd9\u4e2a\u4f1a\u6839\u636econtentHeight\u8ba1\u7b97\u5e94\u8be5\u4e0b\u964d\u591a\u5c11 */\n  topHeight?: number | string;\n  /**\n   * \u6d6e\u5c42\u7684\u4e0a\u4e0b\u7a7a\u767d\u533a\u6bd4\u503c\uff0c\u5efa\u8bae\u5c0f\u4e8e1\n   * @default 0.618\n   */\n  maskRatio?: number;\n};\nconst ModalContent: FCProps<IProps> = (props) => {\n  const {\n    children,\n    maskRatio = 0.618,\n    topHeight: topHeightSelf,\n    title = '',\n    ...resetProps\n  } = props;\n  const { bodyStyle } = props;\n\n  const childRef = useRef<HTMLDivElement>(null);\n  // \u83b7\u53d6\u7a97\u4f53\u7684\u9ad8\u5ea6\n  const { height: clientHeight } =\n    useSize(document.querySelector('body')) || {};\n  const { height: childHeight } = useSize(childRef) || {};\n  // \u9700\u8981\u6709\u4e0a\u4e0b24\u7684padding\n  const contentHeight = (childHeight || 0) + 48;\n\n  const topHeight = useMemo(() => {\n    if (topHeightSelf !== undefined) {\n      return topHeightSelf;\n    }\n    if (clientHeight) {\n      // \u9700\u8981\u52a0\u4e0a\u7684height\u7684\u9ad8\u5ea6\n      const resetHeight = clientHeight - contentHeight - headerHeight;\n      if (resetHeight < 200) {\n        return 100;\n      }\n      return resetHeight / 2;\n    }\n    return 100;\n  }, [clientHeight, contentHeight, topHeightSelf]);\n\n  const { contentStyle, style } = useMemo<\n    Record<'contentStyle' | 'style', CSSProperties>\n  >(() => {\n    let maxHeight = `calc(100vh - ${headerHeight}px - ${topHeight} - ${topHeight})`;\n    let top = topHeight.toString();\n    if (typeof topHeight === 'number') {\n      maxHeight = `calc(100vh - ${2 * topHeight + headerHeight}px)`;\n      top = `${topHeight * maskRatio}px`;\n    }\n    return {\n      contentStyle: {\n        maxHeight,\n        overflowY: 'auto',\n        height: contentHeight,\n        textAlign: 'start',\n        ...bodyStyle,\n      },\n      style: { top, textAlign: 'center', ...props.style },\n    };\n  }, [bodyStyle, contentHeight, maskRatio, props.style, topHeight]);\n\n  return (\n    <Modal\n      width={800}\n      footer={null}\n      title={title}\n      {...resetProps}\n      style={style}\n      bodyStyle={contentStyle}\n    >\n      <div ref={childRef}>{children}</div>\n    </Modal>\n  );\n};\n\nexport default ModalContent;",
+        '/*\n * @Author: zml\n * @Date: 2022-06-15 20:53:03\n * @LastEditTime: 2022-06-15 21:04:12\n */\nimport { useBoolean, useMemoizedFn, useSafeState } from \'ahooks\';\nimport { Button, Card, Form, InputNumber } from \'antd\';\nimport ModalContent from \'..\';\n\nexport default () => {\n  const [ratio, setRatio] = useSafeState(0.618);\n  const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);\n\n  const onSubmit = useMemoizedFn((val: { val: number }) => {\n    setRatio(+val.val);\n  });\n\n  return (\n    <Card title="\u8c03\u8282\u6bd4\u4f8b">\n      <Button type="primary" onClick={open}>\n        \u6253\u5f00\u5f39\u7a97\n      </Button>\n      <ModalContent\n        visible={visible}\n        onCancel={close}\n        title="\u5f39\u7a97\u6837\u4f8b"\n        maskRatio={ratio}\n      >\n        <div\n          style={{\n            border: \'5px solid #f00\',\n            width: \'100%\',\n            height: 10000,\n            display: \'flex\',\n            justifyContent: \'center\',\n            padding: \'20px 0\',\n          }}\n        >\n          <Form onFinish={onSubmit}>\n            <Form.Item name="val" label="\u8499\u7248\u4e0a\u4e0b\u6bd4\u4f8b">\n              <InputNumber placeholder="\u8f93\u5165\u6570\u5b57\u8c03\u8282\u4e0a\u4e0b\u6bd4\u4f8b" />\n            </Form.Item>\n            <Button type="primary" htmlType="submit">\n              \u786e\u5b9a\n            </Button>\n          </Form>\n        </div>\n      </ModalContent>\n    </Card>\n  );\n};',
       _ =
-        '/*\n * @Author: zml\n * @Date: 2022-06-15 20:20:02\n * @LastEditTime: 2022-06-15 20:32:04\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { TagsInput } from \'tc-rc\';\n\nexport default () => {\n  const onSearch = useMemoizedFn((val: string) => {\n    const res = +val;\n    if (!Number.isNaN(res)) {\n      return [{ label: res.toString(), value: res.toString() }];\n    } else {\n      return [];\n    }\n  });\n\n  const onSearchEmail = useMemoizedFn((val: string) => {\n    const emails = [\'qq.com\', \'163.com\', \'139.com\'];\n    if (/.*@.*/.test(val)) {\n      return [{ value: val, label: val }];\n    }\n    return emails.map((item) => ({\n      value: `${val}@${item}`,\n      label: `${val}@${item}`,\n    }));\n  });\n\n  return (\n    <>\n      <Card title="\u666e\u901a\u6587\u672c">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput />\n          </Form.Item>\n        </Form>\n      </Card>\n      <Card title="\u53f7\u7801\u8f93\u5165">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput onSearch={onSearch} />\n          </Form.Item>\n        </Form>\n      </Card>\n      <Card title="\u90ae\u7bb1\u8f93\u5165">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput mode="multiple" onSearch={onSearchEmail} />\n          </Form.Item>\n        </Form>\n      </Card>\n    </>\n  );\n};',
+        "/*\n * @Author: zml\n * @Date: 2022-05-31 20:37:58\n * @LastEditTime: 2022-06-23 13:03:31\n */\nimport { useSize } from 'ahooks';\nimport { Modal } from 'antd';\nimport type { CSSProperties } from 'react';\nimport { useMemo, useRef } from 'react';\nimport { FCProps, GetIProps } from 'tc-rc';\n\nconst headerHeight = 55;\ntype IProps = GetIProps<typeof Modal> & {\n  /** \u6d6e\u5c42\u8ddd\u9876\u90e8\u7684\u9ad8\u5ea6\uff0c\u4e3a\u6570\u5b57\u7684\u65f6\u5019\u5355\u4f4d\u662fpx, \u5982\u679c\u6ca1\u6709\u8fd9\u4e2a\u4f1a\u6839\u636econtentHeight\u8ba1\u7b97\u5e94\u8be5\u4e0b\u964d\u591a\u5c11 */\n  topHeight?: number | string;\n  /**\n   * \u6d6e\u5c42\u7684\u4e0a\u4e0b\u7a7a\u767d\u533a\u6bd4\u503c\uff0c\u5efa\u8bae\u5c0f\u4e8e1\n   * @default 0.618\n   */\n  maskRatio?: number;\n};\nconst ModalContent: FCProps<IProps> = (props) => {\n  const {\n    children,\n    maskRatio = 0.618,\n    topHeight: topHeightSelf,\n    title = '',\n    ...resetProps\n  } = props;\n  const { bodyStyle } = props;\n\n  const childRef = useRef<HTMLDivElement>(null);\n  // \u83b7\u53d6\u7a97\u4f53\u7684\u9ad8\u5ea6\n  const { height: clientHeight } =\n    useSize(document.querySelector('body')) || {};\n  const { height: childHeight } = useSize(childRef) || {};\n  // \u9700\u8981\u6709\u4e0a\u4e0b24\u7684padding\n  const contentHeight = (childHeight || 0) + 48;\n\n  const topHeight = useMemo(() => {\n    if (topHeightSelf !== undefined) {\n      return topHeightSelf;\n    }\n    if (clientHeight) {\n      // \u9700\u8981\u52a0\u4e0a\u7684height\u7684\u9ad8\u5ea6\n      const resetHeight = clientHeight - contentHeight - headerHeight;\n      if (resetHeight < 200) {\n        return 100;\n      }\n      return resetHeight / 2;\n    }\n    return 100;\n  }, [clientHeight, contentHeight, topHeightSelf]);\n\n  const { contentStyle, style } = useMemo<\n    Record<'contentStyle' | 'style', CSSProperties>\n  >(() => {\n    let maxHeight = `calc(100vh - ${headerHeight}px - ${topHeight} - ${topHeight})`;\n    let top = topHeight.toString();\n    if (typeof topHeight === 'number') {\n      maxHeight = `calc(100vh - ${2 * topHeight + headerHeight}px)`;\n      top = `${topHeight * maskRatio}px`;\n    }\n    return {\n      contentStyle: {\n        maxHeight,\n        overflowY: 'auto',\n        height: contentHeight,\n        textAlign: 'start',\n        ...bodyStyle,\n      },\n      style: { top, textAlign: 'center', ...props.style },\n    };\n  }, [bodyStyle, contentHeight, maskRatio, props.style, topHeight]);\n\n  return (\n    <Modal\n      width={800}\n      footer={null}\n      title={title}\n      {...resetProps}\n      style={style}\n      bodyStyle={contentStyle}\n    >\n      <div ref={childRef}>{children}</div>\n    </Modal>\n  );\n};\n\nexport default ModalContent;",
       w =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:21:22\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(val.code);\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="code" label="\u4ee3\u7801" initialValue="var a = 1">\n        <CodeInput />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-15 20:20:02\n * @LastEditTime: 2022-06-15 20:32:04\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { TagsInput } from \'tc-rc\';\n\nexport default () => {\n  const onSearch = useMemoizedFn((val: string) => {\n    const res = +val;\n    if (!Number.isNaN(res)) {\n      return [{ label: res.toString(), value: res.toString() }];\n    } else {\n      return [];\n    }\n  });\n\n  const onSearchEmail = useMemoizedFn((val: string) => {\n    const emails = [\'qq.com\', \'163.com\', \'139.com\'];\n    if (/.*@.*/.test(val)) {\n      return [{ value: val, label: val }];\n    }\n    return emails.map((item) => ({\n      value: `${val}@${item}`,\n      label: `${val}@${item}`,\n    }));\n  });\n\n  return (\n    <>\n      <Card title="\u666e\u901a\u6587\u672c">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput />\n          </Form.Item>\n        </Form>\n      </Card>\n      <Card title="\u53f7\u7801\u8f93\u5165">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput onSearch={onSearch} />\n          </Form.Item>\n        </Form>\n      </Card>\n      <Card title="\u90ae\u7bb1\u8f93\u5165">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput mode="multiple" onSearch={onSearchEmail} />\n          </Form.Item>\n        </Form>\n      </Card>\n    </>\n  );\n};',
       k =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:26:03\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(JSON.stringify(val.code, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item\n        name="code"\n        label="\u4ee3\u7801"\n        initialValue={{ lang: \'javascript\', str: \'var a = 1\' }}\n      >\n        <CodeInput valueType="obj" />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:21:22\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(val.code);\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="code" label="\u4ee3\u7801" initialValue="var a = 1">\n        <CodeInput />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
       x =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:32:20\n * @LastEditTime: 2022-06-20 20:37:45\n */\nimport { Form } from \'antd\';\nimport CodeInput from \'..\';\n\nexport default () => {\n  return (\n    <Form>\n      <Form.Item name="readonly" label="\u53ea\u8bfb\u6a21\u5f0f" initialValue="var a = 1;">\n        <CodeInput readonly />\n      </Form.Item>\n      <Form.Item\n        name="aLang"\n        label="\u4e0d\u53ef\u5207\u6362\u8bed\u8a00"\n        initialValue="SELECT * FROM test_table;"\n      >\n        <CodeInput readonly defaultLanguage="sql" />\n      </Form.Item>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:26:03\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(JSON.stringify(val.code, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item\n        name="code"\n        label="\u4ee3\u7801"\n        initialValue={{ lang: \'javascript\', str: \'var a = 1\' }}\n      >\n        <CodeInput valueType="obj" />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
       M =
-        "/*\n * @Author: zml\n * @Date: 2022-06-16 15:38:23\n * @LastEditTime: 2022-06-20 20:28:56\n */\n\nimport { useEffect, useMemo, useRef, useState } from 'react';\nimport codemirror from 'codemirror';\nimport 'codemirror/lib/codemirror.css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/sql/sql';\nimport 'codemirror/mode/shell/shell';\nimport 'codemirror/mode/python/python';\n// import 'codemirror/mode/php/php'\nimport 'codemirror/addon/display/placeholder';\nimport 'codemirror/addon/hint/show-hint.css'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/show-hint.js'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/sql-hint'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/javascript-hint';\nimport 'codemirror/addon/hint/anyword-hint';\nimport 'codemirror/theme/3024-day.css';\nimport './styleGlobal.less';\nimport { Card, message, Select } from 'antd';\nimport {\n  bodyStyle,\n  containerStyle,\n  editStyle,\n  extraStyle,\n  headStyle,\n  selectStyle,\n} from './styles';\nimport { useMemoizedFn } from 'ahooks';\nimport copy from 'copy-to-clipboard';\nimport { generateVal, getValue, languageOptions, suffixIcon } from './config';\nimport type { LangesType, ValueType, VBase } from './type';\n\ntype IProps<V extends VBase = 'str'> = {\n  /** \u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript */\n  defaultLanguage?: LangesType;\n  /** \u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c */\n  initValue?: string;\n  /** \u7f16\u8f91\u7684\u4ee3\u7801\u503c */\n  value?: ValueType<V>;\n  /**\n   * \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6\n   * @default auto\n   */\n  editHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6 */\n  editMaxHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6 */\n  editMinHeight?: string;\n  /** \u4ee3\u7801\u6539\u53d8\u7684\u503c */\n  onChange?: (val?: ValueType<V>) => void;\n  /** \u7981\u6b62\u9009\u62e9\u8bed\u8a00 */\n  disabledChangeLanguage?: boolean;\n  /** \u53ea\u8bfb\u6a21\u5f0f */\n  readonly?: boolean;\n  /** \u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765 */\n  valueType?: V;\n};\nconst CodeInput = <V extends VBase>(props: IProps<V>) => {\n  const divRef = useRef<HTMLDivElement>(null);\n  const {\n    defaultLanguage = 'javascript',\n    value,\n    initValue = '',\n    onChange,\n    disabledChangeLanguage,\n    valueType = 'str' as V,\n  } = props;\n  const { editHeight = 'auto', editMaxHeight, editMinHeight, readonly } = props;\n  const [lang, setLang] = useState(defaultLanguage);\n\n  const changeHandle = useMemoizedFn((val?: string) =>\n    onChange?.(generateVal(valueType, lang, val)),\n  );\n\n  const editorRef = useRef<ReturnType<typeof codemirror>>();\n\n  const valData = getValue(valueType, value);\n\n  useEffect(() => {\n    if (valueType === 'obj') {\n      changeHandle(valData);\n    }\n  }, [lang]);\n\n  useEffect(() => {\n    if (divRef.current) {\n      divRef.current.innerHTML = '';\n      editorRef.current = codemirror(divRef.current, {\n        indentWithTabs: true,\n        readOnly: readonly,\n        smartIndent: true,\n        lineNumbers: true,\n        autofocus: true,\n        extraKeys: {\n          \"';'\": (editor) => {\n            const spaces = Array(editor.getOption('indentUnit')).join(';'); // \u5206\u53f7;\u76d1\u542c\u6267\u884c\u5b8c\u540e,\u5c31\u4e0d\u4f1a\u518d\u6267\u884cinputRead\u8f93\u5165\u76d1\u542c\u4e86\n            editor.replaceSelection(spaces);\n          },\n        },\n        hintOptions: { completeSingle: false },\n        lineWrapping: true, // \u5728\u957f\u884c\u65f6\u6587\u5b57\u662f\u6362\u884c(wrap)\u8fd8\u662f\u6eda\u52a8(scroll)\uff0c\u9ed8\u8ba4\u4e3a\u6eda\u52a8(scroll)\u3002\n        mode: lang,\n        value: valData || initValue,\n      });\n      editorRef.current.on('inputRead', (editor, change) => {\n        const data = {\n          test: ['t_user', 'menu', 'auth_info'],\n          t_user: [],\n          menu: [''],\n          default: ['tableinfo'],\n        };\n        editor.setOption('hintOptions', {\n          tables: data,\n          completeSingle: false,\n        });\n        editor.execCommand('autocomplete');\n      });\n      editorRef.current.on('change', () => {\n        changeHandle(editorRef.current?.getValue() || '');\n      });\n      // editorRef.\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [lang, divRef.current, readonly]);\n\n  useEffect(() => {\n    if (valData !== (editorRef.current?.getValue() || '')) {\n      editorRef.current?.setValue(valData);\n    }\n  }, [valData, valueType]);\n\n  const copyHandle = useMemoizedFn(() => {\n    copy(valData || editorRef.current?.getValue() || '');\n    message.success('\u590d\u5236\u6210\u529f');\n  });\n\n  const styleHandle = useMemo(\n    () => ({\n      ...editStyle,\n      height: editHeight,\n      maxHeight: editMaxHeight,\n      minHeight: editMinHeight,\n    }),\n    [editHeight, editMaxHeight, editMinHeight],\n  );\n\n  return (\n    <Card\n      headStyle={headStyle}\n      style={containerStyle}\n      bodyStyle={bodyStyle}\n      title={\n        <Select\n          disabled={readonly || disabledChangeLanguage}\n          bordered={false}\n          style={selectStyle}\n          options={languageOptions}\n          value={lang}\n          onChange={setLang}\n          suffixIcon={suffixIcon}\n        />\n      }\n      extra={\n        <span style={extraStyle} onClick={copyHandle}>\n          \u590d\u5236\u4ee3\u7801\n        </span>\n      }\n    >\n      <div ref={divRef} style={styleHandle} />\n    </Card>\n  );\n};\n\nexport default CodeInput;",
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:32:20\n * @LastEditTime: 2022-06-20 20:37:45\n */\nimport { Form } from \'antd\';\nimport CodeInput from \'..\';\n\nexport default () => {\n  return (\n    <Form>\n      <Form.Item name="readonly" label="\u53ea\u8bfb\u6a21\u5f0f" initialValue="var a = 1;">\n        <CodeInput readonly />\n      </Form.Item>\n      <Form.Item\n        name="aLang"\n        label="\u4e0d\u53ef\u5207\u6362\u8bed\u8a00"\n        initialValue="SELECT * FROM test_table;"\n      >\n        <CodeInput readonly defaultLanguage="sql" />\n      </Form.Item>\n    </Form>\n  );\n};',
       O =
-        '.CodeMirror {\n  background-color: rgb(247, 247, 247);\n}\n\n.CodeMirror-gutters {\n  border-right: none;\n}',
+        "/*\n * @Author: zml\n * @Date: 2022-06-16 15:38:23\n * @LastEditTime: 2022-06-23 15:14:21\n */\n\nimport { useEffect, useMemo, useRef, useState } from 'react';\nimport codemirror from 'codemirror';\nimport 'codemirror/lib/codemirror.css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/sql/sql';\nimport 'codemirror/mode/shell/shell';\nimport 'codemirror/mode/python/python';\n// import 'codemirror/mode/php/php'\nimport 'codemirror/addon/display/placeholder';\nimport 'codemirror/addon/hint/show-hint.css'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/show-hint.js'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/sql-hint'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/javascript-hint';\nimport 'codemirror/addon/hint/anyword-hint';\nimport 'codemirror/theme/3024-day.css';\nimport './styleGlobal.less';\nimport { Card, message, Select } from 'antd';\nimport {\n  bodyStyle,\n  containerStyle,\n  editStyle,\n  extraStyle,\n  headStyle,\n  selectStyle,\n} from './styles';\nimport { useMemoizedFn } from 'ahooks';\nimport copy from 'copy-to-clipboard';\nimport { generateVal, getValue, languageOptions, suffixIcon } from './config';\nimport type { LangesType, ValueType, VBase } from './type';\n\ntype IProps<V extends VBase = 'str'> = {\n  /** \u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript */\n  defaultLanguage?: LangesType;\n  /** \u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c */\n  initValue?: string;\n  /** \u7f16\u8f91\u7684\u4ee3\u7801\u503c */\n  value?: ValueType<V>;\n  /**\n   * \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6\n   * @default auto\n   */\n  editHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6 */\n  editMaxHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6 */\n  editMinHeight?: string;\n  /** \u4ee3\u7801\u6539\u53d8\u7684\u503c */\n  onChange?: (val?: ValueType<V>) => void;\n  /** \u7981\u6b62\u9009\u62e9\u8bed\u8a00 */\n  disabledChangeLanguage?: boolean;\n  /** \u53ea\u8bfb\u6a21\u5f0f */\n  readonly?: boolean;\n  /** \u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765 */\n  valueType?: V;\n};\nconst CodeInput = <V extends VBase>(props: IProps<V>) => {\n  const divRef = useRef<HTMLDivElement>(null);\n  const {\n    defaultLanguage = 'javascript',\n    value,\n    initValue = '',\n    onChange,\n    disabledChangeLanguage,\n    valueType = 'str' as V,\n  } = props;\n  const {\n    editHeight = '300px',\n    editMaxHeight,\n    editMinHeight,\n    readonly,\n  } = props;\n  const [lang, setLang] = useState(defaultLanguage);\n\n  const changeHandle = useMemoizedFn((val?: string) =>\n    onChange?.(generateVal(valueType, lang, val)),\n  );\n\n  const editorRef = useRef<ReturnType<typeof codemirror>>();\n\n  const valData = getValue(valueType, value);\n\n  useEffect(() => {\n    if (valueType === 'obj') {\n      changeHandle(valData);\n    }\n  }, [lang]);\n\n  useEffect(() => {\n    if (divRef.current) {\n      divRef.current.innerHTML = '';\n      editorRef.current = codemirror(divRef.current, {\n        indentWithTabs: true,\n        readOnly: readonly,\n        smartIndent: true,\n        lineNumbers: true,\n        autofocus: true,\n        extraKeys: {\n          \"';'\": (editor) => {\n            const spaces = Array(editor.getOption('indentUnit')).join(';'); // \u5206\u53f7;\u76d1\u542c\u6267\u884c\u5b8c\u540e,\u5c31\u4e0d\u4f1a\u518d\u6267\u884cinputRead\u8f93\u5165\u76d1\u542c\u4e86\n            editor.replaceSelection(spaces);\n          },\n        },\n        hintOptions: { completeSingle: false },\n        lineWrapping: true, // \u5728\u957f\u884c\u65f6\u6587\u5b57\u662f\u6362\u884c(wrap)\u8fd8\u662f\u6eda\u52a8(scroll)\uff0c\u9ed8\u8ba4\u4e3a\u6eda\u52a8(scroll)\u3002\n        mode: lang,\n        value: valData || initValue,\n      });\n      editorRef.current.on('inputRead', (editor, change) => {\n        const data = {\n          test: ['t_user', 'menu', 'auth_info'],\n          t_user: [],\n          menu: [''],\n          default: ['tableinfo'],\n        };\n        editor.setOption('hintOptions', {\n          tables: data,\n          completeSingle: false,\n        });\n        editor.execCommand('autocomplete');\n      });\n      editorRef.current.on('change', () => {\n        changeHandle(editorRef.current?.getValue() || '');\n      });\n      // editorRef.\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [lang, divRef.current, readonly]);\n\n  useEffect(() => {\n    if (valData !== (editorRef.current?.getValue() || '')) {\n      editorRef.current?.setValue(valData);\n    }\n  }, [valData, valueType]);\n\n  const copyHandle = useMemoizedFn(() => {\n    copy(valData || editorRef.current?.getValue() || '');\n    message.success('\u590d\u5236\u6210\u529f');\n  });\n\n  const styleHandle = useMemo(\n    () => ({\n      ...editStyle,\n      height: editHeight,\n      maxHeight: editMaxHeight,\n      minHeight: editMinHeight,\n    }),\n    [editHeight, editMaxHeight, editMinHeight],\n  );\n\n  return (\n    <Card\n      headStyle={headStyle}\n      style={containerStyle}\n      bodyStyle={bodyStyle}\n      title={\n        <Select\n          disabled={readonly || disabledChangeLanguage}\n          bordered={false}\n          style={selectStyle}\n          options={languageOptions}\n          value={lang}\n          onChange={setLang}\n          suffixIcon={suffixIcon}\n        />\n      }\n      extra={\n        <span style={extraStyle} onClick={copyHandle}>\n          \u590d\u5236\u4ee3\u7801\n        </span>\n      }\n    >\n      <div ref={divRef} style={styleHandle} />\n    </Card>\n  );\n};\n\nexport default CodeInput;",
       E =
-        "/*\n * @Author: zml\n * @Date: 2022-06-16 17:01:19\n * @LastEditTime: 2022-06-16 19:50:55\n */\nimport type { CSSProperties } from 'react';\n\nexport const containerStyle: CSSProperties = {\n  position: 'relative',\n  width: '100%',\n};\n\nexport const headStyle: CSSProperties = {\n  background: 'rgb(240, 240, 240)',\n  height: 32,\n  minHeight: 32,\n  overflow: 'hidden',\n};\n\nexport const bodyStyle: CSSProperties = {\n  padding: 0,\n};\n\nexport const editStyle: CSSProperties = {\n  width: '100%',\n  height: 'auto',\n  border: '1px solid #eee',\n  background: 'rgb(247, 247, 247)',\n  overflowY: 'auto',\n};\n\nexport const selectStyle: CSSProperties = {\n  width: 'auto',\n  // minWidth: \"120px\",\n  height: 30,\n  textAlign: 'end',\n  position: 'absolute',\n  left: 8,\n  top: 0,\n  zIndex: 1,\n};\n\nexport const extraStyle: CSSProperties = {\n  padding: '0 12px',\n  position: 'absolute',\n  height: 30,\n  lineHeight: '30px',\n  right: 0,\n  color: '#999',\n  top: 0,\n  zIndex: 1,\n  cursor: 'pointer',\n};",
+        '.CodeMirror {\n  background-color: rgb(247, 247, 247);\n  height: auto;\n}\n\n.CodeMirror-gutters {\n  border-right: none;\n}',
       j =
-        "/*\n * @Author: zml\n * @Date: 2022-06-17 10:18:05\n * @LastEditTime: 2022-06-17 11:05:50\n */\nimport { CaretDownOutlined } from '@ant-design/icons';\nimport type { ValueType, VBase } from './type';\n\n/**\n * \u9009\u62e9\u6846\u540e\u9762\u7684\u56fe\u6807\n */\nexport const suffixIcon = <CaretDownOutlined style={{ marginTop: 3 }} />;\n\n/**\n * \u53ef\u4ee5\u9009\u62e9\u7684\u8bed\u8a00\uff0c\u5982\u679c\u52a0\u4e86\u8bed\u8a00\uff0c\u8bb0\u5f97\u6ce8\u610fcodemirroe\u4e2d\u6709\u6ca1\u6709mode\u548chint\n * value\u6700\u597d\u52a0\u4e00\u4e9bas const\u66f4\u6709\u5229\u4e8ets\u7684\u7c7b\u578b\u63a8\u5bfc\n */\nexport const languageOptions = [\n  { value: 'javascript' as const, label: 'JavaScript' },\n  { value: 'sql' as const, label: 'Sql' },\n  { value: 'python' as const, label: 'Python' },\n  { value: 'shell' as const, label: 'Shell' },\n  // { value: 'php' as const, label: 'PHP' }\n];\nexport const langes = languageOptions.map(({ value }) => value);\n\n/**\n * \u83b7\u53d6\u6570\u636e\uff0c\u53ef\u4ee5\u5bf9\u54ea\u4e00\u79cd\u7c7b\u578b\u7684\u6570\u636e\u83b7\u53d6\u505a\u4e00\u4e2a\u6536\u655b\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const getValue = (type: VBase, val?: ValueType<VBase>) => {\n  if (!val) {\n    return '';\n  }\n  if (type === 'obj') {\n    return (val as ValueType<'obj'>).str;\n  }\n  return val.toString();\n};\n\n/**\n * \u751f\u6210\u6240\u9700\u8981\u7684\u6570\u636e\u683c\u5f0f\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param lang \u5f53\u524d\u9009\u62e9\u7684\u8bed\u8a00\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const generateVal = <V extends VBase>(\n  type: V,\n  lang: string,\n  val?: string,\n): ValueType<V> => {\n  if (type === 'obj') {\n    return {\n      str: val,\n      lang,\n    } as ValueType<V>;\n  }\n  return val as ValueType<V>;\n};",
+        "/*\n * @Author: zml\n * @Date: 2022-06-16 17:01:19\n * @LastEditTime: 2022-06-16 19:50:55\n */\nimport type { CSSProperties } from 'react';\n\nexport const containerStyle: CSSProperties = {\n  position: 'relative',\n  width: '100%',\n};\n\nexport const headStyle: CSSProperties = {\n  background: 'rgb(240, 240, 240)',\n  height: 32,\n  minHeight: 32,\n  overflow: 'hidden',\n};\n\nexport const bodyStyle: CSSProperties = {\n  padding: 0,\n};\n\nexport const editStyle: CSSProperties = {\n  width: '100%',\n  height: 'auto',\n  border: '1px solid #eee',\n  background: 'rgb(247, 247, 247)',\n  overflowY: 'auto',\n};\n\nexport const selectStyle: CSSProperties = {\n  width: 'auto',\n  // minWidth: \"120px\",\n  height: 30,\n  textAlign: 'end',\n  position: 'absolute',\n  left: 8,\n  top: 0,\n  zIndex: 1,\n};\n\nexport const extraStyle: CSSProperties = {\n  padding: '0 12px',\n  position: 'absolute',\n  height: 30,\n  lineHeight: '30px',\n  right: 0,\n  color: '#999',\n  top: 0,\n  zIndex: 1,\n  cursor: 'pointer',\n};",
       S =
-        'import { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { CronSelect, ButtonAsync } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { cron: string }) => {\n    alert(JSON.stringify(val, null, 4));\n  });\n\n  return (\n    <Card title="cron\u9009\u62e9\u5668">\n      <Form onFinish={onFinish}>\n        <Form.Item label="cron\u9009\u62e9" name="cron">\n          <CronSelect />\n        </Form.Item>\n        <ButtonAsync type="primary" htmlType="submit">\n          \u63d0\u4ea4\n        </ButtonAsync>\n      </Form>\n    </Card>\n  );\n};',
+        "/*\n * @Author: zml\n * @Date: 2022-06-17 10:18:05\n * @LastEditTime: 2022-06-17 11:05:50\n */\nimport { CaretDownOutlined } from '@ant-design/icons';\nimport type { ValueType, VBase } from './type';\n\n/**\n * \u9009\u62e9\u6846\u540e\u9762\u7684\u56fe\u6807\n */\nexport const suffixIcon = <CaretDownOutlined style={{ marginTop: 3 }} />;\n\n/**\n * \u53ef\u4ee5\u9009\u62e9\u7684\u8bed\u8a00\uff0c\u5982\u679c\u52a0\u4e86\u8bed\u8a00\uff0c\u8bb0\u5f97\u6ce8\u610fcodemirroe\u4e2d\u6709\u6ca1\u6709mode\u548chint\n * value\u6700\u597d\u52a0\u4e00\u4e9bas const\u66f4\u6709\u5229\u4e8ets\u7684\u7c7b\u578b\u63a8\u5bfc\n */\nexport const languageOptions = [\n  { value: 'javascript' as const, label: 'JavaScript' },\n  { value: 'sql' as const, label: 'Sql' },\n  { value: 'python' as const, label: 'Python' },\n  { value: 'shell' as const, label: 'Shell' },\n  // { value: 'php' as const, label: 'PHP' }\n];\nexport const langes = languageOptions.map(({ value }) => value);\n\n/**\n * \u83b7\u53d6\u6570\u636e\uff0c\u53ef\u4ee5\u5bf9\u54ea\u4e00\u79cd\u7c7b\u578b\u7684\u6570\u636e\u83b7\u53d6\u505a\u4e00\u4e2a\u6536\u655b\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const getValue = (type: VBase, val?: ValueType<VBase>) => {\n  if (!val) {\n    return '';\n  }\n  if (type === 'obj') {\n    return (val as ValueType<'obj'>).str;\n  }\n  return val.toString();\n};\n\n/**\n * \u751f\u6210\u6240\u9700\u8981\u7684\u6570\u636e\u683c\u5f0f\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param lang \u5f53\u524d\u9009\u62e9\u7684\u8bed\u8a00\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const generateVal = <V extends VBase>(\n  type: V,\n  lang: string,\n  val?: string,\n): ValueType<V> => {\n  if (type === 'obj') {\n    return {\n      str: val,\n      lang,\n    } as ValueType<V>;\n  }\n  return val as ValueType<V>;\n};",
       L =
+        'import { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { CronSelect, ButtonAsync } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { cron: string }) => {\n    alert(JSON.stringify(val, null, 4));\n  });\n\n  return (\n    <Card title="cron\u9009\u62e9\u5668">\n      <Form onFinish={onFinish}>\n        <Form.Item label="cron\u9009\u62e9" name="cron">\n          <CronSelect />\n        </Form.Item>\n        <ButtonAsync type="primary" htmlType="submit">\n          \u63d0\u4ea4\n        </ButtonAsync>\n      </Form>\n    </Card>\n  );\n};',
+      T =
         "import { Prominent } from 'tc-rc';\n\nconst Demo = () => {\n  return <Prominent str=\"\u6587\u5b57\u9ad8\u4eae\u7ec4\u4ef6\u5e93\" vals={['\u6587\u5b57']} />;\n};\n\nexport default Demo;",
-      T = {
+      C = {
         'countdownbutton-demos': {
           component: n('WFta').default,
           previewerProps: {
             sources: { _: { tsx: s } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71404,7 +71519,7 @@
             sources: { _: { tsx: u } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71426,7 +71541,7 @@
           previewerProps: {
             sources: { _: { tsx: l } },
             dependencies: {
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71449,7 +71564,7 @@
           previewerProps: {
             sources: { _: { tsx: c } },
             dependencies: {
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71474,7 +71589,7 @@
             dependencies: {
               ahooks: { version: '>=2.10.11' },
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71495,7 +71610,7 @@
           previewerProps: {
             sources: { _: { tsx: f } },
             dependencies: {
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71518,7 +71633,7 @@
           previewerProps: {
             sources: { _: { tsx: p } },
             dependencies: {
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71543,7 +71658,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71559,13 +71674,37 @@
             identifier: 'dateselect-demos',
           },
         },
-        'formcontent-demos': {
-          component: n('Kv0V').default,
+        'dateselect-disableranges': {
+          component: n('ZAtt').default,
           previewerProps: {
             sources: { _: { tsx: h } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
-              'tc-rc': { version: '1.4.0' },
+              ahooks: { version: '>=2.10.11' },
+              moment: { version: '2.29.3' },
+              'tc-rc': { version: '1.4.8' },
+              react: { version: '>=16.9.0' },
+              'react-dom': { version: '>=16.9.0' },
+              '@ant-design/pro-table': {
+                version: '>=2.16.1',
+                css: '@ant-design/pro-table/dist/table.css',
+              },
+              '@types/lodash': { version: '>=4.14.0' },
+              codemirror: { version: '5.65.5' },
+              lodash: { version: '>=4.0.0' },
+              'qnn-react-cron': { version: '^0.8.6' },
+            },
+            componentName: 'DateSelect',
+            identifier: 'dateselect-disableranges',
+          },
+        },
+        'formcontent-demos': {
+          component: n('Kv0V').default,
+          previewerProps: {
+            sources: { _: { tsx: v } },
+            dependencies: {
+              antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71585,11 +71724,11 @@
         'formcontent-required': {
           component: n('czfv').default,
           previewerProps: {
-            sources: { _: { tsx: v } },
+            sources: { _: { tsx: g } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71608,11 +71747,11 @@
         'modalcontent-demos': {
           component: n('i1cl').default,
           previewerProps: {
-            sources: { _: { tsx: g } },
+            sources: { _: { tsx: b } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71632,8 +71771,8 @@
           component: n('ZHNe').default,
           previewerProps: {
             sources: {
-              _: { tsx: b },
-              'index.tsx': { import: '..', content: y },
+              _: { tsx: y },
+              'index.tsx': { import: '..', content: _ },
             },
             dependencies: {
               antd: { version: '4.20.7', css: 'antd/dist/antd.css' },
@@ -71648,11 +71787,11 @@
         'tagsinput-demos': {
           component: n('z/0N').default,
           previewerProps: {
-            sources: { _: { tsx: _ } },
+            sources: { _: { tsx: w } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71671,11 +71810,11 @@
         'codeinput-demos': {
           component: n('z+Q3').default,
           previewerProps: {
-            sources: { _: { tsx: w } },
+            sources: { _: { tsx: k } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71694,11 +71833,11 @@
         'codeinput-objval': {
           component: n('05+q').default,
           previewerProps: {
-            sources: { _: { tsx: k } },
+            sources: { _: { tsx: x } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71718,11 +71857,11 @@
           component: n('/4b3').default,
           previewerProps: {
             sources: {
-              _: { tsx: x },
-              'index.tsx': { import: '..', content: M },
-              'styleGlobal.less': { import: './styleGlobal.less', content: O },
-              'styles.ts': { import: './styles', content: E },
-              'config.tsx': { import: './config', content: j },
+              _: { tsx: M },
+              'index.tsx': { import: '..', content: O },
+              'styleGlobal.less': { import: './styleGlobal.less', content: E },
+              'styles.ts': { import: './styles', content: j },
+              'config.tsx': { import: './config', content: S },
             },
             dependencies: {
               antd: { version: '4.20.7', css: 'antd/dist/antd.css' },
@@ -71740,11 +71879,11 @@
         'cronselect-demos': {
           component: n('rAH7').default,
           previewerProps: {
-            sources: { _: { tsx: S } },
+            sources: { _: { tsx: L } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71763,9 +71902,9 @@
         'prominent-demos': {
           component: n('J78K').default,
           previewerProps: {
-            sources: { _: { tsx: L } },
+            sources: { _: { tsx: T } },
             dependencies: {
-              'tc-rc': { version: '1.4.0' },
+              'tc-rc': { version: '1.4.8' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71784,13 +71923,13 @@
           },
         },
       },
-      C = n('x2v5'),
-      D = n('KcUY'),
-      Y = n.n(D);
+      D = n('x2v5'),
+      Y = n('KcUY'),
+      P = n.n(Y);
     t['default'] = (e) =>
       o.a.createElement(
-        Y.a,
-        Object(r['a'])({}, e, { config: i, demos: T, apis: C }),
+        P.a,
+        Object(r['a'])({}, e, { config: i, demos: C, apis: D }),
       );
   },
   afO8: function (e, t, n) {
@@ -84818,7 +84957,7 @@
   },
   q3YX: function (e) {
     e.exports = JSON.parse(
-      '{"menus":{"en-US":{"/components":[{"title":"Prominent","path":"/components","meta":{},"children":[{"path":"/components/button-async","title":"ButtonAsync \u6309\u94ae\u81ea\u52a8loading","meta":{}},{"path":"/components/button-group","title":"ButtonGroup \u6309\u94ae\u7ec4","meta":{}},{"path":"/components/code-input","title":"CodeInput \u4ee3\u7801\u8f93\u5165\u5668","meta":{}},{"path":"/components/countdown-button","title":"CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae","meta":{}},{"path":"/components/cron-select","title":"Cron \u9009\u62e9\u5668","meta":{}},{"path":"/components/date-select","title":"DateSelect \u65e5\u671f\u9650\u5236\u9009\u62e9\u5668","meta":{}},{"path":"/components/form-content","title":"FormContent \u81ea\u52a8\u6805\u683c","meta":{}},{"path":"/components/modal-content","title":"ModalContent \u6bd4\u4f8b\u5f39\u7a97","meta":{}},{"path":"/components/prominent","title":"Prominent \u5173\u952e\u5b57\u9ad8\u4eae\u6548\u679c","meta":{}},{"path":"/components/rank-list","title":"RankList \u6392\u884c\u699c","meta":{}},{"path":"/components/tags-input","title":"TagsInput \u6807\u7b7e\u8f93\u5165\u6846","meta":{}}]}],"/hook":[{"title":"UseThrottle","path":"/hook","meta":{},"children":[{"path":"/hook/use-debounce","title":"\u9632\u6296\u7684hook","meta":{}},{"path":"/hook/use-throttle","title":"\u8282\u6d41\u7684hook","meta":{}}]}],"/func":[{"title":"ProTableUtils","path":"/func","meta":{},"children":[{"path":"/func/pro-table-utils","title":"ProTable\u5b9e\u7528\u65b9\u6cd5","meta":{}}]}],"*":[{"path":"/","title":"Index","meta":{}}]}},"locales":[{"name":"en-US","label":"English"}],"navs":{"en-US":[{"title":"hook","path":"/hook"},{"title":"\u5b9e\u7528\u65b9\u6cd5","path":"/func"},{"title":"\u7ec4\u4ef6","path":"/components"}]},"title":"\u540c\u57cerc\u7ec4\u4ef6\u5e93","logo":"data:image/png;base64,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","mode":"site","repository":{"url":"http://gitlab.sfjswl.com/fe/tc-rc","branch":"master"},"theme":{}}',
+      '{"menus":{"zh-CN":{"/components":[{"title":"Prominent","path":"/components","meta":{},"children":[{"path":"/components/button-async","title":"ButtonAsync \u6309\u94ae\u81ea\u52a8loading","meta":{}},{"path":"/components/button-group","title":"ButtonGroup \u6309\u94ae\u7ec4","meta":{}},{"path":"/components/code-input","title":"CodeInput \u4ee3\u7801\u8f93\u5165\u5668","meta":{}},{"path":"/components/countdown-button","title":"CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae","meta":{}},{"path":"/components/cron-select","title":"Cron \u9009\u62e9\u5668","meta":{}},{"path":"/components/date-select","title":"DateSelect \u65e5\u671f\u9650\u5236\u9009\u62e9\u5668","meta":{}},{"path":"/components/form-content","title":"FormContent \u81ea\u52a8\u6805\u683c","meta":{}},{"path":"/components/modal-content","title":"ModalContent \u6bd4\u4f8b\u5f39\u7a97","meta":{}},{"path":"/components/prominent","title":"Prominent \u5173\u952e\u5b57\u9ad8\u4eae\u6548\u679c","meta":{}},{"path":"/components/rank-list","title":"RankList \u6392\u884c\u699c","meta":{}},{"path":"/components/tags-input","title":"TagsInput \u6807\u7b7e\u8f93\u5165\u6846","meta":{}}]}],"/hook":[{"title":"UseThrottle","path":"/hook","meta":{},"children":[{"path":"/hook/use-debounce","title":"\u9632\u6296\u7684hook","meta":{}},{"path":"/hook/use-throttle","title":"\u8282\u6d41\u7684hook","meta":{}}]}],"/func":[{"title":"ProTableUtils","path":"/func","meta":{},"children":[{"path":"/func/pro-table-utils","title":"ProTable\u5b9e\u7528\u65b9\u6cd5","meta":{}}]}],"*":[{"path":"/","title":"Index","meta":{}}]}},"locales":[{"name":"zh-CN","label":"\u4e2d\u6587"}],"navs":{"zh-CN":[{"title":"hook","path":"/hook"},{"title":"\u5b9e\u7528\u65b9\u6cd5","path":"/func"},{"title":"\u7ec4\u4ef6","path":"/components"}]},"title":"\u540c\u57cerc\u7ec4\u4ef6\u5e93","logo":"data:image/png;base64,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","mode":"site","repository":{"url":"http://gitlab.sfjswl.com/fe/tc-rc","branch":"master"},"theme":{}}',
     );
   },
   qCM6: function (e, t, n) {},
@@ -91140,6 +91279,11 @@
                     value: '\u57fa\u7840\u4f7f\u7528',
                     heading: '\u57fa\u7840\u4f7f\u7528',
                   },
+                  {
+                    depth: 2,
+                    value: '\u5c4f\u853d\u65e5\u671f\u6bb5',
+                    heading: '\u5c4f\u853d\u65e5\u671f\u6bb5',
+                  },
                   { depth: 2, value: 'API', heading: 'api' },
                 ],
                 hasPreviewer: !0,
@@ -92843,7 +92987,7 @@
           O = e.valueType,
           E = void 0 === O ? 'str' : O,
           C = e.editHeight,
-          D = void 0 === C ? 'auto' : C,
+          D = void 0 === C ? '300px' : C,
           Y = e.editMaxHeight,
           P = e.editMinHeight,
           A = e.readonly,
@@ -101327,7 +101471,7 @@
   },
   x2v5: function (e) {
     e.exports = JSON.parse(
-      '{"CountdownButton":{"default":[{"identifier":"maxSecondNum","description":"\u6700\u5927\u79d2\u6570","type":"number","default":"60"},{"identifier":"txt","description":"\u6309\u94ae\u9ed8\u8ba4\u6587\u672c","type":"string","default":"\u83b7\u53d6\u9a8c\u8bc1\u7801"},{"identifier":"loadingTxt","description":"\u52a0\u8f7d\u65f6\u6309\u94ae\u6587\u672c","type":"string","default":"\u53d1\u9001\u4e2d"},{"identifier":"disabledTxt","description":"\u7981\u7528\u65f6\u6309\u94ae\u6587\u672c","type":"(s: number) => string","default":"(s) => `${s} \u79d2\u540e\u91cd\u8bd5`"},{"identifier":"onClick","description":"\u70b9\u51fb\u6309\u94ae\u65f6\u89e6\u53d1\u7684\u51fd\u6570\uff0c\u5176\u53c2\u6570 completeCallback \u9700\u8981\u5728\u63a5\u53e3\u8bf7\u6c42\u5b8c\u6bd5\u540e\u8c03\u7528\uff0c\u7528\u4e8e\u544a\u77e5\u7ec4\u4ef6\u63a5\u53e3\u8bf7\u6c42\u5df2\u5b8c\u6210\u3002","type":"(completeCallback: () => void) => void","default":"(completeCallback) => {\\n    completeCallback();\\n  }"}]},"RankList":{"default":[{"identifier":"data","type":"{ label: string; value: string | number; }[]","required":true}]},"ButtonAsync":{"default":[{"identifier":"onClick","description":"\u70b9\u51fb\u4e8b\u4ef6\u52a0\u4e0apromise\u7684\u5904\u7406, \u5176\u4ed6\u914d\u7f6e\u4e0eButton\u6807\u7b7e\u4e00\u6837","type":"() => void | Promise<void>"}]},"ButtonGroup":{"default":[{"identifier":"style","type":"CSSProperties"},{"identifier":"onCancel","description":"\u53d6\u6d88\u4e8b\u4ef6","type":"() => void | Promise<void>"},{"identifier":"onSubmit","description":"\u786e\u5b9a\u4e8b\u4ef6","type":"(() => void | Promise<void>) & FormEventHandler<{ style?: CSSProperties; onCancel?: () => void | Promise<void>; onSubmit?: () => void | Promise<void>; cancelText?: ReactNode; ... 4 more ...; cancelProps?: IProps; }>"},{"identifier":"cancelText","description":"\u53d6\u6d88\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"submitText","description":"\u786e\u5b9a\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"gap","description":"\u4e24\u4e2a\u6309\u94ae\u7684\u95f4\u9699","type":"Gap<string | number>"},{"identifier":"buttonStyle","description":"\u4fe9\u6309\u94ae\u7edf\u4e00\u7684style","type":"CSSProperties"},{"identifier":"submitProps","description":"\u786e\u5b9a\u6309\u94ae\u900f\u4f20\u7684\u53c2\u6570","type":"IProps"},{"identifier":"cancelProps","description":"\u53d6\u6d88\u6309\u94ae\u5077\u4f20\u7684\u53c2\u6570","type":"IProps"}]},"DateSelect":{"default":[{"identifier":"onChange","description":"\u65e5\u671f\u6539\u53d8\u7684\u65f6\u5019\u7684\u503c","type":"(val?: ValueType) => void"},{"identifier":"value","description":"\u663e\u793a\u7684\u503c","type":"ValueType"},{"identifier":"dataLength","description":"\u65e5\u671f\u7684\u957f\u5ea6\uff0c\u5982\u679c\u4e0d\u4f20\u6216\u8005\u4f200\uff0c\u90a3\u5c31\u6ca1\u6709\u957f\u5ea6\u9650\u5236\u4e86","type":"number"},{"identifier":"disableTodayAfter","description":"\u5c4f\u853d\u4eca\u5929\u4e4b\u540e\u7684\u6240\u6709\u65e5\u671f","type":"boolean","default":"true"}]},"FormContent":{"default":[{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"ModalContent":{"default":[{"identifier":"topHeight","description":"\u6d6e\u5c42\u8ddd\u9876\u90e8\u7684\u9ad8\u5ea6\uff0c\u4e3a\u6570\u5b57\u7684\u65f6\u5019\u5355\u4f4d\u662fpx, \u5982\u679c\u6ca1\u6709\u8fd9\u4e2a\u4f1a\u6839\u636econtentHeight\u8ba1\u7b97\u5e94\u8be5\u4e0b\u964d\u591a\u5c11","type":"string | number"},{"identifier":"maskRatio","description":"\u6d6e\u5c42\u7684\u4e0a\u4e0b\u7a7a\u767d\u533a\u6bd4\u503c\uff0c\u5efa\u8bae\u5c0f\u4e8e1","type":"number","default":"0.618"}]},"TagsInput":{"default":[{"identifier":"onSearch","description":"\u8f93\u5165\u7684\u65f6\u5019search\u7684\u503c\uff0c\u8fd4\u56de\u7684\u503c\u5c06\u88ab\u5199\u5165options","type":"(val: string) => IOptions<string, string>[] | Promise<IOptions<string, string>[]>"},{"identifier":"tokenSeparators","description":"\u7528\u4e8e\u5206\u5272\u7684\uff0c\u53ef\u4ee5\u4f20\u5b57\u7b26\u4e32\uff0c\u7528&\u9694\u5f00\uff0c\u4f1a\u7528split\u8f6c\u6570\u7ec4","type":"string | string[]"},{"identifier":"mode","description":"\u4f7f\u7528\u4ec0\u4e48\u6a21\u5f0f\u591a\u9009\uff0c\u5728tags\u6a21\u5f0f\u4e0b\u4f1aoptions\u7684\u7b2c\u4e00\u4e2a\u884c\u662f\u5f53\u524d\u8f93\u5165\u7684\u503c","type":"\\"multiple\\" | \\"tags\\"","default":"multiple"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"CodeInput":{"default":[{"identifier":"defaultLanguage","description":"\u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript","type":"\\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\""},{"identifier":"initValue","description":"\u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c","type":"string"},{"identifier":"value","description":"\u7f16\u8f91\u7684\u4ee3\u7801\u503c","type":"string | { lang: \\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\"; str: string; }"},{"identifier":"editHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6","type":"string","default":"auto"},{"identifier":"editMaxHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6","type":"string"},{"identifier":"editMinHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6","type":"string"},{"identifier":"onChange","description":"\u4ee3\u7801\u6539\u53d8\u7684\u503c","type":"(val?: ValueType<V>) => void"},{"identifier":"disabledChangeLanguage","description":"\u7981\u6b62\u9009\u62e9\u8bed\u8a00","type":"boolean"},{"identifier":"readonly","description":"\u53ea\u8bfb\u6a21\u5f0f","type":"boolean"},{"identifier":"valueType","description":"\u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765","type":"VBase"}]},"CronSelect":{"default":[{"identifier":"onChange","description":"\u70b9\u51fb\u786e\u5b9a\u7684\u65f6\u5019\u7684\u4fee\u6539\u4e8b\u4ef6","type":"(val?: string) => void"},{"identifier":"value","description":"Cron\u8868\u8fbe\u5f0f\uff0c\u7528\u6765\u89e3\u6790\u5230UI","type":"string"},{"identifier":"style","description":"\u6837\u5f0f","type":"CSSProperties"},{"identifier":"onOk","description":"\u70b9\u51fb\u751f\u6210\u6309\u94ae\u65f6\u8c03\u7528\u8be5\u56de\u8c03","type":"(value: string) => void"},{"identifier":"footer","description":"\u5e95\u90e8\u6309\u94ae","type":"ReactNode"},{"identifier":"panesShow","description":"\u914d\u7f6e\u9762\u677f\u7684\u9690\u85cf, false \u5373\u9690\u85cf\\nConfiguration panel hiding","type":"{ second: boolean; minute: boolean; hour: boolean; day: boolean; month: boolean; week: boolean; year: boolean; }"},{"identifier":"defaultTab","description":"\u9ed8\u8ba4\u663e\u793a\u54ea\u4e2a\u9762\u677f, \u9ed8\u8ba4\u4e3a second\uff0c \u5982\u679c\u9690\u85cf\u4e86 second \u9700\u8981\u81ea\u884c\u8bbe\u7f6e\\nThe default is second. If second is hidden, you need to set it by yourself","type":"\\"second\\" | \\"minute\\" | \\"hour\\" | \\"day\\" | \\"month\\" | \\"week\\" | \\"year\\""},{"identifier":"placeholder","description":"\u503c\u4e3a\u7a7a\u65f6\u5c55\u793a\u7684\u5360\u4f4d\u6587\u672c","type":"ReactDOM","default":"\'\u8bf7\u9009\u62e9\'"}]},"Prominent":{"default":[{"identifier":"str","description":"\u5b57\u7b26\u4e32","type":"string"},{"identifier":"vals","description":"\u9ad8\u4eae\u7684\u5173\u952e\u5b57\u7684\u6570\u7ec4\uff0c\u53ef\u4ee5\u6279\u91cf\u9ad8\u5149","type":"string[]"},{"identifier":"color","description":"\u9ad8\u4eae\u7684\u989c\u8272\u503c","type":"string"},{"identifier":"clickKeyValName","description":"\u5173\u952e\u5b57\u70b9\u51fb","type":"(v: string) => void"},{"identifier":"style","type":"CSSProperties"},{"identifier":"onClick","type":"(e: MouseEvent<HTMLSpanElement, MouseEvent>) => void"}]}}',
+      '{"CountdownButton":{"default":[{"identifier":"maxSecondNum","description":"\u6700\u5927\u79d2\u6570","type":"number","default":"60"},{"identifier":"txt","description":"\u6309\u94ae\u9ed8\u8ba4\u6587\u672c","type":"string","default":"\u83b7\u53d6\u9a8c\u8bc1\u7801"},{"identifier":"loadingTxt","description":"\u52a0\u8f7d\u65f6\u6309\u94ae\u6587\u672c","type":"string","default":"\u53d1\u9001\u4e2d"},{"identifier":"disabledTxt","description":"\u7981\u7528\u65f6\u6309\u94ae\u6587\u672c","type":"(s: number) => string","default":"(s) => `${s} \u79d2\u540e\u91cd\u8bd5`"},{"identifier":"onClick","description":"\u70b9\u51fb\u6309\u94ae\u65f6\u89e6\u53d1\u7684\u51fd\u6570\uff0c\u5176\u53c2\u6570 completeCallback \u9700\u8981\u5728\u63a5\u53e3\u8bf7\u6c42\u5b8c\u6bd5\u540e\u8c03\u7528\uff0c\u7528\u4e8e\u544a\u77e5\u7ec4\u4ef6\u63a5\u53e3\u8bf7\u6c42\u5df2\u5b8c\u6210\u3002","type":"(completeCallback: () => void) => void","default":"(completeCallback) => {\\n    completeCallback();\\n  }"}]},"RankList":{"default":[{"identifier":"data","type":"{ label: string; value: string | number; }[]","required":true}]},"ButtonAsync":{"default":[{"identifier":"onClick","description":"\u70b9\u51fb\u4e8b\u4ef6\u52a0\u4e0apromise\u7684\u5904\u7406, \u5176\u4ed6\u914d\u7f6e\u4e0eButton\u6807\u7b7e\u4e00\u6837","type":"() => void | Promise<void>"}]},"ButtonGroup":{"default":[{"identifier":"style","type":"CSSProperties"},{"identifier":"onCancel","description":"\u53d6\u6d88\u4e8b\u4ef6","type":"() => void | Promise<void>"},{"identifier":"onSubmit","description":"\u786e\u5b9a\u4e8b\u4ef6","type":"(() => void | Promise<void>) & FormEventHandler<{ style?: CSSProperties; onCancel?: () => void | Promise<void>; onSubmit?: () => void | Promise<void>; cancelText?: ReactNode; ... 4 more ...; cancelProps?: IProps; }>"},{"identifier":"cancelText","description":"\u53d6\u6d88\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"submitText","description":"\u786e\u5b9a\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"gap","description":"\u4e24\u4e2a\u6309\u94ae\u7684\u95f4\u9699","type":"Gap<string | number>"},{"identifier":"buttonStyle","description":"\u4fe9\u6309\u94ae\u7edf\u4e00\u7684style","type":"CSSProperties"},{"identifier":"submitProps","description":"\u786e\u5b9a\u6309\u94ae\u900f\u4f20\u7684\u53c2\u6570","type":"IProps"},{"identifier":"cancelProps","description":"\u53d6\u6d88\u6309\u94ae\u5077\u4f20\u7684\u53c2\u6570","type":"IProps"}]},"DateSelect":{"default":[{"identifier":"onChange","description":"\u65e5\u671f\u6539\u53d8\u7684\u65f6\u5019\u7684\u503c","type":"(val?: ValueType) => void"},{"identifier":"value","description":"\u663e\u793a\u7684\u503c","type":"ValueType"},{"identifier":"dataLength","description":"\u65e5\u671f\u7684\u957f\u5ea6\uff0c\u5982\u679c\u4e0d\u4f20\u6216\u8005\u4f200\uff0c\u90a3\u5c31\u6ca1\u6709\u957f\u5ea6\u9650\u5236\u4e86","type":"number"},{"identifier":"disableTodayAfter","description":"\u5c4f\u853d\u4eca\u5929\u4e4b\u540e\u7684\u6240\u6709\u65e5\u671f","type":"boolean","default":"true"},{"identifier":"includeToday","description":"\u4eca\u5929\u662f\u5426\u53ef\u9009","type":"boolean","default":"false"},{"identifier":"disabledDate","description":"\u65e5\u671f\u5c4f\u853d\u7684\u65b9\u6cd5\uff0c\u5728\u539fDatePicker.RangePicker\u7684\u57fa\u7840\u4e0a\u589e\u52a0\u4e86disabledFn\u7684\u8bed\u6cd5\u7cd6","type":"((current: Moment, disabledFn: (current: Moment) => boolean) => boolean) & ((date: Moment) => boolean)"},{"identifier":"disabledRanges","description":"\u9700\u8981\u5c4f\u853d\u7684\u65e5\u671f\u6bb5, \u53ef\u4ee5\u76f4\u63a5\u7ed9moment\u5bf9\u8c61\uff0c\u4e5f\u53ef\u4ee5\u7ed9YYYYMMDD\u6570\u5b57\u65e5\u671f, \u5185\u90e8\u505a\u4e86\u517c\u5bb9","type":"(number | Moment)[][]"}]},"FormContent":{"default":[{"identifier":"required","description":"\u662f\u5426\u5fc5\u987b\uff0c\u5982\u679c\u4f20\u4e86\u8fd9\u4e2a\u4e4b\u540e\u5c31\u4f1a\u81ea\u52a8\u6dfb\u52a0rule\uff0c\u5982\u679crequired\u662f\u5b57\u7b26\u4e32\uff0c\u4f1a\u5199\u5165message","type":"string | boolean"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"ModalContent":{"default":[{"identifier":"topHeight","description":"\u6d6e\u5c42\u8ddd\u9876\u90e8\u7684\u9ad8\u5ea6\uff0c\u4e3a\u6570\u5b57\u7684\u65f6\u5019\u5355\u4f4d\u662fpx, \u5982\u679c\u6ca1\u6709\u8fd9\u4e2a\u4f1a\u6839\u636econtentHeight\u8ba1\u7b97\u5e94\u8be5\u4e0b\u964d\u591a\u5c11","type":"string | number"},{"identifier":"maskRatio","description":"\u6d6e\u5c42\u7684\u4e0a\u4e0b\u7a7a\u767d\u533a\u6bd4\u503c\uff0c\u5efa\u8bae\u5c0f\u4e8e1","type":"number","default":"0.618"}]},"TagsInput":{"default":[{"identifier":"onSearch","description":"\u8f93\u5165\u7684\u65f6\u5019search\u7684\u503c\uff0c\u8fd4\u56de\u7684\u503c\u5c06\u88ab\u5199\u5165options","type":"(val: string) => IOptions<string, string>[] | Promise<IOptions<string, string>[]>"},{"identifier":"tokenSeparators","description":"\u7528\u4e8e\u5206\u5272\u7684\uff0c\u53ef\u4ee5\u4f20\u5b57\u7b26\u4e32\uff0c\u7528&\u9694\u5f00\uff0c\u4f1a\u7528split\u8f6c\u6570\u7ec4","type":"string | string[]"},{"identifier":"mode","description":"\u4f7f\u7528\u4ec0\u4e48\u6a21\u5f0f\u591a\u9009\uff0c\u5728tags\u6a21\u5f0f\u4e0b\u4f1aoptions\u7684\u7b2c\u4e00\u4e2a\u884c\u662f\u5f53\u524d\u8f93\u5165\u7684\u503c","type":"\\"multiple\\" | \\"tags\\"","default":"multiple"},{"identifier":"required","description":"\u662f\u5426\u5fc5\u987b\uff0c\u5982\u679c\u4f20\u4e86\u8fd9\u4e2a\u4e4b\u540e\u5c31\u4f1a\u81ea\u52a8\u6dfb\u52a0rule\uff0c\u5982\u679crequired\u662f\u5b57\u7b26\u4e32\uff0c\u4f1a\u5199\u5165message","type":"string | boolean"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"CodeInput":{"default":[{"identifier":"defaultLanguage","description":"\u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript","type":"\\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\""},{"identifier":"initValue","description":"\u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c","type":"string"},{"identifier":"value","description":"\u7f16\u8f91\u7684\u4ee3\u7801\u503c","type":"string | { lang: \\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\"; str: string; }"},{"identifier":"editHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6","type":"string","default":"auto"},{"identifier":"editMaxHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6","type":"string"},{"identifier":"editMinHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6","type":"string"},{"identifier":"onChange","description":"\u4ee3\u7801\u6539\u53d8\u7684\u503c","type":"(val?: ValueType<V>) => void"},{"identifier":"disabledChangeLanguage","description":"\u7981\u6b62\u9009\u62e9\u8bed\u8a00","type":"boolean"},{"identifier":"readonly","description":"\u53ea\u8bfb\u6a21\u5f0f","type":"boolean"},{"identifier":"valueType","description":"\u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765","type":"VBase"}]},"CronSelect":{"default":[{"identifier":"onChange","description":"\u70b9\u51fb\u786e\u5b9a\u7684\u65f6\u5019\u7684\u4fee\u6539\u4e8b\u4ef6","type":"(val?: string) => void"},{"identifier":"value","description":"Cron\u8868\u8fbe\u5f0f\uff0c\u7528\u6765\u89e3\u6790\u5230UI","type":"string"},{"identifier":"style","description":"\u6837\u5f0f","type":"CSSProperties"},{"identifier":"onOk","description":"\u70b9\u51fb\u751f\u6210\u6309\u94ae\u65f6\u8c03\u7528\u8be5\u56de\u8c03","type":"(value: string) => void"},{"identifier":"footer","description":"\u5e95\u90e8\u6309\u94ae","type":"ReactNode"},{"identifier":"panesShow","description":"\u914d\u7f6e\u9762\u677f\u7684\u9690\u85cf, false \u5373\u9690\u85cf\\nConfiguration panel hiding","type":"{ second: boolean; minute: boolean; hour: boolean; day: boolean; month: boolean; week: boolean; year: boolean; }"},{"identifier":"defaultTab","description":"\u9ed8\u8ba4\u663e\u793a\u54ea\u4e2a\u9762\u677f, \u9ed8\u8ba4\u4e3a second\uff0c \u5982\u679c\u9690\u85cf\u4e86 second \u9700\u8981\u81ea\u884c\u8bbe\u7f6e\\nThe default is second. If second is hidden, you need to set it by yourself","type":"\\"second\\" | \\"minute\\" | \\"hour\\" | \\"day\\" | \\"month\\" | \\"week\\" | \\"year\\""},{"identifier":"placeholder","description":"\u503c\u4e3a\u7a7a\u65f6\u5c55\u793a\u7684\u5360\u4f4d\u6587\u672c","type":"ReactDOM","default":"\'\u8bf7\u9009\u62e9\'"}]},"Prominent":{"default":[{"identifier":"str","description":"\u5b57\u7b26\u4e32","type":"string"},{"identifier":"vals","description":"\u9ad8\u4eae\u7684\u5173\u952e\u5b57\u7684\u6570\u7ec4\uff0c\u53ef\u4ee5\u6279\u91cf\u9ad8\u5149","type":"string[]"},{"identifier":"color","description":"\u9ad8\u4eae\u7684\u989c\u8272\u503c","type":"string"},{"identifier":"clickKeyValName","description":"\u5173\u952e\u5b57\u70b9\u51fb","type":"(v: string) => void"},{"identifier":"style","type":"CSSProperties"},{"identifier":"onClick","type":"(e: MouseEvent<HTMLSpanElement, MouseEvent>) => void"}]}}',
     );
   },
   x6pH: function (e, t, n) {

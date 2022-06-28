@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 10:44:43
- * @LastEditTime: 2022-06-27 13:52:28
+ * @LastEditTime: 2022-06-28 11:15:20
  */
 import { defineConfig } from 'dumi';
 
@@ -33,8 +33,8 @@ export default defineConfig({
     },
   },
   locales: [['zh-CN', '中文']],
-  base: '/tc-rc/docs-dist/',
-  publicPath: '/tc-rc/docs-dist/',
+  // base: '/tc-rc/docs-dist/',
+  // publicPath: '/tc-rc/docs-dist/',
   history: {
     type: 'hash', // 设置路由模式为 hash 模式，防止部署至 GitHub Pages 后刷新网页后出现 404 的情况发生.
   },

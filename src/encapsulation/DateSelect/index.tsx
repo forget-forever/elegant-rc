@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-22 20:16:17
- * @LastEditTime: 2022-06-27 21:28:57
+ * @LastEditTime: 2022-06-28 10:56:20
  */
 import React, { useRef, useState } from 'react';
 import { DatePicker } from 'antd';
@@ -31,6 +31,9 @@ type IProps = {
    * @default false
    */
   includeToday?: boolean;
+  /**
+   * 日期屏蔽的方法，在原DatePicker.RangePicker的基础上增加了disabledFn的语法糖
+   */
   disabledDate?: (
     /** 当前的日期 */
     current: moment.Moment,

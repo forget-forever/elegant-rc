@@ -15,6 +15,10 @@ group:
 
 <code src="./demos/index.tsx" />
 
+## 屏蔽日期段
+
+<code src="./demos/DisableRanges.tsx">
+
 <API />
 
 除以上 API 外，该时间选择器与 组件（Ant Design）的 RangePicker 选择器 所有 API 一致。

@@ -1,3 +1,6 @@
+
+echo "开始生成文档"
+
 npm run docs:build
 if [ $? -eq 0 ]; then
   mkdir docs-output
