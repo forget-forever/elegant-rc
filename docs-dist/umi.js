@@ -71630,13 +71630,13 @@
       k =
         "/*\n * @Author: zml\n * @Date: 2022-06-28 11:22:16\n * @LastEditTime: 2022-06-28 13:56:18\n */\nimport { useMemoizedFn, useMount } from 'ahooks';\nimport { Button, message } from 'antd';\nimport { uniqueId } from 'lodash';\nimport { useState } from 'react';\nimport { useSafeFunc } from 'tc-rc';\n\nconst request = () => {\n  return new Promise<string>((resolve, reject) => {\n    setTimeout(() => {\n      resolve(uniqueId('safeFunc-'));\n    }, 5000);\n  });\n};\n\nconst Component: React.FC = () => {\n  const { safeRun } = useSafeFunc();\n  const [id, setId] = useState('loading...');\n\n  useMount(async () => {\n    setId('loading...');\n    const res = await request();\n    safeRun(() => {\n      message.success('write id\uff01\uff01');\n      setId(res);\n    });\n  });\n\n  return <div>{id}</div>;\n};\n\nexport default () => {\n  const [mount, setMount] = useState(true);\n\n  const clickHandle = useMemoizedFn(() => {\n    setMount(!mount);\n  });\n\n  return (\n    <>\n      <Button onClick={clickHandle}>click me!</Button>\n      {mount && <Component />}\n    </>\n  );\n};",
       x =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:21:22\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(val.code);\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="code" label="\u4ee3\u7801" initialValue="var a = 1">\n        <CodeInput />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-28 15:18:45\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(val.code);\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="code" label="\u4ee3\u7801" initialValue="var a = 1">\n        <CodeInput codeSelect={[\'javascript\', \'python\']} />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
       M =
         '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:26:03\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(JSON.stringify(val.code, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item\n        name="code"\n        label="\u4ee3\u7801"\n        initialValue={{ lang: \'javascript\', str: \'var a = 1\' }}\n      >\n        <CodeInput valueType="obj" />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
       O =
         '/*\n * @Author: zml\n * @Date: 2022-06-20 20:32:20\n * @LastEditTime: 2022-06-20 20:37:45\n */\nimport { Form } from \'antd\';\nimport CodeInput from \'..\';\n\nexport default () => {\n  return (\n    <Form>\n      <Form.Item name="readonly" label="\u53ea\u8bfb\u6a21\u5f0f" initialValue="var a = 1;">\n        <CodeInput readonly />\n      </Form.Item>\n      <Form.Item\n        name="aLang"\n        label="\u4e0d\u53ef\u5207\u6362\u8bed\u8a00"\n        initialValue="SELECT * FROM test_table;"\n      >\n        <CodeInput readonly defaultLanguage="sql" />\n      </Form.Item>\n    </Form>\n  );\n};',
       E =
-        "/*\n * @Author: zml\n * @Date: 2022-06-16 15:38:23\n * @LastEditTime: 2022-06-23 15:14:21\n */\n\nimport { useEffect, useMemo, useRef, useState } from 'react';\nimport codemirror from 'codemirror';\nimport 'codemirror/lib/codemirror.css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/sql/sql';\nimport 'codemirror/mode/shell/shell';\nimport 'codemirror/mode/python/python';\n// import 'codemirror/mode/php/php'\nimport 'codemirror/addon/display/placeholder';\nimport 'codemirror/addon/hint/show-hint.css'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/show-hint.js'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/sql-hint'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/javascript-hint';\nimport 'codemirror/addon/hint/anyword-hint';\nimport 'codemirror/theme/3024-day.css';\nimport './styleGlobal.less';\nimport { Card, message, Select } from 'antd';\nimport {\n  bodyStyle,\n  containerStyle,\n  editStyle,\n  extraStyle,\n  headStyle,\n  selectStyle,\n} from './styles';\nimport { useMemoizedFn } from 'ahooks';\nimport copy from 'copy-to-clipboard';\nimport { generateVal, getValue, languageOptions, suffixIcon } from './config';\nimport type { LangesType, ValueType, VBase } from './type';\n\ntype IProps<V extends VBase = 'str'> = {\n  /** \u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript */\n  defaultLanguage?: LangesType;\n  /** \u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c */\n  initValue?: string;\n  /** \u7f16\u8f91\u7684\u4ee3\u7801\u503c */\n  value?: ValueType<V>;\n  /**\n   * \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6\n   * @default auto\n   */\n  editHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6 */\n  editMaxHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6 */\n  editMinHeight?: string;\n  /** \u4ee3\u7801\u6539\u53d8\u7684\u503c */\n  onChange?: (val?: ValueType<V>) => void;\n  /** \u7981\u6b62\u9009\u62e9\u8bed\u8a00 */\n  disabledChangeLanguage?: boolean;\n  /** \u53ea\u8bfb\u6a21\u5f0f */\n  readonly?: boolean;\n  /** \u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765 */\n  valueType?: V;\n};\nconst CodeInput = <V extends VBase>(props: IProps<V>) => {\n  const divRef = useRef<HTMLDivElement>(null);\n  const {\n    defaultLanguage = 'javascript',\n    value,\n    initValue = '',\n    onChange,\n    disabledChangeLanguage,\n    valueType = 'str' as V,\n  } = props;\n  const {\n    editHeight = '300px',\n    editMaxHeight,\n    editMinHeight,\n    readonly,\n  } = props;\n  const [lang, setLang] = useState(defaultLanguage);\n\n  const changeHandle = useMemoizedFn((val?: string) =>\n    onChange?.(generateVal(valueType, lang, val)),\n  );\n\n  const editorRef = useRef<ReturnType<typeof codemirror>>();\n\n  const valData = getValue(valueType, value);\n\n  useEffect(() => {\n    if (valueType === 'obj') {\n      changeHandle(valData);\n    }\n  }, [lang]);\n\n  useEffect(() => {\n    if (divRef.current) {\n      divRef.current.innerHTML = '';\n      editorRef.current = codemirror(divRef.current, {\n        indentWithTabs: true,\n        readOnly: readonly,\n        smartIndent: true,\n        lineNumbers: true,\n        autofocus: true,\n        extraKeys: {\n          \"';'\": (editor) => {\n            const spaces = Array(editor.getOption('indentUnit')).join(';'); // \u5206\u53f7;\u76d1\u542c\u6267\u884c\u5b8c\u540e,\u5c31\u4e0d\u4f1a\u518d\u6267\u884cinputRead\u8f93\u5165\u76d1\u542c\u4e86\n            editor.replaceSelection(spaces);\n          },\n        },\n        hintOptions: { completeSingle: false },\n        lineWrapping: true, // \u5728\u957f\u884c\u65f6\u6587\u5b57\u662f\u6362\u884c(wrap)\u8fd8\u662f\u6eda\u52a8(scroll)\uff0c\u9ed8\u8ba4\u4e3a\u6eda\u52a8(scroll)\u3002\n        mode: lang,\n        value: valData || initValue,\n      });\n      editorRef.current.on('inputRead', (editor, change) => {\n        const data = {\n          test: ['t_user', 'menu', 'auth_info'],\n          t_user: [],\n          menu: [''],\n          default: ['tableinfo'],\n        };\n        editor.setOption('hintOptions', {\n          tables: data,\n          completeSingle: false,\n        });\n        editor.execCommand('autocomplete');\n      });\n      editorRef.current.on('change', () => {\n        changeHandle(editorRef.current?.getValue() || '');\n      });\n      // editorRef.\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [lang, divRef.current, readonly]);\n\n  useEffect(() => {\n    if (valData !== (editorRef.current?.getValue() || '')) {\n      editorRef.current?.setValue(valData);\n    }\n  }, [valData, valueType]);\n\n  const copyHandle = useMemoizedFn(() => {\n    copy(valData || editorRef.current?.getValue() || '');\n    message.success('\u590d\u5236\u6210\u529f');\n  });\n\n  const styleHandle = useMemo(\n    () => ({\n      ...editStyle,\n      height: editHeight,\n      maxHeight: editMaxHeight,\n      minHeight: editMinHeight,\n    }),\n    [editHeight, editMaxHeight, editMinHeight],\n  );\n\n  return (\n    <Card\n      headStyle={headStyle}\n      style={containerStyle}\n      bodyStyle={bodyStyle}\n      title={\n        <Select\n          disabled={readonly || disabledChangeLanguage}\n          bordered={false}\n          style={selectStyle}\n          options={languageOptions}\n          value={lang}\n          onChange={setLang}\n          suffixIcon={suffixIcon}\n        />\n      }\n      extra={\n        <span style={extraStyle} onClick={copyHandle}>\n          \u590d\u5236\u4ee3\u7801\n        </span>\n      }\n    >\n      <div ref={divRef} style={styleHandle} />\n    </Card>\n  );\n};\n\nexport default CodeInput;",
+        "/*\n * @Author: zml\n * @Date: 2022-06-16 15:38:23\n * @LastEditTime: 2022-06-28 15:19:25\n */\n\nimport { useEffect, useMemo, useRef, useState } from 'react';\nimport codemirror from 'codemirror';\nimport 'codemirror/lib/codemirror.css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/sql/sql';\nimport 'codemirror/mode/shell/shell';\nimport 'codemirror/mode/python/python';\n// import 'codemirror/mode/php/php'\nimport 'codemirror/addon/display/placeholder';\nimport 'codemirror/addon/hint/show-hint.css'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/show-hint.js'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/sql-hint'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/javascript-hint';\nimport 'codemirror/addon/hint/anyword-hint';\nimport 'codemirror/theme/3024-day.css';\nimport './styleGlobal.less';\nimport { Card, message, Select } from 'antd';\nimport {\n  bodyStyle,\n  containerStyle,\n  editStyle,\n  extraStyle,\n  headStyle,\n  selectStyle,\n} from './styles';\nimport { useMemoizedFn } from 'ahooks';\nimport copy from 'copy-to-clipboard';\nimport { generateVal, getValue, languageOptions, suffixIcon } from './config';\nimport type { LangesType, ValueType, VBase } from './type';\n\ntype IProps<V extends VBase = 'str'> = {\n  /** \u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript */\n  defaultLanguage?: LangesType;\n  /** \u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c */\n  initValue?: string;\n  /** \u7f16\u8f91\u7684\u4ee3\u7801\u503c */\n  value?: ValueType<V>;\n  /**\n   * \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6\n   * @default auto\n   */\n  editHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6 */\n  editMaxHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6 */\n  editMinHeight?: string;\n  /** \u4ee3\u7801\u6539\u53d8\u7684\u503c */\n  onChange?: (val?: ValueType<V>) => void;\n  /** \u7981\u6b62\u9009\u62e9\u8bed\u8a00 */\n  disabledChangeLanguage?: boolean;\n  /** \u53ea\u8bfb\u6a21\u5f0f */\n  readonly?: boolean;\n  /** \u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765 */\n  valueType?: V;\n  /** \u5141\u8bb8\u7684\u8bed\u8a00, \u5982\u679c\u4e0d\u4f20\uff0c\u4f1a\u5141\u8bb8\u5168\u90e8\u8bed\u8a00 */\n  codeSelect?: LangesType[];\n};\nconst CodeInput = <V extends VBase>(props: IProps<V>) => {\n  const divRef = useRef<HTMLDivElement>(null);\n  const {\n    defaultLanguage = 'javascript',\n    value,\n    initValue = '',\n    onChange,\n    disabledChangeLanguage,\n    valueType = 'str' as V,\n    editHeight = '300px',\n    editMaxHeight,\n    editMinHeight,\n    readonly,\n    codeSelect,\n  } = props;\n  const [lang, setLang] = useState(defaultLanguage);\n\n  const changeHandle = useMemoizedFn((val?: string) =>\n    onChange?.(generateVal(valueType, lang, val)),\n  );\n\n  const editorRef = useRef<ReturnType<typeof codemirror>>();\n\n  const valData = getValue(valueType, value);\n\n  useEffect(() => {\n    if (valueType === 'obj') {\n      changeHandle(valData);\n    }\n  }, [lang]);\n\n  useEffect(() => {\n    if (divRef.current) {\n      divRef.current.innerHTML = '';\n      editorRef.current = codemirror(divRef.current, {\n        indentWithTabs: true,\n        readOnly: readonly,\n        smartIndent: true,\n        lineNumbers: true,\n        autofocus: true,\n        extraKeys: {\n          \"';'\": (editor) => {\n            const spaces = Array(editor.getOption('indentUnit')).join(';'); // \u5206\u53f7;\u76d1\u542c\u6267\u884c\u5b8c\u540e,\u5c31\u4e0d\u4f1a\u518d\u6267\u884cinputRead\u8f93\u5165\u76d1\u542c\u4e86\n            editor.replaceSelection(spaces);\n          },\n        },\n        hintOptions: { completeSingle: false },\n        lineWrapping: true, // \u5728\u957f\u884c\u65f6\u6587\u5b57\u662f\u6362\u884c(wrap)\u8fd8\u662f\u6eda\u52a8(scroll)\uff0c\u9ed8\u8ba4\u4e3a\u6eda\u52a8(scroll)\u3002\n        mode: lang,\n        value: valData || initValue,\n      });\n      editorRef.current.on('inputRead', (editor, change) => {\n        const data = {\n          test: ['t_user', 'menu', 'auth_info'],\n          t_user: [],\n          menu: [''],\n          default: ['tableinfo'],\n        };\n        editor.setOption('hintOptions', {\n          tables: data,\n          completeSingle: false,\n        });\n        editor.execCommand('autocomplete');\n      });\n      editorRef.current.on('change', () => {\n        changeHandle(editorRef.current?.getValue() || '');\n      });\n      // editorRef.\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [lang, divRef.current, readonly]);\n\n  useEffect(() => {\n    if (valData !== (editorRef.current?.getValue() || '')) {\n      editorRef.current?.setValue(valData);\n    }\n  }, [valData, valueType]);\n\n  const copyHandle = useMemoizedFn(() => {\n    copy(valData || editorRef.current?.getValue() || '');\n    message.success('\u590d\u5236\u6210\u529f');\n  });\n\n  const styleHandle = useMemo(\n    () => ({\n      ...editStyle,\n      height: editHeight,\n      maxHeight: editMaxHeight,\n      minHeight: editMinHeight,\n    }),\n    [editHeight, editMaxHeight, editMinHeight],\n  );\n\n  const langes = useMemo(() => {\n    if (!codeSelect) return languageOptions;\n    const allowLanges = [...new Set(codeSelect)];\n    return languageOptions.filter((item) => allowLanges.includes(item.value));\n  }, [codeSelect?.join()]);\n\n  return (\n    <Card\n      headStyle={headStyle}\n      style={containerStyle}\n      bodyStyle={bodyStyle}\n      title={\n        <Select\n          disabled={readonly || disabledChangeLanguage}\n          bordered={false}\n          style={selectStyle}\n          options={langes}\n          value={lang}\n          onChange={setLang}\n          suffixIcon={suffixIcon}\n        />\n      }\n      extra={\n        <span style={extraStyle} onClick={copyHandle}>\n          \u590d\u5236\u4ee3\u7801\n        </span>\n      }\n    >\n      <div ref={divRef} style={styleHandle} />\n    </Card>\n  );\n};\n\nexport default CodeInput;",
       j =
         '.CodeMirror {\n  background-color: rgb(247, 247, 247);\n  height: auto;\n}\n\n.CodeMirror-gutters {\n  border-right: none;\n}',
       S =
@@ -71654,7 +71654,7 @@
             sources: { _: { tsx: s } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71677,7 +71677,7 @@
             sources: { _: { tsx: u } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71699,7 +71699,7 @@
           previewerProps: {
             sources: { _: { tsx: l } },
             dependencies: {
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71722,7 +71722,7 @@
           previewerProps: {
             sources: { _: { tsx: c } },
             dependencies: {
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71747,7 +71747,7 @@
             dependencies: {
               ahooks: { version: '>=2.10.11' },
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71768,7 +71768,7 @@
           previewerProps: {
             sources: { _: { tsx: f } },
             dependencies: {
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71791,7 +71791,7 @@
           previewerProps: {
             sources: { _: { tsx: p } },
             dependencies: {
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71816,7 +71816,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71840,7 +71840,7 @@
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
               moment: { version: '2.29.3' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71862,7 +71862,7 @@
             sources: { _: { tsx: v } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71886,7 +71886,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71909,7 +71909,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71949,7 +71949,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71974,7 +71974,7 @@
               ahooks: { version: '>=2.10.11' },
               lodash: { version: '>=4.0.0' },
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
@@ -71994,7 +71994,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -72017,7 +72017,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -72063,7 +72063,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -72084,7 +72084,7 @@
           previewerProps: {
             sources: { _: { tsx: C } },
             dependencies: {
-              'tc-rc': { version: '1.5.0' },
+              'tc-rc': { version: '1.5.1' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -93216,22 +93216,23 @@
           Y = e.editMaxHeight,
           P = e.editMinHeight,
           A = e.readonly,
-          N = Object(u['useState'])(c),
-          R = Object(s['a'])(N, 2),
-          I = R[0],
-          F = R[1],
-          H = Object(b['a'])((e) =>
-            null === x || void 0 === x ? void 0 : x(T(E, I, e)),
+          N = e.codeSelect,
+          R = Object(u['useState'])(c),
+          I = Object(s['a'])(R, 2),
+          F = I[0],
+          H = I[1],
+          z = Object(b['a'])((e) =>
+            null === x || void 0 === x ? void 0 : x(T(E, F, e)),
           ),
-          z = Object(u['useRef'])(),
-          W = L(E, y);
+          W = Object(u['useRef'])(),
+          B = L(E, y);
         Object(u['useEffect'])(() => {
-          'obj' === E && H(W);
-        }, [I]),
+          'obj' === E && z(B);
+        }, [F]),
           Object(u['useEffect'])(() => {
             t.current &&
               ((t.current.innerHTML = ''),
-              (z.current = d()(t.current, {
+              (W.current = d()(t.current, {
                 indentWithTabs: !0,
                 readOnly: A,
                 smartIndent: !0,
@@ -93245,10 +93246,10 @@
                 },
                 hintOptions: { completeSingle: !1 },
                 lineWrapping: !0,
-                mode: I,
-                value: W || k,
+                mode: F,
+                value: B || k,
               })),
-              z.current.on('inputRead', (e, t) => {
+              W.current.on('inputRead', (e, t) => {
                 var n = {
                   test: ['t_user', 'menu', 'auth_info'],
                   t_user: [],
@@ -93258,35 +93259,35 @@
                 e.setOption('hintOptions', { tables: n, completeSingle: !1 }),
                   e.execCommand('autocomplete');
               }),
-              z.current.on('change', () => {
+              W.current.on('change', () => {
                 var e;
-                H(
-                  (null === (e = z.current) || void 0 === e
+                z(
+                  (null === (e = W.current) || void 0 === e
                     ? void 0
                     : e.getValue()) || '',
                 );
               }));
-          }, [I, t.current, A]),
+          }, [F, t.current, A]),
           Object(u['useEffect'])(() => {
             var e, t;
-            W !==
-              ((null === (e = z.current) || void 0 === e
+            B !==
+              ((null === (e = W.current) || void 0 === e
                 ? void 0
                 : e.getValue()) || '') &&
-              (null === (t = z.current) || void 0 === t || t.setValue(W));
-          }, [W, E]);
-        var B = Object(b['a'])(() => {
+              (null === (t = W.current) || void 0 === t || t.setValue(B));
+          }, [B, E]);
+        var U = Object(b['a'])(() => {
             var e;
             _()(
-              W ||
-                (null === (e = z.current) || void 0 === e
+              B ||
+                (null === (e = W.current) || void 0 === e
                   ? void 0
                   : e.getValue()) ||
                 '',
             ),
               i['b'].success('\u590d\u5236\u6210\u529f');
           }),
-          U = Object(u['useMemo'])(
+          V = Object(u['useMemo'])(
             () =>
               Object(o['a'])(
                 Object(o['a'])({}, h),
@@ -93294,7 +93295,12 @@
                 { height: D, maxHeight: Y, minHeight: P },
               ),
             [D, Y, P],
-          );
+          ),
+          q = Object(u['useMemo'])(() => {
+            if (!N) return S;
+            var e = [...new Set(N)];
+            return S.filter((t) => e.includes(t.value));
+          }, [null === N || void 0 === N ? void 0 : N.join()]);
         return l.a.createElement(
           r['a'],
           {
@@ -93305,18 +93311,18 @@
               disabled: A || M,
               bordered: !1,
               style: v,
-              options: S,
-              value: I,
-              onChange: F,
+              options: q,
+              value: F,
+              onChange: H,
               suffixIcon: j,
             }),
             extra: l.a.createElement(
               'span',
-              { style: g, onClick: B },
+              { style: g, onClick: U },
               '\u590d\u5236\u4ee3\u7801',
             ),
           },
-          l.a.createElement('div', { ref: t, style: U }),
+          l.a.createElement('div', { ref: t, style: V }),
         );
       };
     t['a'] = C;
@@ -101696,7 +101702,7 @@
   },
   x2v5: function (e) {
     e.exports = JSON.parse(
-      '{"CountdownButton":{"default":[{"identifier":"maxSecondNum","description":"\u6700\u5927\u79d2\u6570","type":"number","default":"60"},{"identifier":"txt","description":"\u6309\u94ae\u9ed8\u8ba4\u6587\u672c","type":"string","default":"\u83b7\u53d6\u9a8c\u8bc1\u7801"},{"identifier":"loadingTxt","description":"\u52a0\u8f7d\u65f6\u6309\u94ae\u6587\u672c","type":"string","default":"\u53d1\u9001\u4e2d"},{"identifier":"disabledTxt","description":"\u7981\u7528\u65f6\u6309\u94ae\u6587\u672c","type":"(s: number) => string","default":"(s) => `${s} \u79d2\u540e\u91cd\u8bd5`"},{"identifier":"onClick","description":"\u70b9\u51fb\u6309\u94ae\u65f6\u89e6\u53d1\u7684\u51fd\u6570\uff0c\u5176\u53c2\u6570 completeCallback \u9700\u8981\u5728\u63a5\u53e3\u8bf7\u6c42\u5b8c\u6bd5\u540e\u8c03\u7528\uff0c\u7528\u4e8e\u544a\u77e5\u7ec4\u4ef6\u63a5\u53e3\u8bf7\u6c42\u5df2\u5b8c\u6210\u3002","type":"(completeCallback: () => void) => void","default":"(completeCallback) => {\\n    completeCallback();\\n  }"}]},"RankList":{"default":[{"identifier":"data","type":"{ label: string; value: string | number; }[]","required":true}]},"ButtonAsync":{"default":[{"identifier":"onClick","description":"\u70b9\u51fb\u4e8b\u4ef6\u52a0\u4e0apromise\u7684\u5904\u7406, \u5176\u4ed6\u914d\u7f6e\u4e0eButton\u6807\u7b7e\u4e00\u6837","type":"() => void | Promise<void>"}]},"ButtonGroup":{"default":[{"identifier":"style","type":"CSSProperties"},{"identifier":"onCancel","description":"\u53d6\u6d88\u4e8b\u4ef6","type":"() => void | Promise<void>"},{"identifier":"onSubmit","description":"\u786e\u5b9a\u4e8b\u4ef6","type":"(() => void | Promise<void>) & FormEventHandler<{ style?: CSSProperties; onCancel?: () => void | Promise<void>; onSubmit?: () => void | Promise<void>; cancelText?: ReactNode; ... 4 more ...; cancelProps?: IProps; }>"},{"identifier":"cancelText","description":"\u53d6\u6d88\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"submitText","description":"\u786e\u5b9a\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"gap","description":"\u4e24\u4e2a\u6309\u94ae\u7684\u95f4\u9699","type":"Gap<string | number>"},{"identifier":"buttonStyle","description":"\u4fe9\u6309\u94ae\u7edf\u4e00\u7684style","type":"CSSProperties"},{"identifier":"submitProps","description":"\u786e\u5b9a\u6309\u94ae\u900f\u4f20\u7684\u53c2\u6570","type":"IProps"},{"identifier":"cancelProps","description":"\u53d6\u6d88\u6309\u94ae\u5077\u4f20\u7684\u53c2\u6570","type":"IProps"}]},"DateSelect":{"default":[{"identifier":"onChange","description":"\u65e5\u671f\u6539\u53d8\u7684\u65f6\u5019\u7684\u503c","type":"(val?: ValueType) => void"},{"identifier":"value","description":"\u663e\u793a\u7684\u503c","type":"ValueType"},{"identifier":"dataLength","description":"\u65e5\u671f\u7684\u957f\u5ea6\uff0c\u5982\u679c\u4e0d\u4f20\u6216\u8005\u4f200\uff0c\u90a3\u5c31\u6ca1\u6709\u957f\u5ea6\u9650\u5236\u4e86","type":"number"},{"identifier":"disableTodayAfter","description":"\u5c4f\u853d\u4eca\u5929\u4e4b\u540e\u7684\u6240\u6709\u65e5\u671f","type":"boolean","default":"true"},{"identifier":"includeToday","description":"\u4eca\u5929\u662f\u5426\u53ef\u9009","type":"boolean","default":"false"},{"identifier":"disabledDate","description":"\u65e5\u671f\u5c4f\u853d\u7684\u65b9\u6cd5\uff0c\u5728\u539fDatePicker.RangePicker\u7684\u57fa\u7840\u4e0a\u589e\u52a0\u4e86disabledFn\u7684\u8bed\u6cd5\u7cd6","type":"((current: Moment, disabledFn: (current: Moment) => boolean) => boolean) & ((date: Moment) => boolean)"},{"identifier":"disabledRanges","description":"\u9700\u8981\u5c4f\u853d\u7684\u65e5\u671f\u6bb5, \u53ef\u4ee5\u76f4\u63a5\u7ed9moment\u5bf9\u8c61\uff0c\u4e5f\u53ef\u4ee5\u7ed9YYYYMMDD\u6570\u5b57\u65e5\u671f, \u5185\u90e8\u505a\u4e86\u517c\u5bb9","type":"(number | Moment)[][]"}]},"FormContent":{"default":[{"identifier":"required","description":"\u662f\u5426\u5fc5\u987b\uff0c\u5982\u679c\u4f20\u4e86\u8fd9\u4e2a\u4e4b\u540e\u5c31\u4f1a\u81ea\u52a8\u6dfb\u52a0rule\uff0c\u5982\u679crequired\u662f\u5b57\u7b26\u4e32\uff0c\u4f1a\u5199\u5165message","type":"string | boolean"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"ModalContent":{"default":[{"identifier":"topHeight","description":"\u6d6e\u5c42\u8ddd\u9876\u90e8\u7684\u9ad8\u5ea6\uff0c\u4e3a\u6570\u5b57\u7684\u65f6\u5019\u5355\u4f4d\u662fpx, \u5982\u679c\u6ca1\u6709\u8fd9\u4e2a\u4f1a\u6839\u636econtentHeight\u8ba1\u7b97\u5e94\u8be5\u4e0b\u964d\u591a\u5c11","type":"string | number"},{"identifier":"maskRatio","description":"\u6d6e\u5c42\u7684\u4e0a\u4e0b\u7a7a\u767d\u533a\u6bd4\u503c\uff0c\u5efa\u8bae\u5c0f\u4e8e1","type":"number","default":"0.618"}]},"TagsInput":{"default":[{"identifier":"onSearch","description":"\u8f93\u5165\u7684\u65f6\u5019search\u7684\u503c\uff0c\u8fd4\u56de\u7684\u503c\u5c06\u88ab\u5199\u5165options","type":"(val: string) => IOptions<string, string>[] | Promise<IOptions<string, string>[]>"},{"identifier":"tokenSeparators","description":"\u7528\u4e8e\u5206\u5272\u7684\uff0c\u53ef\u4ee5\u4f20\u5b57\u7b26\u4e32\uff0c\u7528&\u9694\u5f00\uff0c\u4f1a\u7528split\u8f6c\u6570\u7ec4","type":"string | string[]"},{"identifier":"mode","description":"\u4f7f\u7528\u4ec0\u4e48\u6a21\u5f0f\u591a\u9009\uff0c\u5728tags\u6a21\u5f0f\u4e0b\u4f1aoptions\u7684\u7b2c\u4e00\u4e2a\u884c\u662f\u5f53\u524d\u8f93\u5165\u7684\u503c","type":"\\"multiple\\" | \\"tags\\"","default":"multiple"},{"identifier":"required","description":"\u662f\u5426\u5fc5\u987b\uff0c\u5982\u679c\u4f20\u4e86\u8fd9\u4e2a\u4e4b\u540e\u5c31\u4f1a\u81ea\u52a8\u6dfb\u52a0rule\uff0c\u5982\u679crequired\u662f\u5b57\u7b26\u4e32\uff0c\u4f1a\u5199\u5165message","type":"string | boolean"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"CodeInput":{"default":[{"identifier":"defaultLanguage","description":"\u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript","type":"\\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\""},{"identifier":"initValue","description":"\u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c","type":"string"},{"identifier":"value","description":"\u7f16\u8f91\u7684\u4ee3\u7801\u503c","type":"string | { lang: \\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\"; str: string; }"},{"identifier":"editHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6","type":"string","default":"auto"},{"identifier":"editMaxHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6","type":"string"},{"identifier":"editMinHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6","type":"string"},{"identifier":"onChange","description":"\u4ee3\u7801\u6539\u53d8\u7684\u503c","type":"(val?: ValueType<V>) => void"},{"identifier":"disabledChangeLanguage","description":"\u7981\u6b62\u9009\u62e9\u8bed\u8a00","type":"boolean"},{"identifier":"readonly","description":"\u53ea\u8bfb\u6a21\u5f0f","type":"boolean"},{"identifier":"valueType","description":"\u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765","type":"VBase"}]},"CronSelect":{"default":[{"identifier":"onChange","description":"\u70b9\u51fb\u786e\u5b9a\u7684\u65f6\u5019\u7684\u4fee\u6539\u4e8b\u4ef6","type":"(val?: string) => void"},{"identifier":"value","description":"Cron\u8868\u8fbe\u5f0f\uff0c\u7528\u6765\u89e3\u6790\u5230UI","type":"string"},{"identifier":"style","description":"\u6837\u5f0f","type":"CSSProperties"},{"identifier":"onOk","description":"\u70b9\u51fb\u751f\u6210\u6309\u94ae\u65f6\u8c03\u7528\u8be5\u56de\u8c03","type":"(value: string) => void"},{"identifier":"footer","description":"\u5e95\u90e8\u6309\u94ae","type":"ReactNode"},{"identifier":"panesShow","description":"\u914d\u7f6e\u9762\u677f\u7684\u9690\u85cf, false \u5373\u9690\u85cf\\nConfiguration panel hiding","type":"{ second: boolean; minute: boolean; hour: boolean; day: boolean; month: boolean; week: boolean; year: boolean; }"},{"identifier":"defaultTab","description":"\u9ed8\u8ba4\u663e\u793a\u54ea\u4e2a\u9762\u677f, \u9ed8\u8ba4\u4e3a second\uff0c \u5982\u679c\u9690\u85cf\u4e86 second \u9700\u8981\u81ea\u884c\u8bbe\u7f6e\\nThe default is second. If second is hidden, you need to set it by yourself","type":"\\"second\\" | \\"minute\\" | \\"hour\\" | \\"day\\" | \\"month\\" | \\"week\\" | \\"year\\""},{"identifier":"placeholder","description":"\u503c\u4e3a\u7a7a\u65f6\u5c55\u793a\u7684\u5360\u4f4d\u6587\u672c","type":"ReactDOM","default":"\'\u8bf7\u9009\u62e9\'"}]},"Prominent":{"default":[{"identifier":"str","description":"\u5b57\u7b26\u4e32","type":"string"},{"identifier":"vals","description":"\u9ad8\u4eae\u7684\u5173\u952e\u5b57\u7684\u6570\u7ec4\uff0c\u53ef\u4ee5\u6279\u91cf\u9ad8\u5149","type":"string[]"},{"identifier":"color","description":"\u9ad8\u4eae\u7684\u989c\u8272\u503c","type":"string"},{"identifier":"clickKeyValName","description":"\u5173\u952e\u5b57\u70b9\u51fb","type":"(v: string) => void"},{"identifier":"style","type":"CSSProperties"},{"identifier":"onClick","type":"(e: MouseEvent<HTMLSpanElement, MouseEvent>) => void"}]}}',
+      '{"CountdownButton":{"default":[{"identifier":"maxSecondNum","description":"\u6700\u5927\u79d2\u6570","type":"number","default":"60"},{"identifier":"txt","description":"\u6309\u94ae\u9ed8\u8ba4\u6587\u672c","type":"string","default":"\u83b7\u53d6\u9a8c\u8bc1\u7801"},{"identifier":"loadingTxt","description":"\u52a0\u8f7d\u65f6\u6309\u94ae\u6587\u672c","type":"string","default":"\u53d1\u9001\u4e2d"},{"identifier":"disabledTxt","description":"\u7981\u7528\u65f6\u6309\u94ae\u6587\u672c","type":"(s: number) => string","default":"(s) => `${s} \u79d2\u540e\u91cd\u8bd5`"},{"identifier":"onClick","description":"\u70b9\u51fb\u6309\u94ae\u65f6\u89e6\u53d1\u7684\u51fd\u6570\uff0c\u5176\u53c2\u6570 completeCallback \u9700\u8981\u5728\u63a5\u53e3\u8bf7\u6c42\u5b8c\u6bd5\u540e\u8c03\u7528\uff0c\u7528\u4e8e\u544a\u77e5\u7ec4\u4ef6\u63a5\u53e3\u8bf7\u6c42\u5df2\u5b8c\u6210\u3002","type":"(completeCallback: () => void) => void","default":"(completeCallback) => {\\n    completeCallback();\\n  }"}]},"RankList":{"default":[{"identifier":"data","type":"{ label: string; value: string | number; }[]","required":true}]},"ButtonAsync":{"default":[{"identifier":"onClick","description":"\u70b9\u51fb\u4e8b\u4ef6\u52a0\u4e0apromise\u7684\u5904\u7406, \u5176\u4ed6\u914d\u7f6e\u4e0eButton\u6807\u7b7e\u4e00\u6837","type":"() => void | Promise<void>"}]},"ButtonGroup":{"default":[{"identifier":"style","type":"CSSProperties"},{"identifier":"onCancel","description":"\u53d6\u6d88\u4e8b\u4ef6","type":"() => void | Promise<void>"},{"identifier":"onSubmit","description":"\u786e\u5b9a\u4e8b\u4ef6","type":"(() => void | Promise<void>) & FormEventHandler<{ style?: CSSProperties; onCancel?: () => void | Promise<void>; onSubmit?: () => void | Promise<void>; cancelText?: ReactNode; ... 4 more ...; cancelProps?: IProps; }>"},{"identifier":"cancelText","description":"\u53d6\u6d88\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"submitText","description":"\u786e\u5b9a\u7684\u6587\u5b57","type":"ReactNode"},{"identifier":"gap","description":"\u4e24\u4e2a\u6309\u94ae\u7684\u95f4\u9699","type":"Gap<string | number>"},{"identifier":"buttonStyle","description":"\u4fe9\u6309\u94ae\u7edf\u4e00\u7684style","type":"CSSProperties"},{"identifier":"submitProps","description":"\u786e\u5b9a\u6309\u94ae\u900f\u4f20\u7684\u53c2\u6570","type":"IProps"},{"identifier":"cancelProps","description":"\u53d6\u6d88\u6309\u94ae\u5077\u4f20\u7684\u53c2\u6570","type":"IProps"}]},"DateSelect":{"default":[{"identifier":"onChange","description":"\u65e5\u671f\u6539\u53d8\u7684\u65f6\u5019\u7684\u503c","type":"(val?: ValueType) => void"},{"identifier":"value","description":"\u663e\u793a\u7684\u503c","type":"ValueType"},{"identifier":"dataLength","description":"\u65e5\u671f\u7684\u957f\u5ea6\uff0c\u5982\u679c\u4e0d\u4f20\u6216\u8005\u4f200\uff0c\u90a3\u5c31\u6ca1\u6709\u957f\u5ea6\u9650\u5236\u4e86","type":"number"},{"identifier":"disableTodayAfter","description":"\u5c4f\u853d\u4eca\u5929\u4e4b\u540e\u7684\u6240\u6709\u65e5\u671f","type":"boolean","default":"true"},{"identifier":"includeToday","description":"\u4eca\u5929\u662f\u5426\u53ef\u9009","type":"boolean","default":"false"},{"identifier":"disabledDate","description":"\u65e5\u671f\u5c4f\u853d\u7684\u65b9\u6cd5\uff0c\u5728\u539fDatePicker.RangePicker\u7684\u57fa\u7840\u4e0a\u589e\u52a0\u4e86disabledFn\u7684\u8bed\u6cd5\u7cd6","type":"((current: Moment, disabledFn: (current: Moment) => boolean) => boolean) & ((date: Moment) => boolean)"},{"identifier":"disabledRanges","description":"\u9700\u8981\u5c4f\u853d\u7684\u65e5\u671f\u6bb5, \u53ef\u4ee5\u76f4\u63a5\u7ed9moment\u5bf9\u8c61\uff0c\u4e5f\u53ef\u4ee5\u7ed9YYYYMMDD\u6570\u5b57\u65e5\u671f, \u5185\u90e8\u505a\u4e86\u517c\u5bb9","type":"(number | Moment)[][]"}]},"FormContent":{"default":[{"identifier":"required","description":"\u662f\u5426\u5fc5\u987b\uff0c\u5982\u679c\u4f20\u4e86\u8fd9\u4e2a\u4e4b\u540e\u5c31\u4f1a\u81ea\u52a8\u6dfb\u52a0rule\uff0c\u5982\u679crequired\u662f\u5b57\u7b26\u4e32\uff0c\u4f1a\u5199\u5165message","type":"string | boolean"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"ModalContent":{"default":[{"identifier":"topHeight","description":"\u6d6e\u5c42\u8ddd\u9876\u90e8\u7684\u9ad8\u5ea6\uff0c\u4e3a\u6570\u5b57\u7684\u65f6\u5019\u5355\u4f4d\u662fpx, \u5982\u679c\u6ca1\u6709\u8fd9\u4e2a\u4f1a\u6839\u636econtentHeight\u8ba1\u7b97\u5e94\u8be5\u4e0b\u964d\u591a\u5c11","type":"string | number"},{"identifier":"maskRatio","description":"\u6d6e\u5c42\u7684\u4e0a\u4e0b\u7a7a\u767d\u533a\u6bd4\u503c\uff0c\u5efa\u8bae\u5c0f\u4e8e1","type":"number","default":"0.618"}]},"TagsInput":{"default":[{"identifier":"onSearch","description":"\u8f93\u5165\u7684\u65f6\u5019search\u7684\u503c\uff0c\u8fd4\u56de\u7684\u503c\u5c06\u88ab\u5199\u5165options","type":"(val: string) => IOptions<string, string>[] | Promise<IOptions<string, string>[]>"},{"identifier":"tokenSeparators","description":"\u7528\u4e8e\u5206\u5272\u7684\uff0c\u53ef\u4ee5\u4f20\u5b57\u7b26\u4e32\uff0c\u7528&\u9694\u5f00\uff0c\u4f1a\u7528split\u8f6c\u6570\u7ec4","type":"string | string[]"},{"identifier":"mode","description":"\u4f7f\u7528\u4ec0\u4e48\u6a21\u5f0f\u591a\u9009\uff0c\u5728tags\u6a21\u5f0f\u4e0b\u4f1aoptions\u7684\u7b2c\u4e00\u4e2a\u884c\u662f\u5f53\u524d\u8f93\u5165\u7684\u503c","type":"\\"multiple\\" | \\"tags\\"","default":"multiple"},{"identifier":"required","description":"\u662f\u5426\u5fc5\u987b\uff0c\u5982\u679c\u4f20\u4e86\u8fd9\u4e2a\u4e4b\u540e\u5c31\u4f1a\u81ea\u52a8\u6dfb\u52a0rule\uff0c\u5982\u679crequired\u662f\u5b57\u7b26\u4e32\uff0c\u4f1a\u5199\u5165message","type":"string | boolean"},{"identifier":"span","description":"\u6805\u683c","type":"ColSpanType"},{"identifier":"itemStyle","description":"Form.Item \u7684\u6837\u5f0f","type":"CSSProperties"}]},"CodeInput":{"default":[{"identifier":"defaultLanguage","description":"\u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript","type":"\\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\""},{"identifier":"initValue","description":"\u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c","type":"string"},{"identifier":"value","description":"\u7f16\u8f91\u7684\u4ee3\u7801\u503c","type":"string | { lang: \\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\"; str: string; }"},{"identifier":"editHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6","type":"string","default":"auto"},{"identifier":"editMaxHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6","type":"string"},{"identifier":"editMinHeight","description":"\u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6","type":"string"},{"identifier":"onChange","description":"\u4ee3\u7801\u6539\u53d8\u7684\u503c","type":"(val?: ValueType<V>) => void"},{"identifier":"disabledChangeLanguage","description":"\u7981\u6b62\u9009\u62e9\u8bed\u8a00","type":"boolean"},{"identifier":"readonly","description":"\u53ea\u8bfb\u6a21\u5f0f","type":"boolean"},{"identifier":"valueType","description":"\u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765","type":"VBase"},{"identifier":"codeSelect","description":"\u5141\u8bb8\u7684\u8bed\u8a00, \u5982\u679c\u4e0d\u4f20\uff0c\u4f1a\u5141\u8bb8\u5168\u90e8\u8bed\u8a00","type":"(\\"javascript\\" | \\"sql\\" | \\"python\\" | \\"shell\\")[]"}]},"CronSelect":{"default":[{"identifier":"onChange","description":"\u70b9\u51fb\u786e\u5b9a\u7684\u65f6\u5019\u7684\u4fee\u6539\u4e8b\u4ef6","type":"(val?: string) => void"},{"identifier":"value","description":"Cron\u8868\u8fbe\u5f0f\uff0c\u7528\u6765\u89e3\u6790\u5230UI","type":"string"},{"identifier":"style","description":"\u6837\u5f0f","type":"CSSProperties"},{"identifier":"onOk","description":"\u70b9\u51fb\u751f\u6210\u6309\u94ae\u65f6\u8c03\u7528\u8be5\u56de\u8c03","type":"(value: string) => void"},{"identifier":"footer","description":"\u5e95\u90e8\u6309\u94ae","type":"ReactNode"},{"identifier":"panesShow","description":"\u914d\u7f6e\u9762\u677f\u7684\u9690\u85cf, false \u5373\u9690\u85cf\\nConfiguration panel hiding","type":"{ second: boolean; minute: boolean; hour: boolean; day: boolean; month: boolean; week: boolean; year: boolean; }"},{"identifier":"defaultTab","description":"\u9ed8\u8ba4\u663e\u793a\u54ea\u4e2a\u9762\u677f, \u9ed8\u8ba4\u4e3a second\uff0c \u5982\u679c\u9690\u85cf\u4e86 second \u9700\u8981\u81ea\u884c\u8bbe\u7f6e\\nThe default is second. If second is hidden, you need to set it by yourself","type":"\\"second\\" | \\"minute\\" | \\"hour\\" | \\"day\\" | \\"month\\" | \\"week\\" | \\"year\\""},{"identifier":"placeholder","description":"\u503c\u4e3a\u7a7a\u65f6\u5c55\u793a\u7684\u5360\u4f4d\u6587\u672c","type":"ReactDOM","default":"\'\u8bf7\u9009\u62e9\'"}]},"Prominent":{"default":[{"identifier":"str","description":"\u5b57\u7b26\u4e32","type":"string"},{"identifier":"vals","description":"\u9ad8\u4eae\u7684\u5173\u952e\u5b57\u7684\u6570\u7ec4\uff0c\u53ef\u4ee5\u6279\u91cf\u9ad8\u5149","type":"string[]"},{"identifier":"color","description":"\u9ad8\u4eae\u7684\u989c\u8272\u503c","type":"string"},{"identifier":"clickKeyValName","description":"\u5173\u952e\u5b57\u70b9\u51fb","type":"(v: string) => void"},{"identifier":"style","type":"CSSProperties"},{"identifier":"onClick","type":"(e: MouseEvent<HTMLSpanElement, MouseEvent>) => void"}]}}',
     );
   },
   x6pH: function (e, t, n) {
@@ -109617,7 +109623,9 @@
         i.a.createElement(
           a['a'].Item,
           { name: 'code', label: '\u4ee3\u7801', initialValue: 'var a = 1' },
-          i.a.createElement(u['CodeInput'], null),
+          i.a.createElement(u['CodeInput'], {
+            codeSelect: ['javascript', 'python'],
+          }),
         ),
         i.a.createElement(
           r['a'],
