@@ -15,15 +15,30 @@ npm run start
 
 ```
 
-## components 目录结构
+## 目录结构
 
 ```bash
 |--src
-  |--componentDemo
-    |--index.tsx 组件入口
-    |--index.md 组件说明文档
-    |--demos 使用范例
-  ｜--index.ts 组件统一加入的入口，每加一个组件记得到这里面去加入口
+  |--encapsulation # 二次封装的组件
+    |--componentDemo
+      index.tsx # 组件入口
+      index.md # 组件说明文档
+      |--demos # 使用范例
+    index.ts # 二次封装组件统一加入的入口，每加一个组件记得到这里面去加入口
+  |--independent # 自开发组件
+    |--componentDemo
+      index.tsx # 组件入口
+      index.md # 组件说明文档
+      |--demos # 使用范例
+    index.ts # 自开发组件统一加入的入口，每加一个组件记得到这里面去加入口
+  |--hooks # hooks,放入一些有复用价值的hook
+    |--hookDemo
+      index.ts # hook的入口
+      index.md # hook的文档说明
+      |--demos # demo演示
+    index.ts # hooks 的统一入口，加入一个hook之后记得在这里添加一下入口
+  |--utils # 一些实用的方法，可以将一些好用的通用方法加入在这，方式与hook类似
+  index.ts # 库的统一入口，
 ```
 
 ## 发布

@@ -3252,35 +3252,39 @@
     n.d(t, 'RankList', function () {
       return a['a'];
     });
-    n('0lfv'), n('eZYV');
-    var o = n('M9ro');
-    n.d(t, 'CodeInput', function () {
+    n('0lfv');
+    var o = n('eZYV');
+    n.d(t, 'useSafeFunc', function () {
       return o['a'];
-    }),
-      n.d(t, 'CronSelect', function () {
-        return o['b'];
-      }),
-      n.d(t, 'Prominent', function () {
-        return o['c'];
-      });
-    var i = n('/vKh');
-    n.d(t, 'ButtonAsync', function () {
+    });
+    var i = n('M9ro');
+    n.d(t, 'CodeInput', function () {
       return i['a'];
     }),
-      n.d(t, 'ButtonGroup', function () {
+      n.d(t, 'CronSelect', function () {
         return i['b'];
       }),
-      n.d(t, 'DateSelect', function () {
+      n.d(t, 'Prominent', function () {
         return i['c'];
+      });
+    var s = n('/vKh');
+    n.d(t, 'ButtonAsync', function () {
+      return s['a'];
+    }),
+      n.d(t, 'ButtonGroup', function () {
+        return s['b'];
+      }),
+      n.d(t, 'DateSelect', function () {
+        return s['c'];
       }),
       n.d(t, 'FormContent', function () {
-        return i['d'];
+        return s['d'];
       }),
       n.d(t, 'ModalContent', function () {
-        return i['e'];
+        return s['e'];
       }),
       n.d(t, 'TagsInput', function () {
-        return i['f'];
+        return s['f'];
       });
     n('p21n');
   },
@@ -26057,6 +26061,82 @@
       };
     e.exports.f = function (e) {
       return i && '[object Window]' == o.call(e) ? s(e) : a(r(e));
+    };
+  },
+  BZy2: function (e, t, n) {
+    'use strict';
+    n.r(t);
+    var r = n('q1tI'),
+      a = n.n(r),
+      o = n('dEAq'),
+      i = n('Zxc8'),
+      s = a.a.memo((e) => {
+        var t = e.demos,
+          n = t['usesafefunc-demos'].component;
+        return a.a.createElement(
+          a.a.Fragment,
+          null,
+          a.a.createElement(
+            a.a.Fragment,
+            null,
+            a.a.createElement(
+              'div',
+              { className: 'markdown' },
+              a.a.createElement(
+                'h2',
+                { id: '\u4f5c\u7528' },
+                a.a.createElement(
+                  o['AnchorLink'],
+                  { to: '#\u4f5c\u7528', 'aria-hidden': 'true', tabIndex: -1 },
+                  a.a.createElement('span', { className: 'icon icon-link' }),
+                ),
+                '\u4f5c\u7528',
+              ),
+              a.a.createElement(
+                'p',
+                null,
+                '\u5f53\u7ec4\u4ef6\u4e2d\u7684\u4e00\u4e9b\u5f02\u6b65\u6d41\u7a0b\u9700\u8981\u5728\u7ec4\u4ef6\u7684\u5b89\u5168\u8303\u56f4\u4e2d\u6267\u884c\u65f6\uff0c\u4f7f\u7528\u7684 hook',
+              ),
+              a.a.createElement(
+                'h2',
+                { id: '\u57fa\u7840\u7528\u6cd5' },
+                a.a.createElement(
+                  o['AnchorLink'],
+                  {
+                    to: '#\u57fa\u7840\u7528\u6cd5',
+                    'aria-hidden': 'true',
+                    tabIndex: -1,
+                  },
+                  a.a.createElement('span', { className: 'icon icon-link' }),
+                ),
+                '\u57fa\u7840\u7528\u6cd5',
+              ),
+            ),
+            a.a.createElement(
+              i['default'],
+              t['usesafefunc-demos'].previewerProps,
+              a.a.createElement(n, null),
+            ),
+          ),
+        );
+      });
+    t['default'] = (e) => {
+      var t = a.a.useContext(o['context']),
+        n = t.demos;
+      return (
+        a.a.useEffect(() => {
+          var t;
+          null !== e &&
+            void 0 !== e &&
+            null !== (t = e.location) &&
+            void 0 !== t &&
+            t.hash &&
+            o['AnchorLink'].scrollToAnchor(
+              decodeURIComponent(e.location.hash.slice(1)),
+            );
+        }, []),
+        a.a.createElement(s, { demos: n })
+      );
     };
   },
   Bs8V: function (e, t, n) {
@@ -62734,6 +62814,82 @@
       return t;
     });
   },
+  YRw9: function (e, t, n) {
+    'use strict';
+    n.r(t);
+    n('+L6B');
+    var r = n('2/Rp'),
+      a = (n('miYZ'), n('tsqr')),
+      o = n('9og8'),
+      i = n('tJVT'),
+      s = n('WmNS'),
+      u = n.n(s),
+      l = n('q1tI'),
+      c = n.n(l),
+      d = function (e) {
+        Object(l['useEffect'])(function () {
+          null === e || void 0 === e || e();
+        }, []);
+      },
+      f = d,
+      p = n('L00U'),
+      m = n('LvDl'),
+      h = n('/7QA'),
+      v = () =>
+        new Promise((e, t) => {
+          setTimeout(() => {
+            e(Object(m['uniqueId'])('safeFunc-'));
+          }, 5e3);
+        }),
+      g = () => {
+        var e = Object(h['useSafeFunc'])(),
+          t = e.safeRun,
+          n = Object(l['useState'])('loading...'),
+          r = Object(i['a'])(n, 2),
+          s = r[0],
+          d = r[1];
+        return (
+          f(
+            Object(o['a'])(
+              u.a.mark(function e() {
+                var n;
+                return u.a.wrap(function (e) {
+                  while (1)
+                    switch ((e.prev = e.next)) {
+                      case 0:
+                        return d('loading...'), (e.next = 3), v();
+                      case 3:
+                        (n = e.sent),
+                          t(() => {
+                            a['b'].success('write id\uff01\uff01'), d(n);
+                          });
+                      case 5:
+                      case 'end':
+                        return e.stop();
+                    }
+                }, e);
+              }),
+            ),
+          ),
+          c.a.createElement('div', null, s)
+        );
+      };
+    t['default'] = () => {
+      var e = Object(l['useState'])(!0),
+        t = Object(i['a'])(e, 2),
+        n = t[0],
+        a = t[1],
+        o = Object(p['a'])(() => {
+          a(!n);
+        });
+      return c.a.createElement(
+        c.a.Fragment,
+        null,
+        c.a.createElement(r['a'], { onClick: o }, 'click me!'),
+        n && c.a.createElement(g, null),
+      );
+    };
+  },
   YS25: function (e, t, n) {
     'use strict';
     n.d(t, 'a', function () {
@@ -71458,7 +71614,7 @@
       m =
         '/*\n * @Author: zml\n * @Date: 2022-06-23 14:08:50\n * @LastEditTime: 2022-06-28 10:55:17\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Card, Form } from \'antd\';\nimport { DateSelect } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val) => {\n    alert(JSON.stringify(val));\n  });\n\n  return (\n    <Card title="\u9650\u5236\u9009\u62e9\u65e5\u671f\u7684\u957f\u5ea6">\n      <Form onFinish={onFinish}>\n        <Form.Item name="date1" label="\u9009\u62e9\u65e5\u671f">\n          <DateSelect dataLength={9} includeToday />\n        </Form.Item>\n        <Button htmlType="submit" type="primary">\n          \u786e\u5b9a\n        </Button>\n      </Form>\n    </Card>\n  );\n};',
       h =
-        "/*\n * @Author: zml\n * @Date: 2022-06-23 14:08:50\n * @LastEditTime: 2022-06-28 10:53:58\n */\nimport { useMemoizedFn } from 'ahooks';\nimport { Button, Card, Form } from 'antd';\nimport moment from 'moment';\nimport { DateSelect } from 'tc-rc';\n\nconst disList = [\n  [moment().subtract(7, 'days'), moment().subtract(3, 'days')] as [\n    moment.Moment,\n    moment.Moment,\n  ],\n  undefined,\n];\n\nexport default () => {\n  const onFinish = useMemoizedFn((val) => {\n    alert(JSON.stringify(val));\n  });\n\n  return (\n   <Card title=\"\u5c4f\u853d\u65e5\u671f\u6bb5\">\n    <Form onFinish={onFinish}>\n      <Form.Item name=\"date1\" label=\"\u9009\u62e9\u65e5\u671f\">\n        <DateSelect dataLength={9} includeToday disabledRanges={disList} />\n      </Form.Item>\n      <Button htmlType=\"submit\" type=\"primary\">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  </Card>\n  );\n};",
+        "/*\n * @Author: zml\n * @Date: 2022-06-23 14:08:50\n * @LastEditTime: 2022-06-28 10:53:58\n */\nimport { useMemoizedFn } from 'ahooks';\nimport { Button, Card, Form } from 'antd';\nimport moment from 'moment';\nimport { DateSelect } from 'tc-rc';\n\nconst disList = [\n  [moment().subtract(7, 'days'), moment().subtract(3, 'days')] as [\n    moment.Moment,\n    moment.Moment,\n  ],\n  undefined,\n];\n\nexport default () => {\n  const onFinish = useMemoizedFn((val) => {\n    alert(JSON.stringify(val));\n  });\n\n  return (\n    <Card title=\"\u5c4f\u853d\u65e5\u671f\u6bb5\">\n      <Form onFinish={onFinish}>\n        <Form.Item name=\"date1\" label=\"\u9009\u62e9\u65e5\u671f\">\n          <DateSelect dataLength={9} includeToday disabledRanges={disList} />\n        </Form.Item>\n        <Button htmlType=\"submit\" type=\"primary\">\n          \u786e\u5b9a\n        </Button>\n      </Form>\n    </Card>\n  );\n};",
       v =
         'import { Form, Input, Row, Select } from \'antd\';\nimport { FormContent } from \'tc-rc\';\n\nconst genderOptions = [\n  { value: \'male\', label: \'\u7537\' },\n  { value: \'femal\', label: \'\u5973\' },\n  { value: \'secret\', label: \'\u4fdd\u5bc6\' },\n];\n\nexport default () => {\n  return (\n    <Form>\n      <Row gutter={24}>\n        <FormContent name="name" span={8} label="\u59d3\u540d">\n          <Input />\n        </FormContent>\n        <FormContent name="age" span={8} label="\u5e74\u9f84">\n          <Input />\n        </FormContent>\n        <FormContent name="gender" span={8} label="\u6027\u522b">\n          <Select options={genderOptions} />\n        </FormContent>\n        <FormContent name="describe" label="\u63cf\u8ff0" span={18}>\n          <Input.TextArea />\n        </FormContent>\n      </Row>\n    </Form>\n  );\n};',
       g =
@@ -71472,31 +71628,33 @@
       w =
         '/*\n * @Author: zml\n * @Date: 2022-06-15 20:20:02\n * @LastEditTime: 2022-06-15 20:32:04\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { TagsInput } from \'tc-rc\';\n\nexport default () => {\n  const onSearch = useMemoizedFn((val: string) => {\n    const res = +val;\n    if (!Number.isNaN(res)) {\n      return [{ label: res.toString(), value: res.toString() }];\n    } else {\n      return [];\n    }\n  });\n\n  const onSearchEmail = useMemoizedFn((val: string) => {\n    const emails = [\'qq.com\', \'163.com\', \'139.com\'];\n    if (/.*@.*/.test(val)) {\n      return [{ value: val, label: val }];\n    }\n    return emails.map((item) => ({\n      value: `${val}@${item}`,\n      label: `${val}@${item}`,\n    }));\n  });\n\n  return (\n    <>\n      <Card title="\u666e\u901a\u6587\u672c">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput />\n          </Form.Item>\n        </Form>\n      </Card>\n      <Card title="\u53f7\u7801\u8f93\u5165">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput onSearch={onSearch} />\n          </Form.Item>\n        </Form>\n      </Card>\n      <Card title="\u90ae\u7bb1\u8f93\u5165">\n        <Form>\n          <Form.Item name="tags" label="\u7535\u8bdd\u53f7\u7801">\n            <TagsInput mode="multiple" onSearch={onSearchEmail} />\n          </Form.Item>\n        </Form>\n      </Card>\n    </>\n  );\n};',
       k =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:21:22\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(val.code);\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="code" label="\u4ee3\u7801" initialValue="var a = 1">\n        <CodeInput />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
+        "/*\n * @Author: zml\n * @Date: 2022-06-28 11:22:16\n * @LastEditTime: 2022-06-28 13:56:18\n */\nimport { useMemoizedFn, useMount } from 'ahooks';\nimport { Button, message } from 'antd';\nimport { uniqueId } from 'lodash';\nimport { useState } from 'react';\nimport { useSafeFunc } from 'tc-rc';\n\nconst request = () => {\n  return new Promise<string>((resolve, reject) => {\n    setTimeout(() => {\n      resolve(uniqueId('safeFunc-'));\n    }, 5000);\n  });\n};\n\nconst Component: React.FC = () => {\n  const { safeRun } = useSafeFunc();\n  const [id, setId] = useState('loading...');\n\n  useMount(async () => {\n    setId('loading...');\n    const res = await request();\n    safeRun(() => {\n      message.success('write id\uff01\uff01');\n      setId(res);\n    });\n  });\n\n  return <div>{id}</div>;\n};\n\nexport default () => {\n  const [mount, setMount] = useState(true);\n\n  const clickHandle = useMemoizedFn(() => {\n    setMount(!mount);\n  });\n\n  return (\n    <>\n      <Button onClick={clickHandle}>click me!</Button>\n      {mount && <Component />}\n    </>\n  );\n};",
       x =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:26:03\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(JSON.stringify(val.code, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item\n        name="code"\n        label="\u4ee3\u7801"\n        initialValue={{ lang: \'javascript\', str: \'var a = 1\' }}\n      >\n        <CodeInput valueType="obj" />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:21:22\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(val.code);\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item name="code" label="\u4ee3\u7801" initialValue="var a = 1">\n        <CodeInput />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
       M =
-        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:32:20\n * @LastEditTime: 2022-06-20 20:37:45\n */\nimport { Form } from \'antd\';\nimport CodeInput from \'..\';\n\nexport default () => {\n  return (\n    <Form>\n      <Form.Item name="readonly" label="\u53ea\u8bfb\u6a21\u5f0f" initialValue="var a = 1;">\n        <CodeInput readonly />\n      </Form.Item>\n      <Form.Item\n        name="aLang"\n        label="\u4e0d\u53ef\u5207\u6362\u8bed\u8a00"\n        initialValue="SELECT * FROM test_table;"\n      >\n        <CodeInput readonly defaultLanguage="sql" />\n      </Form.Item>\n    </Form>\n  );\n};',
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:14:45\n * @LastEditTime: 2022-06-20 20:26:03\n */\nimport { useMemoizedFn } from \'ahooks\';\nimport { Button, Form } from \'antd\';\nimport { CodeInput } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { code: string }) => {\n    alert(JSON.stringify(val.code, null, 4));\n  });\n\n  return (\n    <Form onFinish={onFinish}>\n      <Form.Item\n        name="code"\n        label="\u4ee3\u7801"\n        initialValue={{ lang: \'javascript\', str: \'var a = 1\' }}\n      >\n        <CodeInput valueType="obj" />\n      </Form.Item>\n      <Button type="primary" htmlType="submit">\n        \u786e\u5b9a\n      </Button>\n    </Form>\n  );\n};',
       O =
-        "/*\n * @Author: zml\n * @Date: 2022-06-16 15:38:23\n * @LastEditTime: 2022-06-23 15:14:21\n */\n\nimport { useEffect, useMemo, useRef, useState } from 'react';\nimport codemirror from 'codemirror';\nimport 'codemirror/lib/codemirror.css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/sql/sql';\nimport 'codemirror/mode/shell/shell';\nimport 'codemirror/mode/python/python';\n// import 'codemirror/mode/php/php'\nimport 'codemirror/addon/display/placeholder';\nimport 'codemirror/addon/hint/show-hint.css'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/show-hint.js'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/sql-hint'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/javascript-hint';\nimport 'codemirror/addon/hint/anyword-hint';\nimport 'codemirror/theme/3024-day.css';\nimport './styleGlobal.less';\nimport { Card, message, Select } from 'antd';\nimport {\n  bodyStyle,\n  containerStyle,\n  editStyle,\n  extraStyle,\n  headStyle,\n  selectStyle,\n} from './styles';\nimport { useMemoizedFn } from 'ahooks';\nimport copy from 'copy-to-clipboard';\nimport { generateVal, getValue, languageOptions, suffixIcon } from './config';\nimport type { LangesType, ValueType, VBase } from './type';\n\ntype IProps<V extends VBase = 'str'> = {\n  /** \u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript */\n  defaultLanguage?: LangesType;\n  /** \u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c */\n  initValue?: string;\n  /** \u7f16\u8f91\u7684\u4ee3\u7801\u503c */\n  value?: ValueType<V>;\n  /**\n   * \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6\n   * @default auto\n   */\n  editHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6 */\n  editMaxHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6 */\n  editMinHeight?: string;\n  /** \u4ee3\u7801\u6539\u53d8\u7684\u503c */\n  onChange?: (val?: ValueType<V>) => void;\n  /** \u7981\u6b62\u9009\u62e9\u8bed\u8a00 */\n  disabledChangeLanguage?: boolean;\n  /** \u53ea\u8bfb\u6a21\u5f0f */\n  readonly?: boolean;\n  /** \u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765 */\n  valueType?: V;\n};\nconst CodeInput = <V extends VBase>(props: IProps<V>) => {\n  const divRef = useRef<HTMLDivElement>(null);\n  const {\n    defaultLanguage = 'javascript',\n    value,\n    initValue = '',\n    onChange,\n    disabledChangeLanguage,\n    valueType = 'str' as V,\n  } = props;\n  const {\n    editHeight = '300px',\n    editMaxHeight,\n    editMinHeight,\n    readonly,\n  } = props;\n  const [lang, setLang] = useState(defaultLanguage);\n\n  const changeHandle = useMemoizedFn((val?: string) =>\n    onChange?.(generateVal(valueType, lang, val)),\n  );\n\n  const editorRef = useRef<ReturnType<typeof codemirror>>();\n\n  const valData = getValue(valueType, value);\n\n  useEffect(() => {\n    if (valueType === 'obj') {\n      changeHandle(valData);\n    }\n  }, [lang]);\n\n  useEffect(() => {\n    if (divRef.current) {\n      divRef.current.innerHTML = '';\n      editorRef.current = codemirror(divRef.current, {\n        indentWithTabs: true,\n        readOnly: readonly,\n        smartIndent: true,\n        lineNumbers: true,\n        autofocus: true,\n        extraKeys: {\n          \"';'\": (editor) => {\n            const spaces = Array(editor.getOption('indentUnit')).join(';'); // \u5206\u53f7;\u76d1\u542c\u6267\u884c\u5b8c\u540e,\u5c31\u4e0d\u4f1a\u518d\u6267\u884cinputRead\u8f93\u5165\u76d1\u542c\u4e86\n            editor.replaceSelection(spaces);\n          },\n        },\n        hintOptions: { completeSingle: false },\n        lineWrapping: true, // \u5728\u957f\u884c\u65f6\u6587\u5b57\u662f\u6362\u884c(wrap)\u8fd8\u662f\u6eda\u52a8(scroll)\uff0c\u9ed8\u8ba4\u4e3a\u6eda\u52a8(scroll)\u3002\n        mode: lang,\n        value: valData || initValue,\n      });\n      editorRef.current.on('inputRead', (editor, change) => {\n        const data = {\n          test: ['t_user', 'menu', 'auth_info'],\n          t_user: [],\n          menu: [''],\n          default: ['tableinfo'],\n        };\n        editor.setOption('hintOptions', {\n          tables: data,\n          completeSingle: false,\n        });\n        editor.execCommand('autocomplete');\n      });\n      editorRef.current.on('change', () => {\n        changeHandle(editorRef.current?.getValue() || '');\n      });\n      // editorRef.\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [lang, divRef.current, readonly]);\n\n  useEffect(() => {\n    if (valData !== (editorRef.current?.getValue() || '')) {\n      editorRef.current?.setValue(valData);\n    }\n  }, [valData, valueType]);\n\n  const copyHandle = useMemoizedFn(() => {\n    copy(valData || editorRef.current?.getValue() || '');\n    message.success('\u590d\u5236\u6210\u529f');\n  });\n\n  const styleHandle = useMemo(\n    () => ({\n      ...editStyle,\n      height: editHeight,\n      maxHeight: editMaxHeight,\n      minHeight: editMinHeight,\n    }),\n    [editHeight, editMaxHeight, editMinHeight],\n  );\n\n  return (\n    <Card\n      headStyle={headStyle}\n      style={containerStyle}\n      bodyStyle={bodyStyle}\n      title={\n        <Select\n          disabled={readonly || disabledChangeLanguage}\n          bordered={false}\n          style={selectStyle}\n          options={languageOptions}\n          value={lang}\n          onChange={setLang}\n          suffixIcon={suffixIcon}\n        />\n      }\n      extra={\n        <span style={extraStyle} onClick={copyHandle}>\n          \u590d\u5236\u4ee3\u7801\n        </span>\n      }\n    >\n      <div ref={divRef} style={styleHandle} />\n    </Card>\n  );\n};\n\nexport default CodeInput;",
+        '/*\n * @Author: zml\n * @Date: 2022-06-20 20:32:20\n * @LastEditTime: 2022-06-20 20:37:45\n */\nimport { Form } from \'antd\';\nimport CodeInput from \'..\';\n\nexport default () => {\n  return (\n    <Form>\n      <Form.Item name="readonly" label="\u53ea\u8bfb\u6a21\u5f0f" initialValue="var a = 1;">\n        <CodeInput readonly />\n      </Form.Item>\n      <Form.Item\n        name="aLang"\n        label="\u4e0d\u53ef\u5207\u6362\u8bed\u8a00"\n        initialValue="SELECT * FROM test_table;"\n      >\n        <CodeInput readonly defaultLanguage="sql" />\n      </Form.Item>\n    </Form>\n  );\n};',
       E =
-        '.CodeMirror {\n  background-color: rgb(247, 247, 247);\n  height: auto;\n}\n\n.CodeMirror-gutters {\n  border-right: none;\n}',
+        "/*\n * @Author: zml\n * @Date: 2022-06-16 15:38:23\n * @LastEditTime: 2022-06-23 15:14:21\n */\n\nimport { useEffect, useMemo, useRef, useState } from 'react';\nimport codemirror from 'codemirror';\nimport 'codemirror/lib/codemirror.css';\nimport 'codemirror/mode/javascript/javascript';\nimport 'codemirror/mode/sql/sql';\nimport 'codemirror/mode/shell/shell';\nimport 'codemirror/mode/python/python';\n// import 'codemirror/mode/php/php'\nimport 'codemirror/addon/display/placeholder';\nimport 'codemirror/addon/hint/show-hint.css'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/show-hint.js'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/sql-hint'; // \u7528\u6765\u505a\u4ee3\u7801\u63d0\u793a\nimport 'codemirror/addon/hint/javascript-hint';\nimport 'codemirror/addon/hint/anyword-hint';\nimport 'codemirror/theme/3024-day.css';\nimport './styleGlobal.less';\nimport { Card, message, Select } from 'antd';\nimport {\n  bodyStyle,\n  containerStyle,\n  editStyle,\n  extraStyle,\n  headStyle,\n  selectStyle,\n} from './styles';\nimport { useMemoizedFn } from 'ahooks';\nimport copy from 'copy-to-clipboard';\nimport { generateVal, getValue, languageOptions, suffixIcon } from './config';\nimport type { LangesType, ValueType, VBase } from './type';\n\ntype IProps<V extends VBase = 'str'> = {\n  /** \u9ed8\u8ba4\u8bed\u8a00\uff0c\u9ed8\u8ba4\u662fjavascript */\n  defaultLanguage?: LangesType;\n  /** \u521d\u59cb\u503c\uff0c\u53ea\u6709\u5728\u521d\u59cb\u5316\u7684\u65f6\u5019\u624d\u4f1a\u52a0\u8f7d, \u521d\u59cb\u7684\u65f6\u5019value\u4e0einitValue\u540c\u65f6\u5b58\u5728\u4f1a\u4f7f\u7528value\u4f5c\u4e3a\u521d\u59cb\u503c */\n  initValue?: string;\n  /** \u7f16\u8f91\u7684\u4ee3\u7801\u503c */\n  value?: ValueType<V>;\n  /**\n   * \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u9ad8\u5ea6\n   * @default auto\n   */\n  editHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5927\u9ad8\u5ea6 */\n  editMaxHeight?: string;\n  /** \u4ee3\u7801\u7f16\u8f91\u533a\u7684\u6700\u5c0f\u9ad8\u5ea6 */\n  editMinHeight?: string;\n  /** \u4ee3\u7801\u6539\u53d8\u7684\u503c */\n  onChange?: (val?: ValueType<V>) => void;\n  /** \u7981\u6b62\u9009\u62e9\u8bed\u8a00 */\n  disabledChangeLanguage?: boolean;\n  /** \u53ea\u8bfb\u6a21\u5f0f */\n  readonly?: boolean;\n  /** \u9700\u8981\u4ec0\u4e48\u7c7b\u578b\u7684\u503c\uff0cstr\u7c7b\u578b\u53ea\u4f1a\u6709\u5b57\u7b26\u4e32\uff0cobj\u4f1a\u628a\u9009\u62e9\u7684\u8bed\u8a00\u4e5f\u8fd4\u56de\u6765 */\n  valueType?: V;\n};\nconst CodeInput = <V extends VBase>(props: IProps<V>) => {\n  const divRef = useRef<HTMLDivElement>(null);\n  const {\n    defaultLanguage = 'javascript',\n    value,\n    initValue = '',\n    onChange,\n    disabledChangeLanguage,\n    valueType = 'str' as V,\n  } = props;\n  const {\n    editHeight = '300px',\n    editMaxHeight,\n    editMinHeight,\n    readonly,\n  } = props;\n  const [lang, setLang] = useState(defaultLanguage);\n\n  const changeHandle = useMemoizedFn((val?: string) =>\n    onChange?.(generateVal(valueType, lang, val)),\n  );\n\n  const editorRef = useRef<ReturnType<typeof codemirror>>();\n\n  const valData = getValue(valueType, value);\n\n  useEffect(() => {\n    if (valueType === 'obj') {\n      changeHandle(valData);\n    }\n  }, [lang]);\n\n  useEffect(() => {\n    if (divRef.current) {\n      divRef.current.innerHTML = '';\n      editorRef.current = codemirror(divRef.current, {\n        indentWithTabs: true,\n        readOnly: readonly,\n        smartIndent: true,\n        lineNumbers: true,\n        autofocus: true,\n        extraKeys: {\n          \"';'\": (editor) => {\n            const spaces = Array(editor.getOption('indentUnit')).join(';'); // \u5206\u53f7;\u76d1\u542c\u6267\u884c\u5b8c\u540e,\u5c31\u4e0d\u4f1a\u518d\u6267\u884cinputRead\u8f93\u5165\u76d1\u542c\u4e86\n            editor.replaceSelection(spaces);\n          },\n        },\n        hintOptions: { completeSingle: false },\n        lineWrapping: true, // \u5728\u957f\u884c\u65f6\u6587\u5b57\u662f\u6362\u884c(wrap)\u8fd8\u662f\u6eda\u52a8(scroll)\uff0c\u9ed8\u8ba4\u4e3a\u6eda\u52a8(scroll)\u3002\n        mode: lang,\n        value: valData || initValue,\n      });\n      editorRef.current.on('inputRead', (editor, change) => {\n        const data = {\n          test: ['t_user', 'menu', 'auth_info'],\n          t_user: [],\n          menu: [''],\n          default: ['tableinfo'],\n        };\n        editor.setOption('hintOptions', {\n          tables: data,\n          completeSingle: false,\n        });\n        editor.execCommand('autocomplete');\n      });\n      editorRef.current.on('change', () => {\n        changeHandle(editorRef.current?.getValue() || '');\n      });\n      // editorRef.\n    }\n    // eslint-disable-next-line react-hooks/exhaustive-deps\n  }, [lang, divRef.current, readonly]);\n\n  useEffect(() => {\n    if (valData !== (editorRef.current?.getValue() || '')) {\n      editorRef.current?.setValue(valData);\n    }\n  }, [valData, valueType]);\n\n  const copyHandle = useMemoizedFn(() => {\n    copy(valData || editorRef.current?.getValue() || '');\n    message.success('\u590d\u5236\u6210\u529f');\n  });\n\n  const styleHandle = useMemo(\n    () => ({\n      ...editStyle,\n      height: editHeight,\n      maxHeight: editMaxHeight,\n      minHeight: editMinHeight,\n    }),\n    [editHeight, editMaxHeight, editMinHeight],\n  );\n\n  return (\n    <Card\n      headStyle={headStyle}\n      style={containerStyle}\n      bodyStyle={bodyStyle}\n      title={\n        <Select\n          disabled={readonly || disabledChangeLanguage}\n          bordered={false}\n          style={selectStyle}\n          options={languageOptions}\n          value={lang}\n          onChange={setLang}\n          suffixIcon={suffixIcon}\n        />\n      }\n      extra={\n        <span style={extraStyle} onClick={copyHandle}>\n          \u590d\u5236\u4ee3\u7801\n        </span>\n      }\n    >\n      <div ref={divRef} style={styleHandle} />\n    </Card>\n  );\n};\n\nexport default CodeInput;",
       j =
-        "/*\n * @Author: zml\n * @Date: 2022-06-16 17:01:19\n * @LastEditTime: 2022-06-16 19:50:55\n */\nimport type { CSSProperties } from 'react';\n\nexport const containerStyle: CSSProperties = {\n  position: 'relative',\n  width: '100%',\n};\n\nexport const headStyle: CSSProperties = {\n  background: 'rgb(240, 240, 240)',\n  height: 32,\n  minHeight: 32,\n  overflow: 'hidden',\n};\n\nexport const bodyStyle: CSSProperties = {\n  padding: 0,\n};\n\nexport const editStyle: CSSProperties = {\n  width: '100%',\n  height: 'auto',\n  border: '1px solid #eee',\n  background: 'rgb(247, 247, 247)',\n  overflowY: 'auto',\n};\n\nexport const selectStyle: CSSProperties = {\n  width: 'auto',\n  // minWidth: \"120px\",\n  height: 30,\n  textAlign: 'end',\n  position: 'absolute',\n  left: 8,\n  top: 0,\n  zIndex: 1,\n};\n\nexport const extraStyle: CSSProperties = {\n  padding: '0 12px',\n  position: 'absolute',\n  height: 30,\n  lineHeight: '30px',\n  right: 0,\n  color: '#999',\n  top: 0,\n  zIndex: 1,\n  cursor: 'pointer',\n};",
+        '.CodeMirror {\n  background-color: rgb(247, 247, 247);\n  height: auto;\n}\n\n.CodeMirror-gutters {\n  border-right: none;\n}',
       S =
-        "/*\n * @Author: zml\n * @Date: 2022-06-17 10:18:05\n * @LastEditTime: 2022-06-17 11:05:50\n */\nimport { CaretDownOutlined } from '@ant-design/icons';\nimport type { ValueType, VBase } from './type';\n\n/**\n * \u9009\u62e9\u6846\u540e\u9762\u7684\u56fe\u6807\n */\nexport const suffixIcon = <CaretDownOutlined style={{ marginTop: 3 }} />;\n\n/**\n * \u53ef\u4ee5\u9009\u62e9\u7684\u8bed\u8a00\uff0c\u5982\u679c\u52a0\u4e86\u8bed\u8a00\uff0c\u8bb0\u5f97\u6ce8\u610fcodemirroe\u4e2d\u6709\u6ca1\u6709mode\u548chint\n * value\u6700\u597d\u52a0\u4e00\u4e9bas const\u66f4\u6709\u5229\u4e8ets\u7684\u7c7b\u578b\u63a8\u5bfc\n */\nexport const languageOptions = [\n  { value: 'javascript' as const, label: 'JavaScript' },\n  { value: 'sql' as const, label: 'Sql' },\n  { value: 'python' as const, label: 'Python' },\n  { value: 'shell' as const, label: 'Shell' },\n  // { value: 'php' as const, label: 'PHP' }\n];\nexport const langes = languageOptions.map(({ value }) => value);\n\n/**\n * \u83b7\u53d6\u6570\u636e\uff0c\u53ef\u4ee5\u5bf9\u54ea\u4e00\u79cd\u7c7b\u578b\u7684\u6570\u636e\u83b7\u53d6\u505a\u4e00\u4e2a\u6536\u655b\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const getValue = (type: VBase, val?: ValueType<VBase>) => {\n  if (!val) {\n    return '';\n  }\n  if (type === 'obj') {\n    return (val as ValueType<'obj'>).str;\n  }\n  return val.toString();\n};\n\n/**\n * \u751f\u6210\u6240\u9700\u8981\u7684\u6570\u636e\u683c\u5f0f\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param lang \u5f53\u524d\u9009\u62e9\u7684\u8bed\u8a00\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const generateVal = <V extends VBase>(\n  type: V,\n  lang: string,\n  val?: string,\n): ValueType<V> => {\n  if (type === 'obj') {\n    return {\n      str: val,\n      lang,\n    } as ValueType<V>;\n  }\n  return val as ValueType<V>;\n};",
+        "/*\n * @Author: zml\n * @Date: 2022-06-16 17:01:19\n * @LastEditTime: 2022-06-16 19:50:55\n */\nimport type { CSSProperties } from 'react';\n\nexport const containerStyle: CSSProperties = {\n  position: 'relative',\n  width: '100%',\n};\n\nexport const headStyle: CSSProperties = {\n  background: 'rgb(240, 240, 240)',\n  height: 32,\n  minHeight: 32,\n  overflow: 'hidden',\n};\n\nexport const bodyStyle: CSSProperties = {\n  padding: 0,\n};\n\nexport const editStyle: CSSProperties = {\n  width: '100%',\n  height: 'auto',\n  border: '1px solid #eee',\n  background: 'rgb(247, 247, 247)',\n  overflowY: 'auto',\n};\n\nexport const selectStyle: CSSProperties = {\n  width: 'auto',\n  // minWidth: \"120px\",\n  height: 30,\n  textAlign: 'end',\n  position: 'absolute',\n  left: 8,\n  top: 0,\n  zIndex: 1,\n};\n\nexport const extraStyle: CSSProperties = {\n  padding: '0 12px',\n  position: 'absolute',\n  height: 30,\n  lineHeight: '30px',\n  right: 0,\n  color: '#999',\n  top: 0,\n  zIndex: 1,\n  cursor: 'pointer',\n};",
       L =
-        'import { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { CronSelect, ButtonAsync } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { cron: string }) => {\n    alert(JSON.stringify(val, null, 4));\n  });\n\n  return (\n    <Card title="cron\u9009\u62e9\u5668">\n      <Form onFinish={onFinish}>\n        <Form.Item label="cron\u9009\u62e9" name="cron">\n          <CronSelect />\n        </Form.Item>\n        <ButtonAsync type="primary" htmlType="submit">\n          \u63d0\u4ea4\n        </ButtonAsync>\n      </Form>\n    </Card>\n  );\n};',
+        "/*\n * @Author: zml\n * @Date: 2022-06-17 10:18:05\n * @LastEditTime: 2022-06-17 11:05:50\n */\nimport { CaretDownOutlined } from '@ant-design/icons';\nimport type { ValueType, VBase } from './type';\n\n/**\n * \u9009\u62e9\u6846\u540e\u9762\u7684\u56fe\u6807\n */\nexport const suffixIcon = <CaretDownOutlined style={{ marginTop: 3 }} />;\n\n/**\n * \u53ef\u4ee5\u9009\u62e9\u7684\u8bed\u8a00\uff0c\u5982\u679c\u52a0\u4e86\u8bed\u8a00\uff0c\u8bb0\u5f97\u6ce8\u610fcodemirroe\u4e2d\u6709\u6ca1\u6709mode\u548chint\n * value\u6700\u597d\u52a0\u4e00\u4e9bas const\u66f4\u6709\u5229\u4e8ets\u7684\u7c7b\u578b\u63a8\u5bfc\n */\nexport const languageOptions = [\n  { value: 'javascript' as const, label: 'JavaScript' },\n  { value: 'sql' as const, label: 'Sql' },\n  { value: 'python' as const, label: 'Python' },\n  { value: 'shell' as const, label: 'Shell' },\n  // { value: 'php' as const, label: 'PHP' }\n];\nexport const langes = languageOptions.map(({ value }) => value);\n\n/**\n * \u83b7\u53d6\u6570\u636e\uff0c\u53ef\u4ee5\u5bf9\u54ea\u4e00\u79cd\u7c7b\u578b\u7684\u6570\u636e\u83b7\u53d6\u505a\u4e00\u4e2a\u6536\u655b\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const getValue = (type: VBase, val?: ValueType<VBase>) => {\n  if (!val) {\n    return '';\n  }\n  if (type === 'obj') {\n    return (val as ValueType<'obj'>).str;\n  }\n  return val.toString();\n};\n\n/**\n * \u751f\u6210\u6240\u9700\u8981\u7684\u6570\u636e\u683c\u5f0f\n * @param type \u683c\u5f0f\u7c7b\u578b\n * @param lang \u5f53\u524d\u9009\u62e9\u7684\u8bed\u8a00\n * @param val \u6570\u636e\u503c\n * @returns\n */\nexport const generateVal = <V extends VBase>(\n  type: V,\n  lang: string,\n  val?: string,\n): ValueType<V> => {\n  if (type === 'obj') {\n    return {\n      str: val,\n      lang,\n    } as ValueType<V>;\n  }\n  return val as ValueType<V>;\n};",
       T =
+        'import { useMemoizedFn } from \'ahooks\';\nimport { Card, Form } from \'antd\';\nimport { CronSelect, ButtonAsync } from \'tc-rc\';\n\nexport default () => {\n  const onFinish = useMemoizedFn((val: { cron: string }) => {\n    alert(JSON.stringify(val, null, 4));\n  });\n\n  return (\n    <Card title="cron\u9009\u62e9\u5668">\n      <Form onFinish={onFinish}>\n        <Form.Item label="cron\u9009\u62e9" name="cron">\n          <CronSelect />\n        </Form.Item>\n        <ButtonAsync type="primary" htmlType="submit">\n          \u63d0\u4ea4\n        </ButtonAsync>\n      </Form>\n    </Card>\n  );\n};',
+      C =
         "import { Prominent } from 'tc-rc';\n\nconst Demo = () => {\n  return <Prominent str=\"\u6587\u5b57\u9ad8\u4eae\u7ec4\u4ef6\u5e93\" vals={['\u6587\u5b57']} />;\n};\n\nexport default Demo;",
-      C = {
+      D = {
         'countdownbutton-demos': {
           component: n('WFta').default,
           previewerProps: {
             sources: { _: { tsx: s } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71519,7 +71677,7 @@
             sources: { _: { tsx: u } },
             dependencies: {
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71541,7 +71699,7 @@
           previewerProps: {
             sources: { _: { tsx: l } },
             dependencies: {
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71564,7 +71722,7 @@
           previewerProps: {
             sources: { _: { tsx: c } },
             dependencies: {
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71589,7 +71747,7 @@
             dependencies: {
               ahooks: { version: '>=2.10.11' },
               react: { version: '>=16.9.0' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71610,7 +71768,7 @@
           previewerProps: {
             sources: { _: { tsx: f } },
             dependencies: {
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71633,7 +71791,7 @@
           previewerProps: {
             sources: { _: { tsx: p } },
             dependencies: {
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71658,7 +71816,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71682,7 +71840,7 @@
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
               moment: { version: '2.29.3' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71704,7 +71862,7 @@
             sources: { _: { tsx: v } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71728,7 +71886,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71751,7 +71909,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71791,7 +71949,7 @@
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71807,14 +71965,36 @@
             identifier: 'tagsinput-demos',
           },
         },
-        'codeinput-demos': {
-          component: n('z+Q3').default,
+        'usesafefunc-demos': {
+          component: n('YRw9').default,
           previewerProps: {
             sources: { _: { tsx: k } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              lodash: { version: '>=4.0.0' },
+              react: { version: '>=16.9.0' },
+              'tc-rc': { version: '1.5.0' },
+              'react-dom': { version: '>=16.9.0' },
+              '@ant-design/pro-table': {
+                version: '>=2.16.1',
+                css: '@ant-design/pro-table/dist/table.css',
+              },
+              '@types/lodash': { version: '>=4.14.0' },
+              codemirror: { version: '5.65.5' },
+              'qnn-react-cron': { version: '^0.8.6' },
+            },
+            identifier: 'usesafefunc-demos',
+          },
+        },
+        'codeinput-demos': {
+          component: n('z+Q3').default,
+          previewerProps: {
+            sources: { _: { tsx: x } },
+            dependencies: {
+              antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
+              ahooks: { version: '>=2.10.11' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71833,11 +72013,11 @@
         'codeinput-objval': {
           component: n('05+q').default,
           previewerProps: {
-            sources: { _: { tsx: x } },
+            sources: { _: { tsx: M } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71857,11 +72037,11 @@
           component: n('/4b3').default,
           previewerProps: {
             sources: {
-              _: { tsx: M },
-              'index.tsx': { import: '..', content: O },
-              'styleGlobal.less': { import: './styleGlobal.less', content: E },
-              'styles.ts': { import: './styles', content: j },
-              'config.tsx': { import: './config', content: S },
+              _: { tsx: O },
+              'index.tsx': { import: '..', content: E },
+              'styleGlobal.less': { import: './styleGlobal.less', content: j },
+              'styles.ts': { import: './styles', content: S },
+              'config.tsx': { import: './config', content: L },
             },
             dependencies: {
               antd: { version: '4.20.7', css: 'antd/dist/antd.css' },
@@ -71879,11 +72059,11 @@
         'cronselect-demos': {
           component: n('rAH7').default,
           previewerProps: {
-            sources: { _: { tsx: L } },
+            sources: { _: { tsx: T } },
             dependencies: {
               antd: { version: '>=4.0.0', css: 'antd/dist/antd.css' },
               ahooks: { version: '>=2.10.11' },
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               react: { version: '>=16.9.0' },
               'react-dom': { version: '>=16.9.0' },
               '@ant-design/pro-table': {
@@ -71902,9 +72082,9 @@
         'prominent-demos': {
           component: n('J78K').default,
           previewerProps: {
-            sources: { _: { tsx: T } },
+            sources: { _: { tsx: C } },
             dependencies: {
-              'tc-rc': { version: '1.4.8' },
+              'tc-rc': { version: '1.5.0' },
               '@ant-design/pro-table': {
                 version: '>=2.16.1',
                 css: '@ant-design/pro-table/dist/table.css',
@@ -71923,13 +72103,13 @@
           },
         },
       },
-      D = n('x2v5'),
-      Y = n('KcUY'),
-      P = n.n(Y);
+      Y = n('x2v5'),
+      P = n('KcUY'),
+      A = n.n(P);
     t['default'] = (e) =>
       o.a.createElement(
-        P.a,
-        Object(r['a'])({}, e, { config: i, demos: C, apis: D }),
+        A.a,
+        Object(r['a'])({}, e, { config: i, demos: D, apis: Y }),
       );
   },
   afO8: function (e, t, n) {
@@ -74426,22 +74606,8 @@
   cv0b: function (e, t, n) {
     'use strict';
     var r = n('q1tI'),
-      a = function () {
-        var e = Object(r['useRef'])(!1);
-        return (
-          Object(r['useEffect'])(function () {
-            return (
-              (e.current = !1),
-              function () {
-                e.current = !0;
-              }
-            );
-          }, []),
-          e
-        );
-      },
-      o = a,
-      i = function (e, t) {
+      a = n('t0dR'),
+      o = function (e, t) {
         var n = 'function' === typeof Symbol && e[Symbol.iterator];
         if (!n) return e;
         var r,
@@ -74462,17 +74628,17 @@
         }
         return i;
       };
-    function s(e) {
-      var t = o(),
-        n = i(Object(r['useState'])(e), 2),
-        a = n[0],
+    function i(e) {
+      var t = Object(a['a'])(),
+        n = o(Object(r['useState'])(e), 2),
+        i = n[0],
         s = n[1],
         u = Object(r['useCallback'])(function (e) {
           t.current || s(e);
         }, []);
-      return [a, u];
+      return [i, u];
     }
-    t['a'] = s;
+    t['a'] = i;
   },
   cvf0: function (e, t, n) {
     'use strict';
@@ -75702,7 +75868,20 @@
   },
   eZYV: function (e, t, n) {
     'use strict';
+    n.d(t, 'a', function () {
+      return o;
+    });
     n('L00U'), n('LvDl'), n('q1tI');
+    var r = n('t0dR'),
+      a = () => {
+        var e = Object(r['a'])(),
+          t = (t) => {
+            var n = e.current ? 'unmounted' : 'mounted';
+            'mounted' === n && t();
+          };
+        return { safeRun: t };
+      },
+      o = a;
   },
   ebwN: function (e, t, n) {
     var r = n('Cwc5'),
@@ -83262,6 +83441,10 @@
       return r(t.call(e));
     };
   },
+  miYZ: function (e, t, n) {
+    'use strict';
+    n('EFp3'), n('bXwC');
+  },
   'n3/R': function (e, t, n) {
     'use strict';
     var r = n('0Dky');
@@ -84957,7 +85140,7 @@
   },
   q3YX: function (e) {
     e.exports = JSON.parse(
-      '{"menus":{"zh-CN":{"/components":[{"title":"Prominent","path":"/components","meta":{},"children":[{"path":"/components/button-async","title":"ButtonAsync \u6309\u94ae\u81ea\u52a8loading","meta":{}},{"path":"/components/button-group","title":"ButtonGroup \u6309\u94ae\u7ec4","meta":{}},{"path":"/components/code-input","title":"CodeInput \u4ee3\u7801\u8f93\u5165\u5668","meta":{}},{"path":"/components/countdown-button","title":"CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae","meta":{}},{"path":"/components/cron-select","title":"Cron \u9009\u62e9\u5668","meta":{}},{"path":"/components/date-select","title":"DateSelect \u65e5\u671f\u9650\u5236\u9009\u62e9\u5668","meta":{}},{"path":"/components/form-content","title":"FormContent \u81ea\u52a8\u6805\u683c","meta":{}},{"path":"/components/modal-content","title":"ModalContent \u6bd4\u4f8b\u5f39\u7a97","meta":{}},{"path":"/components/prominent","title":"Prominent \u5173\u952e\u5b57\u9ad8\u4eae\u6548\u679c","meta":{}},{"path":"/components/rank-list","title":"RankList \u6392\u884c\u699c","meta":{}},{"path":"/components/tags-input","title":"TagsInput \u6807\u7b7e\u8f93\u5165\u6846","meta":{}}]}],"/hook":[{"title":"UseThrottle","path":"/hook","meta":{},"children":[{"path":"/hook/use-debounce","title":"\u9632\u6296\u7684hook","meta":{}},{"path":"/hook/use-throttle","title":"\u8282\u6d41\u7684hook","meta":{}}]}],"/func":[{"title":"ProTableUtils","path":"/func","meta":{},"children":[{"path":"/func/pro-table-utils","title":"ProTable\u5b9e\u7528\u65b9\u6cd5","meta":{}}]}],"*":[{"path":"/","title":"Index","meta":{}}]}},"locales":[{"name":"zh-CN","label":"\u4e2d\u6587"}],"navs":{"zh-CN":[{"title":"hook","path":"/hook"},{"title":"\u5b9e\u7528\u65b9\u6cd5","path":"/func"},{"title":"\u7ec4\u4ef6","path":"/components"}]},"title":"\u540c\u57cerc\u7ec4\u4ef6\u5e93","logo":"data:image/png;base64,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","mode":"site","repository":{"url":"http://gitlab.sfjswl.com/fe/tc-rc","branch":"master"},"theme":{}}',
+      '{"menus":{"zh-CN":{"/components":[{"title":"Prominent","path":"/components","meta":{},"children":[{"path":"/components/button-async","title":"ButtonAsync \u6309\u94ae\u81ea\u52a8loading","meta":{}},{"path":"/components/button-group","title":"ButtonGroup \u6309\u94ae\u7ec4","meta":{}},{"path":"/components/code-input","title":"CodeInput \u4ee3\u7801\u8f93\u5165\u5668","meta":{}},{"path":"/components/countdown-button","title":"CountdownButton \u5012\u8ba1\u65f6\u6309\u94ae","meta":{}},{"path":"/components/cron-select","title":"Cron \u9009\u62e9\u5668","meta":{}},{"path":"/components/date-select","title":"DateSelect \u65e5\u671f\u9650\u5236\u9009\u62e9\u5668","meta":{}},{"path":"/components/form-content","title":"FormContent \u81ea\u52a8\u6805\u683c","meta":{}},{"path":"/components/modal-content","title":"ModalContent \u6bd4\u4f8b\u5f39\u7a97","meta":{}},{"path":"/components/prominent","title":"Prominent \u5173\u952e\u5b57\u9ad8\u4eae\u6548\u679c","meta":{}},{"path":"/components/rank-list","title":"RankList \u6392\u884c\u699c","meta":{}},{"path":"/components/tags-input","title":"TagsInput \u6807\u7b7e\u8f93\u5165\u6846","meta":{}}]}],"/hook":[{"title":"UseThrottle","path":"/hook","meta":{},"children":[{"path":"/hook/use-debounce","title":"\u9632\u6296\u7684hook","meta":{}},{"path":"/hook/use-safe-func","title":"\u5b89\u5168\u8fd0\u884c\u65b9\u6cd5","meta":{}},{"path":"/hook/use-throttle","title":"\u8282\u6d41\u7684hook","meta":{}}]}],"/func":[{"title":"ProTableUtils","path":"/func","meta":{},"children":[{"path":"/func/pro-table-utils","title":"ProTable\u5b9e\u7528\u65b9\u6cd5","meta":{}}]}],"*":[{"path":"/","title":"Index","meta":{}}]}},"locales":[{"name":"zh-CN","label":"\u4e2d\u6587"}],"navs":{"zh-CN":[{"title":"hook","path":"/hook"},{"title":"\u5b9e\u7528\u65b9\u6cd5","path":"/func"},{"title":"\u7ec4\u4ef6","path":"/components"}]},"title":"\u540c\u57cerc\u7ec4\u4ef6\u5e93","logo":"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGkAAABpCAMAAAAOXP0IAAACu1BMVEVHcEz////n5+fl5eXo6Oj////o6Oj////p6eno6Ojn5+fp6enp6enq6uro6Ojq6ur///8EAADlAADo6Oj29va/vb3U09Pw7+/a2dnq6en19fXx8PAFAQEIBAT9/Pzz8vLs6+v//v7z8/P6+vr+/f0LBwcSDg76+fnmAgJNSko3MzMsKCjg398PCwv8+/v/+voNCQmnpaUWEhL7+vrv7u7My8v//Pzy8fEUEBAvKyuSkJCbmZm5t7dFQkLyeHiwrq7nDg75+Pjxbm7j4uLPzs7c29s6NjZaV1f4tLSenJxsaWn19PRAPDz29fXr6upIRUUoJCQYFBSVk5Nyb2/uTU3qLCz+7u71lZUzLy9XU1OFg4MmIiL/+/vT0tLnEhKOjIz83d0kICD71dUeGhr94+ONi4tRTk7mBgZoZWX/9/fmBASJh4dKR0d5dnZ1cnK1s7PJyMggHByBfn4xLS3Qz8/oGBj96Oj49/e9u7tcWVnX1tb6xcXvYmI9OTnd3NzBv7+koqKtq6voFBRvbGxmY2Pu7e2+vLxfXFzzf3/qKip+e3vEw8NTUFDvWVnHxsYbFxdCPj7OAgIiHh7sPDzLysrsRERjYGCIhob0ioro5+fnCgr6ysrW1dXpHR33qKhGQ0P5vb3BwMDtRkbpJCT0jY37z8/0kZGopqb+7+/eGRmYlpbp6Oj2np7tSUn84ODpJiYcGBj6zMzrNTW+amr+8vL4urqgnp6dm5vye3vZ2NiGAADDwsLasbGGhITpIyPGXFzwZWXZtLT+8/P71tb2oaHuUVHS0dHzgoLwa2v4sbH83NzsPz+rqam2tLT96uqXlZX0k5Pl5OTrMzP2n5/vXFzk4+MqJibwY2MpAADiAAD96enelpaoAAATAADBc3O/AACyAADHBATbAAAwAADozs43AABjAADVxcXVAABCIJ1kAAAAEHRSTlMAAuNH+AiTAaZl+/30rs2ttrd1HAAABJRJREFUeNrt2udXFGcUx/GlihTzu7Ng2MIWWAi9JoQiVYlgCZYIiohCUAFrokaN0URjYovYMBqNPab33nvvvff+ZwQ4sOxd2Jzn2Z2ZN/J5y4vv2TO7cw73XoNbUEhMcHSUUT1R0cExIUEGb2HhkUaHJdEcqx5zosVhjAwP46GxoSZ7EtSXZDeFjvXojIkwWmzQhs1ijBjjDo0zmaEds2ncYCrCVAUtVZkiBp6R0QxtmY39zyos1AKtWULDekvhJhu0ZjOF9/5gI+3Qnj0yyBBiTIL2kowhhhgH9OCIMQRboAdLsCE6EXJcefUZaRWQlBhtiDJDygvp1GfaJEgxRxmMsZAwcTINsG5/ABJijVKl6dfm0pCUxZdoVcq7hrgZqzQp9Wym4erHq16643YrjSTh5ltULVUtyyJf8mdlq1eqmE8cV7xBpdKCMmKsO7pvI25JjQolx5QEYq5YDSBuDTHJeYGWskuKiLn6Jif62O7P5x80LrDShAxikndPxaBLZ7MPuzyQUnwacfMy4en65TSk1f+SZaXXA5p7Bt4++poGrfG35CqdSczMUheGK1iYMvD3I36WzswlJmGlBSO7ssNKvU4V+FXKnEdcWjx8e3t2+qnSode67cXXOkVLi5OJyZgAYTmvHFCUA0+IlRYSU1SSDWG19yn9fhYpTU9hD2iKA8LazioDfhMp9ZCHsgUQ1lDdpbj9KVCKI7f5FRBW2NiiePhHppS1rArCTs9RPP06XqZUA2HvX6Uwv/8lVboYgp4sX8pDv/xB/pWcx2vb4ZPzwXW88+/fVvKvdHyXoqQePo+Rbfqcd757/ici/0oPb1P6pL76MYZr36twP35L5G/pWWVA5V054Dp3HuOdcz8Q+V/6QHF7pBaeTp7gncqjOfGBlNgX+OwbGPTYId5J/eZ7IKDSm4qnruoG9LnuhlQeOnQeCLDU/JDCtDQWIudopcKcOAkEXEKz9w9zzt0vK8yxdzoRUIm/bHzb2w6oVAKe2uWz8/gmQMUSmj9tGbGz7gsnVCgxDe+mKt6Wlr8OqFLi2g4r3FuLANVK3HvnPL+CpwHNSh4/pG2NhdCuNPRy6Kq+F9CgxLWVf7lzEaBdiRstjZZGSxd8KRPyVvtVKiopgJz1TVlSJfZPu4ytB4lkSj1sEPEcRK3dTx4yBUpTU8SGK5ypw8qGcy6BEo6IDIyGj4+YOoiUnE3eQ7Ab8f9WzSAmdxYESiKDPXiP+bjJE+GjJDisZNjokknfA4aVZAawnO2TfGL21bngsyQ8VO6Gt1uLiUleYQfDSxKD8s/gacuwsfkWQKAkMvzPemk9BtlXJAusAlhJaqHRuhX9nE8/6r3esEGgJLOk2b8WQHe6wMpGoMRdtpkYa8ekjcTV3wkIlOSXaeKrNV6SWhByfF0YeIkvPTnrdpPqe8I96cSwta6qJbjq9hF38EOt9rmXsx9rblMs1CxxNUvcD2jjV4BMSXrvvqGYvW7F9+7ytwTZz0xrLbvHKX1LoN99hG43Hxfpd8ei322ObvdG+t1Q6XYXptutm373e7rdJOp1Z6n37ah+97D/AWOpW6eIJ7MmAAAAAElFTkSuQmCC","mode":"site","repository":{"url":"http://gitlab.sfjswl.com/fe/tc-rc","branch":"master"},"theme":{}}',
     );
   },
   qCM6: function (e, t, n) {},
@@ -90721,6 +90904,25 @@
       };
     t['default'] = g;
   },
+  t0dR: function (e, t, n) {
+    'use strict';
+    var r = n('q1tI'),
+      a = function () {
+        var e = Object(r['useRef'])(!1);
+        return (
+          Object(r['useEffect'])(function () {
+            return (
+              (e.current = !1),
+              function () {
+                e.current = !0;
+              }
+            );
+          }, []),
+          e
+        );
+      };
+    t['a'] = a;
+  },
   t23M: function (e, t, n) {
     'use strict';
     var r = n('wx14'),
@@ -91261,7 +91463,7 @@
               exact: !0,
               meta: {
                 filePath: 'src/encapsulation/DateSelect/index.md',
-                updatedTime: 1655966318e3,
+                updatedTime: 1656396111e3,
                 componentName: 'DateSelect',
                 title: 'DateSelect \u65e5\u671f\u9650\u5236\u9009\u62e9\u5668',
                 nav: { title: '\u7ec4\u4ef6', path: '/components' },
@@ -91406,6 +91608,29 @@
               },
               title:
                 '\u9632\u6296\u7684hook - \u540c\u57cerc\u7ec4\u4ef6\u5e93',
+            },
+            {
+              path: '/hook/use-safe-func',
+              component: n('BZy2').default,
+              exact: !0,
+              meta: {
+                filePath: 'src/hooks/useSafeFunc/index.md',
+                updatedTime: 1656396111e3,
+                title: '\u5b89\u5168\u8fd0\u884c\u65b9\u6cd5',
+                nav: { title: 'hook', path: '/hook' },
+                group: { path: '/hook', title: 'UseSafeFunc' },
+                slugs: [
+                  { depth: 2, value: '\u4f5c\u7528', heading: '\u4f5c\u7528' },
+                  {
+                    depth: 2,
+                    value: '\u57fa\u7840\u7528\u6cd5',
+                    heading: '\u57fa\u7840\u7528\u6cd5',
+                  },
+                ],
+                hasPreviewer: !0,
+              },
+              title:
+                '\u5b89\u5168\u8fd0\u884c\u65b9\u6cd5 - \u540c\u57cerc\u7ec4\u4ef6\u5e93',
             },
             {
               path: '/hook/use-throttle',
@@ -92876,7 +93101,7 @@
     var r = n('bx4M'),
       a = (n('OaEy'), n('2fM7')),
       o = n('k1fw'),
-      i = (n('EFp3'), n('bXwC'), n('tsqr')),
+      i = (n('miYZ'), n('tsqr')),
       s = n('tJVT'),
       u = n('q1tI'),
       l = n.n(u),

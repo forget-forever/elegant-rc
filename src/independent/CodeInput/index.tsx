@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-16 15:38:23
- * @LastEditTime: 2022-06-23 15:14:21
+ * @LastEditTime: 2022-06-28 15:19:25
  */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -58,6 +58,8 @@ type IProps<V extends VBase = 'str'> = {
   readonly?: boolean;
   /** 需要什么类型的值，str类型只会有字符串，obj会把选择的语言也返回来 */
   valueType?: V;
+  /** 允许的语言, 如果不传，会允许全部语言 */
+  codeSelect?: LangesType[];
 };
 const CodeInput = <V extends VBase>(props: IProps<V>) => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -68,12 +70,11 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     onChange,
     disabledChangeLanguage,
     valueType = 'str' as V,
-  } = props;
-  const {
     editHeight = '300px',
     editMaxHeight,
     editMinHeight,
     readonly,
+    codeSelect,
   } = props;
   const [lang, setLang] = useState(defaultLanguage);
 
@@ -153,6 +154,12 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     [editHeight, editMaxHeight, editMinHeight],
   );
 
+  const langes = useMemo(() => {
+    if (!codeSelect) return languageOptions;
+    const allowLanges = [...new Set(codeSelect)];
+    return languageOptions.filter((item) => allowLanges.includes(item.value));
+  }, [codeSelect?.join()]);
+
   return (
     <Card
       headStyle={headStyle}
@@ -163,7 +170,7 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
           disabled={readonly || disabledChangeLanguage}
           bordered={false}
           style={selectStyle}
-          options={languageOptions}
+          options={langes}
           value={lang}
           onChange={setLang}
           suffixIcon={suffixIcon}
