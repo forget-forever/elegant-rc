@@ -1,7 +1,7 @@
 ###
  # @Author: zml
  # @Date: 2022-06-06 15:51:19
- # @LastEditTime: 2022-06-28 16:48:19
+ # @LastEditTime: 2022-06-28 17:02:34
 ### 
 
 if [ -z "$(git status --porcelain)" ]; then 
@@ -9,18 +9,9 @@ if [ -z "$(git status --porcelain)" ]; then
   currentVersion=`npm -s run env echo '$npm_package_version'`
   lastVersion=`npm view tc-rc@${currentVersion} version --registry ${registry}`
 
-  # echo $lastVersion
-  # if [ $lastVersion ]
-  # then
-  #   echo 'err'
-
-  # else
-  #  echo "ok"
-  # fi
-  
   if [ $lastVersion ]
   then
-    echo '未改版本号，禁止发布'
+    echo `仓库中已有${currentVersion}版本号，禁止发布，请修改版本号！`
   else
     npm run build
 
