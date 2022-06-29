@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 17:07:16
+ * @LastEditTime: 2022-06-29 17:29:26
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -95,7 +95,6 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
     ...resetProps
   } = props;
 
-  console.log(props);
   const [visible, { setFalse: close, setTrue: open, set: change }] =
     useBoolean(false);
   const fcid = useMemo(() => uniqueId('cron-fc-'), []);
