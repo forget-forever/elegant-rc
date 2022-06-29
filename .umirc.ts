@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 10:44:43
- * @LastEditTime: 2022-06-28 11:15:20
+ * @LastEditTime: 2022-06-29 14:13:50
  */
 import { defineConfig } from 'dumi';
 
@@ -31,6 +31,9 @@ export default defineConfig({
       // 是否忽略从 node_modules 继承的属性，默认值为 false
       skipNodeModules: true,
     },
+  },
+  cssLoader: {
+    localsConvention: 'camelCase',
   },
   locales: [['zh-CN', '中文']],
   // base: '/tc-rc/docs-dist/',

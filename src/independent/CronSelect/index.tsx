@@ -1,25 +1,18 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-15 19:53:39
+ * @LastEditTime: 2022-06-29 14:14:05
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
-import { Button, Popover } from 'antd';
+import { Input, Popover } from 'antd';
 import { uniqueId } from 'lodash';
-import type { CSSProperties } from 'react';
 import React, { useEffect, useMemo } from 'react';
 import type * as CronType from 'qnn-react-cron/index.d';
 import QnnCron from 'qnn-react-cron';
+import styles from './styles.less';
 
 const Cron = QnnCron as CronType.Cron;
-
-const buttonStyle: CSSProperties = {
-  width: '100%',
-  display: 'flex',
-  justifyContent: 'flex-start',
-  alignItems: 'center',
-};
 
 type IProps = {
   /** 点击确定的时候的修改事件 */
@@ -69,7 +62,16 @@ type IProps = {
    * 值为空时展示的占位文本
    * @default '请选择'
    */
-  placeholder?: React.ReactDOM;
+  placeholder?: string;
+  /**
+   * 是否可以手动编辑
+   * @default false
+   */
+  editable?: boolean;
+  /**
+   * 屏蔽输入
+   */
+  disable?: boolean;
 };
 /**
  * cron的选择器，可以跟着FormItem一起使用
@@ -84,6 +86,8 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
     defaultTab = 'second',
     style,
     placeholder = '请选择',
+    editable = false,
+    disable,
     ...resetProps
   } = props;
   const [visible, { setFalse: close, setTrue: open, set: change }] =
@@ -102,7 +106,7 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
       day: true,
       week: true,
       month: true,
-      year: false,
+      year: true,
       ...panesShow,
     }),
     [panesShow],
@@ -126,6 +130,18 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
     }
   }, [close, fcid, visible]);
 
+  const changeHandle = useMemoizedFn<
+    React.ChangeEventHandler<HTMLInputElement>
+  >((e) => {
+    onChange?.(e.target.value);
+  });
+
+  const openHandle = useMemoizedFn(() => {
+    if (!disable) {
+      open();
+    }
+  });
+
   return (
     <Popover
       content={
@@ -145,19 +161,17 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
       visible={visible}
       trigger="click"
     >
-      <Button onClick={open} style={buttonStyle}>
-        {value ? value : <div style={{ color: '#ccc' }}>{placeholder}</div>}
-        <div
-          style={{
-            marginLeft: 'auto',
-            display: 'flex',
-            color: '#000',
-            opacity: 0.25,
-          }}
-        >
-          <DownOutlined />
-        </div>
-      </Button>
+      <div className={styles.inputContainer}>
+        <Input
+          placeholder={placeholder}
+          onChange={changeHandle}
+          value={value}
+          onClick={openHandle}
+          readOnly={!editable}
+          bordered={false}
+        />
+        <DownOutlined />
+      </div>
     </Popover>
   );
 };
