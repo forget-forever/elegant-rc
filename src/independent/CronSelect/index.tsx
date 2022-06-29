@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 17:29:26
+ * @LastEditTime: 2022-06-29 17:36:44
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -175,10 +175,7 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
           onClick={openHandle}
           readOnly={!editable}
         />
-        <DownOutlined
-          className="input-icon"
-          style={{ opacity: visible ? 0.3 : 1 }}
-        />
+        <DownOutlined className="input-icon" />
       </div>
     </Popover>
   );
