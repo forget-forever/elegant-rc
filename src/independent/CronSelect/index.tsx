@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 14:42:32
+ * @LastEditTime: 2022-06-29 15:05:52
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -10,8 +10,7 @@ import { uniqueId } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import type * as CronType from 'qnn-react-cron/index.d';
 import QnnCron from 'qnn-react-cron';
-/** @ts-ignore */
-import styles from './styles.less';
+import './styles.less';
 
 const Cron = QnnCron as CronType.Cron;
 
@@ -155,14 +154,18 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
           {...resetProps}
         />
       }
-      overlayClassName={fcid}
+      overlayClassName={`${fcid}`}
       placement="bottom"
       onVisibleChange={change}
       overlayInnerStyle={{ width: 600 }}
       visible={visible}
       trigger="click"
+      className="cron-select"
     >
-      <div className={styles.inputContainer}>
+      <div
+        className="input-container"
+        style={{ borderColor: visible ? 'var(--antd-wave-shadow-color)' : '' }}
+      >
         <Input
           placeholder={placeholder}
           onChange={changeHandle}
