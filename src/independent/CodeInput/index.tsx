@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-16 15:38:23
- * @LastEditTime: 2022-06-28 15:19:25
+ * @LastEditTime: 2022-06-29 20:35:43
  */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -76,7 +76,19 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     readonly,
     codeSelect,
   } = props;
-  const [lang, setLang] = useState(defaultLanguage);
+
+  const langes = useMemo(() => {
+    if (!codeSelect) return languageOptions;
+    const allowLanges = [...new Set(codeSelect)];
+    return languageOptions.filter((item) => allowLanges.includes(item.value));
+  }, [codeSelect?.join()]);
+
+  const [lang, setLang] = useState(() => {
+    if (typeof value === 'object') {
+      return value.lang || defaultLanguage || langes[0]?.value || 'javascript';
+    }
+    return defaultLanguage;
+  });
 
   const changeHandle = useMemoizedFn((val?: string) =>
     onChange?.(generateVal(valueType, lang, val)),
@@ -153,12 +165,6 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     }),
     [editHeight, editMaxHeight, editMinHeight],
   );
-
-  const langes = useMemo(() => {
-    if (!codeSelect) return languageOptions;
-    const allowLanges = [...new Set(codeSelect)];
-    return languageOptions.filter((item) => allowLanges.includes(item.value));
-  }, [codeSelect?.join()]);
 
   return (
     <Card
