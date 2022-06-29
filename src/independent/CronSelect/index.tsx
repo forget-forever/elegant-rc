@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 15:29:28
+ * @LastEditTime: 2022-06-29 17:07:16
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -94,6 +94,8 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
     placement,
     ...resetProps
   } = props;
+
+  console.log(props);
   const [visible, { setFalse: close, setTrue: open, set: change }] =
     useBoolean(false);
   const fcid = useMemo(() => uniqueId('cron-fc-'), []);
@@ -166,19 +168,18 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
       trigger="click"
       className="cron-select"
     >
-      <div
-        className="input-container"
-        style={{ borderColor: visible ? 'var(--antd-wave-shadow-color)' : '' }}
-      >
+      <div className="input-container">
         <Input
           placeholder={placeholder}
           onChange={changeHandle}
           value={value}
           onClick={openHandle}
           readOnly={!editable}
-          bordered={false}
         />
-        <DownOutlined />
+        <DownOutlined
+          className="input-icon"
+          style={{ opacity: visible ? 0.3 : 1 }}
+        />
       </div>
     </Popover>
   );

@@ -10,7 +10,11 @@ export default () => {
   return (
     <Card title="cron选择器">
       <Form onFinish={onFinish}>
-        <Form.Item label="cron选择" name="cron">
+        <Form.Item
+          label="cron选择"
+          name="cron"
+          rules={[{ validator: async () => Promise.reject(Error('错误')) }]}
+        >
           <CronSelect />
         </Form.Item>
         <ButtonAsync type="primary" htmlType="submit">
