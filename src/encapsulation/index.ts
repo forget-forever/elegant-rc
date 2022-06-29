@@ -3,6 +3,7 @@ import ButtonGroup from './ButtonGroup';
 import DateSelect from './DateSelect';
 import FormContent from './FormContent';
 import ModalContent from './ModalContent';
+import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
 
 export {
@@ -12,4 +13,5 @@ export {
   ModalContent,
   TagsInput,
   DateSelect,
+  SelectControl,
 };
