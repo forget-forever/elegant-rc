@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 14:14:05
+ * @LastEditTime: 2022-06-29 14:42:32
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -10,6 +10,7 @@ import { uniqueId } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import type * as CronType from 'qnn-react-cron/index.d';
 import QnnCron from 'qnn-react-cron';
+/** @ts-ignore */
 import styles from './styles.less';
 
 const Cron = QnnCron as CronType.Cron;
