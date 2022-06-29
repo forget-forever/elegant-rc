@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 15:05:52
+ * @LastEditTime: 2022-06-29 15:29:28
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -11,6 +11,7 @@ import React, { useEffect, useMemo } from 'react';
 import type * as CronType from 'qnn-react-cron/index.d';
 import QnnCron from 'qnn-react-cron';
 import './styles.less';
+import { TooltipPlacement } from 'antd/lib/tooltip';
 
 const Cron = QnnCron as CronType.Cron;
 
@@ -72,6 +73,8 @@ type IProps = {
    * 屏蔽输入
    */
   disable?: boolean;
+  /** ToolTip的显示位置 */
+  placement?: TooltipPlacement | undefined;
 };
 /**
  * cron的选择器，可以跟着FormItem一起使用
@@ -88,6 +91,7 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
     placeholder = '请选择',
     editable = false,
     disable,
+    placement,
     ...resetProps
   } = props;
   const [visible, { setFalse: close, setTrue: open, set: change }] =
@@ -155,7 +159,7 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
         />
       }
       overlayClassName={`${fcid}`}
-      placement="bottom"
+      placement={placement}
       onVisibleChange={change}
       overlayInnerStyle={{ width: 600 }}
       visible={visible}
