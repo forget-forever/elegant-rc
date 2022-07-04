@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-06 10:44:43
- * @LastEditTime: 2022-06-29 14:13:50
+ * @LastEditTime: 2022-07-03 11:01:41
  */
 import { defineConfig } from 'dumi';
 
@@ -14,6 +14,7 @@ export default defineConfig({
   mode: 'site',
   scripts: [
     'https://codepush-1258916733.cos.ap-shanghai.myqcloud.com/sfsdk/lineAnimation.js',
+    // 'https://cdn.jsdelivr.net/npm/live2d-widget@3.0.4/lib/L2Dwidget.min.js'
   ],
   extraBabelPlugins: [
     [
@@ -30,6 +31,7 @@ export default defineConfig({
     propFilter: {
       // 是否忽略从 node_modules 继承的属性，默认值为 false
       skipNodeModules: true,
+      skipPropsWithoutDoc: false,
     },
   },
   cssLoader: {
@@ -42,4 +44,7 @@ export default defineConfig({
     type: 'hash', // 设置路由模式为 hash 模式，防止部署至 GitHub Pages 后刷新网页后出现 404 的情况发生.
   },
   // more config: https://d.umijs.org/config
+  terserOptions: {
+    minimal: true,
+  },
 });

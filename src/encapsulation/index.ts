@@ -1,3 +1,4 @@
+import AutoComplete from './AutoComplete';
 import ButtonAsync from './ButtonAsync';
 import ButtonGroup from './ButtonGroup';
 import DateSelect from './DateSelect';
@@ -14,4 +15,5 @@ export {
   TagsInput,
   DateSelect,
   SelectControl,
+  AutoComplete,
 };
