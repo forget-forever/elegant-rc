@@ -1,9 +1,9 @@
 /*
  * @Author: zml
  * @Date: 2022-05-31 20:37:58
- * @LastEditTime: 2022-06-23 13:03:31
+ * @LastEditTime: 2022-07-04 16:27:14
  */
-import { useSize } from 'ahooks';
+import { useMemoizedFn, useSize, useUpdate } from 'ahooks';
 import { Modal } from 'antd';
 import type { CSSProperties } from 'react';
 import { useMemo, useRef } from 'react';
@@ -30,9 +30,12 @@ const ModalContent: FCProps<IProps> = (props) => {
   const { bodyStyle } = props;
 
   const childRef = useRef<HTMLDivElement>(null);
+  const update = useUpdate();
+
   // 获取窗体的高度
   const { height: clientHeight } =
     useSize(document.querySelector('body')) || {};
+
   const { height: childHeight } = useSize(childRef) || {};
   // 需要有上下24的padding
   const contentHeight = (childHeight || 0) + 48;
@@ -73,6 +76,16 @@ const ModalContent: FCProps<IProps> = (props) => {
     };
   }, [bodyStyle, contentHeight, maskRatio, props.style, topHeight]);
 
+  const divOnLayout = useMemoizedFn((ele: HTMLDivElement) => {
+    const oldCurrent = childRef.current;
+    /** 解决在关闭销毁节点时，出现的高度无法获取的问题 */
+    /** @ts-ignore */
+    childRef.current = ele;
+    if (props.destroyOnClose && ele && !oldCurrent) {
+      update();
+    }
+  });
+
   return (
     <Modal
       width={800}
@@ -82,7 +95,7 @@ const ModalContent: FCProps<IProps> = (props) => {
       style={style}
       bodyStyle={contentStyle}
     >
-      <div ref={childRef}>{children}</div>
+      <div ref={divOnLayout}>{children}</div>
     </Modal>
   );
 };

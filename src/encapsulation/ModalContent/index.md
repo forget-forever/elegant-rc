@@ -19,6 +19,9 @@ group:
 
 <code src="./demos/ratio.tsx" />
 
-其他配置项与 antd 的 Modal 配置一致
+# 关闭时销毁节点
+
+<code src="./demos/destoryContent.tsx" />
 
 <API></API>
+其他配置项与 antd 的 Modal 配置一致
