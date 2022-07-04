@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-13 14:01:28
- * @LastEditTime: 2022-07-04 14:45:00
+ * @LastEditTime: 2022-07-04 14:51:32
  */
 import type { SubmitterProps } from '@ant-design/pro-form';
 import { useMemoizedFn } from 'ahooks';
@@ -16,7 +16,7 @@ type Config = {
   submitText?: string;
   /** 取消按钮的文字 */
   cancelText?: string;
-  /** 取消按钮要触发的方法，如果没有的话这个会返回上一页 */
+  /** 取消按钮要触发的方法 */
   onCancel?: () => void;
   /** 按钮容器的外边距 */
   margin?: CSSProperties['margin'];
