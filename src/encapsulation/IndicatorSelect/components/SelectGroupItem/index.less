@@ -1,0 +1,34 @@
+.module {
+  &:nth-of-type(2n) {
+    background: #f9f9f9;
+  }
+  .checkAll {
+    display: block;
+    & > span {
+      color: #000;
+    }
+  }
+
+  .checkGroup {
+    display: inline-flex;
+    flex: 1;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    .index {
+      width: 205px;
+      margin: 0 30px 8px 0;
+      white-space: nowrap;
+      & > span {
+        color: #666;
+      }
+    }
+  }
+}
+.externalIcon {
+  &:hover > svg {
+    color: orangered;
+  }
+}
+.externalIconChecked > svg {
+  color: orangered;
+}

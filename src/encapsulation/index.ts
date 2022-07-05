@@ -6,6 +6,7 @@ import FormContent from './FormContent';
 import ModalContent from './ModalContent';
 import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
+import IndicatorSelect from './IndicatorSelect';
 
 export {
   ButtonAsync,
@@ -16,4 +17,5 @@ export {
   DateSelect,
   SelectControl,
   AutoComplete,
+  IndicatorSelect,
 };
