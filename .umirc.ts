@@ -47,4 +47,7 @@ export default defineConfig({
   terserOptions: {
     minimal: true,
   },
+  lessLoader: {
+    javascriptEnabled: true,
+  },
 });
