@@ -9,7 +9,9 @@ export default function initReportList(list: ReportItem[]) {
     .map((label, index) => {
       return {
         label,
-        list: list.filter((e) => e.reportOrPreinstall === index),
+        list: list
+          .filter((e) => e.reportOrPreinstall === index)
+          .map((e) => ({ label: e.reportName, value: e.initConfigId })),
       };
     })
     .filter((e) => e.list.length > 0);
