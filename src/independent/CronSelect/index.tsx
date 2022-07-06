@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-06-29 17:36:44
+ * @LastEditTime: 2022-07-05 19:09:09
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -10,7 +10,7 @@ import { uniqueId } from 'lodash';
 import React, { useEffect, useMemo } from 'react';
 import type * as CronType from 'qnn-react-cron/index.d';
 import QnnCron from 'qnn-react-cron';
-import './styles.less';
+import styles from './styles.less';
 import { TooltipPlacement } from 'antd/lib/tooltip';
 
 const Cron = QnnCron as CronType.Cron;
@@ -165,9 +165,9 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
       overlayInnerStyle={{ width: 600 }}
       visible={visible}
       trigger="click"
-      className="cron-select"
+      className={styles.cronSelect}
     >
-      <div className="input-container">
+      <div className={styles.inputContainer}>
         <Input
           placeholder={placeholder}
           onChange={changeHandle}
@@ -175,7 +175,7 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
           onClick={openHandle}
           readOnly={!editable}
         />
-        <DownOutlined className="input-icon" />
+        <DownOutlined className={styles.inputIcon} />
       </div>
     </Popover>
   );
