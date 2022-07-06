@@ -1,8 +1,4 @@
-/*
- * @Author: zml
- * @Date: 2022-06-06 10:44:43
- * @LastEditTime: 2022-06-23 13:45:47
- */
+/// <reference path="./typings.d.ts" />
 import CountdownButton from './CountdownButton';
 import RankList from './RankList';
 

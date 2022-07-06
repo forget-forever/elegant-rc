@@ -12,6 +12,7 @@ import ModalContent from './ModalContent';
 import RowContent from './RowContent';
 import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
+import IndicatorSelect from './IndicatorSelect';
 
 export {
   ButtonAsync,
@@ -22,5 +23,6 @@ export {
   DateSelect,
   SelectControl,
   AutoComplete,
+  IndicatorSelect,
   RowContent,
 };
