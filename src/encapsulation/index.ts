@@ -13,6 +13,7 @@ import RowContent from './RowContent';
 import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
 import IndicatorSelect from './IndicatorSelect';
+import NumControl from './NumControl';
 
 export {
   ButtonAsync,
@@ -25,4 +26,5 @@ export {
   AutoComplete,
   IndicatorSelect,
   RowContent,
+  NumControl,
 };
