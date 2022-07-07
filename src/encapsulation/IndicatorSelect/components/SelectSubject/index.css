@@ -1,0 +1,3 @@
+.selectSubjectContainer > div:nth-of-type(odd) {
+  background: #fbfbfb;
+}

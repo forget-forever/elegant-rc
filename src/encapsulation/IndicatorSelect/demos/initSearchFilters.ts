@@ -1,6 +1,5 @@
 import {
   IDimDetail,
-  IFilterChecked,
   IGroup,
   IIndicatorDetail,
   IMapDimGroupCnameToIndicators,
@@ -13,8 +12,6 @@ import {
   ISubjects,
 } from '../index';
 import { intersection } from 'lodash';
-import moment, { Moment } from 'moment';
-import { EDimType } from '../enum';
 
 export default function initSearchFilters(data: ISearchData) {
   const searchFilters = data || {
@@ -157,22 +154,3 @@ function getSearchFiltersMapDetails(searchFilters: ISearchData) {
     mapDimGroupCnameToIndicators,
   };
 }
-
-let indicatorFilterId = 1;
-export function getInitFilter(): IFilterChecked {
-  indicatorFilterId += 1;
-  return {
-    key: '',
-    judge: '=',
-    value: [],
-    id: indicatorFilterId,
-    showSelect: true,
-    type: EDimType.INPUT,
-  };
-}
-
-export const getInitDate = () =>
-  [moment().subtract(1, 'days'), moment().subtract(1, 'days')] as [
-    Moment,
-    Moment,
-  ];

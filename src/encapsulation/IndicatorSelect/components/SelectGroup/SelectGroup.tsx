@@ -1,5 +1,4 @@
 import React from 'react';
-import commonStyles from '../../common.less';
 import classnames from 'classnames';
 import {
   VerticalAlignBottomOutlined,
@@ -11,8 +10,15 @@ import {
   TDataSourceParams,
   TDataSourceParamsPartial,
 } from '../../index';
-import styles from './index.less';
 import SelectGroupItem from '../SelectGroupItem';
+import {
+  contentItem,
+  contentItemLabel,
+  contentItemLabelTextCollaps,
+  contentItemLabelText,
+  contentItemWrapper,
+  contentItemCollaps,
+} from '../../common';
 
 type IProps = {
   index: number;
@@ -52,13 +58,10 @@ const SelectGroup: React.FC<IProps> = (props) => {
   };
 
   return (
-    <div className={commonStyles.contentItem} style={{ position: 'relative' }}>
-      <div className={commonStyles.contentItemLabel}>
+    <div style={{ ...contentItem, position: 'relative' }}>
+      <div style={{ ...contentItemLabel }}>
         <div
-          className={classnames({
-            [commonStyles.contentItemLabelText]: collaps,
-            [commonStyles.contentItemLabelTextCollaps]: !collaps,
-          })}
+          style={collaps ? contentItemLabelText : contentItemLabelTextCollaps}
         >
           {title}
         </div>
@@ -66,13 +69,13 @@ const SelectGroup: React.FC<IProps> = (props) => {
       <div
         className={classnames(
           {
-            [styles.selectGroupContent]: !collaps,
+            selectGroupContent: !collaps,
           },
-          commonStyles.contentItemWrapper,
           {
-            [styles.selectGroupContentCollaps]: collaps,
+            selectGroupContentCollaps: collaps,
           },
         )}
+        style={{ ...contentItemWrapper }}
       >
         {children.map((groupName) => {
           const selectsItem = mapGroupCnameToSelects.get(groupName);
@@ -93,7 +96,7 @@ const SelectGroup: React.FC<IProps> = (props) => {
           );
         })}
       </div>
-      <div className={commonStyles.contentItemCollaps} onClick={onCollaps}>
+      <div style={contentItemCollaps} onClick={onCollaps}>
         {collaps ? (
           <VerticalAlignBottomOutlined />
         ) : (

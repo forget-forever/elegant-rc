@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { Button, Select, Affix } from 'antd';
-import styles from './index.less';
-import commonStyles from '../../common.less';
+import { selectShotCutContent, selectShotCutContainer } from './styles';
 import type { AffixProps } from 'antd';
 import {
   VerticalAlignBottomOutlined,
@@ -9,7 +8,11 @@ import {
 } from '@ant-design/icons';
 import { TDataSourceParams, TDataSourceParamsPartial } from '../..';
 import useQuerySetParam from './useQuerySetParam';
-import classnames from 'classnames';
+import {
+  contentItem,
+  contentItemLabel,
+  contentItemWrapper,
+} from '../../common';
 
 const { Option, OptGroup } = Select;
 
@@ -109,20 +112,9 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
 
   return (
     <Affix offsetTop={offsetTop}>
-      <div
-        className={classnames(
-          commonStyles.contentItem,
-          styles.selectShotCutContainer,
-        )}
-        style={{ padding: 20 }}
-      >
-        <div className={commonStyles.contentItemLabel}>快捷选择</div>
-        <div
-          className={classnames(
-            commonStyles.contentItemWrapper,
-            styles.selectShotCutContent,
-          )}
-        >
+      <div style={{ ...selectShotCutContainer, ...contentItem, padding: 20 }}>
+        <div style={{ ...contentItemLabel }}>快捷选择</div>
+        <div style={{ ...selectShotCutContent, ...contentItemWrapper }}>
           <div>
             <Select<string>
               getPopupContainer={(triggerNode) => triggerNode.parentElement}

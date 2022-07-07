@@ -1,0 +1,8 @@
+.paramDataRow {
+  display: flex;
+  margin: 6px 0;
+  align-items: flex-start;
+}
+.paramDataRow > div:nth-of-type(n + 2) {
+  margin-left: 20px;
+}

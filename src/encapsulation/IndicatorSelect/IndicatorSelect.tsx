@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Card } from 'antd';
 import ShortCut from './components/ShortCut';
 import { IShortCutProps } from './components/ShortCut/ShortCut';
@@ -21,7 +21,10 @@ const bodyStyle = {
   maxWidth: '100%',
 };
 
-type IProps = Omit<IShortCutProps, ['allCollaps', 'setAllCollaps'][number]> & {
+type IProps = Omit<
+  IShortCutProps,
+  ['allCollaps', 'setAllCollaps', 'unionOfGroupFilter'][number]
+> & {
   mapGroupToLabelList: Record<string, string[]>;
   subjects: ISubjects;
   mapIndicatorNameToDetail: IMapIndicatorNameToDetail;
@@ -34,7 +37,6 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     params,
     paramsShadow,
     setPartialParams,
-    unionOfGroupFilter,
     flatIndicators,
     reportList,
     onChangeReport,
@@ -46,6 +48,18 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     mapGroupCnameToSelects,
   } = props;
 
+  const unionOfGroupFilter = useMemo(() => {
+    return [
+      ...new Set(params.json.groupby),
+      ...new Set(params.json.where.map((e) => e.key)),
+    ].filter(Boolean);
+  }, [
+    JSON.stringify([
+      [...params.json.groupby].sort(),
+      params.json.where.map((e) => e.key).sort(),
+    ]),
+  ]);
+
   const { allCollaps, setAllCollaps, collapsStatus, setCollapsStatus } =
     useCollapsState(subjects);
 
@@ -56,11 +70,11 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     setPartialParams,
     allCollaps,
     setAllCollaps,
-    unionOfGroupFilter,
     flatIndicators,
     reportList,
     onChangeReport,
     resetQueryOnParamChange,
+    unionOfGroupFilter,
   };
 
   const generateText = (ele: { explain: string; groupby: string }) => {
@@ -82,11 +96,11 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     setCollapsStatus,
 
     params,
-    unionOfGroupFilter,
     setPartialParams,
     generateText,
     subjects,
     mapGroupCnameToSelects,
+    unionOfGroupFilter,
   };
 
   const selectSumProps: ISelectSumProps = {

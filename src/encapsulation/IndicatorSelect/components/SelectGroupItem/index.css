@@ -1,0 +1,36 @@
+.module:nth-of-type(2n) {
+  background: #f9f9f9;
+}
+
+.checkAll {
+  display: block;
+}
+
+.checkAll > span {
+  color: #000;
+}
+
+.checkGroup {
+  display: inline-flex;
+  flex: 1;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.checkGroup .index {
+  width: 205px;
+  margin: 0 30px 8px 0;
+  white-space: nowrap;
+}
+
+.checkGroup .index > span {
+  color: #666;
+}
+
+
+.externalIcon:hover > svg {
+  color: orangered;
+}
+.externalIconChecked > svg {
+  color: orangered;
+}

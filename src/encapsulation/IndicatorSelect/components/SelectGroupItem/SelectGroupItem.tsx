@@ -6,7 +6,6 @@ import {
 } from '@ant-design/icons';
 import classnames from 'classnames';
 import { intersection } from 'lodash';
-import styles from './index.less';
 import {
   IIndicatorDetail,
   TDataSourceParams,
@@ -97,7 +96,7 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
   const checkedValues = intersection(select, itemValues);
 
   return (
-    <div className={styles.module}>
+    <div className={'module'}>
       {selectsItem && (
         <>
           <div>
@@ -114,7 +113,7 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
           </div>
           <div hidden={collaps}>
             <CheckboxGroup
-              className={styles.checkGroup}
+              className={'checkGroup'}
               onChange={(vals) => onChange(vals as string[])}
               value={checkedValues}
             >
@@ -122,7 +121,7 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
                 const checked = select.includes(item.name);
                 return (
                   <Checkbox
-                    className={styles.index}
+                    className={'index'}
                     key={item.name}
                     value={item.name}
                     disabled={item?.getDisabled(unionOfGroupFilter)}
@@ -143,8 +142,8 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
                       ) && item.is_external ? (
                         <ExclamationCircleOutlined
                           style={{ marginLeft: '5px', color: '#D0D0D0' }}
-                          className={classnames(styles.externalIcon, {
-                            [styles.externalIconChecked]: checked,
+                          className={classnames('externalIcon', {
+                            externalIconChecked: checked,
                           })}
                         />
                       ) : (

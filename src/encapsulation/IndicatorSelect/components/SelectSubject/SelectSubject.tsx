@@ -5,7 +5,7 @@ import {
   TDataSourceParams,
   TDataSourceParamsPartial,
 } from '../..';
-import styles from './index.less';
+import './index.css';
 import SelectGroup from '../SelectGroup';
 
 export type ISubjectProps = {
@@ -37,7 +37,7 @@ const SelectSubject: React.FC<ISubjectProps> = (props) => {
 
   return (
     <div
-      className={styles.selectSubjectContainer}
+      className={'selectSubjectContainer'}
       style={{ ...(allCollaps ? { display: 'none' } : {}) }}
     >
       {subjects &&

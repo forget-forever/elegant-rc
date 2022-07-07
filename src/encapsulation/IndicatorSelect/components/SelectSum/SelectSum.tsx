@@ -1,5 +1,4 @@
 import React, { useState, CSSProperties } from 'react';
-import commonStyles from '../../common.less';
 import classnames from 'classnames';
 import { Checkbox, Tooltip } from 'antd';
 import {
@@ -9,13 +8,30 @@ import {
   VerticalAlignTopOutlined,
 } from '@ant-design/icons';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
-import styles from './index.less';
+import '../SelectGroupItem/index.css';
 import {
   IMapIndicatorNameToDetail,
   TDataSourceParams,
   TDataSourceParamsPartial,
 } from '../..';
 import { DeliveryType } from '../../enum';
+import {
+  contentItem,
+  contentItemCollaps,
+  contentItemLabel,
+  contentItemWrapper,
+} from '../../common';
+
+const currentSelect = {
+  height: 32,
+  lineHeight: '32px',
+};
+
+const sumIndex: CSSProperties = {
+  width: 205,
+  margin: '8px 30px 8px 0 !important',
+  whiteSpace: 'nowrap',
+};
 
 export type ISelectSumProps = {
   params: TDataSourceParams;
@@ -59,21 +75,18 @@ const SelectSum: React.FC<ISelectSumProps> = (props) => {
   };
   return (
     <>
-      <div className={commonStyles.contentItem} style={containerStyle}>
-        <div className={commonStyles.contentItemLabel}>
-          <div className={styles.currentSelect}>已选指标</div>
+      <div style={{ ...contentItem, ...containerStyle }}>
+        <div style={{ ...contentItemLabel }}>
+          <div style={currentSelect}>已选指标</div>
         </div>
-        <div
-          className={classnames(commonStyles.contentItemWrapper)}
-          style={contentStyle}
-        >
+        <div style={{ ...contentItemWrapper, ...contentStyle }}>
           <div>
             {select.map((ele) => {
               const item = mapIndicatorNameToDetail.get(ele);
               return (
                 item && (
                   <Checkbox
-                    className={styles.sumIndex}
+                    style={sumIndex}
                     key={item.name}
                     checked
                     onChange={(e) => onChange(e, ele)}
@@ -93,8 +106,8 @@ const SelectSum: React.FC<ISelectSumProps> = (props) => {
                         <ExclamationCircleOutlined
                           style={{ marginLeft: '5px', color: '#D0D0D0' }}
                           className={classnames(
-                            styles.externalIcon,
-                            styles.externalIconChecked,
+                            'externalIcon',
+                            'externalIconChecked',
                           )}
                         />
                       ) : (
@@ -109,10 +122,7 @@ const SelectSum: React.FC<ISelectSumProps> = (props) => {
             })}
           </div>
         </div>
-        <div
-          className={commonStyles.contentItemCollaps}
-          onClick={() => setCollaps(!collaps)}
-        >
+        <div style={contentItemCollaps} onClick={() => setCollaps(!collaps)}>
           {collaps ? (
             <VerticalAlignBottomOutlined />
           ) : (
