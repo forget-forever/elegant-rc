@@ -14,6 +14,7 @@ import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
 import IndicatorSelect from './IndicatorSelect';
 import ParamData from './ParamData';
+import NumControl from './NumControl';
 
 export {
   ButtonAsync,
@@ -27,4 +28,5 @@ export {
   IndicatorSelect,
   RowContent,
   ParamData,
+  NumControl,
 };

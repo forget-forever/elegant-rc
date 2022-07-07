@@ -1,6 +1,6 @@
 {
   "name": "tc-rc",
-  "version": "1.5.20",
+  "version": "1.5.23",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -13,7 +13,7 @@
     "test:coverage": "umi-test --coverage"
   },
   "main": "lib/index.js",
-  "module": "es/index.esm.js",
+  "module": "es/index.js",
   "types": "lib/index.d.ts",
   "typings": "lib/index.d.ts",
   "gitHooks": {
