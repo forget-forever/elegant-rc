@@ -112,7 +112,14 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
 
   return (
     <Affix offsetTop={offsetTop}>
-      <div style={{ ...selectShotCutContainer, ...contentItem, padding: 20 }}>
+      <div
+        style={{
+          ...selectShotCutContainer,
+          ...contentItem,
+          padding: 20,
+          background: '#fff',
+        }}
+      >
         <div style={{ ...contentItemLabel }}>快捷选择</div>
         <div style={{ ...selectShotCutContent, ...contentItemWrapper }}>
           <div>

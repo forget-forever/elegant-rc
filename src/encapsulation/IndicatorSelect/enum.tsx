@@ -15,3 +15,12 @@ export enum DeliveryType {
   OTHER = 2,
   ALL = 3,
 }
+
+export enum ModalKind {
+  NONE = 'NONE',
+  SQL = 'SQL',
+  INPUT = 'INPUT',
+  QUERY = 'QUERY',
+  LIST = 'LIST',
+  MEMBER = 'MEMBER',
+}
