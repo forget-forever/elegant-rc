@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-16 15:38:23
- * @LastEditTime: 2022-06-29 20:35:43
+ * @LastEditTime: 2022-07-13 13:48:40
  */
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -60,6 +60,8 @@ type IProps<V extends VBase = 'str'> = {
   valueType?: V;
   /** 允许的语言, 如果不传，会允许全部语言 */
   codeSelect?: LangesType[];
+  /** 可以手动加一些hint的数据 */
+  hintMap?: Record<string, (string | number)[]>;
 };
 const CodeInput = <V extends VBase>(props: IProps<V>) => {
   const divRef = useRef<HTMLDivElement>(null);
@@ -75,6 +77,7 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     editMinHeight,
     readonly,
     codeSelect,
+    hintMap = {},
   } = props;
 
   const langes = useMemo(() => {
@@ -104,6 +107,23 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
     }
   }, [lang]);
 
+  const inputRead = useMemoizedFn(
+    (editor: codemirror.Editor, change: codemirror.EditorChange) => {
+      const data = {
+        // test: ['t_user', 'menu', 'auth_info'],
+      };
+      /** 一定要转化字符串，不信你试试 */
+      Object.keys(hintMap).forEach((key) => {
+        data[key] = hintMap[key].map(String);
+      });
+      editor.setOption('hintOptions', {
+        tables: data,
+        completeSingle: false,
+      });
+      editor.execCommand('autocomplete');
+    },
+  );
+
   useEffect(() => {
     if (divRef.current) {
       divRef.current.innerHTML = '';
@@ -124,19 +144,7 @@ const CodeInput = <V extends VBase>(props: IProps<V>) => {
         mode: lang,
         value: valData || initValue,
       });
-      editorRef.current.on('inputRead', (editor, change) => {
-        const data = {
-          test: ['t_user', 'menu', 'auth_info'],
-          t_user: [],
-          menu: [''],
-          default: ['tableinfo'],
-        };
-        editor.setOption('hintOptions', {
-          tables: data,
-          completeSingle: false,
-        });
-        editor.execCommand('autocomplete');
-      });
+      editorRef.current.on('inputRead', inputRead);
       editorRef.current.on('change', () => {
         changeHandle(editorRef.current?.getValue() || '');
       });

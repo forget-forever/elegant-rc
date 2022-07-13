@@ -22,6 +22,10 @@ group:
 将 valueType 设置成'obj'
 <code src="./demos/objVal.tsx" />
 
+## 手动指定 hints
+
+<code src="./demos/hint.tsx" />
+
 ## 其他
 
 <code src="./demos/others.tsx" />

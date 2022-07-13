@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-17 10:18:05
- * @LastEditTime: 2022-06-17 11:05:50
+ * @LastEditTime: 2022-07-13 13:59:15
  */
 import { CaretDownOutlined } from '@ant-design/icons';
 import type { ValueType, VBase } from './type';
@@ -35,9 +35,9 @@ export const getValue = (type: VBase, val?: ValueType<VBase>) => {
     return '';
   }
   if (type === 'obj') {
-    return (val as ValueType<'obj'>).str;
+    return (val as ValueType<'obj'>)?.str || '';
   }
-  return val.toString();
+  return val?.toString() || '';
 };
 
 /**
