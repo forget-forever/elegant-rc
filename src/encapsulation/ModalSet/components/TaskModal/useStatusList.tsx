@@ -1,5 +1,4 @@
 import React from 'react';
-import './index.css';
 import { Tabs, Card, Progress } from 'antd';
 import {
   progressClassNameMap,

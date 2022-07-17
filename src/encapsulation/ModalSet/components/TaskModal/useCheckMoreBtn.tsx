@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styles from '@/pages/tangram/components/TaskModal/index.less';
 import { Button } from 'antd';
 import { CaretDownOutlined, CaretUpOutlined } from '@ant-design/icons';
 
@@ -7,7 +6,7 @@ export default function useCheckMoreBtn() {
   const [showSubTaskList, setShowSubTaskList] = useState(false);
 
   const checkMoreBtn = (
-    <div className={styles.moreBtn}>
+    <div className={'moreBtn'}>
       <Button
         icon={showSubTaskList ? <CaretUpOutlined /> : <CaretDownOutlined />}
         onClick={() => setShowSubTaskList(!showSubTaskList)}

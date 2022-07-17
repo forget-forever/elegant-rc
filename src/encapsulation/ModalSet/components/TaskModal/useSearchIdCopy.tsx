@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import styles from './index.css';
 import { CopyTwoTone } from '@ant-design/icons';
 import { Button, message } from 'antd';
 import copyToClipboard from 'copy-to-clipboard';
@@ -8,7 +7,7 @@ export default function useSearchIdCopy(searchId: string | undefined | null) {
   return useMemo(() => {
     return (
       searchId && (
-        <div className={styles.title}>
+        <div className={'title'}>
           <span>
             当前的查询/下载任务进度如下，请关注任务ID:{searchId?.slice(-4)}
           </span>
