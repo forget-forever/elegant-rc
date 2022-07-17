@@ -1,6 +1,5 @@
-// @ts-ignore
 import React from 'react';
-import styles from '@/pages/tangram/components/TaskModal/index.less';
+import './index.css';
 import { Tabs, Card, Progress } from 'antd';
 import {
   progressClassNameMap,
@@ -30,7 +29,7 @@ export default function useStatusList(statusList: IStatusListItem[]) {
               <Progress
                 percent={parseInt(sub.progress, 10) || 0}
                 status={statusPropMap[sub.status]}
-                className={styles[progressClassNameMap[sub.status]]}
+                className={progressClassNameMap[sub.status]}
               />
               <div style={{ marginBottom: 20 }}>
                 {textDisplayByCurrentStatus[sub.status]}
