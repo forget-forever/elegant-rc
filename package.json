@@ -1,6 +1,6 @@
 {
   "name": "tc-rc",
-  "version": "1.5.28",
+  "version": "1.5.29",
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
