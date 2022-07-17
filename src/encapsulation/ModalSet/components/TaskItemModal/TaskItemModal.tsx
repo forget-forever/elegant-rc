@@ -56,11 +56,11 @@ const TaskItemModal: React.FC<IProps> = (props) => {
           current={Math.min(2, (EStatusList as string[]).indexOf(allStatus))}
           progressDot={(dot: string) => <>{dot}</>}
         >
-          {(displayStatusList[allStatus] || displayStatusList[2]).map(
-            (l: string) => (
-              <Step key={l} title={l} />
-            ),
-          )}
+          {(
+            displayStatusList[allStatus] || displayStatusList[EStatus.已完成]
+          ).map((l: string) => (
+            <Step key={l} title={l} />
+          ))}
         </Steps>
         <Progress
           percent={Math.max(parseInt(allProgress, 10) || 5, 5)}

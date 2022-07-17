@@ -37,7 +37,7 @@ const backTaskList = [
         position: null,
       },
     ],
-    allStatus: '已保存',
+    allStatus: '执行中',
     name: '总单量（含未支付取消单）',
     allProgress: '100',
     isUnread: false,
@@ -67,8 +67,12 @@ export default function () {
             setTaskManageState({
               activityTips: {
                 ...state.activityTips,
+                dateList: [
+                  { a: 'b', c: 'd' },
+                  { a: '1', c: 2 },
+                ],
                 tip: '一段提示',
-                show: true,
+                isShow: true,
               },
             })
           }
@@ -76,39 +80,47 @@ export default function () {
           活动提示
         </Button>
         <BackListBtn
+          top={270}
+          right={270}
           setTaskManageState={setTaskManageState}
           currentUser={{ empName: '张三', empNum: 'tc999999' }}
           backTaskList={backTaskList}
         />
-        <Button>任务弹窗</Button>
+        <Button
+          onClick={() => setTaskManageState({ modalKind: ModalKind.QUERY })}
+        >
+          任务弹窗
+        </Button>
       </Space>
       <ActivityModal
         activityModalMethodName={'beforeSearch'}
         activityTips={state.activityTips}
         onActivityContinue={() =>
-          setTaskManageState({ ...state.activityTips, show: false })
+          setTaskManageState({
+            activityTips: { dateList: [], tip: '', isShow: false },
+          })
         }
         onActivityCancel={() =>
-          setTaskManageState({ ...state.activityTips, show: false })
+          setTaskManageState({
+            activityTips: { dateList: [], tip: '', isShow: false },
+          })
         }
       />
-      {state.itemSource && (
-        <TaskItemModal
-          modalKind={state.modalKind}
-          itemSource={state.itemSource!}
-          onItemCheckData={() =>
-            setTaskManageState({ modalKind: ModalKind.MEMBER })
-          }
-          onItemDownloadBackDataClick={() => {}}
-          onItemModalCancel={() =>
-            setTaskManageState({ modalKind: ModalKind.NONE })
-          }
-        />
-      )}
+      <TaskItemModal
+        modalKind={state.modalKind}
+        itemSource={backTaskList[1]}
+        onItemCheckData={() =>
+          setTaskManageState({ modalKind: ModalKind.MEMBER })
+        }
+        onItemDownloadBackDataClick={() => {}}
+        onItemModalCancel={() =>
+          setTaskManageState({ modalKind: ModalKind.NONE })
+        }
+      />
       <TaskModal
         onCancelSearchClick={() => {}}
         onSubmitBackClick={() => {}}
-        dataSource={backTaskList[0]}
+        dataSource={backTaskList[1]}
         handleExport={() => {}}
         createExportAnimation={() => {}}
         setTaskManageState={setTaskManageState}
@@ -120,7 +132,9 @@ export default function () {
         backTaskList={backTaskList}
         onItemCancelSearchClick={() => {}}
         onItemCheckData={() => {}}
-        onItemCheckProgress={() => {}}
+        onItemCheckProgress={() =>
+          setTaskManageState({ modalKind: ModalKind.MEMBER })
+        }
         onItemDownloadBackDataClick={() => {}}
         onItemSaveBackDataClick={() => {}}
         updateDownloadName={() => {}}
