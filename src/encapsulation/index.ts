@@ -15,6 +15,8 @@ import TagsInput from './TagsInput';
 import IndicatorSelect from './IndicatorSelect';
 import ParamData from './ParamData';
 import NumControl from './NumControl';
+import CacheTip from './CacheTip';
+import DataTable from './DataTable';
 
 export {
   ButtonAsync,
@@ -29,4 +31,6 @@ export {
   RowContent,
   ParamData,
   NumControl,
+  CacheTip,
+  DataTable,
 };
