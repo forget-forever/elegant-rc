@@ -1,0 +1,8 @@
+.ActivityWrapper {
+  transform-origin: right top;
+}
+.ActivityWrapper [class~='ant-modal-footer'] {
+  display: flex;
+  justify-content: center;
+  border-top: none;
+}

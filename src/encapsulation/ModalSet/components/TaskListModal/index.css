@@ -1,0 +1,3 @@
+.wrapTaskListModal [class~='data-factory-modal-content'] {
+  background: #ccc;
+}

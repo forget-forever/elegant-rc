@@ -17,6 +17,7 @@ import ParamData from './ParamData';
 import NumControl from './NumControl';
 import CacheTip from './CacheTip';
 import DataTable from './DataTable';
+import ModalSet from './ModalSet';
 
 export {
   ButtonAsync,
@@ -33,4 +34,5 @@ export {
   NumControl,
   CacheTip,
   DataTable,
+  ModalSet,
 };
