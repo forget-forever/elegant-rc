@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Card, Modal, Progress, Steps } from 'antd';
-import { ModalKind } from 'src/encapsulation/IndicatorSelect/enum';
+import { ModalKind } from '../../../IndicatorSelect/enum';
 import {
   displayStatusList,
   EStatus,

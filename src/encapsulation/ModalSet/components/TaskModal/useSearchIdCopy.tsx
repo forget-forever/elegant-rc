@@ -1,6 +1,5 @@
-// @ts-ignore
 import React, { useMemo } from 'react';
-import styles from '@/pages/tangram/components/TaskModal/index.less';
+import styles from './index.css';
 import { CopyTwoTone } from '@ant-design/icons';
 import { Button, message } from 'antd';
 import copyToClipboard from 'copy-to-clipboard';
