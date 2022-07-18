@@ -1,0 +1,12 @@
+/lambda/
+/scripts
+/config
+node_modules
+.history
+public
+dist
+.umi
+mock
+es
+lib
+docs-dist
