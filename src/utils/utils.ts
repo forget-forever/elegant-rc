@@ -1,8 +1,56 @@
-import { CSSProperties } from 'react';
+import { forOwn } from 'lodash';
 
-export const noPaddingStyle: CSSProperties = {
-  paddingLeft: 0,
-  paddingRight: 0,
-  paddingTop: 0,
-  paddingBottom: 0,
+/**
+ * 验证一个对象中是否有一项为空的
+ * @param item 一项的数据
+ * @param checkArr 需要check的字段
+ * @returns
+ */
+export const rowItemValid = <I extends Record<string, unknown>>(
+  item: I,
+  checkArr?: (keyof I)[],
+) => {
+  let res = true;
+  forOwn(item, (v, k) => {
+    if (checkArr && !checkArr.includes(k)) {
+      return;
+    }
+    if (v == undefined) {
+      res = false;
+    }
+    if (typeof v === 'string' && v === '') {
+      res = false;
+    }
+    if (Array.isArray(v) && !v.length) {
+      res = false;
+    }
+  });
+  return res;
+};
+
+/**
+ * 对象遍历的方法
+ * @param obj 对象
+ * @param cb 遍历回调函数: cb: ( key: 对象的键名  item: 对象的键值  obj: 当前处理中的对象 ) => Partial<OBJ>
+ * @returns 处理之后的对象
+ */
+export const objMap = <
+  K extends string | number,
+  P extends unknown,
+  R extends unknown,
+>(
+  obj = {} as Record<K, P>,
+  cb: (
+    /** 对象的键名 */
+    key: K,
+    /** 对象的键值 */
+    item: P,
+    /** 当前处理中的对象 */
+    obj: Partial<Record<K, R>>,
+  ) => Partial<Record<K, R>>,
+) => {
+  return Object.entries(obj).reduce(
+    (pre, [k, v]) => ({ ...pre, ...cb(k as K, v as P, pre) }),
+    {} as Record<K, R>,
+  );
 };
