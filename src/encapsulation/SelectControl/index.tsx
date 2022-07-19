@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-29 10:52:07
- * @LastEditTime: 2022-06-29 11:37:00
+ * @LastEditTime: 2022-07-19 19:58:14
  */
 import {
   ProSchemaValueEnumMap,
@@ -59,7 +59,7 @@ const SelectControl = <
       }
       return item;
     });
-  }, [maxCount, options, value]);
+  }, [maxCount, options, value, valueEnum]);
 
   return <Select value={value} options={optionsConf} {...resetProps} />;
 };
