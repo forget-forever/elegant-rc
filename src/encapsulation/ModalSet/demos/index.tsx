@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { ModalSet } from 'tc-rc';
 import { Button, Space } from 'antd';
 import { ModalKind } from '../../IndicatorSelect/enum';
+import SearchCondition from '../components/SearchCondition';
+import useParamsState from '../../IndicatorSelect/useParamsState';
+import { isRefreshSessionKeySetter } from '../components/FeedBack/isRefreshSessionKeySetter';
+import initSearchFilters from '../../IndicatorSelect/demos/initSearchFilters';
+import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';
+import { ISearchData } from '../../IndicatorSelect';
+
+const { mapIndicatorNameToDetail, mapDimNameToDetail } = initSearchFilters(
+  searchFilters as ISearchData,
+);
 
 const { ActivityModal, BackListBtn, TaskItemModal, TaskModal, TaskListModal } =
   ModalSet;
@@ -51,6 +61,7 @@ export default function () {
     activityTips: { dateList: [], tip: '', isShow: false },
     itemSource: null,
   });
+  const { params, setPartialParams } = useParamsState();
   const setTaskManageState = (p: any) => {
     setState((s) => {
       return {
@@ -79,18 +90,33 @@ export default function () {
         >
           活动提示
         </Button>
-        <BackListBtn
-          top={270}
-          right={270}
-          setTaskManageState={setTaskManageState}
-          currentUser={{ empName: '张三', empNum: 'tc999999' }}
-          backTaskList={backTaskList}
-        />
+        {state.modalKind === ModalKind.NONE && (
+          <BackListBtn
+            top={270}
+            right={270}
+            setTaskManageState={setTaskManageState}
+            currentUser={{ empName: '张三', empNum: 'tc999999' }}
+            backTaskList={backTaskList}
+          />
+        )}
         <Button
           onClick={() => setTaskManageState({ modalKind: ModalKind.QUERY })}
         >
           任务弹窗
         </Button>
+        <SearchCondition
+          top={270}
+          right={470}
+          modalKind={state.modalKind}
+          params={params}
+          setPartialParams={setPartialParams}
+          setTaskManageState={setTaskManageState}
+          isRefreshSessionKeySetter={(s: string) =>
+            isRefreshSessionKeySetter('tangram', s)
+          }
+          mapIndicatorNameToDetail={mapIndicatorNameToDetail}
+          mapDimNameToDetail={mapDimNameToDetail}
+        />
       </Space>
       <ActivityModal
         activityModalMethodName={'beforeSearch'}
