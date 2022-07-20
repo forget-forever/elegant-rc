@@ -54,3 +54,30 @@ export const objMap = <
     {} as Record<K, R>,
   );
 };
+
+const uniqueIdMap: Record<string, number> = {};
+
+/**
+ * 获取独一无二的id, 数字自增从0开始
+ * @param preStr 前缀，前缀改了后会从1重新开始
+ * @returns
+ */
+export const generateUniqueId = (preStr: string = '') => {
+  /** 如果没有那就写入一个0 */
+  if (!uniqueIdMap[preStr]) {
+    uniqueIdMap[preStr] = 0;
+  }
+
+  uniqueIdMap[preStr] += 1;
+  return `${preStr}${uniqueIdMap[preStr] || 0}`;
+};
+
+/**
+ * 刷新独一无二的id
+ * @param preStr 需要刷新的前缀
+ */
+export const refreshUniqueId = (preStr: string = '') => {
+  if (uniqueIdMap[preStr]) {
+    uniqueIdMap[preStr] = 0;
+  }
+};
