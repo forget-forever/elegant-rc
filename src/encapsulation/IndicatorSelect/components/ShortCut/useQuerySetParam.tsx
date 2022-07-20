@@ -3,7 +3,6 @@ import { isEqual } from 'lodash';
 import { TDataSourceParams } from '../../index';
 
 type IArg = {
-  onChangeReport?: (initConfigId: number, reportName: string) => void;
   setReportOrPreinstallValue: (v: number | undefined) => void;
   params: TDataSourceParams;
   paramsShadow: TDataSourceParams | undefined;
@@ -13,7 +12,6 @@ type IArg = {
 
 export default function useQuerySetParam(arg: IArg) {
   const {
-    onChangeReport,
     setReportOrPreinstallValue,
     params,
     paramsShadow,
@@ -23,10 +21,6 @@ export default function useQuerySetParam(arg: IArg) {
 
   useEffect(() => {
     setReportOrPreinstallValue(Number(initConfigId) || undefined);
-  }, [initConfigId]);
-
-  useEffect(() => {
-    onChangeReport?.(Number(initConfigId), '');
   }, [initConfigId]);
 
   useEffect(() => {
