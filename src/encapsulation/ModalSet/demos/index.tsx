@@ -125,11 +125,17 @@ export default function () {
           params={params}
           setPartialParams={setPartialParams}
           setTaskManageState={setTaskManageState}
-          isRefreshSessionKeySetter={(s: string) =>
-            isRefreshSessionKeySetter('tangram', s)
-          }
           mapIndicatorNameToDetail={mapIndicatorNameToDetail}
           mapDimNameToDetail={mapDimNameToDetail}
+          onClickCondition={() =>
+            setTaskManageState({ modalKind: ModalKind.INPUT })
+          }
+          onCacheChange={(b) => {
+            isRefreshSessionKeySetter('tangram', b ? '1' : '');
+            setPartialParams({
+              isRefresh: b,
+            });
+          }}
         />
       </Space>
       <ActivityModal

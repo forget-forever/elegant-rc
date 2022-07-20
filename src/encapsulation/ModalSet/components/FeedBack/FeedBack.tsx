@@ -13,9 +13,8 @@ type IProps = {
   right?: number;
   zIndex?: number;
   params: TDataSourceParams;
-  setPartialParams: (params: TDataSourceParamsPartial) => void;
-  setTaskManageState: (s: Record<string, any>) => void;
-  isRefreshSessionKeySetter: (v: string) => void;
+  onCacheChange: (b: boolean) => void;
+  onClickCondition: () => void;
 };
 const FeedBack = (props: IProps) => {
   const {
@@ -23,18 +22,11 @@ const FeedBack = (props: IProps) => {
     right = 60,
     zIndex,
     params,
-    setPartialParams,
-    setTaskManageState,
-    isRefreshSessionKeySetter,
+    onCacheChange,
+    onClickCondition,
   } = props;
 
   const { isRefresh } = params;
-
-  const onClickConditon = () => {
-    setTaskManageState({
-      modalKind: ModalKind.INPUT,
-    });
-  };
 
   const menu = (
     <Menu style={{ zIndex: 99999 }}>
@@ -44,17 +36,14 @@ const FeedBack = (props: IProps) => {
           checked={isRefresh}
           onChange={(e) => {
             const val = e.target.checked;
-            isRefreshSessionKeySetter(val ? '1' : '');
-            setPartialParams({
-              isRefresh: val,
-            });
+            onCacheChange(val);
           }}
         >
           强制清除缓存
         </Checkbox>
       </Menu.Item>
       <Menu.Item>
-        <Button onClick={onClickConditon}>查询条件</Button>
+        <Button onClick={onClickCondition}>查询条件</Button>
       </Menu.Item>
       <Menu.Item>
         <Tooltip

@@ -7,7 +7,7 @@ import {
   TDataSourceParams,
   TDataSourceParamsPartial,
 } from 'src/encapsulation/IndicatorSelect';
-import FeedBack from '../FeedBack/FeedBack';
+import FeedBack from '../FeedBack';
 import ParamsDesc from './ParamsDesc';
 import compactParamsJson from './compactParamsJson';
 import { ModalKind } from '../../../IndicatorSelect/enum';
@@ -20,9 +20,10 @@ type IProps = {
   params: TDataSourceParams;
   setPartialParams: (params: TDataSourceParamsPartial) => void;
   setTaskManageState: (s: Record<string, any>) => void;
-  isRefreshSessionKeySetter: (v: string) => void;
   mapIndicatorNameToDetail: IMapIndicatorNameToDetail;
   mapDimNameToDetail: IMapDimNameToDetail;
+  onCacheChange: (b: boolean) => void;
+  onClickCondition: () => void;
 };
 
 const SearchCondition: React.FC<IProps> = (props) => {
@@ -34,9 +35,10 @@ const SearchCondition: React.FC<IProps> = (props) => {
     params,
     setPartialParams,
     setTaskManageState,
-    isRefreshSessionKeySetter,
     mapIndicatorNameToDetail,
     mapDimNameToDetail,
+    onCacheChange,
+    onClickCondition,
   } = props;
   const [msg, setMsg] = useState('');
   const [copyParams, setCopyParams] = useState<TDataSourceParamsPartial>({});
@@ -75,9 +77,8 @@ const SearchCondition: React.FC<IProps> = (props) => {
         right={right}
         zIndex={zIndex}
         params={params}
-        setTaskManageState={setTaskManageState}
-        setPartialParams={setPartialParams}
-        isRefreshSessionKeySetter={isRefreshSessionKeySetter}
+        onClickCondition={onClickCondition}
+        onCacheChange={onCacheChange}
       />
       <Modal
         title="查询条件"
