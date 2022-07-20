@@ -3,6 +3,7 @@ import BackListBtn from './components/BackListBtn/BackListBtn';
 import TaskListModal from './components/TaskListModal/TaskListModal';
 import TaskModal from './components/TaskModal/TaskModal';
 import TaskItemModal from './components/TaskItemModal/TaskItemModal';
+import SearchCondition from './components/SearchCondition';
 
 export default {
   ActivityModal,
@@ -10,4 +11,5 @@ export default {
   TaskItemModal,
   TaskModal,
   TaskListModal,
+  SearchCondition,
 };

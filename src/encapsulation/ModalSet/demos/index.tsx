@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ModalSet } from 'tc-rc';
 import { Button, Space } from 'antd';
 import { ModalKind } from '../../IndicatorSelect/enum';
-import SearchCondition from '../components/SearchCondition';
 import useParamsState from '../../IndicatorSelect/useParamsState';
 import { isRefreshSessionKeySetter } from '../components/FeedBack/isRefreshSessionKeySetter';
 import initSearchFilters from '../../IndicatorSelect/demos/initSearchFilters';
@@ -13,8 +12,14 @@ const { mapIndicatorNameToDetail, mapDimNameToDetail } = initSearchFilters(
   searchFilters as ISearchData,
 );
 
-const { ActivityModal, BackListBtn, TaskItemModal, TaskModal, TaskListModal } =
-  ModalSet;
+const {
+  ActivityModal,
+  BackListBtn,
+  TaskItemModal,
+  TaskModal,
+  TaskListModal,
+  SearchCondition,
+} = ModalSet;
 
 const backTaskList = [
   {
