@@ -17,6 +17,7 @@ import {
 const { Option, OptGroup } = Select;
 
 export type IShortCutProps = {
+  initConfigId?: string | number;
   // 吸顶距离
   offsetTop?: AffixProps['offsetTop'];
   // 参数
@@ -48,6 +49,7 @@ export type IShortCutProps = {
 };
 const ShortCut: React.FC<IShortCutProps> = (props) => {
   const {
+    initConfigId,
     offsetTop = 96,
     params,
     paramsShadow,
@@ -104,7 +106,7 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
     setReportOrPreinstallValue,
     params,
     paramsShadow,
-    initConfigId: reportOrPreinstallValue,
+    initConfigId,
     resetQueryOnParamChange,
   });
 

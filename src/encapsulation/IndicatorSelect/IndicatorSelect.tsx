@@ -33,6 +33,7 @@ type IProps = Omit<
 
 const IndicatorSelect: React.FC<IProps> = (props) => {
   const {
+    initConfigId,
     offsetTop,
     params,
     paramsShadow,
@@ -64,6 +65,7 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     useCollapsState(subjects);
 
   const shortCutProps: IShortCutProps = {
+    initConfigId,
     offsetTop,
     params,
     paramsShadow,
