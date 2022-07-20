@@ -19,6 +19,7 @@ const {
   TaskModal,
   TaskListModal,
   SearchCondition,
+  IndicatorsTipModal,
 } = ModalSet;
 
 const backTaskList = [
@@ -75,6 +76,9 @@ export default function () {
       };
     });
   };
+  const [indicatorsUnready, setIndicatorsUnready] = useState<
+    { value: string }[]
+  >([]);
   return (
     <>
       <Space>
@@ -108,6 +112,11 @@ export default function () {
           onClick={() => setTaskManageState({ modalKind: ModalKind.QUERY })}
         >
           任务弹窗
+        </Button>
+        <Button
+          onClick={() => setIndicatorsUnready([{ value: 'count_order' }])}
+        >
+          未Ready指标弹窗
         </Button>
         <SearchCondition
           top={270}
@@ -173,6 +182,12 @@ export default function () {
         onItemTry={() => {}}
         onItemModifyCondition={() => {}}
         onItemCheckSearchCondition={() => {}}
+      />
+      <IndicatorsTipModal
+        indicatorsUnready={indicatorsUnready}
+        setTaskManageState={() => setIndicatorsUnready([])}
+        searchWithIndicatorsReady={() => {}}
+        searchFilters={searchFilters as ISearchData}
       />
     </>
   );
