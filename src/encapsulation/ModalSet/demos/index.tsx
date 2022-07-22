@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ModalSet } from 'tc-rc';
 import { Button, Space } from 'antd';
 import { ModalKind } from '../../IndicatorSelect/enum';
-import SearchCondition from '../components/SearchCondition';
 import useParamsState from '../../IndicatorSelect/useParamsState';
 import { isRefreshSessionKeySetter } from '../components/FeedBack/isRefreshSessionKeySetter';
 import initSearchFilters from '../../IndicatorSelect/demos/initSearchFilters';
@@ -13,8 +12,15 @@ const { mapIndicatorNameToDetail, mapDimNameToDetail } = initSearchFilters(
   searchFilters as ISearchData,
 );
 
-const { ActivityModal, BackListBtn, TaskItemModal, TaskModal, TaskListModal } =
-  ModalSet;
+const {
+  ActivityModal,
+  BackListBtn,
+  TaskItemModal,
+  TaskModal,
+  TaskListModal,
+  SearchCondition,
+  IndicatorsTipModal,
+} = ModalSet;
 
 const backTaskList = [
   {
@@ -70,6 +76,9 @@ export default function () {
       };
     });
   };
+  const [indicatorsUnready, setIndicatorsUnready] = useState<
+    { value: string }[]
+  >([]);
   return (
     <>
       <Space>
@@ -104,6 +113,11 @@ export default function () {
         >
           任务弹窗
         </Button>
+        <Button
+          onClick={() => setIndicatorsUnready([{ value: 'count_order' }])}
+        >
+          未Ready指标弹窗
+        </Button>
         <SearchCondition
           top={270}
           right={470}
@@ -111,11 +125,17 @@ export default function () {
           params={params}
           setPartialParams={setPartialParams}
           setTaskManageState={setTaskManageState}
-          isRefreshSessionKeySetter={(s: string) =>
-            isRefreshSessionKeySetter('tangram', s)
-          }
           mapIndicatorNameToDetail={mapIndicatorNameToDetail}
           mapDimNameToDetail={mapDimNameToDetail}
+          onClickCondition={() =>
+            setTaskManageState({ modalKind: ModalKind.INPUT })
+          }
+          onCacheChange={(b) => {
+            isRefreshSessionKeySetter('tangram', b ? '1' : '');
+            setPartialParams({
+              isRefresh: b,
+            });
+          }}
         />
       </Space>
       <ActivityModal
@@ -168,6 +188,12 @@ export default function () {
         onItemTry={() => {}}
         onItemModifyCondition={() => {}}
         onItemCheckSearchCondition={() => {}}
+      />
+      <IndicatorsTipModal
+        indicatorsUnready={indicatorsUnready}
+        setTaskManageState={() => setIndicatorsUnready([])}
+        searchWithIndicatorsReady={() => {}}
+        searchFilters={searchFilters as ISearchData}
       />
     </>
   );

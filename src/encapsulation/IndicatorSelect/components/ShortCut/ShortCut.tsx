@@ -17,6 +17,7 @@ import {
 const { Option, OptGroup } = Select;
 
 export type IShortCutProps = {
+  initConfigId?: string | number;
   // 吸顶距离
   offsetTop?: AffixProps['offsetTop'];
   // 参数
@@ -37,9 +38,8 @@ export type IShortCutProps = {
   reportList: {
     label: string;
     list: {
-      reportName: string;
-      initConfigId: number;
-      reportOrPreinstall: 0 | 1;
+      label: string;
+      value: number;
     }[];
   }[];
   // 选择预设组的回调
@@ -49,6 +49,7 @@ export type IShortCutProps = {
 };
 const ShortCut: React.FC<IShortCutProps> = (props) => {
   const {
+    initConfigId,
     offsetTop = 96,
     params,
     paramsShadow,
@@ -69,7 +70,7 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
     (pre, next) => {
       return {
         ...pre,
-        [next.initConfigId]: next.reportName,
+        [next.value]: next.label,
       };
     },
     {} as any,
@@ -102,11 +103,10 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
   };
 
   useQuerySetParam({
-    onChangeReport,
     setReportOrPreinstallValue,
     params,
     paramsShadow,
-    initConfigId: reportOrPreinstallValue,
+    initConfigId,
     resetQueryOnParamChange,
   });
 
