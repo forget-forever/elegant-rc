@@ -1,14 +1,19 @@
 /*
  * @Author: zml
  * @Date: 2022-06-13 21:18:06
- * @LastEditTime: 2022-06-23 13:05:05
+ * @LastEditTime: 2022-07-22 10:54:15
  */
 import { useMemoizedFn } from 'ahooks';
 import { Select } from 'antd';
 import { useMemo, useState } from 'react';
-import { GetIProps, IOptions } from 'tc-rc';
+import { GetIProps, IOptions, MyOmit } from 'tc-rc';
 import { FormContent } from '..';
 
+/**
+ * 标签输入组件，可以直接传name放入Form表单中使用，也可以传value和onChange自己控制
+ * @param props
+ * @returns
+ */
 const TagsInput: React.FC<
   {
     /** 输入的时候search的值，返回的值将被写入options */
@@ -21,12 +26,26 @@ const TagsInput: React.FC<
      * @default multiple
      */
     mode?: 'multiple' | 'tags';
-  } & GetIProps<typeof FormContent>
+    /** value的值 */
+    value?: string[];
+    /** 数值变化的时候触发的函数 */
+    onChange?: (val: string[]) => void;
+    /** 需要透传给select标签的值，value, onChnage需要使用TagsInput本身的属性, defauleValue不可透传 */
+    selectProps?: MyOmit<
+      GetIProps<typeof Select>,
+      'value' | 'onChange' | 'defaultValue'
+    >;
+  } & MyOmit<GetIProps<typeof FormContent>, 'onChange'>
 > = (props) => {
   const {
     onSearch,
     tokenSeparators = ',&+& &;&',
     mode = 'multiple',
+    placeholder,
+    name,
+    value,
+    onChange,
+    selectProps,
     ...resetProps
   } = props;
   const [options, setOptions] = useState<IOptions<string, string>[]>();
@@ -45,13 +64,24 @@ const TagsInput: React.FC<
       : tokenSeparators.split('&');
   }, [tokenSeparators]);
 
+  const valueConf = useMemo(() => {
+    if (name) {
+      return undefined;
+    }
+    return value;
+  }, [name]);
+
   return (
-    <FormContent {...resetProps}>
+    <FormContent name={name} {...resetProps}>
       <Select
         tokenSeparators={tokenSeparatorsConfig}
         mode={mode}
+        value={valueConf}
+        onChange={onChange}
         options={options}
+        placeholder={placeholder}
         onSearch={searchHandle}
+        {...selectProps}
       />
     </FormContent>
   );

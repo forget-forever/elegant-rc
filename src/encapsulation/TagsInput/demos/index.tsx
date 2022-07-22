@@ -1,16 +1,16 @@
 /*
  * @Author: zml
  * @Date: 2022-06-15 20:20:02
- * @LastEditTime: 2022-06-15 20:32:04
+ * @LastEditTime: 2022-07-22 10:56:43
  */
 import { useMemoizedFn } from 'ahooks';
-import { Card, Form } from 'antd';
+import { Button, Card, Form } from 'antd';
 import { TagsInput } from 'tc-rc';
 
 export default () => {
   const onSearch = useMemoizedFn((val: string) => {
     const res = +val;
-    if (!Number.isNaN(res)) {
+    if (!Number.isNaN(res) && val) {
       return [{ label: res.toString(), value: res.toString() }];
     } else {
       return [];
@@ -28,27 +28,33 @@ export default () => {
     }));
   });
 
+  const onFinish = useMemoizedFn((val) => {
+    alert(JSON.stringify(val));
+  });
+
   return (
     <>
-      <Card title="普通文本">
-        <Form>
-          <Form.Item name="tags" label="电话号码">
-            <TagsInput />
-          </Form.Item>
-        </Form>
-      </Card>
       <Card title="号码输入">
-        <Form>
+        <Form onFinish={onFinish}>
           <Form.Item name="tags" label="电话号码">
-            <TagsInput onSearch={onSearch} />
+            <TagsInput onSearch={onSearch} placeholder="请输入电话号码" />
           </Form.Item>
+          <Button htmlType="submit">确定</Button>
         </Form>
       </Card>
-      <Card title="邮箱输入">
-        <Form>
-          <Form.Item name="tags" label="电话号码">
+      <Card title="其他">
+        <Form onFinish={onFinish}>
+          <Form.Item name="tags" label="邮箱">
             <TagsInput mode="multiple" onSearch={onSearchEmail} />
           </Form.Item>
+          <TagsInput
+            name="phone"
+            label="电话"
+            mode="multiple"
+            placeholder="请输入电话号码"
+            onSearch={onSearch}
+          />
+          <Button htmlType="submit">确定</Button>
         </Form>
       </Card>
     </>
