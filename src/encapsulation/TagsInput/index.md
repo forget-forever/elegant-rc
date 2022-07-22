@@ -15,4 +15,8 @@ group:
 
 <code src="./demos/index.tsx" />
 
+## 受控用法
+
+<code src="./demos/other.tsx">
+
 <API></API>

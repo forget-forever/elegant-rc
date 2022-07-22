@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-13 21:18:06
- * @LastEditTime: 2022-07-22 10:54:15
+ * @LastEditTime: 2022-07-22 11:32:51
  */
 import { useMemoizedFn } from 'ahooks';
 import { Select } from 'antd';
@@ -69,7 +69,7 @@ const TagsInput: React.FC<
       return undefined;
     }
     return value;
-  }, [name]);
+  }, [name, value]);
 
   return (
     <FormContent name={name} {...resetProps}>
