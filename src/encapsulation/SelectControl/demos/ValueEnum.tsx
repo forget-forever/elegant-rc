@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-29 11:23:17
- * @LastEditTime: 2022-06-29 12:21:54
+ * @LastEditTime: 2022-07-25 12:50:32
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Form } from 'antd';
@@ -21,7 +21,12 @@ export default () => {
   return (
     <Form onFinish={finishHandle}>
       <Form.Item name="val">
-        <SelectControl valueEnum={valueEnum} maxCount={2} mode="multiple" />
+        <SelectControl
+          valueEnum={valueEnum}
+          maxCount={2}
+          mode="multiple"
+          disabledList={[1]}
+        />
       </Form.Item>
       <Button htmlType="submit">确定</Button>
     </Form>

@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-29 10:52:07
- * @LastEditTime: 2022-07-25 11:51:36
+ * @LastEditTime: 2022-07-25 12:52:35
  */
 import {
   ProSchemaValueEnumMap,
@@ -28,7 +28,7 @@ const SelectControl = <
     maxCount?: number;
     /** 数据的枚举，这个可以代替options */
     valueEnum?: ProSchemaValueEnumObj | ProSchemaValueEnumMap;
-    /** 在传入valueEnum时需要屏蔽的值 */
+    /** 在传入valueEnum时需要屏蔽的值, valueEnum是object的时候会强行转string */
     disabledList?: React.ReactText[];
   } & SelectProps<ValueType, OptionType>,
 ) => {
@@ -55,12 +55,14 @@ const SelectControl = <
           });
         });
       } else if (valueEnum instanceof Object) {
+        /** 应为object的键只能是string类型，所以说这个地方应该转成string类型 */
+        const disabledListStr = disabledList.map(String);
         Object.keys(valueEnum).forEach((key) => {
           /** @ts-ignore */
           resOptions.push({
             value: key,
             label: valueEnum[key],
-            disabled: disabledList.includes(key),
+            disabled: disabledListStr.includes(key),
           });
         });
       }
