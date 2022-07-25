@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-29 10:52:07
- * @LastEditTime: 2022-07-25 11:49:36
+ * @LastEditTime: 2022-07-25 11:51:36
  */
 import {
   ProSchemaValueEnumMap,
@@ -13,7 +13,7 @@ import type {
   DefaultOptionType,
   SelectProps,
 } from 'antd/lib/select';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 /**
  * 在antd的Select组件的基础上增加multiple和Tags模式下支持允许最大数目的限制等功能
@@ -29,7 +29,7 @@ const SelectControl = <
     /** 数据的枚举，这个可以代替options */
     valueEnum?: ProSchemaValueEnumObj | ProSchemaValueEnumMap;
     /** 在传入valueEnum时需要屏蔽的值 */
-    disabledList?: string[];
+    disabledList?: React.ReactText[];
   } & SelectProps<ValueType, OptionType>,
 ) => {
   const {
