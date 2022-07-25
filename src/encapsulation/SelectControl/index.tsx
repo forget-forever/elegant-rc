@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-29 10:52:07
- * @LastEditTime: 2022-07-19 19:58:14
+ * @LastEditTime: 2022-07-25 11:49:36
  */
 import {
   ProSchemaValueEnumMap,
@@ -28,9 +28,18 @@ const SelectControl = <
     maxCount?: number;
     /** 数据的枚举，这个可以代替options */
     valueEnum?: ProSchemaValueEnumObj | ProSchemaValueEnumMap;
+    /** 在传入valueEnum时需要屏蔽的值 */
+    disabledList?: string[];
   } & SelectProps<ValueType, OptionType>,
 ) => {
-  const { options, valueEnum, value, maxCount, ...resetProps } = props;
+  const {
+    options,
+    valueEnum,
+    value,
+    maxCount,
+    disabledList = [],
+    ...resetProps
+  } = props;
 
   const optionsConf = useMemo(() => {
     const resOptions = options || [];
@@ -39,12 +48,20 @@ const SelectControl = <
       if (valueEnum instanceof Map) {
         valueEnum.forEach((label, val) => {
           /** @ts-ignore */
-          resOptions.push({ value: val, label });
+          resOptions.push({
+            value: val,
+            label,
+            disabled: disabledList.includes(val),
+          });
         });
       } else if (valueEnum instanceof Object) {
         Object.keys(valueEnum).forEach((key) => {
           /** @ts-ignore */
-          resOptions.push({ value: key, label: valueEnum[key] });
+          resOptions.push({
+            value: key,
+            label: valueEnum[key],
+            disabled: disabledList.includes(key),
+          });
         });
       }
     }
