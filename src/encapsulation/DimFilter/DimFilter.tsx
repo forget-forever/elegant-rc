@@ -137,19 +137,17 @@ const DimFilter: React.FC<IFilterIndex> = (props) => {
               margin: '6px 0',
             }}
           >
-            <div>
-              <Select
-                style={{ minWidth: 300, marginRight: '20px' }}
-                disabled={disabled}
-                showSearch
-                optionFilterProp="children"
-                placeholder="请选择筛选条件"
-                value={where.key || undefined}
-                onChange={(_, option) => onKeyChange(option as any, index)}
-              >
-                {options}
-              </Select>
-            </div>
+            <Select
+              style={{ minWidth: 300, marginRight: '20px' }}
+              disabled={disabled}
+              showSearch
+              optionFilterProp="children"
+              placeholder="请选择筛选条件"
+              value={where.key || undefined}
+              onChange={(_, option) => onKeyChange(option as any, index)}
+            >
+              {options}
+            </Select>
             {['time', 'time_only'].includes(
               where.type || mapDimNameToDetail.get(where.key)?.type,
             ) ? (
