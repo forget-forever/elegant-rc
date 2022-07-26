@@ -1,9 +1,9 @@
 /*
  * @Author: zml
  * @Date: 2022-06-29 10:52:07
- * @LastEditTime: 2022-07-25 12:52:35
+ * @LastEditTime: 2022-07-26 19:08:44
  */
-import {
+import type {
   ProSchemaValueEnumMap,
   ProSchemaValueEnumObj,
 } from '@ant-design/pro-utils';
@@ -78,7 +78,7 @@ const SelectControl = <
       }
       return item;
     });
-  }, [maxCount, options, value, valueEnum]);
+  }, [disabledList, maxCount, options, value, valueEnum]);
 
   return <Select value={value} options={optionsConf} {...resetProps} />;
 };

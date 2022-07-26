@@ -1,11 +1,11 @@
 /*
  * @Author: zml
  * @Date: 2022-07-01 19:02:31
- * @LastEditTime: 2022-07-01 19:27:30
+ * @LastEditTime: 2022-07-26 19:09:08
  */
 import { useMemoizedFn, useSafeState } from 'ahooks';
 import { AutoComplete as Complete, Form } from 'antd';
-import { GetIProps, IOptions, MyOmit } from 'tc-rc';
+import type { GetIProps, IOptions, MyOmit } from 'tc-rc';
 
 type OptionType = IOptions<string | number, React.ReactNode>;
 const AutoCompete: React.FC<
