@@ -1,7 +1,7 @@
 /*
  * @Author: zml
  * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-07-18 13:47:23
+ * @LastEditTime: 2022-07-26 19:08:33
  */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
@@ -11,7 +11,7 @@ import React, { useEffect, useMemo } from 'react';
 import type * as CronType from 'qnn-react-cron/index.d';
 import QnnCron from 'qnn-react-cron';
 import './styles.less';
-import { TooltipPlacement } from 'antd/lib/tooltip';
+import type { TooltipPlacement } from 'antd/lib/tooltip';
 
 const Cron = QnnCron as CronType.Cron;
 

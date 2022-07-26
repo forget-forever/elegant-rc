@@ -1,11 +1,11 @@
 /*
  * @Author: zml
  * @Date: 2022-06-02 15:34:24
- * @LastEditTime: 2022-06-13 21:57:39
+ * @LastEditTime: 2022-07-26 19:09:39
  */
 
 import ButtonAsync from '../ButtonAsync';
-import { FCProps, GetIProps } from '../../types';
+import type { FCProps, GetIProps } from '../../types';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
 
