@@ -19,6 +19,7 @@ import CacheTip from './CacheTip';
 import DataTable from './DataTable';
 import ModalSet from './ModalSet';
 import BtnPannel from './BtnPannel';
+import ReportOperate from './ReportOperate';
 
 export {
   ButtonAsync,
@@ -37,4 +38,5 @@ export {
   DataTable,
   ModalSet,
   BtnPannel,
+  ReportOperate,
 };
