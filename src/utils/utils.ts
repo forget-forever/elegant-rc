@@ -75,9 +75,10 @@ export const generateUniqueId = (preStr: string = '') => {
 /**
  * 刷新独一无二的id
  * @param preStr 需要刷新的前缀
+ * @param refreshValue 复位到的值，默认是复位到最开始的时候, 复位之后下一个生成的就是它的数字+1
  */
-export const refreshUniqueId = (preStr: string = '') => {
+export const refreshUniqueId = (preStr: string = '', refreshValue = 0) => {
   if (uniqueIdMap[preStr]) {
-    uniqueIdMap[preStr] = 0;
+    uniqueIdMap[preStr] = refreshValue;
   }
 };
