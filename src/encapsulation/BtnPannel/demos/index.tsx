@@ -1,6 +1,6 @@
 import BtnPanel from '../ButtonPanel';
 import { useState } from 'react';
-import { ButtonProps } from 'antd';
+import type { ButtonProps } from 'antd';
 import {
   CopyOutlined,
   DownloadOutlined,
@@ -9,28 +9,28 @@ import {
 } from '@ant-design/icons';
 import { ModalKind } from '../../IndicatorSelect/enum';
 
-const _buttonPropList: (ButtonProps & { innerText: string })[] = [
+const _buttonPropList: (ButtonProps & { text: string })[] = [
   {
     type: 'primary',
-    innerText: '查询',
+    text: '查询',
     onClick: () => alert('查询方法'),
     icon: <SearchOutlined />,
   },
   {
     type: 'primary',
-    innerText: '导出',
+    text: '导出',
     onClick: () => alert('导出方法'),
     icon: <DownloadOutlined />,
   },
   {
     type: 'primary',
-    innerText: '查看SQL',
+    text: '查看SQL',
     onClick: () => alert('查询方法'),
     icon: <CopyOutlined />,
   },
   {
     type: 'dashed',
-    innerText: '保存该查询条件',
+    text: '保存该查询条件',
     onClick: () => alert('保存查询条件方法'),
     icon: <PlusOutlined />,
   },
@@ -47,9 +47,7 @@ export default function () {
     return {
       ...e,
       onClick:
-        e.innerText === '查看SQL'
-          ? () => setModalKind(ModalKind.SQL)
-          : e.onClick,
+        e.text === '查看SQL' ? () => setModalKind(ModalKind.SQL) : e.onClick,
     };
   });
   return (

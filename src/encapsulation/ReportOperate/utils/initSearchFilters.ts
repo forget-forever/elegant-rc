@@ -1,4 +1,4 @@
-import {
+import type {
   IDimDetail,
   IGroup,
   IIndicatorDetail,
@@ -10,7 +10,7 @@ import {
   ISelectEle,
   ISelectsItem,
   ISubjects,
-} from '../index';
+} from '../../IndicatorSelect';
 import { intersection } from 'lodash';
 
 export default function initSearchFilters(data: ISearchData) {

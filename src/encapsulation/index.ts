@@ -21,6 +21,7 @@ import ModalSet from './ModalSet';
 import BtnPannel from './BtnPannel';
 import ReportOperate from './ReportOperate';
 import OperationColumn from './OperationColumn';
+import ReportShare from './ReportShare';
 
 export {
   ButtonAsync,
@@ -41,4 +42,5 @@ export {
   BtnPannel,
   ReportOperate,
   OperationColumn,
+  ReportShare,
 };

@@ -1,9 +1,9 @@
 import { ReportOperate } from 'tc-rc';
 import { Select, Radio, Divider } from 'antd';
 import { useEffect, useState } from 'react';
-import initSearchFilters from '../../IndicatorSelect/demos/initSearchFilters';
+import initSearchFilters from '../utils/initSearchFilters';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';
-import { ISearchData } from '../../IndicatorSelect';
+import type { ISearchData } from '../../IndicatorSelect';
 import { reportDetail, preinstallDetail } from './reportDetail';
 
 const {
@@ -96,12 +96,8 @@ export default function () {
       <ReportOperate
         key={JSON.stringify(initialValues)}
         loading={loading}
-        selects={searchFilters.selects}
+        searchData={searchFilters as ISearchData}
         themeOptions={themeOptions}
-        groupOptionsGetter={groupOptionsGetter}
-        mapDimNameToDetail={mapDimNameToDetail}
-        mapDimGroupCnameToIndicators={mapDimGroupCnameToIndicators}
-        mapIndicatorNameToDetail={mapIndicatorNameToDetail}
         onClickSubmit={onClickSubmit}
         onClickCancel={() => {}}
         initialValues={initialValues}

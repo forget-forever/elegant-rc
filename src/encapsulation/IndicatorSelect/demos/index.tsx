@@ -1,8 +1,8 @@
 import { IndicatorSelect } from 'tc-rc';
-import initSearchFilters from './initSearchFilters';
+import initSearchFilters from '../../ReportOperate/utils/initSearchFilters';
 import searchFilters from './searchFilters.json';
 import list from './reportList.json';
-import { ISearchData } from '../index';
+import type { ISearchData } from '../index';
 import initReportList from './initReportList';
 import useParamsState from '../useParamsState';
 

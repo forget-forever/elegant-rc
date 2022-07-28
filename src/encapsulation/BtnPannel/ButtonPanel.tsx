@@ -1,12 +1,13 @@
 import React from 'react';
-import { Affix, Button, Card, Space, ButtonProps } from 'antd';
+import type { ButtonProps } from 'antd';
+import { Affix, Button, Card, Space } from 'antd';
 import SqlModal from './components/SqlModal/SqlModal';
-import { ModalKind } from '../IndicatorSelect/enum';
+import type { ModalKind } from '../IndicatorSelect/enum';
 
 type IProps = {
   offsetBottom?: number;
   offsetTop?: number;
-  buttonPropList: (ButtonProps & { innerText: string })[];
+  buttonPropList: (ButtonProps & { text: string })[];
   sqlSource: {
     sqlInfo?: string[];
     explainInfo?: string[];
@@ -40,8 +41,8 @@ const BtnPanel: React.FC<IProps> = (props) => {
           >
             <Space>
               {buttonPropList.map((btn) => (
-                <Button key={btn.innerText} {...btn}>
-                  {btn.innerText}
+                <Button key={btn.text} {...btn}>
+                  {btn.text}
                 </Button>
               ))}
             </Space>
