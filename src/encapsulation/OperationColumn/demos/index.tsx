@@ -64,14 +64,37 @@ export default function () {
       setVisible(false);
     }, 1500);
   };
-  const listNodes = list.map((record) => (
-    <OperationColumn
-      key={record.id}
-      record={record}
-      mapSourceCodeToText={mapSourceCodeToText}
-      onClickShare={onClickShare}
-    />
-  ));
+  const listNodes = list.map((record) => {
+    const buttonPropList = [
+      {
+        buttonProps: {
+          type: 'link' as const,
+          children: record.ifEditOrDel ? '编辑' : '查看',
+        },
+      },
+      {
+        buttonProps: {
+          type: 'link' as const,
+          children: '分享',
+          disabled: !record.ifEditOrDel,
+          onClick: onClickShare,
+        },
+      },
+      {
+        buttonProps: {
+          type: 'link' as const,
+          children: '删除',
+          disabled: !record.ifEditOrDel,
+        },
+        popConfirmProps: {
+          title: '确认删除吗？',
+          disabled: !record.ifEditOrDel,
+        },
+      },
+    ];
+
+    return <OperationColumn buttonPropList={buttonPropList} />;
+  });
 
   return (
     <ConfigProvider locale={zhCN}>
