@@ -1,14 +1,13 @@
 import React from 'react';
 import { Modal } from 'antd';
-import TaskItemIndex, {
-  ISourceItem,
-} from './components/TaskItemIndex/TaskItemIndex';
+import type { ISourceItem } from './components/TaskItemIndex/TaskItemIndex';
+import TaskItemIndex from './components/TaskItemIndex/TaskItemIndex';
 import { ModalKind } from '../../../IndicatorSelect/enum';
 import './index.css';
 
 type IProps = {
   modalKind: ModalKind;
-  setTaskManageState: (s: Record<string, any>) => void;
+  onCancel: () => void;
 
   backTaskList: ISourceItem[];
   onItemCancelSearchClick: (index?: undefined | number) => void;
@@ -26,7 +25,7 @@ type IProps = {
 const TaskListModal: React.FC<IProps> = (props) => {
   const {
     modalKind,
-    setTaskManageState,
+    onCancel,
     backTaskList,
     onItemCancelSearchClick,
     onItemCheckData,
@@ -45,13 +44,10 @@ const TaskListModal: React.FC<IProps> = (props) => {
       width={950}
       visible={modalKind === ModalKind.LIST}
       footer={false}
-      onCancel={() => {
-        setTaskManageState({
-          modalKind: ModalKind.NONE,
-        });
-      }}
+      onCancel={onCancel}
       wrapClassName={'wrapTaskListModal'}
       zIndex={1100}
+      maskClosable={false}
     >
       {(Array.isArray(backTaskList) &&
         backTaskList.length > 0 &&
