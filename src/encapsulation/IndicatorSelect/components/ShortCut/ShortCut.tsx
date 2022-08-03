@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Button, Select, Affix } from 'antd';
+import { Affix, Button, Select } from 'antd';
 import { selectShotCutContent, selectShotCutContainer } from './styles';
 import type { AffixProps } from 'antd';
 import {
@@ -20,6 +20,8 @@ export type IShortCutProps = {
   initConfigId?: string | number;
   // 吸顶距离
   offsetTop?: AffixProps['offsetTop'];
+  top?: number;
+  zIndex?: number;
   // 参数
   params: TDataSourceParams;
   /** 参数分身 */
@@ -50,7 +52,9 @@ export type IShortCutProps = {
 const ShortCut: React.FC<IShortCutProps> = (props) => {
   const {
     initConfigId,
+    zIndex = 1,
     offsetTop = 96,
+    top,
     params,
     paramsShadow,
     setPartialParams,
@@ -110,8 +114,8 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
     resetQueryOnParamChange,
   });
 
-  return (
-    <Affix offsetTop={offsetTop}>
+  const child = (
+    <>
       <div
         style={{
           ...selectShotCutContainer,
@@ -142,10 +146,10 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
               showSearch
               style={{ width: 256, marginLeft: 20 }}
               optionFilterProp="children"
-              onChange={(initConfigId) => {
-                const reportName = mapReportIdToName[initConfigId];
-                onChangeReport(initConfigId, reportName);
-                setReportOrPreinstallValue(initConfigId);
+              onChange={(_initConfigId) => {
+                const reportName = mapReportIdToName[_initConfigId];
+                onChangeReport(_initConfigId, reportName);
+                setReportOrPreinstallValue(_initConfigId);
               }}
               filterOption={(input, group) => {
                 if (group?.label) {
@@ -187,8 +191,14 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
           </Button>
         </div>
       </div>
-    </Affix>
+    </>
   );
+
+  if (top === undefined) {
+    return <Affix offsetTop={offsetTop}>{child}</Affix>;
+  }
+
+  return <div style={{ zIndex, position: 'sticky', top }}>{child}</div>;
 };
 
 export default ShortCut;

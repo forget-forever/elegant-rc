@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import type { ButtonProps } from 'antd';
-import { Affix, Button, Card, Space } from 'antd';
+import { Affix, Button, Space } from 'antd';
 import SqlModal from './components/SqlModal/SqlModal';
 import type { ModalKind } from '../IndicatorSelect/enum';
 
@@ -18,43 +18,42 @@ type IProps = {
 
 const BtnPanel: React.FC<IProps> = (props) => {
   const {
-    offsetBottom = 0,
-    offsetTop = 96,
+    offsetBottom,
+    offsetTop,
     buttonPropList,
     sqlSource,
     modalKind,
     onConfirmSql,
   } = props;
 
+  const Component =
+    offsetBottom === undefined && offsetTop === undefined ? Fragment : Affix;
+
   return (
-    <>
-      <div style={{ position: 'relative', maxWidth: '100%' }}>
-        <Affix offsetBottom={offsetBottom} offsetTop={offsetTop}>
-          <Card
-            bodyStyle={{
-              display: 'flex',
-              justifyContent: 'flex-end',
-              transition: 'all 0.5s',
-              maxWidth: '100%',
-            }}
-            bordered={false}
-          >
-            <Space>
-              {buttonPropList.map((btn) => (
-                <Button key={btn.text} {...btn}>
-                  {btn.text}
-                </Button>
-              ))}
-            </Space>
-          </Card>
-        </Affix>
+    <Component>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          transition: 'all 0.5s',
+          maxWidth: '100%',
+          padding: 24,
+        }}
+      >
+        <Space>
+          {buttonPropList.map((btn) => (
+            <Button key={btn.text} {...btn}>
+              {btn.text}
+            </Button>
+          ))}
+        </Space>
       </div>
       <SqlModal
         sqlSource={sqlSource}
         onConfirm={onConfirmSql}
         modalKind={modalKind}
       />
-    </>
+    </Component>
   );
 };
 
