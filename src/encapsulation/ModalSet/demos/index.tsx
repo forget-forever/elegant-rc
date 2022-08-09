@@ -174,7 +174,7 @@ export default function () {
       />
       <TaskListModal
         modalKind={state.modalKind}
-        setTaskManageState={setTaskManageState}
+        onCancel={() => setTaskManageState({ modalKind: ModalKind.NONE })}
         backTaskList={backTaskList}
         onItemCancelSearchClick={() => {}}
         onItemCheckData={() => {}}
