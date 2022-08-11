@@ -1,8 +1,16 @@
 module.exports = {
-  extends: [require.resolve('@umijs/fabric/dist/eslint')],
+  extends: ['alloy', 'alloy/react', 'alloy/typescript'],
+  plugins: ['react-hooks', 'react'],
   globals: {
     page: true,
     REACT_APP_ENV: true,
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
   },
   rules: {
     'no-restricted-syntax': 0,
@@ -13,5 +21,13 @@ module.exports = {
     'no-useless-escape': 0,
     'no-unneeded-ternary': 0,
     '@typescript-eslint/no-unused-vars': 0,
+    'react-hooks/exhaustive-deps': 'warn',
+    'no-constant-binary-expression': 0,
+    'no-unused-private-class-members': 0,
+    'prefer-object-has-own': 0,
+    '@typescript-eslint/consistent-type-definitions': 0,
+    '@typescript-eslint/triple-slash-reference': 0,
+    '@typescript-eslint/no-invalid-void-type': 0,
+    '@typescript-eslint/consistent-type-assertions': 0,
   },
 };

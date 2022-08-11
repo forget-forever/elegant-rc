@@ -88,7 +88,7 @@ const ParamData: React.FC<IProps> = (props) => {
           <div hidden={hiddenDelivery}>
             <Delivery params={params} setPartialParams={setPartialParams} />
           </div>
-          <div className={'paramDataRow'}>
+          <div className="paramDataRow">
             <DimGroupSelect
               params={params}
               setPartialParams={setPartialParams}

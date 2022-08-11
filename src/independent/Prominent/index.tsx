@@ -5,7 +5,7 @@
  */
 import { uniqueId } from 'lodash';
 import type { CSSProperties } from 'react';
-import { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 type IProps = {
   /** 字符串 */

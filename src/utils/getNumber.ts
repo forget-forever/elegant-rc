@@ -31,7 +31,7 @@ export function getNumber(str: string | number, mustNum?: boolean) {
     return str;
   }
   if (mustNum) {
-    return +str.replace(/[^0-9]/gi, '') || 0;
+    return Number(str.replace(/[^0-9]/gi, '')) || 0;
   }
   return str.replace(/[^0-9]/gi, '');
 }

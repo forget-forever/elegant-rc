@@ -15,7 +15,7 @@ import { useMemo } from 'react';
  */
 const useDebounce = <F extends (...args: never[]) => unknown>(
   cb: F,
-  wait: number = 0,
+  wait = 0,
 ) => {
   const submit = useMemoizedFn<F>(((...args) => {
     return cb(...args);
@@ -23,7 +23,7 @@ const useDebounce = <F extends (...args: never[]) => unknown>(
 
   const resFunc = useMemo(() => {
     return debounce(submit, wait);
-  }, [submit]);
+  }, [submit, wait]);
 
   return resFunc;
 };

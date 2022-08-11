@@ -34,3 +34,14 @@ export type FormProps<T, E = Record<string, never>> = {
   /** 数据，由Form.Item注入 */
   value?: T;
 } & E;
+
+/**
+ * 生成固定长度的数组
+ * @return GenerateArr<1, [string]>:  [string]; GenerateArr<2, [string]>:  [string, string]
+ */
+export type GenerateArr<
+  N extends number,
+  ARR extends unknown[] = [],
+> = ARR['length'] extends N ? ARR : GenerateArr<N, [...ARR, ARR[0]]>;
+
+type T1 = GenerateArr<9, [string]>;

@@ -38,9 +38,7 @@ const buttonGroupStyle: CSSProperties = {
  * @param config 配置的方法
  * @returns submitter的配置对象
  */
-const useProFormSubmitter = <FormType extends unknown = unknown>(
-  config?: Config,
-) => {
+const useProFormSubmitter = function <FormType = unknown>(config?: Config) {
   const {
     submitText = '提交',
     cancelText = '取消',

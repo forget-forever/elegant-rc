@@ -83,7 +83,7 @@ const DateSelect: React.FC<IProps> = (props) => {
       }
     }
 
-    const currentNum = +current.format('YYYYMMDD');
+    const currentNum = Number(current.format('YYYYMMDD'));
     // 是否在屏蔽段内
     if (
       disabledRanges?.some((item) => {
@@ -96,7 +96,7 @@ const DateSelect: React.FC<IProps> = (props) => {
             if (typeof ele === 'number') {
               return ele;
             }
-            return +ele!.format('YYYYMMDD');
+            return Number(ele!.format('YYYYMMDD'));
           }) || [];
         if (compare.length < 2) {
           return false;

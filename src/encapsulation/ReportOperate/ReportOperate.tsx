@@ -215,159 +215,155 @@ const ReportOperate: React.FC<IProps> = (props) => {
               label=" "
               colon={false}
             >
-              <>
-                <Space direction="vertical">
-                  {form.getFieldValue('dateType') === 1 && (
-                    <>
-                      <Radio
-                        checked={dateTypeConfigBo.goBackXDay === 0}
-                        onChange={() =>
-                          setDateTypeConfigBo({
-                            ...initDateTypeConfigBo,
-                            goBackXDay: 0,
-                          })
-                        }
-                      >
-                        昨日
-                      </Radio>
-                      <Radio
-                        checked={dateTypeConfigBo.goBackXDay !== 0}
-                        onChange={() =>
-                          setDateTypeConfigBo({
-                            ...initDateTypeConfigBo,
-                            goBackXDay: 1,
-                          })
-                        }
-                      >
-                        <Space>
-                          <span className="date_prefix_text">往前</span>
-                          <InputNumber
-                            min={1}
-                            disabled={dateTypeConfigBo.goBackXDay === 0}
-                            style={{ width: 100 }}
-                            value={dateTypeConfigBo.goBackXDay}
-                            onChange={(e) =>
-                              setDateTypeConfigBo({
-                                ...initDateTypeConfigBo,
-                                goBackXDay: Number(e) || 0,
-                              })
-                            }
-                          />
-                          <span>天</span>
-                          <span className="date_text">
-                            （以9月10号为例：统计时间为9月8日的数据）
-                          </span>
-                        </Space>
-                      </Radio>
-                    </>
-                  )}
-                  {form.getFieldValue('dateType') === 5 && (
-                    <>
-                      <Radio
-                        checked={dateTypeConfigBo.ifNatureWeek}
-                        onChange={() =>
-                          setDateTypeConfigBo({
-                            ...initDateTypeConfigBo,
-                            ifNatureWeek: true,
-                          })
-                        }
-                      >
-                        自然周
+              <Space direction="vertical">
+                {form.getFieldValue('dateType') === 1 && (
+                  <>
+                    <Radio
+                      checked={dateTypeConfigBo.goBackXDay === 0}
+                      onChange={() =>
+                        setDateTypeConfigBo({
+                          ...initDateTypeConfigBo,
+                          goBackXDay: 0,
+                        })
+                      }
+                    >
+                      昨日
+                    </Radio>
+                    <Radio
+                      checked={dateTypeConfigBo.goBackXDay !== 0}
+                      onChange={() =>
+                        setDateTypeConfigBo({
+                          ...initDateTypeConfigBo,
+                          goBackXDay: 1,
+                        })
+                      }
+                    >
+                      <Space>
+                        <span className="date_prefix_text">往前</span>
+                        <InputNumber
+                          min={1}
+                          disabled={dateTypeConfigBo.goBackXDay === 0}
+                          style={{ width: 100 }}
+                          value={dateTypeConfigBo.goBackXDay}
+                          onChange={(e) =>
+                            setDateTypeConfigBo({
+                              ...initDateTypeConfigBo,
+                              goBackXDay: Number(e) || 0,
+                            })
+                          }
+                        />
+                        <span>天</span>
                         <span className="date_text">
-                          （每周一产出上个周的数据）
+                          （以9月10号为例：统计时间为9月8日的数据）
                         </span>
-                      </Radio>
-                      <Radio
-                        checked={!dateTypeConfigBo.ifNatureWeek}
-                        onChange={() =>
-                          setDateTypeConfigBo({
-                            ...initDateTypeConfigBo,
-                            ifNatureWeek: false,
-                            dayOfWeek: 1,
-                          })
-                        }
-                      >
-                        <Space>
-                          <span className="date_prefix_text">每周</span>
-                          <Select
-                            disabled={dateTypeConfigBo.ifNatureWeek}
-                            onClick={(e) => e.preventDefault()}
-                            options={weekOptions}
-                            style={{ width: 100 }}
-                            value={dateTypeConfigBo.dayOfWeek || undefined}
-                            onChange={(e) =>
-                              setDateTypeConfigBo({
-                                ...initDateTypeConfigBo,
-                                ifNatureWeek: false,
-                                dayOfWeek: Number(e),
-                              })
-                            }
-                          />
-                          <span className="date_text">
-                            （以每周三产出数据为例：即上周三到本周二的数据）
-                          </span>
-                        </Space>
-                      </Radio>
-                    </>
-                  )}
-                  {form.getFieldValue('dateType') === 10 && (
-                    <>
-                      <Radio
-                        checked={dateTypeConfigBo.ifNatureMonth}
-                        onChange={() =>
-                          setDateTypeConfigBo({
-                            ...initDateTypeConfigBo,
-                            ifNatureMonth: true,
-                            dayOfMonth: 1,
-                          })
-                        }
-                      >
-                        自然月
+                      </Space>
+                    </Radio>
+                  </>
+                )}
+                {form.getFieldValue('dateType') === 5 && (
+                  <>
+                    <Radio
+                      checked={dateTypeConfigBo.ifNatureWeek}
+                      onChange={() =>
+                        setDateTypeConfigBo({
+                          ...initDateTypeConfigBo,
+                          ifNatureWeek: true,
+                        })
+                      }
+                    >
+                      自然周
+                      <span className="date_text">
+                        （每周一产出上个周的数据）
+                      </span>
+                    </Radio>
+                    <Radio
+                      checked={!dateTypeConfigBo.ifNatureWeek}
+                      onChange={() =>
+                        setDateTypeConfigBo({
+                          ...initDateTypeConfigBo,
+                          ifNatureWeek: false,
+                          dayOfWeek: 1,
+                        })
+                      }
+                    >
+                      <Space>
+                        <span className="date_prefix_text">每周</span>
+                        <Select
+                          disabled={dateTypeConfigBo.ifNatureWeek}
+                          onClick={(e) => e.preventDefault()}
+                          options={weekOptions}
+                          style={{ width: 100 }}
+                          value={dateTypeConfigBo.dayOfWeek || undefined}
+                          onChange={(e) =>
+                            setDateTypeConfigBo({
+                              ...initDateTypeConfigBo,
+                              ifNatureWeek: false,
+                              dayOfWeek: Number(e),
+                            })
+                          }
+                        />
                         <span className="date_text">
-                          （每月1号产出上个月的数据）
+                          （以每周三产出数据为例：即上周三到本周二的数据）
                         </span>
-                      </Radio>
-                      <Radio
-                        checked={!dateTypeConfigBo.ifNatureMonth}
-                        onChange={() =>
-                          setDateTypeConfigBo({
-                            ...initDateTypeConfigBo,
-                            ifNatureMonth: false,
-                            dayOfMonth: 1,
-                          })
-                        }
-                      >
-                        <Space>
-                          <span className="date_prefix_text">每月</span>
-                          <InputNumber
-                            disabled={dateTypeConfigBo.ifNatureMonth}
-                            min={1}
-                            max={31}
-                            onClick={(e) => e.preventDefault()}
-                            style={{ width: 100 }}
-                            value={dateTypeConfigBo.dayOfMonth || undefined}
-                            onChange={(e) =>
-                              setDateTypeConfigBo({
-                                ...initDateTypeConfigBo,
-                                ifNatureMonth: false,
-                                dayOfMonth: Number(e) || 0,
-                              })
-                            }
-                          />
-                          <span>日</span>
-                          <span className="date_text">
-                            （以每月2日产出数据为例：即2号往前推30天数据）
-                          </span>
-                        </Space>
-                      </Radio>
-                    </>
-                  )}
-                </Space>
-              </>
+                      </Space>
+                    </Radio>
+                  </>
+                )}
+                {form.getFieldValue('dateType') === 10 && (
+                  <>
+                    <Radio
+                      checked={dateTypeConfigBo.ifNatureMonth}
+                      onChange={() =>
+                        setDateTypeConfigBo({
+                          ...initDateTypeConfigBo,
+                          ifNatureMonth: true,
+                          dayOfMonth: 1,
+                        })
+                      }
+                    >
+                      自然月
+                      <span className="date_text">
+                        （每月1号产出上个月的数据）
+                      </span>
+                    </Radio>
+                    <Radio
+                      checked={!dateTypeConfigBo.ifNatureMonth}
+                      onChange={() =>
+                        setDateTypeConfigBo({
+                          ...initDateTypeConfigBo,
+                          ifNatureMonth: false,
+                          dayOfMonth: 1,
+                        })
+                      }
+                    >
+                      <Space>
+                        <span className="date_prefix_text">每月</span>
+                        <InputNumber
+                          disabled={dateTypeConfigBo.ifNatureMonth}
+                          min={1}
+                          max={31}
+                          onClick={(e) => e.preventDefault()}
+                          style={{ width: 100 }}
+                          value={dateTypeConfigBo.dayOfMonth || undefined}
+                          onChange={(e) =>
+                            setDateTypeConfigBo({
+                              ...initDateTypeConfigBo,
+                              ifNatureMonth: false,
+                              dayOfMonth: Number(e) || 0,
+                            })
+                          }
+                        />
+                        <span>日</span>
+                        <span className="date_text">
+                          （以每月2日产出数据为例：即2号往前推30天数据）
+                        </span>
+                      </Space>
+                    </Radio>
+                  </>
+                )}
+              </Space>
               {form.getFieldValue('dateType') === 15 && (
-                <>
-                  <span>当月1号至昨天</span>
-                </>
+                <span>当月1号至昨天</span>
               )}
             </FormItem>
             <div className="block_title">选择指标和维度</div>

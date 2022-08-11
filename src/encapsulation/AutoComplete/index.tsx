@@ -3,6 +3,7 @@
  * @Date: 2022-07-01 19:02:31
  * @LastEditTime: 2022-07-26 19:09:08
  */
+import React from 'react';
 import { useMemoizedFn, useSafeState } from 'ahooks';
 import { AutoComplete as Complete, Form } from 'antd';
 import type { GetIProps, IOptions, MyOmit } from 'tc-rc';

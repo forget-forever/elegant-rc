@@ -1,6 +1,7 @@
 /lambda/
 /scripts
 /config
+.eslintrc.js
 node_modules
 .history
 public

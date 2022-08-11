@@ -1,8 +1,4 @@
 /// <reference path="./typings.d.ts" />
-import CountdownButton from './CountdownButton';
-import RankList from './RankList';
-
-export { RankList, CountdownButton };
 
 export * from './utils';
 

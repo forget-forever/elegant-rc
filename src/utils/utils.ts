@@ -15,7 +15,7 @@ export const rowItemValid = <I extends Record<string, unknown>>(
     if (checkArr && !checkArr.includes(k)) {
       return;
     }
-    if (v == undefined) {
+    if (v === undefined || v === null) {
       res = false;
     }
     if (typeof v === 'string' && v === '') {
@@ -34,11 +34,7 @@ export const rowItemValid = <I extends Record<string, unknown>>(
  * @param cb 遍历回调函数: cb: ( key: 对象的键名  item: 对象的键值  obj: 当前处理中的对象 ) => Partial<OBJ>
  * @returns 处理之后的对象
  */
-export const objMap = <
-  K extends string | number,
-  P extends unknown,
-  R extends unknown,
->(
+export const objMap = <K extends string | number, P, R>(
   obj = {} as Record<K, P>,
   cb: (
     /** 对象的键名 */
@@ -62,7 +58,7 @@ const uniqueIdMap: Record<string, number> = {};
  * @param preStr 前缀，前缀改了后会从1重新开始
  * @returns
  */
-export const generateUniqueId = (preStr: string = '') => {
+export const generateUniqueId = (preStr = '') => {
   /** 如果没有那就写入一个0 */
   if (!uniqueIdMap[preStr]) {
     uniqueIdMap[preStr] = 0;
@@ -77,7 +73,7 @@ export const generateUniqueId = (preStr: string = '') => {
  * @param preStr 需要刷新的前缀
  * @param refreshValue 复位到的值，默认是复位到最开始的时候, 复位之后下一个生成的就是它的数字+1
  */
-export const refreshUniqueId = (preStr: string = '', refreshValue = 0) => {
+export const refreshUniqueId = (preStr = '', refreshValue = 0) => {
   if (uniqueIdMap[preStr] || refreshValue > 0) {
     uniqueIdMap[preStr] = refreshValue;
   }
