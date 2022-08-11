@@ -1,4 +1,5 @@
-import React, { useState, CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
 import { Checkbox, Tooltip } from 'antd';
 import {
@@ -7,9 +8,9 @@ import {
   VerticalAlignBottomOutlined,
   VerticalAlignTopOutlined,
 } from '@ant-design/icons';
-import { CheckboxChangeEvent } from 'antd/lib/checkbox';
+import type { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import '../SelectGroupItem/index.css';
-import {
+import type {
   IMapIndicatorNameToDetail,
   TDataSourceParams,
   TDataSourceParamsPartial,
@@ -23,14 +24,7 @@ import {
 } from '../../common';
 
 const currentSelect = {
-  height: 32,
-  lineHeight: '32px',
-};
-
-const sumIndex: CSSProperties = {
-  width: 205,
-  margin: '8px 30px 8px 0 !important',
-  whiteSpace: 'nowrap',
+  marginTop: 10,
 };
 
 export type ISelectSumProps = {
@@ -80,13 +74,13 @@ const SelectSum: React.FC<ISelectSumProps> = (props) => {
           <div style={currentSelect}>已选指标</div>
         </div>
         <div style={{ ...contentItemWrapper, ...contentStyle }}>
-          <div>
+          <div className={'checkGroup'}>
             {select.map((ele) => {
               const item = mapIndicatorNameToDetail.get(ele);
               return (
                 item && (
                   <Checkbox
-                    style={sumIndex}
+                    className={'index'}
                     key={item.name}
                     checked
                     onChange={(e) => onChange(e, ele)}
@@ -99,6 +93,7 @@ const SelectSum: React.FC<ISelectSumProps> = (props) => {
                       mouseEnterDelay={0.3}
                       color="#fff"
                       overlayStyle={{ maxWidth: '500px' }}
+                      placement="bottom"
                     >
                       {[DeliveryType.OTHER, DeliveryType.ALL].includes(
                         deliveryType,

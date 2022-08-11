@@ -1,10 +1,11 @@
 import { IndicatorSelect } from 'tc-rc';
-import initSearchFilters from './initSearchFilters';
+import initSearchFilters from '../../ReportOperate/utils/initSearchFilters';
 import searchFilters from './searchFilters.json';
 import list from './reportList.json';
-import { ISearchData } from '../index';
+import type { ISearchData } from '../index';
 import initReportList from './initReportList';
 import useParamsState from '../useParamsState';
+import { Divider } from 'antd';
 
 const reportList: any = initReportList(list as any);
 
@@ -18,21 +19,46 @@ const {
 export default function () {
   const { params, setPartialParams } = useParamsState();
   return (
-    <IndicatorSelect
-      {...{
-        mapGroupToLabelList,
-        mapIndicatorNameToDetail,
-        subjects: searchFilters.subjects,
-        flatIndicators,
-        reportList,
-        params,
-        paramsShadow: undefined,
-        setPartialParams,
-        unionOfGroupFilter: [],
-        onChangeReport: () => {},
-        resetQueryOnParamChange: () => {},
-        mapGroupCnameToSelects,
-      }}
-    />
+    <div>
+      <IndicatorSelect
+        {...{
+          offsetTop: 60,
+          top: 0,
+          maxHeight: 400,
+          mapGroupToLabelList,
+          mapIndicatorNameToDetail,
+          subjects: searchFilters.subjects,
+          flatIndicators,
+          reportList,
+          params,
+          paramsShadow: undefined,
+          setPartialParams,
+          unionOfGroupFilter: [],
+          onChangeReport: () => {},
+          resetQueryOnParamChange: () => {},
+          mapGroupCnameToSelects,
+        }}
+      />
+      <Divider />
+      <IndicatorSelect
+        {...{
+          offsetTop: 60,
+          // top: 0,
+          maxHeight: 'auto',
+          mapGroupToLabelList,
+          mapIndicatorNameToDetail,
+          subjects: searchFilters.subjects,
+          flatIndicators,
+          reportList,
+          params,
+          paramsShadow: undefined,
+          setPartialParams,
+          unionOfGroupFilter: [],
+          onChangeReport: () => {},
+          resetQueryOnParamChange: () => {},
+          mapGroupCnameToSelects,
+        }}
+      />
+    </div>
   );
 }

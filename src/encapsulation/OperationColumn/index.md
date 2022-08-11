@@ -1,5 +1,5 @@
 ---
-title: ReportOperate 报表、预设组 信息组件
+title: OperationColumn 预设组 列表操作组件
 nav:
 title: 组件
 path: /components
@@ -7,7 +7,7 @@ group:
 path: /components
 ---
 
-# ReportOperate 七巧板、丰和数据统计 共同使用
+# OperationColumn 七巧板、丰和数据统计 共同使用
 
 ## 使用
 

@@ -25,6 +25,7 @@ type IProps = Omit<
   IShortCutProps,
   ['allCollaps', 'setAllCollaps', 'unionOfGroupFilter'][number]
 > & {
+  maxHeight?: number | string;
   mapGroupToLabelList: Record<string, string[]>;
   subjects: ISubjects;
   mapIndicatorNameToDetail: IMapIndicatorNameToDetail;
@@ -33,8 +34,11 @@ type IProps = Omit<
 
 const IndicatorSelect: React.FC<IProps> = (props) => {
   const {
+    maxHeight = 400,
     initConfigId,
     offsetTop,
+    top,
+    zIndex,
     params,
     paramsShadow,
     setPartialParams,
@@ -67,6 +71,8 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
   const shortCutProps: IShortCutProps = {
     initConfigId,
     offsetTop,
+    top,
+    zIndex,
     params,
     paramsShadow,
     setPartialParams,
@@ -114,7 +120,11 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
   };
 
   return (
-    <Card bodyStyle={bodyStyle} bordered={false}>
+    <Card
+      bodyStyle={bodyStyle}
+      bordered={false}
+      style={{ maxHeight, overflow: 'auto' }}
+    >
       <div style={{ flex: 1, maxWidth: '100%' }}>
         <ShortCut {...shortCutProps} />
         <SelectSubject {...selectSubjectProps} />

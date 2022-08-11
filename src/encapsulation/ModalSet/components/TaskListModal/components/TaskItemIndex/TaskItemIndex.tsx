@@ -8,7 +8,7 @@ import {
   progressClassNameMap,
   statusPropMap,
 } from '../../../../../ModalSet/enum';
-import { IStatusListItem } from '../../../TaskModal/useStatusList';
+import type { IStatusListItem } from '../../../TaskModal/useStatusList';
 
 export type ISourceItem = {
   name: string;

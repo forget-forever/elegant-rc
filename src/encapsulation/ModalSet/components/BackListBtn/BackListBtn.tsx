@@ -29,10 +29,12 @@ const BackListBtn = (props: IProps) => {
   const count = (Array.isArray(backTaskList) ? backTaskList : []).filter(
     (ele) => ele.isUnread,
   ).length;
+
+  const text = `${empName}${empNum ? `(${empNum})` : ''}`;
   const child = (
     <Button onClick={onClick} className={'backBtn'} style={{ top, right }}>
       <Badge count={count} size="small">
-        {empName}({empNum})
+        {text}
       </Badge>
     </Button>
   );

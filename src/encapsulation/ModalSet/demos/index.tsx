@@ -4,9 +4,9 @@ import { Button, Space } from 'antd';
 import { ModalKind } from '../../IndicatorSelect/enum';
 import useParamsState from '../../IndicatorSelect/useParamsState';
 import { isRefreshSessionKeySetter } from '../components/FeedBack/isRefreshSessionKeySetter';
-import initSearchFilters from '../../IndicatorSelect/demos/initSearchFilters';
+import initSearchFilters from '../../ReportOperate/utils/initSearchFilters';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';
-import { ISearchData } from '../../IndicatorSelect';
+import type { ISearchData } from '../../IndicatorSelect';
 
 const { mapIndicatorNameToDetail, mapDimNameToDetail } = initSearchFilters(
   searchFilters as ISearchData,
@@ -174,7 +174,7 @@ export default function () {
       />
       <TaskListModal
         modalKind={state.modalKind}
-        setTaskManageState={setTaskManageState}
+        onCancel={() => setTaskManageState({ modalKind: ModalKind.NONE })}
         backTaskList={backTaskList}
         onItemCancelSearchClick={() => {}}
         onItemCheckData={() => {}}

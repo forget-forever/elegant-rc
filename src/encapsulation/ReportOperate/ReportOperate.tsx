@@ -1,4 +1,5 @@
 import React from 'react';
+import type { SelectProps } from 'antd';
 import {
   Card,
   Input,
@@ -13,44 +14,36 @@ import {
   InputNumber,
   Divider,
   Spin,
-  SelectProps,
-  TreeSelectProps,
 } from 'antd';
 import './index.css';
+import type { IDateTypeConfigBo } from './constant';
 import {
   dateTypeOptions,
   formLayout,
-  IDateTypeConfigBo,
   initDateTypeConfigBo,
   mapDateTypeToConfigBo,
   weekOptions,
 } from './constant';
-import {
-  IFilterChecked,
-  IMapDimGroupCnameToIndicators,
-  IMapDimNameToDetail,
-  IMapIndicatorNameToDetail,
-} from '../IndicatorSelect';
+import type { ISearchData } from '../IndicatorSelect';
 import DimFilter from '../DimFilter';
 import { EGroupByDate } from './enum';
 import useDimFilterProps from './useDimFilterProps';
 import { useTreeData } from './useTreeData';
 import useForceUpdate from './useForceUpdate';
 import useDateTypeConfigBo from './useDateTypeConfigBo';
+import useSearchFiltersKit from './utils/useSearchFiltersKit';
+import useGroupOptionsGetter from './utils/useGroupOptionsGetter';
 
 const FormItem = Form.Item;
 
 type IProps = {
   // 状态
   loading?: boolean;
+  searchData: ISearchData;
   // 类型的数组
-  kindOptions?: { label: string; value: string }[];
-  // 选择的指标
-  selects: Parameters<typeof useTreeData>[0]['selects'];
+  kindOptions?: { label: string; value: number }[];
   // 主题选项
   themeOptions: SelectProps['options'];
-  // 分组选项
-  groupOptionsGetter: (s: string[]) => SelectProps['children'];
   // 提交回调
   onClickSubmit: (...arg: any[]) => void;
   // 取消回调
@@ -68,10 +61,6 @@ type IProps = {
       typeof useDimFilterProps
     >[0]['initialValues']['condition'];
   };
-  // DimFilter 使用
-  mapDimNameToDetail: IMapDimNameToDetail;
-  mapDimGroupCnameToIndicators: IMapDimGroupCnameToIndicators;
-  mapIndicatorNameToDetail: IMapIndicatorNameToDetail;
   getSearchList: (params: {
     where_name: string;
     keyword?: string;
@@ -80,23 +69,30 @@ type IProps = {
 const ReportOperate: React.FC<IProps> = (props) => {
   const {
     loading = false,
+    searchData,
     kindOptions = [
       { label: '预设组', value: 0 },
       { label: '报表', value: 1 },
     ],
-    selects,
     themeOptions,
-    groupOptionsGetter,
     onClickSubmit,
     onClickCancel,
     initialValues,
-    mapDimNameToDetail,
-    mapDimGroupCnameToIndicators,
-    mapIndicatorNameToDetail,
     getSearchList,
   } = props;
 
   const forceUpdate = useForceUpdate();
+  const { searchFiltersKit } = useSearchFiltersKit(searchData);
+  const {
+    searchFilters,
+    mapDimNameToDetail,
+    mapDimGroupCnameToIndicators,
+    mapIndicatorNameToDetail,
+  } = searchFiltersKit;
+
+  const { dims, selects } = searchFilters;
+
+  const groupOptionsGetter = useGroupOptionsGetter(dims, mapDimNameToDetail);
 
   const disabled = false;
   const [form] = Form.useForm();
@@ -147,7 +143,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                   } else {
                     form.setFieldsValue({
                       dateType: dateTypeOptions
-                        .map((e) => e.value)
+                        .map((el) => el.value)
                         .includes(initialValues.dateType as any)
                         ? initialValues.dateType
                         : 1,
