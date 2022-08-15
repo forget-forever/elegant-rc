@@ -219,7 +219,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                       onChange={() =>
                         setDateTypeConfigBo({
                           ...initDateTypeConfigBo,
-                          goBackXDay: 0,
+                          goBackXDay: 1,
                         })
                       }
                     >
