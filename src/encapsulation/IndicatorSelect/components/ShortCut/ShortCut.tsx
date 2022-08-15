@@ -157,23 +157,25 @@ const ShortCut: React.FC<IShortCutProps> = (props) => {
                 }
                 return !!group?.children?.includes(input as any);
               }}
-              placeholder="请选择"
+              placeholder={`请选择${reportList.map((e) => e.label).join('/')}`}
               value={reportOrPreinstallValue}
             >
-              {reportList.map((item, index) => {
-                return (
-                  <OptGroup key={item.label} label={item.label}>
-                    {item.list.map((ele: any) => (
-                      <Option
-                        key={`${item.label}${ele.label}${ele.value}`}
-                        value={ele.value}
-                      >
-                        {ele.label}
-                      </Option>
-                    ))}
-                  </OptGroup>
-                );
-              })}
+              {reportList
+                .filter((e) => e.list.length > 0)
+                .map((item, index) => {
+                  return (
+                    <OptGroup key={item.label} label={item.label}>
+                      {item.list.map((ele: any) => (
+                        <Option
+                          key={`${item.label}${ele.label}${ele.value}`}
+                          value={ele.value}
+                        >
+                          {ele.label}
+                        </Option>
+                      ))}
+                    </OptGroup>
+                  );
+                })}
             </Select>
           </div>
           <Button

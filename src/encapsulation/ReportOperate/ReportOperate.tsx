@@ -54,7 +54,7 @@ type IProps = {
     reportTheme?: string;
     dateType?: number;
     selects: string[];
-    group?: [];
+    group?: string[];
     groupByDate?: number | null;
     dateTypeConfigBo?: IDateTypeConfigBo;
     condition?: Parameters<
