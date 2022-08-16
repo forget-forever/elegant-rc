@@ -49,6 +49,7 @@ type IFormData = {
 type IProps = {
   // 状态
   loading?: boolean;
+  disabled?: boolean;
   searchData: ISearchData;
   // 类型的数组
   kindOptions?: { label: string; value: number }[];
@@ -83,6 +84,7 @@ type IProps = {
 const ReportOperate: React.FC<IProps> = (props) => {
   const {
     loading = false,
+    disabled = false,
     searchData,
     kindOptions = [
       { label: '预设组', value: 0 },
@@ -108,7 +110,6 @@ const ReportOperate: React.FC<IProps> = (props) => {
 
   const groupOptionsGetter = useGroupOptionsGetter(dims, mapDimNameToDetail);
 
-  const disabled = false;
   const [form] = Form.useForm();
   const { dateTypeConfigBo, setDateTypeConfigBo } = useDateTypeConfigBo(
     initialValues.dateTypeConfigBo,
@@ -156,6 +157,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
               rules={[{ required: true, message: '类别必选' }]}
             >
               <Radio.Group
+                disabled={disabled}
                 onChange={(e) => {
                   const { value } = e.target;
                   if (value === 0) {
@@ -193,6 +195,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
               rules={[{ required: true, message: '名称必填' }]}
             >
               <Input
+                disabled={disabled}
                 onChange={() => forceUpdate()}
                 maxLength={50}
                 placeholder="请输入名称"
@@ -204,6 +207,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
               rules={[{ required: true, message: '主题必选' }]}
             >
               <Select
+                disabled={disabled}
                 onChange={() => forceUpdate()}
                 placeholder="请选择主题"
                 options={themeOptions}
@@ -216,6 +220,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
               rules={[{ required: true, message: '日期必选' }]}
             >
               <Radio.Group
+                disabled={disabled}
                 buttonStyle="solid"
                 onChange={(e) => {
                   setDateTypeConfigBo(mapDateTypeToConfigBo[e.target.value]);
@@ -239,6 +244,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 {form.getFieldValue('dateType') === 1 && (
                   <>
                     <Radio
+                      disabled={disabled}
                       checked={yesterdayChecked}
                       onChange={() => {
                         setYesterdayChecked(true);
@@ -251,6 +257,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                       昨日
                     </Radio>
                     <Radio
+                      disabled={disabled}
                       checked={!yesterdayChecked}
                       onChange={() => {
                         setYesterdayChecked(false);
@@ -264,7 +271,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                         <span className="date_prefix_text">往前</span>
                         <InputNumber
                           min={1}
-                          disabled={yesterdayChecked}
+                          disabled={disabled || yesterdayChecked}
                           style={{ width: 100 }}
                           value={dateTypeConfigBo.goBackXDay}
                           onChange={(e) =>
@@ -285,6 +292,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 {form.getFieldValue('dateType') === 5 && (
                   <>
                     <Radio
+                      disabled={disabled}
                       checked={dateTypeConfigBo.ifNatureWeek}
                       onChange={() =>
                         setDateTypeConfigBo({
@@ -299,6 +307,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                       </span>
                     </Radio>
                     <Radio
+                      disabled={disabled}
                       checked={!dateTypeConfigBo.ifNatureWeek}
                       onChange={() =>
                         setDateTypeConfigBo({
@@ -311,7 +320,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                       <Space>
                         <span className="date_prefix_text">每周</span>
                         <Select
-                          disabled={dateTypeConfigBo.ifNatureWeek}
+                          disabled={disabled || dateTypeConfigBo.ifNatureWeek}
                           onClick={(e) => e.preventDefault()}
                           options={weekOptions}
                           style={{ width: 100 }}
@@ -334,6 +343,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 {form.getFieldValue('dateType') === 10 && (
                   <>
                     <Radio
+                      disabled={disabled}
                       checked={dateTypeConfigBo.ifNatureMonth}
                       onChange={() =>
                         setDateTypeConfigBo({
@@ -349,6 +359,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                       </span>
                     </Radio>
                     <Radio
+                      disabled={disabled}
                       checked={!dateTypeConfigBo.ifNatureMonth}
                       onChange={() =>
                         setDateTypeConfigBo({
@@ -361,7 +372,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                       <Space>
                         <span className="date_prefix_text">每月</span>
                         <InputNumber
-                          disabled={dateTypeConfigBo.ifNatureMonth}
+                          disabled={disabled || dateTypeConfigBo.ifNatureMonth}
                           min={1}
                           max={31}
                           onClick={(e) => e.preventDefault()}
@@ -395,6 +406,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
               rules={[{ required: true, message: '指标必选' }]}
             >
               <TreeSelect
+                disabled={disabled}
                 onChange={() => forceUpdate()}
                 style={{ maxHeight: 116, overflowY: 'auto' }}
                 treeData={treeData}
@@ -410,7 +422,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 onChange={() => forceUpdate()}
                 allowClear
                 mode="multiple"
-                disabled={false}
+                disabled={disabled}
                 optionFilterProp="label"
                 style={{ minWidth: 277 }}
               >
@@ -418,14 +430,14 @@ const ReportOperate: React.FC<IProps> = (props) => {
               </Select>
             </FormItem>
             <FormItem label="按日期分组" name="groupByDate">
-              <Radio.Group onChange={() => forceUpdate()}>
+              <Radio.Group onChange={() => forceUpdate()} disabled={disabled}>
                 <Radio value={EGroupByDate.ALL}>查询所有</Radio>
                 <Radio value={EGroupByDate.DAILY}>按天查询</Radio>
               </Radio.Group>
             </FormItem>
             <FormItem label="筛选条件">
               <DimFilter
-                disabled={false}
+                disabled={disabled}
                 disableHandel={(dim) => {
                   return !!mapDimNameToDetail
                     .get(dim.name)
@@ -442,6 +454,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
               <Col offset={3}>
                 <Space>
                   <Button
+                    hidden={disabled}
                     type="primary"
                     onClick={() => {
                       form.validateFields().then((values) => {

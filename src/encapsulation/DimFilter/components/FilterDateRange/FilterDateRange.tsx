@@ -6,6 +6,7 @@ import type { RangeValue } from 'rc-picker/lib/interface';
 import FilterDateSelect from '../FilterDateSelect';
 
 type IProps = {
+  disabled?: boolean;
   filterIndex: IFilterChecked[];
   setFilterIndex: (data: IFilterChecked[]) => void;
   where: IFilterChecked;
@@ -43,7 +44,7 @@ const FilterDateRange: React.FC<IProps> = (props) => {
         value={value}
         setValue={changeHandle}
         dataLength={30}
-        disabled={disabled}
+        disabled={props.disabled || disabled}
       />
     </>
   );

@@ -152,6 +152,7 @@ const DimFilter: React.FC<IFilterIndex> = (props) => {
               where.type || mapDimNameToDetail.get(where.key)?.type,
             ) ? (
               <FilterDateRange
+                disabled={disabled}
                 filterIndex={filterIndex}
                 setFilterIndex={setFilterIndex}
                 index={index}
@@ -159,6 +160,7 @@ const DimFilter: React.FC<IFilterIndex> = (props) => {
               />
             ) : (
               <SelectInput
+                disabled={disabled}
                 where={where}
                 optionsRecord={optionsRecord}
                 setOptionsRecord={setOptionsRecord}

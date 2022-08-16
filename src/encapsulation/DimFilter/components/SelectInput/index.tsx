@@ -15,6 +15,7 @@ const judgeOptions = [
   },
 ];
 type IProps = {
+  disabled?: boolean;
   optionsRecord: Record<string, SelectProps['options']>;
   setOptionsRecord: React.Dispatch<
     React.SetStateAction<Record<string, SelectProps['options']>>
@@ -30,6 +31,7 @@ type IProps = {
 };
 const SelectInput: React.FC<IProps> = (props) => {
   const {
+    disabled = false,
     optionsRecord,
     setOptionsRecord,
     where,
@@ -80,7 +82,7 @@ const SelectInput: React.FC<IProps> = (props) => {
       <Select
         style={{ width: 120, marginRight: '20px' }}
         value={where.judge}
-        disabled={!where.key.length}
+        disabled={disabled || !where.key.length}
         onChange={(val) => judgeHandle(val)}
         options={judgeOptions}
       />
@@ -89,7 +91,7 @@ const SelectInput: React.FC<IProps> = (props) => {
         maxTagCount={4}
         style={{ minWidth: 200, marginRight: '20px', maxWidth: 300 }}
         value={where.value}
-        disabled={!where.key.length}
+        disabled={disabled || !where.key.length}
         placeholder="请输入/选择"
         notFoundContent={fetching ? <Spin size="small" /> : null}
         filterOption={false}

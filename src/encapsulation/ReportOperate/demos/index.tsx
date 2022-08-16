@@ -1,5 +1,5 @@
 import { ReportOperate } from 'tc-rc';
-import { Radio, Divider } from 'antd';
+import { Radio, Divider, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';
 import type { ISearchData } from '../../IndicatorSelect';
@@ -20,6 +20,7 @@ const themeOptions = [
 
 export default function () {
   const [eg, setEg] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const [initialValues, setInitialValues] = useState({
     selects: [] as string[],
     groupByDate: 0,
@@ -65,9 +66,16 @@ export default function () {
         <Radio value={1}>报表 示例</Radio>
       </Radio.Group>
       <Divider />
+      <Checkbox
+        checked={disabled}
+        onChange={(e) => setDisabled(e.target.checked)}
+      >
+        禁用
+      </Checkbox>
+      <Divider />
       <ReportOperate
-        key={JSON.stringify(initialValues)}
         loading={loading}
+        disabled={disabled}
         searchData={searchFilters as ISearchData}
         themeOptions={themeOptions}
         onClickSubmit={onClickSubmit}
