@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import type { SelectProps } from 'antd';
 import {
   Card,
@@ -24,7 +24,7 @@ import {
   mapDateTypeToConfigBo,
   weekOptions,
 } from './constant';
-import type { ISearchData } from '../IndicatorSelect';
+import type { IFilterChecked, ISearchData } from '../IndicatorSelect';
 import DimFilter from '../DimFilter';
 import { EGroupByDate } from './enum';
 import useDimFilterProps from './useDimFilterProps';
@@ -36,6 +36,16 @@ import useGroupOptionsGetter from './utils/useGroupOptionsGetter';
 
 const FormItem = Form.Item;
 
+type IFormData = {
+  reportOrPreinstall: number;
+  reportName: string;
+  reportTheme: string;
+  dateType: number;
+  selects: string[];
+  group: string[];
+  groupByDate: number;
+};
+
 type IProps = {
   // 状态
   loading?: boolean;
@@ -45,7 +55,11 @@ type IProps = {
   // 主题选项
   themeOptions: SelectProps['options'];
   // 提交回调
-  onClickSubmit: (...arg: any[]) => void;
+  onClickSubmit: (
+    values: IFormData,
+    dateTypeConfigBo: IDateTypeConfigBo,
+    filterIndex: IFilterChecked[],
+  ) => void;
   // 取消回调
   onClickCancel: () => void;
   initialValues: {
@@ -114,6 +128,13 @@ const ReportOperate: React.FC<IProps> = (props) => {
 
   const hideKindRadio = !(kindOptions?.length > 1);
 
+  const [yesterdayChecked, setYesterdayChecked] = useState(true);
+
+  useEffect(() => {
+    if (dateTypeConfigBo.goBackXDay > 1) {
+      setYesterdayChecked(false);
+    }
+  }, []);
   return (
     <>
       <pre hidden={!localStorage.getItem('debug')}>
@@ -215,36 +236,38 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 {form.getFieldValue('dateType') === 1 && (
                   <>
                     <Radio
-                      checked={dateTypeConfigBo.goBackXDay === 0}
-                      onChange={() =>
+                      checked={yesterdayChecked}
+                      onChange={() => {
+                        setYesterdayChecked(true);
                         setDateTypeConfigBo({
                           ...initDateTypeConfigBo,
                           goBackXDay: 1,
-                        })
-                      }
+                        });
+                      }}
                     >
                       昨日
                     </Radio>
                     <Radio
-                      checked={dateTypeConfigBo.goBackXDay !== 0}
-                      onChange={() =>
+                      checked={!yesterdayChecked}
+                      onChange={() => {
+                        setYesterdayChecked(false);
                         setDateTypeConfigBo({
                           ...initDateTypeConfigBo,
                           goBackXDay: 1,
-                        })
-                      }
+                        });
+                      }}
                     >
                       <Space>
                         <span className="date_prefix_text">往前</span>
                         <InputNumber
                           min={1}
-                          disabled={dateTypeConfigBo.goBackXDay === 0}
+                          disabled={yesterdayChecked}
                           style={{ width: 100 }}
                           value={dateTypeConfigBo.goBackXDay}
                           onChange={(e) =>
                             setDateTypeConfigBo({
                               ...initDateTypeConfigBo,
-                              goBackXDay: Number(e) || 0,
+                              goBackXDay: Number(e) || 1,
                             })
                           }
                         />

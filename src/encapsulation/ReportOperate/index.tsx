@@ -1,3 +1,8 @@
 import ReportOperate from './ReportOperate';
+import { GetIProps } from 'tc-rc';
 
-export default ReportOperate;
+type ReportOperateProps = GetIProps<typeof ReportOperate>;
+
+export default (props: ReportOperateProps) => (
+  <ReportOperate key={JSON.stringify(props.initialValues)} {...props} />
+);
