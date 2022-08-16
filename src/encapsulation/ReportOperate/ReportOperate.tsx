@@ -133,8 +133,10 @@ const ReportOperate: React.FC<IProps> = (props) => {
   useEffect(() => {
     if (dateTypeConfigBo.goBackXDay > 1) {
       setYesterdayChecked(false);
+    } else {
+      setYesterdayChecked(true);
     }
-  }, []);
+  }, [dateTypeConfigBo.goBackXDay]);
   return (
     <>
       <pre hidden={!localStorage.getItem('debug')}>
@@ -217,6 +219,7 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 buttonStyle="solid"
                 onChange={(e) => {
                   setDateTypeConfigBo(mapDateTypeToConfigBo[e.target.value]);
+                  setYesterdayChecked(true);
                   forceUpdate();
                 }}
               >

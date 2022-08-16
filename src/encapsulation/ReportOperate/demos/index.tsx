@@ -1,37 +1,9 @@
 import { ReportOperate } from 'tc-rc';
-import { Select, Radio, Divider } from 'antd';
+import { Radio, Divider } from 'antd';
 import { useEffect, useState } from 'react';
-import initSearchFilters from '../utils/initSearchFilters';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';
 import type { ISearchData } from '../../IndicatorSelect';
 import { reportDetail, preinstallDetail } from './reportDetail';
-
-const {
-  mapDimNameToDetail,
-  mapDimGroupCnameToIndicators,
-  mapIndicatorNameToDetail,
-} = initSearchFilters(searchFilters as ISearchData);
-
-const { Option, OptGroup } = Select;
-
-const groupOptionsGetter = (checkedIndicators: string[]) =>
-  searchFilters.dims.map((item) => (
-    <OptGroup label={item.label} key={item.label}>
-      {item.option
-        .filter((ele) => ele.is_groupby)
-        .map(({ name, show_name }) => (
-          <Option
-            value={name}
-            key={name}
-            disabled={mapDimNameToDetail
-              .get(name)
-              ?.getDisabled(checkedIndicators)}
-          >
-            {show_name}
-          </Option>
-        ))}
-    </OptGroup>
-  ));
 
 const themeOptions = [
   '订单规模',

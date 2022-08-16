@@ -42,7 +42,7 @@ export const initDateTypeConfigBo: IDateTypeConfigBo = {
 };
 
 export const mapDateTypeToConfigBo = {
-  1: initDateTypeConfigBo,
+  1: { ...initDateTypeConfigBo, goBackXDay: 1 },
   5: { ...initDateTypeConfigBo, ifNatureWeek: true },
   10: { ...initDateTypeConfigBo, ifNatureMonth: true },
   15: initDateTypeConfigBo,
