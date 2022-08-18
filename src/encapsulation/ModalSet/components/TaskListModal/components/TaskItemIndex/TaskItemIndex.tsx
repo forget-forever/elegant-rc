@@ -30,7 +30,7 @@ type IProps = {
   onItemCheckProgress: (index?: undefined | number) => void;
   onItemDownloadBackDataClick: (index?: undefined | number) => void;
   onItemSaveBackDataClick: (index?: undefined | number) => void;
-  updateDownloadName: (searchId: string, name: string) => void;
+  updateDownloadName?: (searchId: string, name: string) => void;
   searchOnRefresh: (searchId?: string) => void;
   onItemTry: (index: number) => void;
   onItemModifyCondition: (index: number) => void;
@@ -68,9 +68,11 @@ const TaskItemIndex: React.FC<IProps> = (props) => {
   const onInputBlur = () => {
     setDisabledEdit(true);
     if (showName !== name) {
-      updateDownloadName(searchId!, showName);
+      updateDownloadName?.(searchId!, showName);
     }
   };
+
+  const editable = !!updateDownloadName;
 
   useEffect(() => {
     setShowName(name);
@@ -83,7 +85,10 @@ const TaskItemIndex: React.FC<IProps> = (props) => {
       </div>
       <div className={classnames('dot', { unread: isUnread })} />
       <div className={'itemContent'}>
-        <div title="双击编辑名称" onDoubleClick={() => setDisabledEdit(false)}>
+        <div
+          title={(editable && '双击编辑名称') || ''}
+          onDoubleClick={() => editable && setDisabledEdit(false)}
+        >
           {disabledEdit ? (
             <span className={'showName'}>{showName}</span>
           ) : (
