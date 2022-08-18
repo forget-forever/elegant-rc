@@ -90,7 +90,9 @@ const TaskItemIndex: React.FC<IProps> = (props) => {
           onDoubleClick={() => editable && setDisabledEdit(false)}
         >
           {disabledEdit ? (
-            <span className={'showName'}>{showName}</span>
+            <span className={classnames({ showName: editable })}>
+              {showName}
+            </span>
           ) : (
             <Input
               autoFocus

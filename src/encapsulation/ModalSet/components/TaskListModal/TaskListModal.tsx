@@ -3,7 +3,6 @@ import { Modal } from 'antd';
 import type { ISourceItem } from './components/TaskItemIndex/TaskItemIndex';
 import TaskItemIndex from './components/TaskItemIndex/TaskItemIndex';
 import { ModalKind } from '../../../IndicatorSelect/enum';
-import './index.css';
 
 type IProps = {
   modalKind: ModalKind;
@@ -48,6 +47,7 @@ const TaskListModal: React.FC<IProps> = (props) => {
       wrapClassName={'wrapTaskListModal'}
       zIndex={1100}
       maskClosable={false}
+      bodyStyle={{ background: '#ccc' }}
     >
       {(Array.isArray(backTaskList) &&
         backTaskList.length > 0 &&
