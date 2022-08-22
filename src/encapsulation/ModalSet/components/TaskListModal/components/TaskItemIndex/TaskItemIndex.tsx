@@ -67,7 +67,7 @@ const TaskItemIndex: React.FC<IProps> = (props) => {
   const [disabledEdit, setDisabledEdit] = useState<boolean>(true);
   const onInputBlur = () => {
     setDisabledEdit(true);
-    if (showName !== name) {
+    if (showName !== name && showName.trim()) {
       updateDownloadName?.(searchId!, showName);
     }
   };
@@ -91,7 +91,7 @@ const TaskItemIndex: React.FC<IProps> = (props) => {
         >
           {disabledEdit ? (
             <span className={classnames({ showName: editable })}>
-              {showName}
+              {showName || '双击编辑名称'}
             </span>
           ) : (
             <Input
