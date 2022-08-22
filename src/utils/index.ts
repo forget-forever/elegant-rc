@@ -4,3 +4,5 @@ export * from './utils';
 export * from './styles';
 
 export * from './getNumber';
+
+export * from './selectOprions';
