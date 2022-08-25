@@ -5,4 +5,4 @@ export * from './styles';
 
 export * from './getNumber';
 
-export * from './selectOprions';
+export * from './selectOptions';
