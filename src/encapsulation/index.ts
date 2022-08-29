@@ -22,6 +22,7 @@ import BtnPannel from './BtnPannel';
 import ReportOperate from './ReportOperate';
 import OperationColumn from './OperationColumn';
 import ReportShare from './ReportShare';
+import ProTable from './ProTable';
 
 export {
   ButtonAsync,
@@ -43,4 +44,5 @@ export {
   ReportOperate,
   OperationColumn,
   ReportShare,
+  ProTable,
 };
