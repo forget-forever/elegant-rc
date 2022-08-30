@@ -1,4 +1,4 @@
-import { IOptions } from 'tc-rc';
+import type { IOptions } from 'tc-rc';
 
 /**
  * Select组件的filterOption筛选方法

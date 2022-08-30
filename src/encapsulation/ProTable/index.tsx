@@ -4,7 +4,7 @@ import { useMemoizedFn } from 'ahooks';
 import { uniqueId } from 'lodash';
 import type { Moment } from 'moment';
 import { useMemo } from 'react';
-import { OmitVoid } from 'tc-rc';
+import type { OmitVoid } from 'tc-rc';
 import { useSearchSpanEffect } from './hooks';
 import './styles.less';
 import type { ParamsType, ProTableType, ProTableTypeReq } from './types';

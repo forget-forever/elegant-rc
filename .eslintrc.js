@@ -13,6 +13,8 @@ module.exports = {
     sourceType: 'module',
   },
   rules: {
+    'react-hooks/exhaustive-deps': 'warn',
+    '@typescript-eslint/consistent-type-imports': 1,
     'no-restricted-syntax': 0,
     'import/no-unresolved': 0,
     camelcase: 0,
@@ -21,7 +23,6 @@ module.exports = {
     'no-useless-escape': 0,
     'no-unneeded-ternary': 0,
     '@typescript-eslint/no-unused-vars': 0,
-    'react-hooks/exhaustive-deps': 'warn',
     'no-constant-binary-expression': 0,
     'no-unused-private-class-members': 0,
     'prefer-object-has-own': 0,
