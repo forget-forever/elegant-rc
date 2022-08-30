@@ -7,28 +7,7 @@ import { useMemo } from 'react';
 import { OmitVoid } from 'tc-rc';
 import { useSearchSpanEffect } from './hooks';
 import './styles.less';
-import type {
-  Column,
-  ParamsType,
-  ProTableType,
-  ProTableTypeReq,
-} from './types';
-
-/**
- * 二次封装一下Columns, 增加了dataIndex的限制, dataIndex为‘options’的时候会默认固定右边
- * @param list 与ProColumns配置一致，增加了searchSpan属性调搜索框的宽度
- * @returns 返回一个新的ProColumns
- */
-export const renderColumns = <T extends ParamsType = ParamsType>(
-  list: Column<T>[],
-): Column<T>[] =>
-  list.map((item) => ({
-    hideInSearch: true,
-    fixed: item.dataIndex === 'options' ? 'right' : undefined,
-    width: '178px',
-    valueType: item.title?.toString().includes('时间') ? 'dateTime' : undefined,
-    ...item,
-  }));
+import type { ParamsType, ProTableType, ProTableTypeReq } from './types';
 
 const defaultHeader = <div style={{ height: 16, display: 'none' }} />;
 

@@ -25,13 +25,13 @@ export const useSearchSpanEffect = <R extends ParamsType>(
 
   useEffect(() => {
     const domList = document.querySelectorAll(
-      `.${fcid} .data-govern-form .data-govern-col[style="padding-left: 12px; padding-right: 12px;`,
+      `.${fcid} [class*="-form"] [class*="-col"]:not([class*="-form-item"])`,
     );
     spanCols.forEach((ele, index) => {
       if (ele && domList[index]) {
         domList[index].className = domList[index].className.replace(
-          /data\-govern\-col-(\d)+/g,
-          `data-govern-col-${ele.toFixed(0)}`,
+          /( )+(.*)\-col\-(\d)/g,
+          `$1$2-col-${ele.toFixed(0)}`,
         );
       }
     });

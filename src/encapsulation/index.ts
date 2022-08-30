@@ -46,3 +46,5 @@ export {
   ReportShare,
   ProTable,
 };
+
+export * from './ProTable/utils';

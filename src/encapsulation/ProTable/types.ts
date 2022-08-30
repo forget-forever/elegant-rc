@@ -17,7 +17,7 @@ export type Column<T extends ParamsType = ParamsType> = MyOmit<
   'dataIndex'
 > & {
   dataIndex?: keyof T | 'options';
-  /** search表单中的栅格位置 */
+  /** search表单中的栅格大小，如果调用的是本组件库中的ProTable，那这一项就会生效 */
   searchSpan?: number;
 };
 export type ProTableType<R extends ParamsType, P, V = 'text'> = MyOmit<
