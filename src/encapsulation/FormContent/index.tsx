@@ -4,8 +4,9 @@
  * @LastEditTime: 2022-06-23 19:35:14
  */
 import { Col, Form } from 'antd';
-import { CSSProperties, useMemo } from 'react';
-import { FCProps, GetIProps, MyOmit } from 'tc-rc';
+import type { CSSProperties } from 'react';
+import { useMemo } from 'react';
+import type { FCProps, GetIProps, MyOmit } from 'tc-rc';
 
 const FormContent: FCProps<
   MyOmit<GetIProps<typeof Form.Item>, 'required'> & {

@@ -7,7 +7,8 @@ import React from 'react';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { useMemoizedFn } from 'ahooks';
 import { Col } from 'antd';
-import { CSSProperties, useMemo } from 'react';
+import type { CSSProperties } from 'react';
+import { useMemo } from 'react';
 import { noPaddingStyle } from 'tc-rc';
 
 const containerStyle: CSSProperties = {
