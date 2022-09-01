@@ -1,18 +1,20 @@
-import React, { useState, CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
+import React, { useState } from 'react';
 import { Button, Checkbox, message, Modal, Card } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import {
+import type {
   TDataSourceParams,
   TDataSourceParamsPartial,
 } from 'src/encapsulation/IndicatorSelect';
 import { DeliveryType } from '../../../IndicatorSelect/enum';
 
 type IProps = {
+  disabledOther?: boolean;
   params: TDataSourceParams;
   setPartialParams: (params: TDataSourceParamsPartial) => void;
 };
 const Delivery: React.FC<IProps> = (props) => {
-  const { setPartialParams, params } = props;
+  const { disabledOther = false, setPartialParams, params } = props;
 
   const { deliveryType = 1 } = params;
 
@@ -61,17 +63,20 @@ const Delivery: React.FC<IProps> = (props) => {
         <Checkbox
           checked={[DeliveryType.SELF, DeliveryType.ALL].includes(deliveryType)}
           onChange={(e) => onChange(e.target.checked, DeliveryType.SELF)}
+          disabled={disabledOther}
         >
           自配送
         </Checkbox>
-        <Checkbox
-          checked={[DeliveryType.OTHER, DeliveryType.ALL].includes(
-            deliveryType,
-          )}
-          onChange={(e) => onChange(e.target.checked, DeliveryType.OTHER)}
-        >
-          第三方配送(餐道单)
-        </Checkbox>
+        {!disabledOther && (
+          <Checkbox
+            checked={[DeliveryType.OTHER, DeliveryType.ALL].includes(
+              deliveryType,
+            )}
+            onChange={(e) => onChange(e.target.checked, DeliveryType.OTHER)}
+          >
+            第三方配送(餐道单)
+          </Checkbox>
+        )}
       </Card>
       <Modal
         visible={visible}

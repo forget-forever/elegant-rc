@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Checkbox } from 'antd';
-import {
+import type {
   IFilterChecked,
   IMapDimGroupCnameToIndicators,
   IMapDimNameToDetail,
@@ -25,6 +25,7 @@ import {
 } from '../IndicatorSelect/common';
 
 type IProps = {
+  disabledOther?: boolean;
   hiddenDelivery?: boolean;
   disableQueryType?: boolean;
   params: TDataSourceParams;
@@ -42,6 +43,7 @@ type IProps = {
 
 const ParamData: React.FC<IProps> = (props) => {
   const {
+    disabledOther = false,
     params,
     setPartialParams,
     mapDimNameToDetail,
@@ -86,7 +88,11 @@ const ParamData: React.FC<IProps> = (props) => {
         <div style={{ ...contentItemLabel }}>数据设置</div>
         <div style={contentItemWrapper}>
           <div hidden={hiddenDelivery}>
-            <Delivery params={params} setPartialParams={setPartialParams} />
+            <Delivery
+              params={params}
+              setPartialParams={setPartialParams}
+              disabledOther={disabledOther}
+            />
           </div>
           <div className="paramDataRow">
             <DimGroupSelect
