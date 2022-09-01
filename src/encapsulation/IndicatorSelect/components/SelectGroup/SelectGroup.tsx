@@ -4,7 +4,7 @@ import {
   VerticalAlignBottomOutlined,
   VerticalAlignTopOutlined,
 } from '@ant-design/icons';
-import {
+import type {
   IMapGroupCnameToSelects,
   ISubjectItem,
   TDataSourceParams,
@@ -19,6 +19,7 @@ import {
   contentItemWrapper,
   contentItemCollaps,
 } from '../../common';
+import './index.css';
 
 type IProps = {
   index: number;

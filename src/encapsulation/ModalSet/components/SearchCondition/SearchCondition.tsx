@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Card, Divider, Input, message, Modal, Tabs } from 'antd';
 import copyToClipboard from 'copy-to-clipboard';
-import {
+import type {
   IMapDimNameToDetail,
   IMapIndicatorNameToDetail,
   TDataSourceParams,
@@ -13,6 +13,7 @@ import compactParamsJson from './compactParamsJson';
 import { ModalKind } from '../../../IndicatorSelect/enum';
 
 type IProps = {
+  hideCodePic?: boolean;
   top?: number;
   right?: number;
   zIndex?: number;
@@ -28,6 +29,7 @@ type IProps = {
 
 const SearchCondition: React.FC<IProps> = (props) => {
   const {
+    hideCodePic = false,
     top,
     right,
     zIndex,
@@ -73,6 +75,7 @@ const SearchCondition: React.FC<IProps> = (props) => {
   return (
     <>
       <FeedBack
+        hideCodePic={hideCodePic}
         top={top}
         right={right}
         zIndex={zIndex}

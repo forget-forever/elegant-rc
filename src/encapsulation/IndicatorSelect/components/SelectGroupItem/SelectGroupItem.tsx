@@ -6,7 +6,7 @@ import {
 } from '@ant-design/icons';
 import classnames from 'classnames';
 import { intersection } from 'lodash';
-import {
+import type {
   IIndicatorDetail,
   TDataSourceParams,
   TDataSourceParamsPartial,
@@ -96,7 +96,7 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
   const checkedValues = intersection(select, itemValues);
 
   return (
-    <div className={'module'}>
+    <div className="module">
       {selectsItem && (
         <>
           <div>
@@ -113,7 +113,7 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
           </div>
           <div hidden={collaps}>
             <CheckboxGroup
-              className={'checkGroup'}
+              className="checkGroup"
               onChange={(vals) => onChange(vals as string[])}
               value={checkedValues}
             >
@@ -121,7 +121,7 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
                 const checked = select.includes(item.name);
                 return (
                   <Checkbox
-                    className={'index'}
+                    className="index"
                     key={item.name}
                     value={item.name}
                     disabled={item?.getDisabled(unionOfGroupFilter)}

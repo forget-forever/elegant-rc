@@ -1,5 +1,5 @@
 import React from 'react';
-import {
+import type {
   IMapGroupCnameToSelects,
   ISubjects,
   TDataSourceParams,
@@ -37,24 +37,23 @@ const SelectSubject: React.FC<ISubjectProps> = (props) => {
 
   return (
     <div
-      className={'selectSubjectContainer'}
+      className="selectSubjectContainer"
       style={{ ...(allCollaps ? { display: 'none' } : {}) }}
     >
-      {subjects &&
-        subjects.map((subject, index) => (
-          <SelectGroup
-            params={params}
-            setPartialParams={setPartialParams}
-            index={index}
-            collapsStatus={collapsStatus}
-            setCollapsStatus={setCollapsStatus}
-            key={subject.title}
-            subject={subject}
-            generateText={generateText}
-            unionOfGroupFilter={unionOfGroupFilter}
-            mapGroupCnameToSelects={mapGroupCnameToSelects}
-          />
-        ))}
+      {subjects?.map((subject, index) => (
+        <SelectGroup
+          params={params}
+          setPartialParams={setPartialParams}
+          index={index}
+          collapsStatus={collapsStatus}
+          setCollapsStatus={setCollapsStatus}
+          key={subject.title}
+          subject={subject}
+          generateText={generateText}
+          unionOfGroupFilter={unionOfGroupFilter}
+          mapGroupCnameToSelects={mapGroupCnameToSelects}
+        />
+      ))}
     </div>
   );
 };

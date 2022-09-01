@@ -2,13 +2,12 @@ import { Button, Checkbox, Dropdown, Image, Menu, Tooltip, Affix } from 'antd';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import {
-  TDataSourceParams,
-  TDataSourceParamsPartial,
-} from '../../../IndicatorSelect';
+import type { TDataSourceParams } from '../../../IndicatorSelect';
+import { TDataSourceParamsPartial } from '../../../IndicatorSelect';
 import { ModalKind } from '../../../IndicatorSelect/enum';
 
 type IProps = {
+  hideCodePic?: boolean;
   top?: number;
   right?: number;
   zIndex?: number;
@@ -18,6 +17,7 @@ type IProps = {
 };
 const FeedBack = (props: IProps) => {
   const {
+    hideCodePic = false,
     top = 56,
     right = 60,
     zIndex,
@@ -45,27 +45,29 @@ const FeedBack = (props: IProps) => {
       <Menu.Item>
         <Button onClick={onClickCondition}>查询条件</Button>
       </Menu.Item>
-      <Menu.Item>
-        <Tooltip
-          title="若二维码失效，联系 tc014953、tc001713"
-          placement="bottom"
-          overlayStyle={{ zIndex: 999999 }}
-        >
-          <Image
-            style={{
-              padding: '2em',
-            }}
-            src="http://codepush-1258916733.cos.ap-shanghai.myqcloud.com/fe-image/data/data-family.png"
-          />
-        </Tooltip>
-      </Menu.Item>
+      {!hideCodePic && (
+        <Menu.Item>
+          <Tooltip
+            title="若二维码失效，联系 tc014953、tc001713"
+            placement="bottom"
+            overlayStyle={{ zIndex: 999999 }}
+          >
+            <Image
+              style={{
+                padding: '2em',
+              }}
+              src="http://codepush-1258916733.cos.ap-shanghai.myqcloud.com/fe-image/data/data-family.png"
+            />
+          </Tooltip>
+        </Menu.Item>
+      )}
     </Menu>
   );
 
   const node = (
     <Dropdown
       placement="bottomLeft"
-      className={'feedBack'}
+      className="feedBack"
       overlay={menu}
       // @ts-ignore
       getPopupContainer={(triggerNode) => {
