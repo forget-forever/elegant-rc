@@ -3,10 +3,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import type { TDataSourceParams } from '../../../IndicatorSelect';
-import { TDataSourceParamsPartial } from '../../../IndicatorSelect';
-import { ModalKind } from '../../../IndicatorSelect/enum';
 
 type IProps = {
+  appendBody?: boolean;
   hideCodePic?: boolean;
   top?: number;
   right?: number;
@@ -17,6 +16,7 @@ type IProps = {
 };
 const FeedBack = (props: IProps) => {
   const {
+    appendBody = false,
     hideCodePic = false,
     top = 56,
     right = 60,
@@ -86,6 +86,10 @@ const FeedBack = (props: IProps) => {
       </span>
     </Dropdown>
   );
+
+  if (!appendBody) {
+    return node;
+  }
 
   return ReactDOM.createPortal(node, document.getElementsByTagName('body')[0]);
 };

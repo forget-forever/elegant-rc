@@ -13,6 +13,7 @@ import compactParamsJson from './compactParamsJson';
 import { ModalKind } from '../../../IndicatorSelect/enum';
 
 type IProps = {
+  appendBody?: boolean;
   hideCodePic?: boolean;
   top?: number;
   right?: number;
@@ -29,6 +30,7 @@ type IProps = {
 
 const SearchCondition: React.FC<IProps> = (props) => {
   const {
+    appendBody,
     hideCodePic = false,
     top,
     right,
@@ -75,6 +77,7 @@ const SearchCondition: React.FC<IProps> = (props) => {
   return (
     <>
       <FeedBack
+        appendBody={appendBody}
         hideCodePic={hideCodePic}
         top={top}
         right={right}

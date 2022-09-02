@@ -119,6 +119,7 @@ export default function () {
           未Ready指标弹窗
         </Button>
         <SearchCondition
+          appendBody
           top={270}
           right={470}
           modalKind={state.modalKind}
@@ -139,7 +140,7 @@ export default function () {
         />
       </Space>
       <ActivityModal
-        activityModalMethodName={'beforeSearch'}
+        activityModalMethodName="beforeSearch"
         activityTips={state.activityTips}
         onActivityContinue={() =>
           setTaskManageState({
