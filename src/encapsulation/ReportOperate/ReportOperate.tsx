@@ -423,8 +423,9 @@ const ReportOperate: React.FC<IProps> = (props) => {
                 allowClear
                 mode="multiple"
                 disabled={disabled}
-                optionFilterProp="label"
+                optionFilterProp="children"
                 style={{ minWidth: 277 }}
+                showSearch
               >
                 {groupOptionsGetter(form.getFieldValue('selects') || [])}
               </Select>
