@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { Card } from 'antd';
 import ShortCut from './components/ShortCut';
 import { IShortCutProps } from './components/ShortCut/ShortCut';
@@ -85,18 +85,21 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     unionOfGroupFilter,
   };
 
-  const generateText = (ele: { explain: string; groupby: string }) => {
-    const define = `【指标定义】${ele.explain}`;
-    const belong = `【可选分组】${mapGroupToLabelList[ele.groupby]?.join(
-      '、',
-    )}`;
-    return (
-      <div style={{ color: '#000', fontSize: 10, fontWeight: 600 }}>
-        <div style={{ marginBottom: 10 }}>{define}</div>
-        {belong}
-      </div>
-    );
-  };
+  const generateText = useCallback(
+    (ele: { explain: string; groupby: string }) => {
+      const define = `【指标定义】${ele.explain}`;
+      const belong = `【可选分组】${mapGroupToLabelList[ele.groupby]?.join(
+        '、',
+      )}`;
+      return (
+        <div style={{ color: '#000', fontSize: 10, fontWeight: 600 }}>
+          <div style={{ marginBottom: 10 }}>{define}</div>
+          {belong}
+        </div>
+      );
+    },
+    [mapGroupToLabelList],
+  );
 
   const selectSubjectProps: ISubjectProps = {
     allCollaps,

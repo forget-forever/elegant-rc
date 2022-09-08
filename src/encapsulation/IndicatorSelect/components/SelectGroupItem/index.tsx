@@ -1,3 +1,4 @@
 import SelectGroupItem from './SelectGroupItem';
+import { memo } from 'react';
 
-export default SelectGroupItem;
+export default memo(SelectGroupItem);

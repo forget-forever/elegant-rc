@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { Checkbox, Tooltip } from 'antd';
 import {
   ExclamationCircleOutlined,
@@ -12,6 +12,7 @@ import type {
   TDataSourceParamsPartial,
 } from '../../index';
 import { DeliveryType } from '../../enum';
+import SelectCheckGroup from '../SelectCheckGroup';
 
 const CheckboxGroup = Checkbox.Group;
 
@@ -22,6 +23,7 @@ type IProps = {
   selectsItem: IIndicatorDetail[];
   unionOfGroupFilter: string[];
   setPartialParams: (params: TDataSourceParamsPartial) => void;
+  // eslint-disable-next-line no-undef
   generateText: (ele: { explain: string; groupby: string }) => JSX.Element;
 };
 
@@ -44,18 +46,32 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
     selectsItem.some((ele) => select.includes(ele.name)) && !groupChecked;
   const itemValues = selectsItem.map((e) => e.name);
 
-  const getNewSelect = (flagGetter: (arg: string) => boolean) => {
-    const selectSet = new Set(select);
-    itemValues.forEach((ele) => {
-      const flag = flagGetter(ele);
-      if (flag) {
-        selectSet.add(ele);
-      } else {
-        selectSet.delete(ele);
-      }
-    });
-    return [...selectSet];
-  };
+  const [entered, setEntered] = useState(false);
+
+  const onMouseEnter = useCallback(() => {
+    setEntered(true);
+  }, []);
+
+  const onMouseLeave = useCallback(() => {
+    setEntered(false);
+  }, []);
+
+  const getNewSelect = useCallback(
+    (flagGetter: (arg: string) => boolean) => {
+      const selectSet = new Set(select);
+      itemValues.forEach((ele) => {
+        const flag = flagGetter(ele);
+        if (flag) {
+          selectSet.add(ele);
+        } else {
+          selectSet.delete(ele);
+        }
+      });
+      return [...selectSet];
+    },
+    [entered && select.join()],
+  );
+
   const onChangeAll = (flag: boolean) => {
     setPartialParams({
       json: {
@@ -64,16 +80,19 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
     });
   };
 
-  const onChange = (checkedValues: string[]) => {
-    setPartialParams({
-      json: {
-        select: getNewSelect((ele) => checkedValues.includes(ele)),
-      },
-    });
-  };
+  const onChange = useCallback(
+    (checkedValues: string[]) => {
+      setPartialParams({
+        json: {
+          select: getNewSelect((ele) => checkedValues.includes(ele)),
+        },
+      });
+    },
+    [getNewSelect],
+  );
 
-  const groupNameNode =
-    groupName === '利润相关' ? (
+  const groupNameNode = useMemo(() => {
+    return groupName === '利润相关' ? (
       <Tooltip
         title={
           <div style={{ color: '#000', fontSize: 10, fontWeight: 600 }}>
@@ -92,11 +111,16 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
     ) : (
       groupName
     );
+  }, [groupName]);
 
   const checkedValues = intersection(select, itemValues);
 
   return (
-    <div className="module">
+    <div
+      className="module"
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       {selectsItem && (
         <>
           <div>
@@ -112,50 +136,15 @@ const SelectGroupItem: React.FC<IProps> = (props) => {
             </Checkbox>
           </div>
           <div hidden={collaps}>
-            <CheckboxGroup
-              className="checkGroup"
-              onChange={(vals) => onChange(vals as string[])}
-              value={checkedValues}
-            >
-              {selectsItem.map((item) => {
-                const checked = select.includes(item.name);
-                return (
-                  <Checkbox
-                    className="index"
-                    key={item.name}
-                    value={item.name}
-                    disabled={item?.getDisabled(unionOfGroupFilter)}
-                  >
-                    {item.show_name.length > 13
-                      ? `${item.show_name.slice(0, 12)}...`
-                      : item.show_name}
-                    <Tooltip
-                      title={() => generateText(item)}
-                      mouseEnterDelay={0.3}
-                      color="#fff"
-                      overlayStyle={{ maxWidth: '500px' }}
-                      placement="bottom"
-                      autoAdjustOverflow
-                    >
-                      {[DeliveryType.OTHER, DeliveryType.ALL].includes(
-                        deliveryType,
-                      ) && item.is_external ? (
-                        <ExclamationCircleOutlined
-                          style={{ marginLeft: '5px', color: '#D0D0D0' }}
-                          className={classnames('externalIcon', {
-                            externalIconChecked: checked,
-                          })}
-                        />
-                      ) : (
-                        <QuestionCircleOutlined
-                          style={{ marginLeft: '5px', color: '#D0D0D0' }}
-                        />
-                      )}
-                    </Tooltip>
-                  </Checkbox>
-                );
-              })}
-            </CheckboxGroup>
+            <SelectCheckGroup
+              key={groupName}
+              generateText={generateText}
+              unionOfGroupFilter={unionOfGroupFilter}
+              deliveryType={deliveryType}
+              selectsItem={selectsItem}
+              checkedValues={checkedValues}
+              onChange={onChange}
+            />
           </div>
         </>
       )}
