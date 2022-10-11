@@ -1,4 +1,4 @@
-import { useBoolean } from 'ahooks';
+import { useBoolean, useMemoizedFn } from 'ahooks';
 import React from 'react';
 import type { GetIProps } from 'tc-rc';
 import { ModalContent } from '../../encapsulation';
@@ -21,9 +21,19 @@ const LevelConfig: React.FC<
   {
     /** 这个组件的配置与Modal配置相似，但是children是用于点击的节点的，modal弹窗需要展示的节点需要用这个属性展示 */
     renderModalContent?: RenderModalContentType;
+    /**
+     * 是否要屏蔽modal的打开关闭, 如果传的是true，那么modal的展示效果会失效
+     * @default false
+     */
+    disabledModal?: boolean;
   } & GetIProps<typeof ModalContent>
 > = (props) => {
-  const { children, renderModalContent, ...resetProps } = props;
+  const {
+    children,
+    renderModalContent,
+    disabledModal = false,
+    ...resetProps
+  } = props;
   const [visible, { setFalse, setTrue }] = useBoolean(false);
 
   const content = renderModalContent?.({
@@ -32,9 +42,15 @@ const LevelConfig: React.FC<
     open: setTrue,
   });
 
+  const openModalHandle = useMemoizedFn(() => {
+    if (!disabledModal) {
+      setTrue();
+    }
+  });
+
   return (
     <>
-      <span onClick={setTrue}>{children}</span>
+      <span onClick={openModalHandle}>{children}</span>
       <ModalContent visible={visible} onCancel={setFalse} {...resetProps}>
         {content}
       </ModalContent>
