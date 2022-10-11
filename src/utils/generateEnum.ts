@@ -1,5 +1,5 @@
 import { mapValues } from 'lodash';
-import React from 'react';
+import type React from 'react';
 
 type EnumType<V extends number | string, T extends React.ReactNode> = {
   /** 运行过程中会用到的真实value，常常是一些让人不好理解的数字或者其他的值 */
@@ -21,7 +21,7 @@ const generateEnum = <
 ) => {
   const keys = Object.keys(enumData);
   return {
-    /** lable，value的options的形式 */
+    /** label，value的options的形式 */
     options: keys.map((k) => ({
       value: enumData[k].value,
       label: enumData[k].text,

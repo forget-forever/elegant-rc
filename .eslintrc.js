@@ -4,6 +4,7 @@ module.exports = {
   globals: {
     page: true,
     REACT_APP_ENV: true,
+    React: true,
   },
   parserOptions: {
     ecmaFeatures: {
