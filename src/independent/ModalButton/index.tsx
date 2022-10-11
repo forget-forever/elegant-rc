@@ -1,7 +1,7 @@
 import { useBoolean, useMemoizedFn } from 'ahooks';
+import { Modal } from 'antd';
 import React from 'react';
 import type { GetIProps } from 'tc-rc';
-import { ModalContent } from '../../encapsulation';
 
 export type RenderModalContentType = (config: {
   /** 弹窗的现实隐藏状态 */
@@ -26,7 +26,7 @@ const LevelConfig: React.FC<
      * @default false
      */
     disabledModal?: boolean;
-  } & GetIProps<typeof ModalContent>
+  } & GetIProps<typeof Modal>
 > = (props) => {
   const {
     children,
@@ -51,9 +51,15 @@ const LevelConfig: React.FC<
   return (
     <>
       <span onClick={openModalHandle}>{children}</span>
-      <ModalContent visible={visible} onCancel={setFalse} {...resetProps}>
+      <Modal
+        width={800}
+        footer={null}
+        visible={visible}
+        onCancel={setFalse}
+        {...resetProps}
+      >
         {content}
-      </ModalContent>
+      </Modal>
     </>
   );
 };
