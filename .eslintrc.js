@@ -5,6 +5,7 @@ module.exports = {
     page: true,
     REACT_APP_ENV: true,
     React: true,
+    JSX: true,
   },
   parserOptions: {
     ecmaFeatures: {
