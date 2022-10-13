@@ -1,4 +1,5 @@
-import { Column, ParamsType } from './types';
+import moment from 'moment';
+import type { Column, ParamsType } from './types';
 
 /**
  * 二次封装一下Columns, 增加了dataIndex的限制, dataIndex为‘options’的时候会默认固定右边
@@ -12,6 +13,20 @@ export const renderColumns = <T extends ParamsType = ParamsType>(
 ): Column<T>[] =>
   list.map((item) => ({
     fixed: item.dataIndex === 'options' ? 'right' : undefined,
+    /** format语法糖的实现 */
+    renderText: item.format
+      ? (text) => {
+          const { format } = item;
+          if (!format) {
+            return text;
+          }
+          if (Array.isArray(format)) {
+            return moment(text, format[0]).format(format[1]);
+          }
+          return moment(text).format(format);
+        }
+      : undefined,
+
     ...wrapConfig,
     ...item,
   }));
