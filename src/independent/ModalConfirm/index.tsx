@@ -76,9 +76,13 @@ const ModalConfirmButton: React.FC<
   const onOkHandle = useMemoizedFn(() => {
     const res = onSubmit?.();
     if (res instanceof Promise) {
-      res.then(() => {
-        setFalse();
-      });
+      res
+        .then(() => {
+          setFalse();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     } else {
       setFalse();
     }

@@ -26,7 +26,7 @@ export type Column<T extends ParamsType = ParamsType> = MyOmit<
   format?: string | [string, string];
 };
 export type ProTableType<R extends ParamsType, P, V = 'text'> = MyOmit<
-  ProTableProps<R, P, V>,
+  ProTableProps<R, P>,
   'columns'
 > & {
   columns?: Column<R>[];
