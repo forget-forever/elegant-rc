@@ -7,8 +7,15 @@ import type { IOptions } from 'tc-rc';
  * @returns 是否匹配上
  */
 export const filterOption = (
-  inputVal: string,
+  inputVal?: string,
   option?: IOptions<unknown, string>,
 ) => {
-  return option?.label.includes(inputVal) ?? false;
+  if (!inputVal) {
+    return true;
+  }
+  const { label = '' } = option || {};
+  if (typeof label === 'string') {
+    return label.includes(inputVal) ?? false;
+  }
+  return true;
 };
