@@ -20,10 +20,19 @@ export const renderColumns = <T extends ParamsType = ParamsType>(
           if (!format) {
             return text;
           }
+          let sourceFormat: string | undefined;
+          let targetFormat = format.toString();
+
           if (Array.isArray(format)) {
-            return moment(text, format[0]).format(format[1]);
+            sourceFormat = format[0];
+            targetFormat = format[1];
           }
-          return moment(text).format(format);
+
+          const targetMoment = moment(text, sourceFormat);
+          if (targetMoment.isValid()) {
+            return targetMoment.format(targetFormat);
+          }
+          return text;
         }
       : undefined,
 
