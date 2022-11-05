@@ -13,6 +13,7 @@ if [ -z "$(git status --porcelain)" ]; then
   then
     echo `仓库中已有${currentVersion}版本号，禁止发布，请修改版本号！`
   else
+    npm run docs:build
     npm run build
 
     if [ $? -eq 0 ]; then
@@ -31,7 +32,6 @@ if [ -z "$(git status --porcelain)" ]; then
         git push
         `git checkout ${br/* /}`
         echo '发布成功'
-        sh ./publish-docs.sh
       else
         echo '当前分支落后master分支, 禁止发布'
       fi

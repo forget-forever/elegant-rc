@@ -7,7 +7,6 @@ node_modules
 
 # production
 dist
-docs-dist
 es
 lib
 
