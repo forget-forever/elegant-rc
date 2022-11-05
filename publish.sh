@@ -5,7 +5,7 @@
 ### 
 
 if [ -z "$(git status --porcelain)" ]; then 
-  registry="http://npm.sfjswl.com"
+  registry="https://registry.npmjs.org"
   currentVersion=`npm -s run env echo '$npm_package_version'`
   lastVersion=`npm view tc-rc@${currentVersion} version --registry ${registry}`
 

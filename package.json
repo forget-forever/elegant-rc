@@ -20,7 +20,7 @@
     "pre-commit": "lint-staged"
   },
   "repository": {
-    "url": "http://gitlab.sfjswl.com/fe/tc-rc",
+    "url": "https://github.com/forget-forever/tc-rc",
     "type": "git"
   },
   "lint-staged": {
