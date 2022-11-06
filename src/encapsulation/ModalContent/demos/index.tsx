@@ -5,7 +5,7 @@
  */
 import { useBoolean, useMemoizedFn, useSafeState } from 'ahooks';
 import { Button, Card } from 'antd';
-import { ModalContent } from 'tc-rc';
+import { ModalContent } from 'elegant-rc';
 
 export default () => {
   const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);

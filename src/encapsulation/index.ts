@@ -17,8 +17,6 @@ import ParamData from './ParamData';
 import NumControl from './NumControl';
 import CacheTip from './CacheTip';
 import DataTable from './DataTable';
-import ModalSet from './ModalSet';
-import BtnPannel from './BtnPannel';
 import ReportOperate from './ReportOperate';
 import OperationColumn from './OperationColumn';
 import ReportShare from './ReportShare';
@@ -39,8 +37,6 @@ export {
   NumControl,
   CacheTip,
   DataTable,
-  ModalSet,
-  BtnPannel,
   ReportOperate,
   OperationColumn,
   ReportShare,

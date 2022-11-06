@@ -1,4 +1,4 @@
-import { CacheTip } from 'tc-rc';
+import { CacheTip } from 'elegant-rc';
 
 const Demo = () => {
   return (

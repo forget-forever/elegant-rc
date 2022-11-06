@@ -6,7 +6,7 @@
 import { useMemoizedFn } from 'ahooks';
 import { Button, Card, Form } from 'antd';
 import moment from 'moment';
-import { DateSelect } from 'tc-rc';
+import { DateSelect } from 'elegant-rc';
 
 const disList = [
   [moment().subtract(7, 'days'), moment().subtract(3, 'days')] as [

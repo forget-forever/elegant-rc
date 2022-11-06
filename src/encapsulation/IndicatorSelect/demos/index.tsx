@@ -1,4 +1,4 @@
-import { IndicatorSelect } from 'tc-rc';
+import { IndicatorSelect } from 'elegant-rc';
 import initSearchFilters from '../../ReportOperate/utils/initSearchFilters';
 import searchFilters from './searchFilters.json';
 import list from './reportList.json';

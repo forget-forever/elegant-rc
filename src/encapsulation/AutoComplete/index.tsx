@@ -6,7 +6,7 @@
 import React from 'react';
 import { useMemoizedFn, useSafeState } from 'ahooks';
 import { AutoComplete as Complete, Form } from 'antd';
-import type { GetIProps, IOptions, MyOmit } from 'tc-rc';
+import type { GetIProps, IOptions, MyOmit } from 'elegant-rc';
 
 type OptionType = IOptions<string | number, React.ReactNode>;
 const AutoCompete: React.FC<

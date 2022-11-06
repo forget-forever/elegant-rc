@@ -7,7 +7,7 @@ import { useMemoizedFn, useMount } from 'ahooks';
 import { Button, message } from 'antd';
 import { uniqueId } from 'lodash';
 import { useState } from 'react';
-import { useSafeFunc } from 'tc-rc';
+import { useSafeFunc } from 'elegant-rc';
 
 const request = () => {
   return new Promise<string>((resolve, reject) => {

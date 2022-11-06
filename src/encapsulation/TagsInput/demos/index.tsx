@@ -5,7 +5,7 @@
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Card, Form } from 'antd';
-import { TagsInput } from 'tc-rc';
+import { TagsInput } from 'elegant-rc';
 
 export default () => {
   const onSearch = useMemoizedFn((val: string) => {

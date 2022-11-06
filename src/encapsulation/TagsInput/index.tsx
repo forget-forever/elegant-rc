@@ -7,7 +7,7 @@ import React from 'react';
 import { useMemoizedFn } from 'ahooks';
 import { Select } from 'antd';
 import { useMemo, useState } from 'react';
-import { GetIProps, IOptions, MyOmit } from 'tc-rc';
+import { GetIProps, IOptions, MyOmit } from 'elegant-rc';
 import { FormContent } from '..';
 
 /**

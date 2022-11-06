@@ -1,7 +1,7 @@
 import { useBoolean, useMemoizedFn } from 'ahooks';
 import { Modal } from 'antd';
 import React from 'react';
-import type { GetIProps } from 'tc-rc';
+import type { GetIProps } from 'elegant-rc';
 
 export type RenderModalContentType = (config: {
   /** 弹窗的现实隐藏状态 */

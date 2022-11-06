@@ -9,7 +9,7 @@ import type { FormInstance } from 'antd';
 import { Space } from 'antd';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
-import { ButtonGroup } from 'tc-rc';
+import { ButtonGroup } from 'elegant-rc';
 
 type Config = {
   /** 确定按钮的文字 */

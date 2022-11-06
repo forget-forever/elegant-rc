@@ -1,4 +1,4 @@
-import type { IOptions } from 'tc-rc';
+import type { IOptions } from 'elegant-rc';
 
 /**
  * Select组件的filterOption筛选方法

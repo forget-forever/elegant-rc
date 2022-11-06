@@ -1,6 +1,6 @@
 import { useMemoizedFn } from 'ahooks';
 import { useState } from 'react';
-import { ButtonAsync } from 'tc-rc';
+import { ButtonAsync } from 'elegant-rc';
 
 const Demo = () => {
   const [loading, setLoading] = useState(false);

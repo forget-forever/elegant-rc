@@ -1,6 +1,6 @@
 import { useMemoizedFn } from 'ahooks';
 import { Button } from 'antd';
-import { ModalConfirm } from 'tc-rc';
+import { ModalConfirm } from 'elegant-rc';
 
 const delay = (t = 100) => {
   return new Promise<void>((resolve) => {

@@ -1,4 +1,4 @@
-import { ButtonGroup } from 'tc-rc';
+import { ButtonGroup } from 'elegant-rc';
 
 const Demo = () => {
   return <ButtonGroup />;

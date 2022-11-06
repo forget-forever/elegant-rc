@@ -1,6 +1,6 @@
 import { useMemoizedFn } from 'ahooks';
 import { Card, Form } from 'antd';
-import { CronSelect, ButtonAsync } from 'tc-rc';
+import { CronSelect, ButtonAsync } from 'elegant-rc';
 
 export default () => {
   const onFinish = useMemoizedFn((val: { cron: string }) => {

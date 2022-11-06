@@ -1,4 +1,4 @@
-import { ButtonAsync } from 'tc-rc';
+import { ButtonAsync } from 'elegant-rc';
 
 const request = () => {};
 const Demo = () => {

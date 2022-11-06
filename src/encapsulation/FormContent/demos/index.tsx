@@ -1,5 +1,5 @@
 import { Form, Input, Row, Select } from 'antd';
-import { FormContent } from 'tc-rc';
+import { FormContent } from 'elegant-rc';
 
 const genderOptions = [
   { value: 'male', label: '男' },

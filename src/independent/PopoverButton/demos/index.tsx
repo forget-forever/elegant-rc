@@ -1,7 +1,7 @@
 import { useMemoizedFn } from 'ahooks';
 import { Button } from 'antd';
-import type { RenderContentType } from 'tc-rc';
-import { PopoverButton } from 'tc-rc';
+import type { RenderContentType } from 'elegant-rc';
+import { PopoverButton } from 'elegant-rc';
 
 export default () => {
   const renderContent = useMemoizedFn<RenderContentType>(({ close }) => {

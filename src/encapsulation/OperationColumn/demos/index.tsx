@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Space, ConfigProvider } from 'antd';
-import { OperationColumn, ReportShare } from 'tc-rc';
+import { OperationColumn, ReportShare } from 'elegant-rc';
 import zhCN from 'antd/es/locale/zh_CN';
 
 const list = [

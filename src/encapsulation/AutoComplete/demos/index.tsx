@@ -4,7 +4,7 @@
  * @LastEditTime: 2022-07-01 19:28:54
  */
 import { useMemoizedFn } from 'ahooks';
-import { AutoComplete, Prominent } from 'tc-rc';
+import { AutoComplete, Prominent } from 'elegant-rc';
 
 const options = [
   { label: 'city', value: 'city' },

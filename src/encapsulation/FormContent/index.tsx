@@ -6,7 +6,7 @@
 import { Col, Form } from 'antd';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
-import type { FCProps, GetIProps, MyOmit } from 'tc-rc';
+import type { FCProps, GetIProps, MyOmit } from 'elegant-rc';
 
 const FormContent: FCProps<
   MyOmit<GetIProps<typeof Form.Item>, 'required'> & {

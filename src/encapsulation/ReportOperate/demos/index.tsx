@@ -1,4 +1,4 @@
-import { ReportOperate } from 'tc-rc';
+import { ReportOperate } from 'elegant-rc';
 import { Radio, Divider, Checkbox } from 'antd';
 import { useEffect, useState } from 'react';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';

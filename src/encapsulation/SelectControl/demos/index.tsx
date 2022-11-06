@@ -5,7 +5,7 @@
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Form } from 'antd';
-import { SelectControl } from 'tc-rc';
+import { SelectControl } from 'elegant-rc';
 
 const options = [
   { value: 1, label: '选项一' },

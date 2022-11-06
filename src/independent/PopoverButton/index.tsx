@@ -1,7 +1,7 @@
 import { useBoolean, useMemoizedFn } from 'ahooks';
 import { Popover } from 'antd';
 import React from 'react';
-import type { GetIProps } from 'tc-rc';
+import type { GetIProps } from 'elegant-rc';
 
 export type RenderContentType = (config: {
   /** 打开这个popover的方法 */

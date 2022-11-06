@@ -1,5 +1,5 @@
 import ReportOperate from './ReportOperate';
-import { GetIProps } from 'tc-rc';
+import { GetIProps } from 'elegant-rc';
 
 type ReportOperateProps = GetIProps<typeof ReportOperate>;
 

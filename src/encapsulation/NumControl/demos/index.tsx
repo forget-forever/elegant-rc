@@ -1,5 +1,5 @@
 import { useMemoizedFn } from 'ahooks';
-import { NumControl } from 'tc-rc';
+import { NumControl } from 'elegant-rc';
 
 export default () => {
   const add = useMemoizedFn(() => {

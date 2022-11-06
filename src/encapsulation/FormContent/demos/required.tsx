@@ -1,6 +1,6 @@
 import { useMemoizedFn } from 'ahooks';
 import { Form, Input, Row, Select } from 'antd';
-import { FormContent, ButtonGroup } from 'tc-rc';
+import { FormContent, ButtonGroup } from 'elegant-rc';
 
 const genderOptions = [
   { value: 'male', label: '男' },

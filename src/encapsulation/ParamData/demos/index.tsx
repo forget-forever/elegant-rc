@@ -1,4 +1,4 @@
-import { ParamData } from 'tc-rc';
+import { ParamData } from 'elegant-rc';
 import useParamsState from '../../IndicatorSelect/useParamsState';
 import initSearchFilters from '../../ReportOperate/utils/initSearchFilters';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';

@@ -1,4 +1,4 @@
-import { Prominent } from 'tc-rc';
+import { Prominent } from 'elegant-rc';
 
 const Demo = () => {
   return <Prominent str="文字高亮组件库" vals={['文字']} />;

@@ -14,7 +14,7 @@ group:
 出来是字符串类型
 
 ```typescript
-import { getNumber } from 'tc-rc';
+import { getNumber } from 'elegant-rc';
 const str = 'ferwrtg4656879hgrjhny';
 const num = getNumber(str); // '4656879'
 ```
@@ -24,7 +24,7 @@ const num = getNumber(str); // '4656879'
 第二个变量传 true 则返回就是数字
 
 ```typescript
-import { getNumber } from 'tc-rc';
+import { getNumber } from 'elegant-rc';
 const str = 'ferwrtg4656879hgrjhny';
 const num = getNumber(str, true); // 4656879
 ```

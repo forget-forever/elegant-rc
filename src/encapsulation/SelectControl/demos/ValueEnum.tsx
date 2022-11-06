@@ -5,7 +5,7 @@
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Form } from 'antd';
-import { SelectControl } from 'tc-rc';
+import { SelectControl } from 'elegant-rc';
 
 const valueEnum = {
   1: '一',

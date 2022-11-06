@@ -7,7 +7,7 @@
 if [ -z "$(git status --porcelain)" ]; then 
   registry="https://registry.npmjs.org"
   currentVersion=`npm -s run env echo '$npm_package_version'`
-  lastVersion=`npm view tc-rc@${currentVersion} version --registry ${registry}`
+  lastVersion=`npm view elegant-rc@${currentVersion} version --registry ${registry}`
 
   if [ $lastVersion ]
   then

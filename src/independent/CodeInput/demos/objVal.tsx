@@ -5,7 +5,7 @@
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Form } from 'antd';
-import { CodeInput } from 'tc-rc';
+import { CodeInput } from 'elegant-rc';
 
 export default () => {
   const onFinish = useMemoizedFn((val: { code: string }) => {

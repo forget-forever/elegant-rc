@@ -1,6 +1,6 @@
 import ProForm, { ProFormSelect } from '@ant-design/pro-form';
 import { useMemoizedFn } from 'ahooks';
-import { useProFormSubmitter } from 'tc-rc';
+import { useProFormSubmitter } from 'elegant-rc';
 
 const genderValueEnum = {
   0: '男',

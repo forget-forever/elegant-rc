@@ -1,7 +1,7 @@
 import { useBoolean, useMemoizedFn } from 'ahooks';
 import { Modal } from 'antd';
 import React, { cloneElement } from 'react';
-import type { GetIProps, MyOmit } from 'tc-rc';
+import type { GetIProps, MyOmit } from 'elegant-rc';
 import ButtonAsync from '../../encapsulation/ButtonAsync';
 
 /**

@@ -1,4 +1,4 @@
-import { DataTable } from 'tc-rc';
+import { DataTable } from 'elegant-rc';
 import { useState } from 'react';
 
 const dataSource = {

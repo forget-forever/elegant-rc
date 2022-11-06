@@ -5,7 +5,7 @@
  */
 import { useMemoizedFn } from 'ahooks';
 import { Button, Card, Form } from 'antd';
-import { DateSelect } from 'tc-rc';
+import { DateSelect } from 'elegant-rc';
 
 export default () => {
   const onFinish = useMemoizedFn((val) => {

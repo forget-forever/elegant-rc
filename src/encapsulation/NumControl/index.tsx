@@ -9,7 +9,7 @@ import { useMemoizedFn } from 'ahooks';
 import { Col } from 'antd';
 import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
-import { noPaddingStyle } from 'tc-rc';
+import { noPaddingStyle } from 'elegant-rc';
 
 const containerStyle: CSSProperties = {
   ...noPaddingStyle,

@@ -12,7 +12,7 @@ group:
 ## filerOption 的配置
 
 ```typescript
-import { filterOption } from 'tc-rc';
+import { filterOption } from 'elegant-rc';
 import { Select } from 'antd';
 
 return <Select filterOption={filterOption} />;

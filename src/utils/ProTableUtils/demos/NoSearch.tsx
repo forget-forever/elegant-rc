@@ -1,6 +1,6 @@
 import ProTable from '@ant-design/pro-table';
 import { useMemo } from 'react';
-import { renderColumns } from 'tc-rc';
+import { renderColumns } from 'elegant-rc';
 
 export default () => {
   const columns = useMemo(

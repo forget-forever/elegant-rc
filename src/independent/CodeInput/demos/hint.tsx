@@ -5,7 +5,7 @@
  */
 import { useMemoizedFn, useRequest } from 'ahooks';
 import { Button, Form } from 'antd';
-import { CodeInput } from 'tc-rc';
+import { CodeInput } from 'elegant-rc';
 
 const getHints = () =>
   new Promise<Record<string, (string | number)[]>>((resolve, reject) => {

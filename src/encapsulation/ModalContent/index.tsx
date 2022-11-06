@@ -7,7 +7,7 @@ import { useMemoizedFn, useSize, useUpdate } from 'ahooks';
 import { Modal } from 'antd';
 import type { CSSProperties } from 'react';
 import { useMemo, useRef } from 'react';
-import type { FCProps, GetIProps } from 'tc-rc';
+import type { FCProps, GetIProps } from 'elegant-rc';
 
 const headerHeight = 55;
 type IProps = GetIProps<typeof Modal> & {

@@ -1,6 +1,6 @@
 import { useMemoizedFn } from 'ahooks';
-import { ModalButton } from 'tc-rc';
-import type { RenderModalContentType } from 'tc-rc';
+import { ModalButton } from 'elegant-rc';
+import type { RenderModalContentType } from 'elegant-rc';
 import { Button } from 'antd';
 
 export default () => {

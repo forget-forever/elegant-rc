@@ -1,5 +1,5 @@
 {
-  "name": "tc-rc",
+  "name": "elegant-rc",
   "version": "1.7.3",
   "scripts": {
     "start": "dumi dev",
@@ -20,7 +20,7 @@
     "pre-commit": "lint-staged"
   },
   "repository": {
-    "url": "https://github.com/forget-forever/tc-rc",
+    "url": "https://github.com/forget-forever/elegant-rc",
     "type": "git"
   },
   "lint-staged": {

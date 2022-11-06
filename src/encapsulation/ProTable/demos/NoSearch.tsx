@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { renderColumns, ProTable } from 'tc-rc';
+import { renderColumns, ProTable } from 'elegant-rc';
 
 export default () => {
   const columns = useMemo(
