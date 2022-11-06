@@ -25,12 +25,12 @@ if [ -z "$(git status --porcelain)" ]; then
         `npm publish --registry ${registry}`
         echo '版本发布成功'
         echo '---------------------------------------------------------------'
-        echo '开始将代码合并到master'
-        git pull
-        git checkout master
-        `git merge ${br/* /}`
-        git push
-        `git checkout ${br/* /}`
+        # echo '开始将代码合并到master'
+        # git pull
+        # git checkout master
+        # `git merge ${br/* /}`
+        # git push
+        # `git checkout ${br/* /}`
         echo '发布成功'
       else
         echo '当前分支落后master分支, 禁止发布'
