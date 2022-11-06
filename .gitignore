@@ -6,6 +6,7 @@ node_modules
 /yarn-error.log
 
 # production
+docs
 dist
 docs-dist
 es
