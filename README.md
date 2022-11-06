@@ -1,5 +1,7 @@
 # react 通用组件库项目
 
+docs: http://rcdocs.zhoumeilei.cn
+
 ## description
 
 对于 react 项目中可以做解藕的公共组件，特意创建的一个项目，可以将日常开发中觉得有复用价值的组件收集到这个项目中
