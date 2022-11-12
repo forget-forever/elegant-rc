@@ -16,7 +16,7 @@ export type Column<T extends ParamsType = ParamsType> = MyOmit<
   ProColumns<T>,
   'dataIndex'
 > & {
-  dataIndex?: keyof T | 'options';
+  dataIndex?: keyof T | 'options' | [keyof T, ...string[]];
   /** search表单中的栅格大小，如果调用的是本组件库中的ProTable，那这一项就会生效 */
   searchSpan?: number;
   /**
