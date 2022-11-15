@@ -1,5 +1,25 @@
+import { get } from 'lodash';
 import moment from 'moment';
 import type { Column, ParamsType } from './types';
+
+const formatTime = (text: string, format?: Required<Column>['format']) => {
+  if (!format) {
+    return text;
+  }
+  let sourceFormat: string | undefined;
+  let targetFormat = format.toString();
+
+  if (Array.isArray(format)) {
+    sourceFormat = format[0];
+    targetFormat = format[1];
+  }
+
+  const targetMoment = moment(text, sourceFormat);
+  if (targetMoment.isValid()) {
+    return targetMoment.format(targetFormat);
+  }
+  return text;
+};
 
 /**
  * 二次封装一下Columns, 增加了dataIndex的限制, dataIndex为‘options’的时候会默认固定右边
@@ -17,22 +37,14 @@ export const renderColumns = <T extends ParamsType = ParamsType>(
     renderText: item.format
       ? (text) => {
           const { format } = item;
-          if (!format) {
-            return text;
-          }
-          let sourceFormat: string | undefined;
-          let targetFormat = format.toString();
-
-          if (Array.isArray(format)) {
-            sourceFormat = format[0];
-            targetFormat = format[1];
-          }
-
-          const targetMoment = moment(text, sourceFormat);
-          if (targetMoment.isValid()) {
-            return targetMoment.format(targetFormat);
-          }
-          return text;
+          return formatTime(text, format);
+        }
+      : undefined,
+    /** renderFormat语法糖的实现 */
+    render: item.renderFormat
+      ? (text, record) => {
+          const { renderFormat, dataIndex = [] } = item;
+          return formatTime(get(record, dataIndex) || '', renderFormat);
         }
       : undefined,
 

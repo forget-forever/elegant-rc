@@ -5,7 +5,7 @@
  */
 import type { ProColumns, ProTableProps } from '@ant-design/pro-table';
 import type { RowClassName } from 'rc-table/lib/interface';
-import type { MyOmit } from 'elegant-rc';
+import type { MyOmit } from 'tc-rc';
 
 export type ProTableTypeReq<R extends ParamsType, P, V = 'text'> = Required<
   ProTableType<R, P, V>
@@ -20,10 +20,15 @@ export type Column<T extends ParamsType = ParamsType> = MyOmit<
   /** search表单中的栅格大小，如果调用的是本组件库中的ProTable，那这一项就会生效 */
   searchSpan?: number;
   /**
-   * 如果传入了这个属性，会自动加上renderText属性，通过moment，format一些时间
+   * 如果传入了这个属性，会自动加上renderText属性，通过moment，format一些时间, 最终会被valueType消费
    * @attention 如果传过来的是数组，第一个参数进入moment的配置参数，第二个是format参数
    */
   format?: string | [string, string];
+  /**
+   * 如果传入了这个属性，会自动加上render属性，通过moment，format一些时间
+   * @attention 如果传过来的是数组，第一个参数进入moment的配置参数，第二个是format参数
+   */
+  renderFormat?: string | [string, string];
 };
 export type ProTableType<R extends ParamsType, P, V = 'text'> = MyOmit<
   ProTableProps<R, P>,
