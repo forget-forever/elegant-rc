@@ -5,7 +5,7 @@
  */
 import type { ProColumns, ProTableProps } from '@ant-design/pro-table';
 import type { RowClassName } from 'rc-table/lib/interface';
-import type { MyOmit } from 'tc-rc';
+import type { MyOmit } from 'elegant-rc';
 
 export type ProTableTypeReq<R extends ParamsType, P, V = 'text'> = Required<
   ProTableType<R, P, V>
