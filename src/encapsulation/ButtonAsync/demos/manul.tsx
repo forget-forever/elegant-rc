@@ -13,11 +13,9 @@ const Demo = () => {
   });
 
   return (
-    <>
-      <ButtonAsync loading={loading} onClick={request} type="primary">
-        点击
-      </ButtonAsync>
-    </>
+    <ButtonAsync loading={loading} onClick={request} type="primary">
+      点击
+    </ButtonAsync>
   );
 };
 

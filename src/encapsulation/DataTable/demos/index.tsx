@@ -23,7 +23,7 @@ const Demo = () => {
       current={current}
       loading={false}
       searchOnRefresh={() => {}}
-      onSearchByPage={(current) => setCurrent(+current)}
+      onSearchByPage={(current) => setCurrent(Number(current))}
       dataSource={dataSource}
     />
   );
