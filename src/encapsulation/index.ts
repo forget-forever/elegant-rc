@@ -21,6 +21,8 @@ import ReportOperate from './ReportOperate';
 import OperationColumn from './OperationColumn';
 import ReportShare from './ReportShare';
 import ProTable from './ProTable';
+import DatePickerExpand from './DatePickExpand';
+import SelectSearch from './SelectSearch';
 
 export {
   ButtonAsync,
@@ -41,6 +43,8 @@ export {
   OperationColumn,
   ReportShare,
   ProTable,
+  DatePickerExpand,
+  SelectSearch,
 };
 
 export * from './ProTable/utils';
