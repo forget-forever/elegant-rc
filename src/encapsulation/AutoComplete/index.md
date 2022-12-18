@@ -7,7 +7,7 @@ group:
   path: /components
 ---
 
-# ButtonAsync 组件
+# AutoComplete 组件
 
 用于一些异步点击需要需要 loading 的情况
 

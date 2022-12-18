@@ -5,12 +5,10 @@ const getList = (val: string) => {
   return new Promise<{ value: number; label: string }[]>((resolve) => {
     setTimeout(() => {
       resolve(
-        [
-          { value: 1, label: '选项一' },
-          { value: 2, label: '选项二' },
-          { value: 3, label: '选项三' },
-          { value: 4, label: '选项四' },
-        ].filter(({ label }) => label.includes(val)),
+        Array.from({ length: 8 }).map((_i, i) => ({
+          value: i,
+          label: `${val}${i + 1}`,
+        })),
       );
     }, 1000);
   });

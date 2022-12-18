@@ -2,23 +2,41 @@ import { useMemoizedFn } from 'ahooks';
 import type { DatePickerProps } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
-import React from 'react';
+import React, { useMemo } from 'react';
+import type { MyOmit, FormProps } from 'elegant-rc';
 
 const format = 'YYYYMMDD';
 
 export const DatePickerExpand: React.FC<
-  DatePickerProps & {
-    /** 能选择的最大日期 */
-    maxDate?: string;
-    /** 能选择的最小日期 */
-    minDate?: string;
-    /** 屏蔽的日期, 可以写一天一天，也可以写时间段 */
-    disabledDates?: (string | [string, string])[];
-    // maxTime: string;
-    // minTime: string;
-  }
+  MyOmit<DatePickerProps, 'value' | 'onChange'> &
+    FormProps<
+      string,
+      {
+        /** 能选择的最大日期 */
+        maxDate?: string;
+        /** 能选择的最小日期 */
+        minDate?: string;
+        /** 屏蔽的日期, 可以写一天一天，也可以写时间段 */
+        disabledDates?: (string | [string, string])[];
+        /**
+         * 值需要整合的format
+         * @default 'YYYY-MM-DD HH:mm:ss'
+         */
+        valueFormat?: string;
+        // maxTime: string;
+        // minTime: string;
+      }
+    >
 > = (props) => {
-  const { maxDate, minDate, disabledDates, ...resetProps } = props;
+  const {
+    maxDate,
+    minDate,
+    disabledDates,
+    value,
+    onChange,
+    valueFormat = 'YYYY-MM-DD HH:mm:ss',
+    ...resetProps
+  } = props;
 
   const disabledDataHandle = useMemoizedFn<
     Required<DatePickerProps>['disabledDate']
@@ -60,14 +78,29 @@ export const DatePickerExpand: React.FC<
     return false;
   });
 
-  // const disabledTimeHandle = useMemoizedFn<Required<DatePickerProps>['disabledTime']>((current) => {
-  //   disabledHours: () => range(0, 24).splice(4, 20),
-  //   disabledMinutes: () => range(30, 60),
-  //   disabledSeconds: () => [55, 56],
-  // })
+  const valueRes = useMemo(() => {
+    if (!value) {
+      return undefined;
+    }
+    return moment(value, valueFormat);
+  }, [value, valueFormat]);
 
-  /** @ts-ignore */
-  return <DatePicker disabledDate={disabledDataHandle} {...resetProps} />;
+  const changeHandle = useMemoizedFn((val?: moment.Moment | null) => {
+    if (!val) {
+      onChange?.(undefined);
+      return;
+    }
+    onChange?.(moment(val).format(valueFormat));
+  });
+
+  return (
+    /** @ts-ignore */
+    <DatePicker
+      disabledDate={disabledDataHandle}
+      onChange={changeHandle}
+      value={valueRes}
+      allowClear
+      {...resetProps}
+    />
+  );
 };
-
-export default DatePickerExpand;

@@ -1,7 +1,7 @@
 import { Select, Spin } from 'antd';
 import type { CSSProperties } from 'react';
-import React from 'react';
-import { useMemoizedFn, useRequest } from 'ahooks';
+import React, { useMemo } from 'react';
+import { useMount, useRequest } from 'ahooks';
 import type { GetIProps, IOptions } from 'elegant-rc';
 import { useDebounce } from '../../hooks';
 
@@ -33,7 +33,12 @@ const FollowMan: React.FC<
      */
     initSearch?: boolean;
     /**
-     * 防抖时长, 单位毫秒
+     * 初始化搜索的时候带上value值当作搜索的参数
+     * @default false
+     */
+    initSearchWithVal?: boolean;
+    /**
+     * 输入的时候触发搜索的防抖时长, 单位毫秒
      * @default 600
      */
     debounceWait?: number;
@@ -44,6 +49,8 @@ const FollowMan: React.FC<
     searchWidthNull = false,
     initSearch = false,
     debounceWait = 600,
+    value,
+    initSearchWithVal,
     ...resetProps
   } = props;
 
@@ -56,7 +63,7 @@ const FollowMan: React.FC<
       const res = await onRequest?.(val);
       return res;
     },
-    { manual: !initSearch },
+    { manual: true },
   );
 
   const searchHandle = useDebounce((val: string) => {
@@ -69,14 +76,32 @@ const FollowMan: React.FC<
     }
   }, debounceWait);
 
+  useMount(() => {
+    if (initSearch) {
+      searchHandle(initSearchWithVal ? (value as any)?.value || value : '');
+    }
+  });
+
+  const optionsCnf = useMemo(() => {
+    if (!options?.length && value && typeof value === 'object') {
+      /** @ts-ignore */
+      const val = value.value || value;
+      /** @ts-ignore */
+      const label = value.label || value;
+      return [{ value: val, label }];
+    }
+    return options;
+  }, [options, value]);
+
   return (
     <Select
       filterOption={false}
       showSearch
-      options={options}
+      options={optionsCnf}
       onSearch={searchHandle}
       loading={loading}
       dropdownRender={loading ? SpinFunc : undefined}
+      value={value}
       {...resetProps}
     />
   );
