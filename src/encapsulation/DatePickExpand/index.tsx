@@ -104,3 +104,5 @@ export const DatePickerExpand: React.FC<
     />
   );
 };
+
+export default DatePickerExpand;
