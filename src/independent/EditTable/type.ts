@@ -31,4 +31,4 @@ export type ColumnType<T extends RecordItem> = Column<T> & {
   required?: boolean;
 };
 
-export type EditTableColumns<T = RecordItem> = ColumnType<T>;
+export type EditTableColumns<T extends RecordItem = RecordItem> = ColumnType<T>;

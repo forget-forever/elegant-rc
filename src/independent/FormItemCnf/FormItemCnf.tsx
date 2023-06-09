@@ -1,4 +1,3 @@
-import type { NamePath } from 'antd/lib/form/interface';
 import { useMemo } from 'react';
 import type { GetIProps } from 'elegant-rc';
 import { FormContent } from '../../encapsulation';
@@ -9,27 +8,12 @@ import { useFormItemCnf, namePathHandle } from './context';
  * @param props
  * @returns
  */
-const FormItemCnf: React.FC<
-  GetIProps<typeof FormContent> & {
-    /** dependencies不会继承preName， 这个属性会，两个会拼接起来 */
-    dependencyWithPreName?: NamePath[];
-  }
-> & {
+const FormItemCnf: React.FC<GetIProps<typeof FormContent>> & {
   /** 路径处理函数 */
   namePathHandle: typeof namePathHandle;
 } = (props) => {
-  const {
-    children,
-    name,
-    dependencies,
-    dependencyWithPreName = [],
-    ...resetProps
-  } = props;
-  const {
-    preNamePath,
-    dependencies: itemDepend,
-    ...sourceProps
-  } = useFormItemCnf();
+  const { children, name, ...resetProps } = props;
+  const { preNamePath, ...sourceProps } = useFormItemCnf();
 
   const nameCnfSource = useMemo(() => {
     const nameFix = namePathHandle(name);
@@ -41,31 +25,8 @@ const FormItemCnf: React.FC<
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const nameCnf = useMemo(() => nameCnfSource, [nameCnfSource.join(',')]);
 
-  const depend = useMemo(() => {
-    return [
-      ...(itemDepend || dependencies || []),
-      ...dependencyWithPreName.map((ele) => {
-        return [...namePathHandle(preNamePath), ...namePathHandle(ele)];
-      }),
-    ];
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    JSON.stringify({
-      dependencies,
-      dependencyWithPreName,
-      itemDepend,
-      preNamePath,
-    }),
-  ]);
-
   return (
-    <FormContent
-      {...sourceProps}
-      {...resetProps}
-      name={nameCnf}
-      dependencies={depend}
-    >
+    <FormContent {...sourceProps} {...resetProps} name={nameCnf}>
       {children}
     </FormContent>
   );

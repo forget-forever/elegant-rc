@@ -29,7 +29,7 @@ export default () => {
       <Button type="primary" onClick={open}>
         打开弹窗
       </Button>
-      <ModalContent onCancel={close} title="样例弹窗" visible={visible}>
+      <ModalContent onCancel={close} title="样例弹窗" open={visible}>
         <div
           style={{
             border: '5px solid #f00',

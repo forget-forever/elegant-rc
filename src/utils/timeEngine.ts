@@ -1,5 +1,5 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 
-export const timeEngine = moment;
+export const timeEngine = dayjs;
 
-export type TimeType = moment.Moment;
+export type TimeType = dayjs.Dayjs;

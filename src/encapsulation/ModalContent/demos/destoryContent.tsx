@@ -1,8 +1,3 @@
-/*
- * @Author: zml
- * @Date: 2022-06-15 20:53:03
- * @LastEditTime: 2022-07-04 16:33:05
- */
 import { useBoolean, useMemoizedFn, useSafeState } from 'ahooks';
 import { Button, Card, Form, InputNumber } from 'antd';
 import ModalContent from '..';
@@ -12,7 +7,7 @@ export default () => {
   const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);
 
   const onSubmit = useMemoizedFn((val: { val: number }) => {
-    setRatio(+val.val);
+    setRatio(Number(val.val));
   });
 
   return (
@@ -21,7 +16,7 @@ export default () => {
         打开弹窗
       </Button>
       <ModalContent
-        visible={visible}
+        open={visible}
         onCancel={close}
         title="弹窗样例"
         maskRatio={ratio}

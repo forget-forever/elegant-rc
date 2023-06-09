@@ -54,7 +54,7 @@ const LevelConfig: React.FC<
       <Modal
         width={800}
         footer={null}
-        visible={visible}
+        open={visible}
         onCancel={setFalse}
         {...resetProps}
       >

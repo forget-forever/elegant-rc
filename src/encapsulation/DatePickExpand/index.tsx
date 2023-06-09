@@ -1,9 +1,9 @@
 import { useMemoizedFn } from 'ahooks';
 import type { DatePickerProps } from 'antd';
 import { DatePicker } from 'antd';
-import moment from 'moment';
 import React, { useLayoutEffect, useMemo } from 'react';
 import type { MyOmit, FormProps } from 'elegant-rc';
+import datJs from 'dayjs';
 
 const format = 'YYYYMMDD';
 
@@ -56,11 +56,11 @@ export const DatePickerExpand: React.FC<
             return false;
           }
           return (
-            current > Number(moment(ele[0]).format(format)) &&
-            current < Number(moment(ele[1]).format(format))
+            current > Number(datJs(ele[0]).format(format)) &&
+            current < Number(datJs(ele[1]).format(format))
           );
         }
-        return Number(moment(ele).format('YYYYMMDD')) === current;
+        return Number(datJs(ele).format('YYYYMMDD')) === current;
       })
     ) {
       return true;
@@ -68,15 +68,15 @@ export const DatePickerExpand: React.FC<
     /** 屏蔽最大最小日期 */
     if (maxDate && minDate) {
       return (
-        current > Number(moment(maxDate).format(format)) ||
-        current < Number(moment(minDate).format(format))
+        current > Number(datJs(maxDate).format(format)) ||
+        current < Number(datJs(minDate).format(format))
       );
     }
     if (maxDate) {
-      return current > Number(moment(maxDate).format(format));
+      return current > Number(datJs(maxDate).format(format));
     }
     if (minDate) {
-      return current < Number(moment(minDate).format(format));
+      return current < Number(datJs(minDate).format(format));
     }
     return false;
   });
@@ -85,20 +85,20 @@ export const DatePickerExpand: React.FC<
     if (!value) {
       return undefined;
     }
-    return moment(value, valueFormat);
+    return datJs(value, valueFormat);
   }, [value, valueFormat]);
 
-  const changeHandle = useMemoizedFn((val?: moment.Moment | null) => {
+  const changeHandle = useMemoizedFn((val?: datJs.Dayjs | null) => {
     if (!val) {
       onChange?.(undefined);
       return;
     }
-    onChange?.(moment(val).format(valueFormat));
+    onChange?.(datJs(val).format(valueFormat));
   });
 
   useLayoutEffect(() => {
     if (clearWhenDateDisabled && value) {
-      if (disabledDataHandle(moment(value))) {
+      if (disabledDataHandle(datJs(value))) {
         changeHandle?.(undefined);
       }
     }

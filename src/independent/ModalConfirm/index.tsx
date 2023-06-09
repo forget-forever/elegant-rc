@@ -166,7 +166,7 @@ const ModalConfirmButton: React.FC<
           </ButtonAsync>,
         ]}
         onCancel={onCancelHandle}
-        visible={visible}
+        open={visible}
         {...resetProps}
       >
         {tipText}

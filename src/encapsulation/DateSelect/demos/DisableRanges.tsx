@@ -9,9 +9,9 @@ import moment from 'moment';
 import { DateSelect } from 'elegant-rc';
 
 const disList = [
-  [moment().subtract(7, 'days'), moment().subtract(3, 'days')] as [
-    moment.Moment,
-    moment.Moment,
+  [
+    moment().subtract(7, 'days').format('YYYYMMDD'),
+    moment().subtract(3, 'days').format('YYYYMMDD'),
   ],
   undefined,
 ];

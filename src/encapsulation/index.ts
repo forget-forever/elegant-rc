@@ -11,6 +11,7 @@ import ModalContent from './ModalContent';
 import RowContent from './RowContent';
 import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
+import NumControl from './NumControl';
 import ProTable from './ProTable';
 import { DatePickerExpand } from './DatePickExpand';
 import SelectSearch from './SelectSearch';
@@ -25,6 +26,7 @@ export {
   DateSelect,
   SelectControl,
   RowContent,
+  NumControl,
   ProTable,
   DatePickerExpand,
   SelectSearch,

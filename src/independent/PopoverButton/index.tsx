@@ -44,8 +44,9 @@ const PopoverButton: React.FC<
   return (
     <Popover
       content={resContent}
-      visible={visible}
-      onVisibleChange={changeHandle}
+      open={visible}
+      // onVisibleChange={changeHandle}
+      onOpenChange={changeHandle}
       {...resetProps}
     >
       {children}

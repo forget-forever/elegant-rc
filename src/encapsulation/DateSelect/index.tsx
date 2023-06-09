@@ -5,13 +5,12 @@
  */
 import React, { useMemo, useState } from 'react';
 import { DatePicker } from 'antd';
-import moment from 'moment';
 import { useMemoizedFn } from 'ahooks';
-import type { RangeValue } from 'rc-picker/lib/interface';
+import dayJs from 'dayjs';
 
 type PickerType = typeof DatePicker.RangePicker;
 
-type ValueType = RangeValue<moment.Moment>;
+type ValueType = (dayJs.Dayjs | null)[] | undefined;
 type RangePickerProps = ConstructorParameters<PickerType>[0];
 
 type IProps = {
@@ -40,12 +39,15 @@ type IProps = {
    */
   disabledDate?: (
     /** 当前的日期 */
-    current: moment.Moment,
+    current: dayJs.Dayjs,
     /** 组件中自定义了的disabled函数, 因为传了disabledDate之后会把组件中的替换掉，如果想要继续用二次封装的，可以调用它 */
-    disabledFn: (current: moment.Moment) => boolean,
+    disabledFn: (current: dayJs.Dayjs) => boolean,
   ) => boolean;
   /** 需要屏蔽的日期段, 可以直接给moment对象，也可以给YYYYMMDD数字日期, 内部做了兼容 */
-  disabledRanges?: ((moment.Moment | number | undefined)[] | undefined)[];
+  disabledRanges?: (
+    | (dayJs.Dayjs | number | undefined | string)[]
+    | undefined
+  )[];
   /** 返回的值的format 值 */
   valueFormat?: string;
 } & Omit<RangePickerProps, 'value' | 'onChange'>;
@@ -66,14 +68,14 @@ const DateSelect: React.FC<IProps> = (props) => {
 
   const value = useMemo(() => {
     return valueSource?.map((ele) => {
-      return moment(ele, valueFormat);
+      return dayJs(ele, valueFormat);
     }) as ValueType;
   }, [valueFormat, valueSource]);
 
   const changeHandle = useMemoizedFn((val?: ValueType) => {
     const valRes = val?.map((ele) => {
       if (valueFormat) {
-        return moment(ele).format(valueFormat);
+        return dayJs(ele).format(valueFormat);
       }
       return ele;
     });
@@ -87,8 +89,8 @@ const DateSelect: React.FC<IProps> = (props) => {
   });
   const { date, hackDate } = dates;
 
-  const disabledDate = useMemoizedFn((current: moment.Moment) => {
-    const toDay = moment();
+  const disabledDate = useMemoizedFn((current: dayJs.Dayjs) => {
+    const toDay = dayJs();
     /** 今天之后是否屏蔽 */
     const isTodayAfter =
       toDay.diff(current, 'days') < 1 &&
@@ -122,7 +124,7 @@ const DateSelect: React.FC<IProps> = (props) => {
             if (typeof ele === 'number') {
               return ele;
             }
-            return Number(ele!.format('YYYYMMDD'));
+            return Number(dayJs(ele).format('YYYYMMDD'));
           }) || [];
         if (compare.length < 2) {
           return false;
@@ -140,15 +142,15 @@ const DateSelect: React.FC<IProps> = (props) => {
     /** 屏蔽最大最小日期 */
     if (maxDate && minDate) {
       return (
-        curNum > Number(moment(maxDate).format('YYYYMMDD')) ||
-        curNum < Number(moment(minDate).format('YYYYMMDD'))
+        curNum > Number(dayJs(maxDate).format('YYYYMMDD')) ||
+        curNum < Number(dayJs(minDate).format('YYYYMMDD'))
       );
     }
     if (maxDate) {
-      return curNum > Number(moment(maxDate).format('YYYYMMDD'));
+      return curNum > Number(dayJs(maxDate).format('YYYYMMDD'));
     }
     if (minDate) {
-      return curNum < Number(moment(minDate).format('YYYYMMDD'));
+      return curNum < Number(dayJs(minDate).format('YYYYMMDD'));
     }
 
     return false;
@@ -162,7 +164,7 @@ const DateSelect: React.FC<IProps> = (props) => {
     }
   });
 
-  const disabledHandle = useMemoizedFn((current: moment.Moment) => {
+  const disabledHandle = useMemoizedFn((current: dayJs.Dayjs) => {
     return disabledSource?.(current, disabledDate) ?? disabledDate(current);
   });
 

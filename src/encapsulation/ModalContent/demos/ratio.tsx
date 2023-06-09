@@ -12,7 +12,7 @@ export default () => {
   const [visible, { setFalse: close, setTrue: open }] = useBoolean(false);
 
   const onSubmit = useMemoizedFn((val: { val: number }) => {
-    setRatio(+val.val);
+    setRatio(Number(val.val));
   });
 
   return (
@@ -21,7 +21,7 @@ export default () => {
         打开弹窗
       </Button>
       <ModalContent
-        visible={visible}
+        open={visible}
         onCancel={close}
         title="弹窗样例"
         maskRatio={ratio}

@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { DatePicker } from 'antd';
-import moment from 'moment';
+import dayJs from 'dayjs';
 
 const { RangePicker } = DatePicker;
 
 type IProps = {
-  value: moment.Moment[];
-  setValue: (arg?: moment.Moment[]) => void;
+  value: dayJs.Dayjs;
+  setValue: (arg?: dayJs.Dayjs[]) => void;
   range: number;
   disabled: boolean;
 };
 const DateRangePicker: React.FC<IProps> = (props) => {
   const { value, setValue, range, disabled } = props;
-  const [dates, setDates] = useState<moment.Moment[]>([]);
-  const [hackValue, setHackValue] = useState<moment.Moment[]>();
+  const [dates, setDates] = useState<dayJs.Dayjs[]>([]);
+  const [hackValue, setHackValue] = useState<dayJs.Dayjs[]>();
 
   const disabledDate: ConstructorParameters<
     typeof RangePicker
   >[0]['disabledDate'] = (current) => {
-    const isTodayAfter = moment().diff(current, 'days') < 1;
+    const isTodayAfter = dayJs().diff(current, 'days') < 1;
     if (isTodayAfter) return isTodayAfter;
     if (!dates || dates.length === 0) {
       return false;
@@ -41,10 +41,10 @@ const DateRangePicker: React.FC<IProps> = (props) => {
     // @ts-ignore
     <RangePicker
       style={{ width: '250px' }}
-      value={(hackValue || value) as [moment.Moment, moment.Moment]}
+      value={(hackValue || value) as [dayJs.Dayjs, dayJs.Dayjs]}
       disabledDate={disabledDate}
-      onCalendarChange={(val) => setDates(val as moment.Moment[])}
-      onChange={(val) => setValue(val as moment.Moment[])}
+      onCalendarChange={(val) => setDates(val as dayJs.Dayjs[])}
+      onChange={(val) => setValue(val as dayJs.Dayjs[])}
       onOpenChange={onOpenChange}
       allowClear={false}
       disabled={disabled}

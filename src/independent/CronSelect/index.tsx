@@ -161,9 +161,10 @@ const CronSelect: React.FC<Partial<IProps>> = (props) => {
       }
       overlayClassName={`${fcid}`}
       placement={placement}
-      onVisibleChange={change}
+      // onVisibleChange={change}
+      onOpenChange={change}
       overlayInnerStyle={{ width: 600 }}
-      visible={visible}
+      open={visible}
       trigger="click"
       className="cron-select"
     >
