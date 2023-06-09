@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import { FormInstance } from 'antd/lib/form';
 import { IFilterChecked, IMapIndicatorNameToDetail } from '../IndicatorSelect';
+import { Form } from 'antd';
 
 function treeReplace(
   data: { group: string; select: { show_name: string; name: string }[] }[],
@@ -61,7 +62,8 @@ type IArg = {
 };
 export function useTreeData(arg: IArg) {
   const { form, selects, mapIndicatorNameToDetail, filterIndex } = arg;
-  const groupsValue = form.getFieldValue('groupIndex');
+  const groupsValue = Form.useWatch('group', form);
+  // const groupsValue = form.getFieldValue('groupIndex');
   const groupSet = new Set<string>(groupsValue);
   filterIndex.forEach((ele) => groupSet.add(ele.key));
   const groupValue = [...groupSet].filter(Boolean).sort();

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { Select, SelectProps } from 'antd';
+import { Select, SelectProps, Space } from 'antd';
 import { MinusCircleOutlined, PlusCircleOutlined } from '@ant-design/icons';
 import { whereIcon } from '../ParamData/components/IndicatorFilter/styles';
 import {
@@ -21,6 +21,7 @@ import { EDimType } from '../IndicatorSelect/enum';
 const { Option, OptGroup } = Select;
 
 interface IFilterIndex {
+  blockWidth?: number;
   disabled?: boolean;
   filterIndex: IFilterChecked[];
   setFilterIndex: (value: Array<IFilterChecked>) => void;
@@ -35,6 +36,7 @@ interface IFilterIndex {
 
 const DimFilter: React.FC<IFilterIndex> = (props) => {
   const {
+    blockWidth,
     disabled = false,
     filterIndex,
     setFilterIndex,
@@ -125,76 +127,66 @@ const DimFilter: React.FC<IFilterIndex> = (props) => {
   }, [mapDimGroupCnameToIndicators, disabledGetter]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div>
-        {filterIndex.map((where, index) => (
-          <div
-            key={`${index}${where.key}${where.judge}${where.type}`}
-            style={{
-              display: 'flex',
-              flexWrap: 'nowrap',
-              alignItems: 'center',
-              margin: '6px 0',
-            }}
+    <Space direction="vertical">
+      {filterIndex.map((where, index) => (
+        <Space key={`${index}${where.key}${where.judge}${where.type}`}>
+          <Select
+            style={{ minWidth: blockWidth }}
+            disabled={disabled}
+            showSearch
+            optionFilterProp="children"
+            placeholder="请选择筛选条件"
+            value={where.key || undefined}
+            onChange={(_, option) => onKeyChange(option as any, index)}
           >
-            <Select
-              style={{ minWidth: 300, marginRight: '20px' }}
+            {options}
+          </Select>
+          {['time', 'time_only'].includes(
+            where.type || mapDimNameToDetail.get(where.key)?.type,
+          ) ? (
+            <FilterDateRange
               disabled={disabled}
-              showSearch
-              optionFilterProp="children"
-              placeholder="请选择筛选条件"
-              value={where.key || undefined}
-              onChange={(_, option) => onKeyChange(option as any, index)}
-            >
-              {options}
-            </Select>
-            {['time', 'time_only'].includes(
-              where.type || mapDimNameToDetail.get(where.key)?.type,
-            ) ? (
-              <FilterDateRange
-                disabled={disabled}
-                filterIndex={filterIndex}
-                setFilterIndex={setFilterIndex}
-                index={index}
-                where={where}
-              />
-            ) : (
-              <SelectInput
-                disabled={disabled}
-                where={where}
-                optionsRecord={optionsRecord}
-                setOptionsRecord={setOptionsRecord}
-                filterIndex={filterIndex}
-                index={index}
-                setFilterIndex={setFilterIndex}
-                getSearchList={getSearchList}
-              />
-            )}
-            {index === 0 && !disabled && (
-              <PlusCircleOutlined
-                style={{
-                  color: '#40a9ff',
-                  ...whereIcon,
-                }}
-                disabled={disabled}
-                onClick={handleAdd}
-              />
-            )}
-            {!disabled && (
-              <MinusCircleOutlined
-                style={{
-                  color: '#40a9ff',
-                  opacity: filterIndex.length === 1 ? 0.4 : 1,
-                  ...whereIcon,
-                }}
-                disabled={disabled}
-                onClick={() => handleDel(index)}
-              />
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+              filterIndex={filterIndex}
+              setFilterIndex={setFilterIndex}
+              index={index}
+              where={where}
+            />
+          ) : (
+            <SelectInput
+              disabled={disabled}
+              where={where}
+              optionsRecord={optionsRecord}
+              setOptionsRecord={setOptionsRecord}
+              filterIndex={filterIndex}
+              index={index}
+              setFilterIndex={setFilterIndex}
+              getSearchList={getSearchList}
+            />
+          )}
+          {index === 0 && !disabled && (
+            <PlusCircleOutlined
+              style={{
+                color: '#40a9ff',
+                ...whereIcon,
+              }}
+              disabled={disabled}
+              onClick={handleAdd}
+            />
+          )}
+          {!disabled && (
+            <MinusCircleOutlined
+              style={{
+                color: '#40a9ff',
+                opacity: filterIndex.length === 1 ? 0.4 : 1,
+                ...whereIcon,
+              }}
+              disabled={disabled}
+              onClick={() => handleDel(index)}
+            />
+          )}
+        </Space>
+      ))}
+    </Space>
   );
 };
 

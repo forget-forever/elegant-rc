@@ -39,14 +39,12 @@ const FilterDateRange: React.FC<IProps> = (props) => {
     where.type === 'time';
 
   return (
-    <>
-      <FilterDateSelect
-        value={value}
-        setValue={changeHandle}
-        dataLength={30}
-        disabled={props.disabled || disabled}
-      />
-    </>
+    <FilterDateSelect
+      value={value}
+      setValue={changeHandle}
+      dataLength={30}
+      disabled={props.disabled || disabled}
+    />
   );
 };
 

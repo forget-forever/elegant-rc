@@ -6,6 +6,7 @@ import {
   TDataSourceParamsPartial,
 } from 'src/encapsulation/IndicatorSelect';
 import useRangerPickerEvents from './useRangerPickerEvents';
+import zhCN from 'antd/es/date-picker/locale/zh_CN';
 
 const { RangePicker } = DatePicker;
 
@@ -32,6 +33,7 @@ const ParamDateRangePicker: React.FC<IProps> = (props) => {
   return (
     // @ts-ignore
     <RangePicker
+      locale={zhCN}
       value={hackValue || value}
       defaultValue={defaultValue}
       style={{ width: '340px' }}

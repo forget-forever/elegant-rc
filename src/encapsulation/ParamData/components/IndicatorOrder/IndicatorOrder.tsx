@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Select } from 'antd';
+import { Select, Space } from 'antd';
 import {
   IMapIndicatorNameToDetail,
   TDataSourceParams,
@@ -20,13 +20,15 @@ const orderOptions = [
 type IOrderMeasures = { key: string; orderType: 'desc' | 'asc' };
 
 type IProps = {
+  blockWidth?: number;
   params: TDataSourceParams;
   setPartialParams: (params: TDataSourceParamsPartial) => void;
   mapIndicatorNameToDetail: IMapIndicatorNameToDetail;
 };
 
 const IndicatorOrder: React.FC<IProps> = (props) => {
-  const { params, setPartialParams, mapIndicatorNameToDetail } = props;
+  const { params, setPartialParams, mapIndicatorNameToDetail, blockWidth } =
+    props;
   const {
     json: { select, orderMeasures },
   } = params;
@@ -51,9 +53,9 @@ const IndicatorOrder: React.FC<IProps> = (props) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', margin: '6px 0' }}>
+    <Space style={{ display: 'flex', alignItems: 'center' }}>
       <Select
-        style={{ minWidth: 300, marginRight: '20px' }}
+        style={{ minWidth: blockWidth }}
         showSearch
         value={key || undefined}
         onChange={(val) => onChangeOrder(val, 'key')}
@@ -62,13 +64,13 @@ const IndicatorOrder: React.FC<IProps> = (props) => {
         allowClear
       />
       <Select
-        style={{ minWidth: 120, marginRight: '20px' }}
+        style={{ minWidth: 120 }}
         value={orderType || undefined}
         onChange={(val) => onChangeOrder(val, 'orderType')}
         placeholder="选择排序方式"
         options={orderOptions}
       />
-    </div>
+    </Space>
   );
 };
 

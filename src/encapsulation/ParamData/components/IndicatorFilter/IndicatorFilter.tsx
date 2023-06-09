@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Select, Input } from 'antd';
+import { Select, Input, Space } from 'antd';
 import { PlusCircleOutlined, MinusCircleOutlined } from '@ant-design/icons';
 
 import { whereIcon } from './styles';
@@ -40,12 +40,14 @@ const judgeOptions = [
 ];
 
 type IProps = {
+  blockWidth?: number;
   params: TDataSourceParams;
   setPartialParams: (params: TDataSourceParamsPartial) => void;
   mapIndicatorNameToDetail: IMapIndicatorNameToDetail;
 };
 const IndicatorFilter: React.FC<IProps> = (props) => {
-  const { params, setPartialParams, mapIndicatorNameToDetail } = props;
+  const { params, setPartialParams, mapIndicatorNameToDetail, blockWidth } =
+    props;
 
   const {
     json: { select, whereMeasures },
@@ -99,72 +101,64 @@ const IndicatorFilter: React.FC<IProps> = (props) => {
   const keySet = new Set(whereMeasures.map((e) => e.key).filter(Boolean));
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      <div>
-        {whereMeasures.map((whereMeasure, index) => {
-          return (
-            <div
-              key={whereMeasure.id}
-              style={{
-                display: 'flex',
-                flexWrap: 'nowrap',
-                alignItems: 'center',
-                margin: '6px 0',
-              }}
-            >
-              <Select
-                style={{ minWidth: 300, marginRight: '20px' }}
-                showSearch
-                value={whereMeasure.key || undefined}
-                onChange={(val) => onChangeWhereMeasures(index, 'key', val)}
-                allowClear
-                placeholder="筛选数据指标查询结果"
-                options={options.filter(
-                  (op) =>
-                    !keySet.has(op.value) || op.value === whereMeasure.key,
-                )}
-              />
-              <Select
-                style={{ width: 120, marginRight: '20px' }}
-                value={whereMeasure.judge}
-                onChange={(val) => onChangeWhereMeasures(index, 'judge', val)}
-                options={judgeOptions}
-              />
-              <Input
-                type="number"
-                onFocus={(e) =>
-                  onChangeWhereMeasures(index, 'value', e.target.value)
-                }
-                onBlur={(e) =>
-                  onChangeWhereMeasures(index, 'value', e.target.value)
-                }
-                defaultValue={whereMeasure.value}
-                style={{ width: 200, marginRight: 20 }}
-                allowClear
-              />
-              {index === 0 && (
-                <PlusCircleOutlined
-                  style={{
-                    color: '#40a9ff',
-                    opacity: addAble ? '1' : '0.4',
-                    ...whereIcon,
-                  }}
-                  onClick={addAble ? onAdd : undefined}
-                />
+    <>
+      {whereMeasures.map((whereMeasure, index) => {
+        return (
+          <Space
+            key={whereMeasure.id}
+            style={index > 0 ? { marginTop: 10 } : {}}
+          >
+            <Select
+              style={{ minWidth: blockWidth }}
+              showSearch
+              value={whereMeasure.key || undefined}
+              onChange={(val) => onChangeWhereMeasures(index, 'key', val)}
+              allowClear
+              placeholder="筛选数据指标查询结果"
+              options={options.filter(
+                (op) => !keySet.has(op.value) || op.value === whereMeasure.key,
               )}
-              <MinusCircleOutlined
+            />
+            <Select
+              style={{ width: 120 }}
+              value={whereMeasure.judge}
+              onChange={(val) => onChangeWhereMeasures(index, 'judge', val)}
+              options={judgeOptions}
+            />
+            <Input
+              type="number"
+              onFocus={(e) =>
+                onChangeWhereMeasures(index, 'value', e.target.value)
+              }
+              onBlur={(e) =>
+                onChangeWhereMeasures(index, 'value', e.target.value)
+              }
+              defaultValue={whereMeasure.value}
+              style={{ width: 210 }}
+              allowClear
+            />
+            {index === 0 && (
+              <PlusCircleOutlined
                 style={{
                   color: '#40a9ff',
-                  opacity: delAble ? '1' : '0.4',
+                  opacity: addAble ? '1' : '0.4',
                   ...whereIcon,
                 }}
-                onClick={() => onDel(index)}
+                onClick={addAble ? onAdd : undefined}
               />
-            </div>
-          );
-        })}
-      </div>
-    </div>
+            )}
+            <MinusCircleOutlined
+              style={{
+                color: '#40a9ff',
+                opacity: delAble ? '1' : '0.4',
+                ...whereIcon,
+              }}
+              onClick={() => onDel(index)}
+            />
+          </Space>
+        );
+      })}
+    </>
   );
 };
 export default IndicatorFilter;

@@ -3,6 +3,7 @@ import useDivElement from './useDivElement';
 import useProFormSubmitter from './useProFormSubmitter';
 import useSafeFunc from './useSafeFunc';
 import useThrottle from './useThrottle';
+import useToolBarRender from './useToolBarRender';
 
 export {
   useThrottle,
@@ -10,4 +11,5 @@ export {
   useSafeFunc,
   useProFormSubmitter,
   useDivElement,
+  useToolBarRender,
 };

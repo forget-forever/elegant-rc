@@ -16,7 +16,7 @@ export default () => {
     <Card title="限制选择日期的长度">
       <Form onFinish={onFinish}>
         <Form.Item name="date1" label="选择日期">
-          <DateSelect dataLength={9} includeToday />
+          <DateSelect dataLength={9} includeToday maxDate="2022-12-01" />
         </Form.Item>
         <Button htmlType="submit" type="primary">
           确定

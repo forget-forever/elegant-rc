@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Checkbox } from 'antd';
+import { Card, Checkbox, Space } from 'antd';
 import type {
   IFilterChecked,
   IMapDimGroupCnameToIndicators,
@@ -23,6 +23,7 @@ import {
   contentItemLabel,
   contentItemWrapper,
 } from '../IndicatorSelect/common';
+import SaasCheckbox from './components/SaasCheckbox';
 
 type IProps = {
   disabledOther?: boolean;
@@ -39,6 +40,10 @@ type IProps = {
   }) => Promise<any>;
   dateRangeType: 'month' | 'day';
   dateDiffValue: number;
+  otherOption?: Record<string, any> & {
+    showSaas?: boolean;
+    blockWidth?: number;
+  };
 };
 
 const ParamData: React.FC<IProps> = (props) => {
@@ -54,7 +59,11 @@ const ParamData: React.FC<IProps> = (props) => {
     disableQueryType = false,
     dateDiffValue,
     dateRangeType,
+    otherOption,
   } = props;
+
+  const showSaas = otherOption?.showSaas || false;
+  const blockWidth = otherOption?.blockWidth ?? 340;
 
   const {
     json: { where, select },
@@ -86,69 +95,75 @@ const ParamData: React.FC<IProps> = (props) => {
     <Card bordered={false} bodyStyle={{ padding: 0, maxWidth: '100%' }}>
       <div style={{ ...contentItem }}>
         <div style={{ ...contentItemLabel }}>数据设置</div>
-        <div style={contentItemWrapper}>
-          <div hidden={hiddenDelivery}>
-            <Delivery
-              params={params}
-              setPartialParams={setPartialParams}
-              disabledOther={disabledOther}
-            />
-          </div>
-          <div className="paramDataRow">
+        <Space style={contentItemWrapper} direction="vertical">
+          {(!hiddenDelivery || showSaas) && (
+            <Space>
+              {!hiddenDelivery && (
+                <Delivery
+                  blockWidth={blockWidth}
+                  params={params}
+                  setPartialParams={setPartialParams}
+                  disabledOther={disabledOther}
+                />
+              )}
+              {showSaas && (
+                <SaasCheckbox
+                  blockWidth={blockWidth}
+                  params={params}
+                  setPartialParams={setPartialParams}
+                />
+              )}
+            </Space>
+          )}
+          <Space align="start">
             <DimGroupSelect
+              blockWidth={blockWidth}
               params={params}
               setPartialParams={setPartialParams}
               mapDimGroupCnameToIndicators={mapDimGroupCnameToIndicators}
             />
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              <ParamDateRangePicker
-                params={params}
-                setPartialParams={setPartialParams}
-                range={dateRangeType}
-                diffValue={dateDiffValue}
-              />
-              <Checkbox
-                style={{ marginLeft: 10 }}
-                disabled={disableQueryType}
-                checked={params.queryType === EQueryType.DAILY}
-                onChange={(e) => onChangeQueryType(e.target.checked)}
-              >
-                按天查询
-              </Checkbox>
-            </div>
-          </div>
-          <div>
-            <DimFilter
-              filterIndex={filterIndex}
-              setFilterIndex={setFilterIndex}
-              disableHandel={(ele) =>
-                !!mapDimNameToDetail.get(ele.name)?.getDisabled(select || [])
-              }
-              mapDimNameToDetail={mapDimNameToDetail}
-              mapDimGroupCnameToIndicators={mapDimGroupCnameToIndicators}
-              getSearchList={getSearchList}
+            <ParamDateRangePicker
+              params={params}
+              setPartialParams={setPartialParams}
+              range={dateRangeType}
+              diffValue={dateDiffValue}
             />
-          </div>
+            <Checkbox
+              style={{ marginTop: 5 }}
+              disabled={disableQueryType}
+              checked={params.queryType === EQueryType.DAILY}
+              onChange={(e) => onChangeQueryType(e.target.checked)}
+            >
+              按天查询
+            </Checkbox>
+          </Space>
+          <DimFilter
+            blockWidth={blockWidth}
+            filterIndex={filterIndex}
+            setFilterIndex={setFilterIndex}
+            disableHandel={(ele) =>
+              !!mapDimNameToDetail.get(ele.name)?.getDisabled(select || [])
+            }
+            mapDimNameToDetail={mapDimNameToDetail}
+            mapDimGroupCnameToIndicators={mapDimGroupCnameToIndicators}
+            getSearchList={getSearchList}
+          />
           {setMoreBtn}
           {showSetMore && (
             <>
-              <div>
-                <IndicatorFilter
-                  params={params}
-                  setPartialParams={setPartialParams}
-                  mapIndicatorNameToDetail={mapIndicatorNameToDetail}
-                />
-              </div>
-              <div>
-                <IndicatorOrder
-                  params={params}
-                  setPartialParams={setPartialParams}
-                  mapIndicatorNameToDetail={mapIndicatorNameToDetail}
-                />
-              </div>
+              <IndicatorFilter
+                params={params}
+                setPartialParams={setPartialParams}
+                mapIndicatorNameToDetail={mapIndicatorNameToDetail}
+              />
+              <IndicatorOrder
+                params={params}
+                setPartialParams={setPartialParams}
+                mapIndicatorNameToDetail={mapIndicatorNameToDetail}
+              />
             </>
           )}
-        </div>
+        </Space>
       </div>
     </Card>
   );

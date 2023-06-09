@@ -27,6 +27,12 @@ onClick 函数返回值在不是 Promise 时，就不会触发按钮中的 loadi
 
 <code src="./demos/manul.tsx" />
 
+## 延时 loading
+
+给 loading 加 delay
+
+<code src="./demos/delay.tsx" />
+
 <API></API>
 
 除以上 API 外，倒计时按钮还支持 Button 组件（Ant Design）的所有 API 。

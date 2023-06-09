@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { message, Select, Spin, SelectProps } from 'antd';
+import { message, Select, Spin, SelectProps, Space } from 'antd';
 import debounce from 'lodash/debounce';
 import { IFilterChecked } from '../../../IndicatorSelect';
 import { dealFilterIndexDataWithTimeOnly } from '../../dealFilterIndexDataWithTimeOnly';
@@ -78,9 +78,9 @@ const SelectInput: React.FC<IProps> = (props) => {
   }, [where.key]);
 
   return (
-    <>
+    <Space>
       <Select
-        style={{ width: 120, marginRight: '20px' }}
+        style={{ width: 120 }}
         value={where.judge}
         disabled={disabled || !where.key.length}
         onChange={(val) => judgeHandle(val)}
@@ -89,7 +89,7 @@ const SelectInput: React.FC<IProps> = (props) => {
       <Select
         mode="multiple"
         maxTagCount={4}
-        style={{ minWidth: 200, marginRight: '20px', maxWidth: 300 }}
+        style={{ minWidth: 210, maxWidth: 300 }}
         value={where.value}
         disabled={disabled || !where.key.length}
         placeholder="请输入/选择"
@@ -103,7 +103,7 @@ const SelectInput: React.FC<IProps> = (props) => {
         onChange={(val) => valueHandle(val)}
         options={optionsRecord[where.key]}
       />
-    </>
+    </Space>
   );
 };
 export default SelectInput;

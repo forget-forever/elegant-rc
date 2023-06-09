@@ -17,12 +17,15 @@ import ParamData from './ParamData';
 import NumControl from './NumControl';
 import CacheTip from './CacheTip';
 import DataTable from './DataTable';
+import ModalSet from './ModalSet';
+import BtnPannel from './BtnPannel';
 import ReportOperate from './ReportOperate';
 import OperationColumn from './OperationColumn';
 import ReportShare from './ReportShare';
 import ProTable from './ProTable';
-import DatePickerExpand from './DatePickExpand';
+import { DatePickerExpand } from './DatePickExpand';
 import SelectSearch from './SelectSearch';
+import DateTimePicker from './DateTimePicker';
 
 export {
   ButtonAsync,
@@ -39,12 +42,15 @@ export {
   NumControl,
   CacheTip,
   DataTable,
+  ModalSet,
+  BtnPannel,
   ReportOperate,
   OperationColumn,
   ReportShare,
   ProTable,
   DatePickerExpand,
   SelectSearch,
+  DateTimePicker,
 };
 
 export * from './ProTable/utils';

@@ -14,6 +14,8 @@ import {
   InputNumber,
   Divider,
   Spin,
+  Checkbox,
+  Tooltip,
 } from 'antd';
 import './index.css';
 import type { IDateTypeConfigBo } from './constant';
@@ -33,6 +35,7 @@ import useForceUpdate from './useForceUpdate';
 import useDateTypeConfigBo from './useDateTypeConfigBo';
 import useSearchFiltersKit from './utils/useSearchFiltersKit';
 import useGroupOptionsGetter from './utils/useGroupOptionsGetter';
+import { QuestionCircleFilled } from '@ant-design/icons';
 
 const FormItem = Form.Item;
 
@@ -64,6 +67,7 @@ type IProps = {
   // 取消回调
   onClickCancel: () => void;
   initialValues: {
+    saasType?: number[];
     reportOrPreinstall?: number;
     reportName?: string;
     reportTheme?: string;
@@ -80,6 +84,7 @@ type IProps = {
     where_name: string;
     keyword?: string;
   }) => Promise<any>;
+  otherOption?: Record<string, any> & { showSaas: boolean };
 };
 const ReportOperate: React.FC<IProps> = (props) => {
   const {
@@ -95,7 +100,10 @@ const ReportOperate: React.FC<IProps> = (props) => {
     onClickCancel,
     initialValues,
     getSearchList,
+    otherOption,
   } = props;
+
+  const showSaas = otherOption?.showSaas;
 
   const forceUpdate = useForceUpdate();
   const { searchFiltersKit } = useSearchFiltersKit(searchData);
@@ -400,6 +408,24 @@ const ReportOperate: React.FC<IProps> = (props) => {
               )}
             </FormItem>
             <div className="block_title">选择指标和维度</div>
+            {showSaas && (
+              <FormItem
+                label="saas条件"
+                name="saasType"
+                rules={[{ required: true, message: 'saas条件必选' }]}
+                wrapperCol={{ span: 21 }}
+              >
+                <Checkbox.Group>
+                  <Checkbox value={1}>
+                    剔除Saas业务数据
+                    <Tooltip title="Saas业务属于丰配云，不属于同城业务">
+                      <QuestionCircleFilled />
+                    </Tooltip>
+                  </Checkbox>
+                  <Checkbox value={2}>Saas业务数据</Checkbox>
+                </Checkbox.Group>
+              </FormItem>
+            )}
             <FormItem
               label="已选指标"
               name="selects"

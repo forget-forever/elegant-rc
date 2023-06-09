@@ -48,6 +48,7 @@ export type TDataSourceParams = {
   isRefresh: boolean;
   isImpala: boolean;
   deliveryType: 1 | 2 | 3;
+  saasType: 1 | 2 | 3;
 };
 
 // 局部参数

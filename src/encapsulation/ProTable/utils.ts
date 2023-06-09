@@ -47,7 +47,6 @@ export const renderColumns = <T extends ParamsType = ParamsType>(
           return formatTime(get(record, dataIndex) || '', renderFormat);
         }
       : undefined,
-
     ...wrapConfig,
     ...item,
   }));

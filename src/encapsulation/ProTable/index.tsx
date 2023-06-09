@@ -5,12 +5,16 @@ import { uniqueId } from 'lodash';
 import type { Moment } from 'moment';
 import { useMemo } from 'react';
 import type { OmitVoid } from 'elegant-rc';
+import type dayjs from 'dayjs';
 import { useSearchSpanEffect } from './hooks';
 import './styles.less';
 import type { ParamsType, ProTableType, ProTableTypeReq } from './types';
 
 const defaultHeader = <div style={{ height: 16, display: 'none' }} />;
 
+const dateFormatter = (val: Moment | dayjs.Dayjs) => {
+  return val.format('YYYY-MM-DD HH:mm:ss');
+};
 /**
  * 给ProTable做的二次封装
  * @param props 和ProTableProps一样，自带了rowKey属性，默认是id，可以配合renderColumns一起使用，体验效果更好
@@ -81,7 +85,7 @@ const ProTable = <R extends ParamsType, P extends ParamsType>(
       headerTitle={defaultHeader}
       options={false}
       scroll={scrollConfig}
-      // dateFormatter={dateFormatter}
+      dateFormatter={dateFormatter}
       {...resetProps}
     />
   );

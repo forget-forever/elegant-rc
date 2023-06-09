@@ -9,12 +9,14 @@ import {
 import { useGroupOptions } from './useGroupOptions';
 
 type IProps = {
+  blockWidth?: number;
   params: TDataSourceParams;
   setPartialParams: (params: TDataSourceParamsPartial) => void;
   mapDimGroupCnameToIndicators: IMapDimGroupCnameToIndicators;
 };
 const GroupTangram: React.FC<IProps> = (props) => {
-  const { params, setPartialParams, mapDimGroupCnameToIndicators } = props;
+  const { params, setPartialParams, mapDimGroupCnameToIndicators, blockWidth } =
+    props;
 
   const {
     json: { groupby, select },
@@ -42,7 +44,7 @@ const GroupTangram: React.FC<IProps> = (props) => {
       <Select
         mode={mode}
         optionFilterProp="children"
-        style={{ minWidth: 300, maxWidth: 455 }}
+        style={{ minWidth: blockWidth, maxWidth: 455 }}
         value={groupby}
         onChange={onGroupChange}
         placeholder="按选中条件分组"

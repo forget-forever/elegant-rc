@@ -8,13 +8,19 @@ import type {
 } from 'src/encapsulation/IndicatorSelect';
 import { DeliveryType } from '../../../IndicatorSelect/enum';
 
+const style = {
+  display: 'inline-block',
+  border: '1px solid #d9d9d9',
+};
+
 type IProps = {
+  blockWidth?: number;
   disabledOther?: boolean;
   params: TDataSourceParams;
   setPartialParams: (params: TDataSourceParamsPartial) => void;
 };
 const Delivery: React.FC<IProps> = (props) => {
-  const { disabledOther = false, setPartialParams, params } = props;
+  const { disabledOther = false, setPartialParams, params, blockWidth } = props;
 
   const { deliveryType = 1 } = params;
 
@@ -31,10 +37,10 @@ const Delivery: React.FC<IProps> = (props) => {
       calcDelivery = deliveryType - delivery;
     }
     if (calcDelivery === DeliveryType.NONE) {
-      const dom = document.querySelector('.data-factory-message-notice');
-      if (!dom) {
-        message.warning('聚合配送至少选一项');
-      }
+      Modal.warning({
+        content: '聚合配送至少选一项',
+        okText: '我知道了~',
+      });
       return;
     }
     setPartialParams({
@@ -51,14 +57,7 @@ const Delivery: React.FC<IProps> = (props) => {
   };
 
   return (
-    <div
-      style={{
-        display: 'inline-block',
-        border: '1px solid #d9d9d9',
-        minWidth: 300,
-        margin: '0 0 6px 0',
-      }}
-    >
+    <div style={{ ...style, minWidth: blockWidth }}>
       <Card bodyStyle={bodyStyle} bordered={false}>
         <Checkbox
           checked={[DeliveryType.SELF, DeliveryType.ALL].includes(deliveryType)}

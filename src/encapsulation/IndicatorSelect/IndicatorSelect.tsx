@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from 'react';
-import { Card } from 'antd';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { Card, Modal } from 'antd';
 import ShortCut from './components/ShortCut';
 import { IShortCutProps } from './components/ShortCut/ShortCut';
 import SelectSubject from './components/SelectSubject';
@@ -121,6 +121,34 @@ const IndicatorSelect: React.FC<IProps> = (props) => {
     setPartialParams,
     mapIndicatorNameToDetail,
   };
+
+  useEffect(() => {
+    const noExistSelect = params.json.select.filter(
+      (e) => !mapIndicatorNameToDetail.get(e),
+    );
+    const existSelect = params.json.select.filter((e) =>
+      mapIndicatorNameToDetail.get(e),
+    );
+    if (noExistSelect.length && mapIndicatorNameToDetail.size) {
+      const content = (
+        <div>
+          <div>以下指标已失效，请及时修改报表/预设组</div>
+          <div>{noExistSelect.join()}</div>
+        </div>
+      );
+      Modal.warn({
+        title: '失效指标',
+        content,
+        onOk: () => {
+          setPartialParams({
+            json: {
+              select: existSelect,
+            },
+          });
+        },
+      });
+    }
+  }, [params.json.select.join(), mapIndicatorNameToDetail]);
 
   return (
     <Card

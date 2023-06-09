@@ -1,9 +1,10 @@
 import { ReportOperate } from 'elegant-rc';
-import { Radio, Divider, Checkbox } from 'antd';
-import { useEffect, useState } from 'react';
+import { Radio, Divider, Checkbox, Input } from 'antd';
+import { useEffect, useMemo, useState } from 'react';
 import searchFilters from '../../IndicatorSelect/demos/searchFilters.json';
 import type { ISearchData } from '../../IndicatorSelect';
 import { reportDetail, preinstallDetail } from './reportDetail';
+import useParamsState from '../../IndicatorSelect/useParamsState';
 
 const themeOptions = [
   '订单规模',
@@ -19,6 +20,17 @@ const themeOptions = [
 }));
 
 export default function () {
+  const { params, setPartialParams } = useParamsState();
+  const [json, setJson] = useState('');
+  const config = useMemo(() => {
+    let obj = {};
+    try {
+      obj = JSON.parse(json);
+    } catch (e) {
+      console.log(e, 'parse error');
+    }
+    return obj;
+  }, [json]);
   const [eg, setEg] = useState(0);
   const [disabled, setDisabled] = useState(false);
   const [initialValues, setInitialValues] = useState({
@@ -66,6 +78,12 @@ export default function () {
         <Radio value={1}>报表 示例</Radio>
       </Radio.Group>
       <Divider />
+      <Input.TextArea
+        placeholder="写入JSON对象进行配置"
+        value={json}
+        onChange={(e) => setJson(e.target.value)}
+      />
+      <Divider />
       <Checkbox
         checked={disabled}
         onChange={(e) => setDisabled(e.target.checked)}
@@ -74,6 +92,9 @@ export default function () {
       </Checkbox>
       <Divider />
       <ReportOperate
+        otherOption={{
+          showSaas: true,
+        }}
         loading={loading}
         disabled={disabled}
         searchData={searchFilters as ISearchData}
@@ -89,6 +110,7 @@ export default function () {
             })),
           };
         }}
+        {...config}
       />
     </>
   );

@@ -3,7 +3,7 @@
  * @Date: 2022-06-22 20:16:17
  * @LastEditTime: 2022-06-28 10:56:20
  */
-import React, { useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { DatePicker } from 'antd';
 import moment from 'moment';
 import { useMemoizedFn } from 'ahooks';
@@ -16,9 +16,9 @@ type RangePickerProps = ConstructorParameters<PickerType>[0];
 
 type IProps = {
   /** 日期改变的时候的值 */
-  onChange?: (val?: ValueType) => void;
+  onChange?: (val?: ValueType | string[]) => void;
   /** 显示的值 */
-  value?: ValueType;
+  value?: ValueType | string[];
   /** 日期的长度，如果不传或者传0，那就没有长度限制了 */
   dataLength?: number;
   /**
@@ -26,6 +26,10 @@ type IProps = {
    * @default true
    */
   disableTodayAfter?: boolean;
+  /** 能选择的最大日期 */
+  maxDate?: string;
+  /** 能选择的最小日期 */
+  minDate?: string;
   /**
    * 今天是否可选
    * @default false
@@ -42,18 +46,40 @@ type IProps = {
   ) => boolean;
   /** 需要屏蔽的日期段, 可以直接给moment对象，也可以给YYYYMMDD数字日期, 内部做了兼容 */
   disabledRanges?: ((moment.Moment | number | undefined)[] | undefined)[];
+  /** 返回的值的format 值 */
+  valueFormat?: string;
 } & Omit<RangePickerProps, 'value' | 'onChange'>;
 const DateSelect: React.FC<IProps> = (props) => {
   const {
-    value,
+    value: valueSource,
     onChange,
     dataLength,
     disableTodayAfter = true,
     includeToday,
-    disabledDate: disabledSoruce,
+    disabledDate: disabledSource,
     disabledRanges,
+    minDate,
+    maxDate,
+    valueFormat,
     ...resetProps
   } = props;
+
+  const value = useMemo(() => {
+    return valueSource?.map((ele) => {
+      return moment(ele, valueFormat);
+    }) as ValueType;
+  }, [valueFormat, valueSource]);
+
+  const changeHandle = useMemoizedFn((val?: ValueType) => {
+    const valRes = val?.map((ele) => {
+      if (valueFormat) {
+        return moment(ele).format(valueFormat);
+      }
+      return ele;
+    });
+
+    onChange?.(valRes as ValueType);
+  });
 
   const [dates, setDates] = useState({
     date: [null, null] as ValueType,
@@ -110,6 +136,20 @@ const DateSelect: React.FC<IProps> = (props) => {
     ) {
       return true;
     }
+    const curNum = Number(current.format('YYYYMMDD'));
+    /** 屏蔽最大最小日期 */
+    if (maxDate && minDate) {
+      return (
+        curNum > Number(moment(maxDate).format('YYYYMMDD')) ||
+        curNum < Number(moment(minDate).format('YYYYMMDD'))
+      );
+    }
+    if (maxDate) {
+      return curNum > Number(moment(maxDate).format('YYYYMMDD'));
+    }
+    if (minDate) {
+      return curNum < Number(moment(minDate).format('YYYYMMDD'));
+    }
 
     return false;
   });
@@ -123,7 +163,7 @@ const DateSelect: React.FC<IProps> = (props) => {
   });
 
   const disabledHandle = useMemoizedFn((current: moment.Moment) => {
-    return disabledSoruce?.(current, disabledDate) ?? disabledDate(current);
+    return disabledSource?.(current, disabledDate) ?? disabledDate(current);
   });
 
   const calendarChange = useMemoizedFn((val: ValueType) => {
@@ -136,7 +176,7 @@ const DateSelect: React.FC<IProps> = (props) => {
       value={hackDate || value}
       disabledDate={disabledHandle}
       onCalendarChange={calendarChange}
-      onChange={onChange}
+      onChange={changeHandle}
       onOpenChange={onOpenChange}
       allowClear={false}
       {...resetProps}

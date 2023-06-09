@@ -45,11 +45,16 @@ const ModalFormButton = <T,>(
      * 阻止onSubmit之后重置表单
      */
     preventResetForm?: boolean;
+    /**
+     * 在关闭弹窗的时候，重置表单
+     */
+    resetFormOnClose?: boolean;
   } & MyOmit<GetIProps<typeof ModalConfirm>, 'onSubmit' | 'children'>,
 ) => {
   const {
     children,
     onSubmit,
+    onCancel,
     buttonNode,
     buttonText = '提交',
     formProps,
@@ -58,6 +63,7 @@ const ModalFormButton = <T,>(
     buttonSize,
     buttonDisabled,
     preventResetForm,
+    resetFormOnClose,
     ...resetProps
   } = props;
 
@@ -69,9 +75,30 @@ const ModalFormButton = <T,>(
     const val = formRes.getFieldsValue();
     const res = onSubmit?.(val, formRef);
     /** 如果说要销毁，那就不用管了，别重置 */
-    if (!preventResetForm && !props.destroyOnClose) {
+    if (!preventResetForm) {
       await res;
       formRef.resetFields();
+    }
+    return res;
+  });
+
+  /**
+   * 取消事件的处理方法
+   */
+  const onCancelHandle = useMemoizedFn(() => {
+    const res = onCancel?.();
+    const doCancel = () => {
+      if (resetFormOnClose) {
+        const formRes = formProps?.form || formRef;
+        formRes.resetFields();
+      }
+    };
+    if (res instanceof Promise) {
+      res.then(() => {
+        doCancel();
+      });
+    } else {
+      doCancel();
     }
     return res;
   });
@@ -79,6 +106,7 @@ const ModalFormButton = <T,>(
   return (
     <ModalConfirm
       onSubmit={submitHandle}
+      onCancel={onCancelHandle}
       title={buttonText}
       tipText={
         <Form form={formRef} layout={formLayout} {...formProps}>

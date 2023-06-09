@@ -27,6 +27,7 @@ const initParams = {
   isRefresh: false,
   isImpala: false,
   deliveryType: 1,
+  saasType: 1,
 };
 
 export default function useParamsState() {

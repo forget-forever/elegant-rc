@@ -1,6 +1,6 @@
 import { useBoolean, useMemoizedFn } from 'ahooks';
 import { Modal } from 'antd';
-import React, { cloneElement } from 'react';
+import React, { cloneElement, isValidElement } from 'react';
 import type { GetIProps, MyOmit } from 'elegant-rc';
 import ButtonAsync from '../../encapsulation/ButtonAsync';
 
@@ -26,6 +26,15 @@ const ModalConfirmButton: React.FC<
      * 取消的时候的统一处理事件，如果设置如果children中没有disabled属性，那么还会将disabledModal属性注入
      */
     onCancel?: () => void | Promise<void>;
+    /**
+     * 当onSubmit完成之后阻止自动关闭弹窗
+     * @default false
+     */
+    disabledAutoClose?: boolean;
+    /**
+     * 打开弹窗拦截，如果返回的是true，或者promise.resolve()就会打开弹窗，不传这个，就会忽略拦截
+     */
+    openModalIntercept?: () => boolean | Promise<void>;
   } & MyOmit<GetIProps<typeof Modal>, 'children' | 'onCancel'>
 > = (props) => {
   const {
@@ -38,6 +47,8 @@ const ModalConfirmButton: React.FC<
     okText = '确定',
     okButtonProps,
     cancelButtonProps,
+    disabledAutoClose,
+    openModalIntercept,
     ...resetProps
   } = props;
 
@@ -54,8 +65,25 @@ const ModalConfirmButton: React.FC<
   const childrenClick = useMemoizedFn((e) => {
     /** 如果被屏蔽了，那就不要做什么事了 */
     if (!disabledModal) {
-      setTrue();
-      propsChild?.onClick?.(e);
+      const doClick = () => {
+        setTrue();
+      };
+      if (openModalIntercept) {
+        const sigOpen = openModalIntercept();
+        /** 是promise */
+        if (sigOpen instanceof Promise) {
+          return sigOpen.then(() => {
+            return doClick();
+          });
+        } else {
+          /** 不是promise就判断返回的逻辑真假 */
+          if (sigOpen) {
+            return doClick();
+          }
+        }
+      } else {
+        return doClick();
+      }
     }
   });
 
@@ -78,13 +106,17 @@ const ModalConfirmButton: React.FC<
     if (res instanceof Promise) {
       res
         .then(() => {
-          setFalse();
+          if (!disabledAutoClose) {
+            setFalse();
+          }
         })
         .catch((err) => {
           console.error(err);
         });
     } else {
-      setFalse();
+      if (!disabledAutoClose) {
+        setFalse();
+      }
     }
     return res;
   });
@@ -103,6 +135,14 @@ const ModalConfirmButton: React.FC<
     }
     return res;
   });
+
+  // let modalNode = tipText;
+  // if (isValidElement(modalNode)) {
+  //   modalNode = cloneElement(modalNode, {
+  //     closeModal: setFalse,
+
+  //   })
+  // }
 
   return (
     <>
