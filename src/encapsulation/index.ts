@@ -3,7 +3,6 @@
  * @Date: 2022-07-04 14:47:05
  * @LastEditTime: 2022-07-05 17:21:18
  */
-import AutoComplete from './AutoComplete';
 import ButtonAsync from './ButtonAsync';
 import ButtonGroup from './ButtonGroup';
 import DateSelect from './DateSelect';
@@ -12,16 +11,6 @@ import ModalContent from './ModalContent';
 import RowContent from './RowContent';
 import SelectControl from './SelectControl';
 import TagsInput from './TagsInput';
-import IndicatorSelect from './IndicatorSelect';
-import ParamData from './ParamData';
-import NumControl from './NumControl';
-import CacheTip from './CacheTip';
-import DataTable from './DataTable';
-import ModalSet from './ModalSet';
-import BtnPannel from './BtnPannel';
-import ReportOperate from './ReportOperate';
-import OperationColumn from './OperationColumn';
-import ReportShare from './ReportShare';
 import ProTable from './ProTable';
 import { DatePickerExpand } from './DatePickExpand';
 import SelectSearch from './SelectSearch';
@@ -35,18 +24,7 @@ export {
   TagsInput,
   DateSelect,
   SelectControl,
-  AutoComplete,
-  IndicatorSelect,
   RowContent,
-  ParamData,
-  NumControl,
-  CacheTip,
-  DataTable,
-  ModalSet,
-  BtnPannel,
-  ReportOperate,
-  OperationColumn,
-  ReportShare,
   ProTable,
   DatePickerExpand,
   SelectSearch,
