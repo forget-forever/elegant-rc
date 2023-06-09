@@ -20,7 +20,7 @@
     "pre-commit": "lint-staged"
   },
   "repository": {
-    "url": "http://gitlab.sfjswl.com/fe/elegant-rc",
+    "url": " https://github.com/forget-forever/elegant-rc",
     "type": "git"
   },
   "lint-staged": {
