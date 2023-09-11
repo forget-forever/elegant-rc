@@ -1,5 +1,5 @@
 import { Form } from 'antd';
-import { ButtonAsync, DaysSelect } from 'tc-rc';
+import { ButtonAsync, DaysSelect } from 'elegant-rc';
 
 export default () => {
   return (
