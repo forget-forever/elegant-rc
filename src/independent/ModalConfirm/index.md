@@ -24,3 +24,4 @@ group:
 <code src="./demos/disabled.tsx" />
 
 <API></API>
+除以上属性外，其他的属性与 ANTD 的 Modal 组件相同

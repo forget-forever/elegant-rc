@@ -8,6 +8,11 @@ import type { CSSProperties } from 'react';
 import { useMemo } from 'react';
 import type { FCProps, GetIProps, MyOmit } from 'elegant-rc';
 
+/**
+ * 可以省去在使用 Form.Item 的时候带来的栅格布局问题, 减少 css 样式的书写， 加入required语法糖，将用的多的配置项平铺
+ * @param props
+ * @returns
+ */
 const FormContent: FCProps<
   MyOmit<GetIProps<typeof Form.Item>, 'required'> & {
     /**
@@ -26,7 +31,7 @@ const FormContent: FCProps<
     props;
 
   const rulesConf = useMemo(() => {
-    const res = rules || [];
+    const res = rules ? [...rules] : [];
     if (required) {
       let message = `${props.label || '该字段'}不能为空`;
       if (typeof required === 'string') {

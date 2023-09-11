@@ -20,15 +20,13 @@ export default () => {
 
   const val = Form.useWatch('search', form);
 
-  console.log(val);
-
   return (
     <Form
       form={form}
       onFinish={(val) => {
         console.log(val, 'submit value');
       }}
-      initialValues={{ search: { value: 1, label: 'aa' } }}
+      initialValues={{ search: { value: 1, label: 'aaaa' } }}
     >
       <Form.Item name="search">
         <SelectSearch labelInValue onRequest={getList} />

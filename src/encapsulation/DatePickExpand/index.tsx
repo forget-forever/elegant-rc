@@ -2,7 +2,7 @@ import { useMemoizedFn } from 'ahooks';
 import type { DatePickerProps } from 'antd';
 import { DatePicker } from 'antd';
 import moment from 'moment';
-import React, { useMemo } from 'react';
+import React, { useLayoutEffect, useMemo } from 'react';
 import type { MyOmit, FormProps } from 'elegant-rc';
 
 const format = 'YYYYMMDD';
@@ -23,6 +23,8 @@ export const DatePickerExpand: React.FC<
          * @default 'YYYY-MM-DD HH:mm:ss'
          */
         valueFormat?: string;
+        /** 当日期被屏蔽时，清除选择的日期 */
+        clearWhenDateDisabled?: boolean;
         // maxTime: string;
         // minTime: string;
       }
@@ -35,6 +37,7 @@ export const DatePickerExpand: React.FC<
     value,
     onChange,
     valueFormat = 'YYYY-MM-DD HH:mm:ss',
+    clearWhenDateDisabled,
     ...resetProps
   } = props;
 
@@ -93,6 +96,21 @@ export const DatePickerExpand: React.FC<
     onChange?.(moment(val).format(valueFormat));
   });
 
+  useLayoutEffect(() => {
+    if (clearWhenDateDisabled && value) {
+      if (disabledDataHandle(moment(value))) {
+        changeHandle?.(undefined);
+      }
+    }
+  }, [
+    changeHandle,
+    clearWhenDateDisabled,
+    disabledDataHandle,
+    maxDate,
+    minDate,
+    value,
+  ]);
+
   return (
     /** @ts-ignore */
     <DatePicker
@@ -104,5 +122,3 @@ export const DatePickerExpand: React.FC<
     />
   );
 };
-
-export default DatePickerExpand;

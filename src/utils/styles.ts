@@ -90,3 +90,8 @@ export const noMarginTop: CSSProperties = {
 export const noMarginBottom: CSSProperties = {
   marginBottom: 0,
 };
+
+/**
+ * 宽度100%的样式
+ */
+export const wholeWidthStyle = { width: '100%', minWidth: 80 } as const;
