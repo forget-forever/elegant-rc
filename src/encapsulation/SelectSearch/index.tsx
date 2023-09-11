@@ -22,7 +22,7 @@ type SearchActionType = {
   /** 立即搜索的方法 */
   load?: (
     val: string,
-  ) => Promise<IOptions<string | number, string>[] | undefined>;
+  ) => Promise<IOptions<string | number, React.ReactNode>[] | undefined>;
   /** 会被props（例如防抖参数）消费的搜索 */
   searchHandle?: (val: string) => void;
 };
@@ -34,7 +34,9 @@ const useAction = () => {
 const FollowMan: React.FC<
   MyOmit<GetIProps<typeof Select>, 'ref'> & {
     /** 请求参数 */
-    onRequest?: (val: string) => Promise<IOptions[]>;
+    onRequest?: (
+      val: string,
+    ) => Promise<IOptions<string | number, React.ReactNode>[] | undefined>;
     /**
      * 为空的时候是否要请求，默认不会发送
      * @default false
