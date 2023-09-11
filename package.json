@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "codemirror": "5.65.5",
+    "date-fns": "^2.30.0",
     "qnn-react-cron": ">=0.8.6",
     "react-day-picker": ">=8.0.0"
   },
