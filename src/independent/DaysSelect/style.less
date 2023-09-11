@@ -1,0 +1,24 @@
+.rdp {
+  --rdp-cell-size: 24px;
+  --rdp-accent-color: var(--antd-wave-shadow-color);
+  --rdp-background-color: #e7edff;
+  /* Switch to dark colors for dark themes */
+  --rdp-accent-color-dark: var(--antd-wave-shadow-color);
+  --rdp-background-color-dark: #180270;
+  /* Outline border for focused elements */
+  --rdp-outline: 2px solid var(--rdp-accent-color);
+  /* Outline border for focused and selected elements */
+  --rdp-outline-selected: 2px solid rgba(0, 0, 0, 0.75);
+  color: #333;
+}
+
+.rdp-weeknumber,
+.rdp-day {
+  border-radius: 2px;
+  margin: 4px;
+}
+
+.days-select-self [class*='select-dropdown'] {
+  width: auto !important;
+  min-width: 0 !important;
+}

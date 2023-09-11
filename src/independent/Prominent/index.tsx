@@ -47,7 +47,7 @@ const Prominent: React.FC<IProps> = (props) => {
       prominentOnClickMap[compoenntId] = clickKeyValName;
     }
     return () => {
-      delete prominentOnClickMap[compoenntId];
+      prominentOnClickMap[compoenntId] = undefined;
     };
   }, [clickKeyValName, compoenntId]);
 
