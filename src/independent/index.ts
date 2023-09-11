@@ -1,5 +1,6 @@
 import CodeInput from './CodeInput';
 import CronSelect from './CronSelect';
+import DaysSelect from './DaysSelect';
 import EditTable from './EditTable';
 import FormItem from './FormItem';
 import ModalButton from './ModalButton';
@@ -22,6 +23,7 @@ export {
   EditTable,
   RateInput,
   SelectFile,
+  DaysSelect,
 };
 
 export * from './PopoverButton';

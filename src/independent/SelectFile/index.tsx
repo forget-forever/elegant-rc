@@ -70,6 +70,7 @@ const SelectFile: React.FC<
     <Upload
       showUploadList
       withCredentials
+      action="http://xxx.xxxinvalid.com"
       {...resetProps}
       fileList={fileList as UploadFile[]}
       beforeUpload={beforeUpload}
