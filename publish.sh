@@ -20,7 +20,7 @@ if [ -z "$(git status --porcelain)" ]; then
 
       br=`git branch | grep "*"`
 
-      cmd_res=`git rev-list origin/master --not ${br/* /}`
+      cmd_res=`git rev-list origin/master-next --not ${br/* /}`
       if [ -z ${cmd_res} ]; then
         `npm publish --registry ${registry}`
         echo '版本发布成功'
