@@ -166,4 +166,4 @@ const SelectSearch: typeof FollowMan & {
 } = FollowMan;
 SelectSearch.useAction = useAction;
 
-export default FollowMan;
+export default SelectSearch;
