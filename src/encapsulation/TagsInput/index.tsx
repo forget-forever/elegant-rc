@@ -71,6 +71,7 @@ const TagsInput: React.FC<
     }
     return value;
   }, [name, value]);
+  
 
   return (
     <FormContent name={name} {...resetProps}>
