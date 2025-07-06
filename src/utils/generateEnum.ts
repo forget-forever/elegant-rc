@@ -35,11 +35,3 @@ const generateEnum = <
     enum: mapValues(enumData, (v) => v.value),
   };
 };
-
-const tt = generateEnum({
-  /** 第一个 */
-  t1: { value: 0, text: '第一个' },
-  t2: { value: 1, text: '第二个' },
-});
-
-const aa = tt.valueEnum[0];
