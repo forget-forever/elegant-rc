@@ -1,8 +1,3 @@
-/*
- * @Author: zml
- * @Date: 2022-06-14 15:14:14
- * @LastEditTime: 2022-07-26 19:08:33
- */
 import { DownOutlined } from '@ant-design/icons';
 import { useBoolean, useMemoizedFn } from 'ahooks';
 import { Input, Popover } from 'antd';
